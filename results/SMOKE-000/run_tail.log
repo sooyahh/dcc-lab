@@ -3,3 +3,6 @@
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
 AttributeError: module 'importlib' has no attribute 'util'
+
+===== attempt 1 2026-10-06T10:13:30+00:00 local-test commit=734ea6e897e0aa5a48b0bde99f3491234f4e00ad =====
+{'exp_id': 'SMOKE-000', 'seed': 0, 'primary_metric': {'name': 'smoke', 'value': 1.0, 'split': 'internal_holdout'}, 'metrics': {'cuda': False, 'gpu': None, 'data_root': 'C:\\Users\\sooyah\\Desktop\\아주대\\dcc\\01_prelim\\dcc2026-prelim\\data\\raw_merged', 'training_entries': 2}}

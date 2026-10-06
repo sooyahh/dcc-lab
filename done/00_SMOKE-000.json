@@ -26,5 +26,23 @@
   "max_attempts": 3,
   "worker": "local-test",
   "claimed_at": "2026-10-06T10:13:12+00:00",
-  "started_at": "2026-10-06T10:13:17+00:00"
+  "status": "done",
+  "gpu": "none",
+  "finished_at": "2026-10-06T10:13:53+00:00",
+  "elapsed_min": 0.4,
+  "metrics": {
+    "exp_id": "SMOKE-000",
+    "seed": 0,
+    "primary_metric": {
+      "name": "smoke",
+      "value": 1.0,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "cuda": false,
+      "gpu": null,
+      "data_root": "C:\\Users\\sooyah\\Desktop\\아주대\\dcc\\01_prelim\\dcc2026-prelim\\data\\raw_merged",
+      "training_entries": 2
+    }
+  }
 }
