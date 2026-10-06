@@ -21,3 +21,24 @@ m = {"exp_id": os.environ["LAB_EXP_ID"], "seed": 0,
 print(m)
 with open(os.path.join(os.environ["LAB_OUT"], "metrics.json"), "w", encoding="utf-8") as f:
     json.dump(m, f, ensure_ascii=False)
+
+# Drive layout diagnostics (names only, depth-limited) to locate the official data folder
+from pathlib import Path
+drive = Path("/content/drive")
+diag = {}
+for base in (drive, drive / "MyDrive", drive / ".shortcut-targets-by-id"):
+    try:
+        diag[str(base)] = sorted(p.name for p in base.iterdir())[:60]
+    except Exception as exc:
+        diag[str(base)] = f"ERR {type(exc).__name__}"
+sc = drive / ".shortcut-targets-by-id"
+if sc.is_dir():
+    for d in sorted(sc.iterdir())[:20]:
+        try:
+            diag[str(d)] = sorted(p.name for p in d.iterdir())[:20]
+        except Exception as exc:
+            diag[str(d)] = f"ERR {type(exc).__name__}"
+m["drive_diag"] = diag
+print(diag)
+with open(os.path.join(os.environ["LAB_OUT"], "metrics.json"), "w", encoding="utf-8") as f:
+    json.dump(m, f, ensure_ascii=False)
