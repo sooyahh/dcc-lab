@@ -50,24 +50,30 @@ def log(msg: str) -> None:
 USE_GIT_CREDENTIALS = bool(os.environ.get("LAB_USE_GIT_CREDENTIALS"))   # local dry runs: OS credential helper
 
 
-def token() -> str:
+# Fine-grained tokens are scoped to one owner, so two are needed:
+#   lab  = sooyahh/dcc-lab, Contents read/write   (env DCC_LAB_TOKEN  or .secrets/github_token.txt)
+#   team = eigensinn-dcc2026/prelim, Contents read (env DCC_TEAM_TOKEN or .secrets/github_team_token.txt)
+SECRETS = {"lab": ("DCC_LAB_TOKEN", "github_token.txt"), "team": ("DCC_TEAM_TOKEN", "github_team_token.txt")}
+TOKENS: dict[str, str] = {}
+
+
+def load_tokens() -> None:
     if USE_GIT_CREDENTIALS:
-        return ""
-    tok = os.environ.get("DCC_LAB_TOKEN", "").strip()
-    if not tok:
-        f = DRIVE_LAB / ".secrets" / "github_token.txt"
-        if f.exists():
+        return
+    for key, (env, fname) in SECRETS.items():
+        tok = os.environ.get(env, "").strip()
+        f = DRIVE_LAB / ".secrets" / fname
+        if not tok and f.exists():
             tok = f.read_text(encoding="utf-8").strip()
-    if not tok:
-        raise SystemExit("GitHub 토큰 없음: env DCC_LAB_TOKEN 또는 MyDrive/dcc_lab/.secrets/github_token.txt")
-    return tok
-
-
-TOKEN = ""
+        if not tok:
+            raise SystemExit(f"GitHub 토큰 없음: env {env} 또는 MyDrive/dcc_lab/.secrets/{fname}")
+        TOKENS[key] = tok
 
 
 def redact(s: str) -> str:
-    return s.replace(TOKEN, "***") if TOKEN else s
+    for tok in TOKENS.values():
+        s = s.replace(tok, "***")
+    return s
 
 
 def git(repo: Path, *args: str, check: bool = True) -> str:
@@ -80,7 +86,8 @@ def git(repo: Path, *args: str, check: bool = True) -> str:
 def url(repo: str) -> str:
     if USE_GIT_CREDENTIALS:
         return f"https://github.com/{repo}.git"
-    return f"https://x-access-token:{TOKEN}@github.com/{repo}.git"
+    tok = TOKENS["lab" if repo == LAB_REPO else "team"]
+    return f"https://x-access-token:{tok}@github.com/{repo}.git"
 
 
 def ensure_clones() -> None:
@@ -260,7 +267,7 @@ def run_job(job: dict) -> None:
         finish(job, "failed", reason=f"code: {redact(str(exc))}")
         return
 
-    env = {k: v for k, v in os.environ.items() if k != "DCC_LAB_TOKEN"}   # experiment code never sees the token
+    env = {k: v for k, v in os.environ.items() if k not in ("DCC_LAB_TOKEN", "DCC_TEAM_TOKEN")}
     env.update(LAB_EXP_ID=exp_id, LAB_OUT=str(out), LAB_WORK=str(work), DCC_RUN_ROOT=str(RUN_ROOT.parent),
                PYTHONUNBUFFERED="1",
                PYTHONPATH=os.pathsep.join([str(repo / "src"), os.environ.get("PYTHONPATH", "")]))
@@ -303,14 +310,13 @@ def run_job(job: dict) -> None:
 
 
 def main() -> None:
-    global TOKEN
     ap = argparse.ArgumentParser()
     ap.add_argument("--idle-exit-min", type=float, default=30,
                     help="큐가 이 시간 동안 비면 종료 (컴퓨팅 단위 절약)")
     ap.add_argument("--unassign-on-idle", action="store_true", help="유휴 종료 시 런타임까지 해제")
     ap.add_argument("--max-jobs", type=int, default=0, help="이 개수만 처리하고 종료 (시험용, 0=무제한)")
     a = ap.parse_args()
-    TOKEN = token()
+    load_tokens()
     ensure_clones()
     log(f"worker={WORKER} gpu={gpu()}")
     status("idle", force_git=True)
