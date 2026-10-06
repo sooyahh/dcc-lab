@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "SMOKE-000",
+    "mission": 0,
+    "title": "local runner dry run",
+    "hypothesis": "러너·GitHub 큐·코드 checkout·데이터 경로·GPU 정상",
+    "change_vs_baseline": "",
+    "baseline": {
+      "exp_id": "",
+      "metric": "",
+      "value": null
+    },
+    "branch": "main",
+    "commit": "",
+    "command": "python $LAB_HOME/runner/smoke.py",
+    "uses_official_val": false,
+    "success_criteria": "metrics.json에 cuda=true, data_root 정상",
+    "gpu": "T4",
+    "budget_hours": 0.5,
+    "priority": 0,
+    "notes": ""
+  },
+  "commit": "734ea6e897e0aa5a48b0bde99f3491234f4e00ad",
+  "submitted_at": "2026-10-06T19:12:48+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
