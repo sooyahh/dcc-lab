@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "SMOKE-002",
+    "mission": 0,
+    "title": "Colab T4 GPU + data root smoke (retry)",
+    "hypothesis": "러너·GitHub 큐·코드 checkout·데이터 경로·GPU 정상",
+    "change_vs_baseline": "",
+    "baseline": {
+      "exp_id": "",
+      "metric": "",
+      "value": null
+    },
+    "branch": "main",
+    "commit": "",
+    "command": "python $LAB_HOME/runner/smoke.py",
+    "uses_official_val": false,
+    "success_criteria": "metrics.json에 cuda=true, data_root 정상",
+    "gpu": "T4",
+    "budget_hours": 0.5,
+    "priority": 0,
+    "notes": ""
+  },
+  "commit": "8f9f21a6539b023166ed5fab1ce3dec049115e67",
+  "submitted_at": "2026-10-06T19:47:43+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
