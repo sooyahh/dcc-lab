@@ -264,7 +264,8 @@ def run_job(job: dict) -> None:
     env.update(LAB_EXP_ID=exp_id, LAB_OUT=str(out), LAB_WORK=str(work), DCC_RUN_ROOT=str(RUN_ROOT.parent),
                PYTHONUNBUFFERED="1",
                PYTHONPATH=os.pathsep.join([str(repo / "src"), os.environ.get("PYTHONPATH", "")]))
-    cmd = spec["command"].replace("$LAB_OUT", str(out)).replace("$LAB_WORK", str(work))
+    cmd = (spec["command"].replace("$LAB_OUT", str(out)).replace("$LAB_WORK", str(work))
+           .replace("$LAB_HOME", str(LAB)))                  # $LAB_HOME = this repo (shared helper scripts)
     budget_s = float(spec.get("budget_hours", 6)) * 3600
     log(f"{exp_id} 시작 (attempt {attempts}) commit={job['commit'][:7]}\n  $ {cmd}")
     status("running", exp_id, force_git=True, attempt=attempts)
