@@ -26,5 +26,10 @@
   "max_attempts": 3,
   "worker": "local-test",
   "claimed_at": "2026-10-06T10:11:47+00:00",
-  "started_at": "2026-10-06T10:11:51+00:00"
+  "status": "failed",
+  "gpu": "none",
+  "finished_at": "2026-10-06T10:12:09+00:00",
+  "reason": "exit 1, metrics.json 없음",
+  "elapsed_min": 0.0,
+  "log_tail": "\n===== attempt 1 2026-10-06T10:12:09+00:00 local-test commit=734ea6e897e0aa5a48b0bde99f3491234f4e00ad =====\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nAttributeError: module 'importlib' has no attribute 'util'\n"
 }

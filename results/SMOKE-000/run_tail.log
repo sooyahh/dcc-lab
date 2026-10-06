@@ -1,0 +1,5 @@
+
+===== attempt 1 2026-10-06T10:12:09+00:00 local-test commit=734ea6e897e0aa5a48b0bde99f3491234f4e00ad =====
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+AttributeError: module 'importlib' has no attribute 'util'
