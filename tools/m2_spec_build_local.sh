@@ -8,11 +8,11 @@
 set -uo pipefail
 TEAM="/c/Users/sooyah/Desktop/아주대/dcc/01_prelim/dcc2026-prelim"
 SRC_REPO="/c/Users/sooyah/Desktop/아주대/dcc/m2spec-4bfd2c4"     # detached worktree of the team repo
-WORK="/c/dcc_m2spec"                                              # ~14 GB npy + 7 GB pack, local disk only
+WORK="/c/Users/sooyah/dcc_m2spec"                                             # ~14 GB npy + 7 GB pack, local disk only
 DRIVE="/g/내 드라이브/dcc_runs/m2_l2_spec"
 STATUS="$DRIVE/STATUS.txt"
 W=${W:-10}
-st(){ echo "$(TZ=Asia/Seoul date '+%F %T KST') $*" | tee -a "$WORK/local_build.log" "$STATUS"; }
+st(){ echo "$(TZ=KST-9 date '+%F %T KST') $*" | tee -a "$WORK/local_build.log" "$STATUS"; }
 fail(){ st "FAILED(local): $*"; exit 1; }
 mkdir -p "$WORK"
 
