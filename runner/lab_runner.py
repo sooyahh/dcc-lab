@@ -307,12 +307,13 @@ def main() -> None:
     ap.add_argument("--idle-exit-min", type=float, default=30,
                     help="큐가 이 시간 동안 비면 종료 (컴퓨팅 단위 절약)")
     ap.add_argument("--unassign-on-idle", action="store_true", help="유휴 종료 시 런타임까지 해제")
+    ap.add_argument("--max-jobs", type=int, default=0, help="이 개수만 처리하고 종료 (시험용, 0=무제한)")
     a = ap.parse_args()
     TOKEN = token()
     ensure_clones()
     log(f"worker={WORKER} gpu={gpu()}")
     status("idle", force_git=True)
-    idle_since = time.time()
+    idle_since, done_jobs = time.time(), 0
     while True:
         try:
             job = claim_next()
@@ -332,6 +333,10 @@ def main() -> None:
             continue
         run_job(job)
         idle_since = time.time()
+        done_jobs += 1
+        if a.max_jobs and done_jobs >= a.max_jobs:
+            status("stopped", force_git=True)
+            return
 
 
 if __name__ == "__main__":
