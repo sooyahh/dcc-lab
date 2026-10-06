@@ -29,12 +29,12 @@ nb = {
                  "kernelspec": {"name": "python3", "display_name": "Python 3"}},
     "cells": [
         md("# DCC lab worker\n\n"
-           "런타임 유형 GPU(T4 기본) → **모두 실행**. 큐가 30분 비면 스스로 종료합니다.\n"
+           "런타임 유형 GPU(T4 기본) → **모두 실행**. 큐가 10분 비면 런타임까지 스스로 해제합니다(컴퓨팅 단위 절약).\n"
            "끊겨도 다시 '모두 실행'하면 진행 중이던 실험을 이어서 재개합니다. 이 노트북은 수정하지 마세요."),
         code("from google.colab import drive\ndrive.mount('/content/drive')\n"
              "!nvidia-smi --query-gpu=name,memory.total --format=csv"),
         code(SETUP),
-        code("!python /content/dcc-lab/runner/lab_runner.py --idle-exit-min 30"),
+        code("!python /content/dcc-lab/runner/lab_runner.py --idle-exit-min 10 --unassign-on-idle"),
     ],
 }
 out = Path(__file__).with_name("lab_worker.ipynb")
