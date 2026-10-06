@@ -170,6 +170,18 @@ def gpu() -> str:
     return _gpu
 
 
+def find_data_root() -> Path | None:
+    """Official data folder (has Training/ and Validation/) on the mounted Drive, via shortcut or MyDrive."""
+    drive = DRIVE_LAB.parent.parent                          # /content/drive
+    cands = [drive / "MyDrive" / "대학부 데이터"] + sorted(drive.glob(".shortcut-targets-by-id/*/대학부 데이터"))
+    cands += sorted(drive.glob(".shortcut-targets-by-id/*/*/대학부 데이터"))
+    for c in cands:
+        for p in (c, c / "대학부 데이터"):
+            if (p / "Training").is_dir() and (p / "Validation").is_dir():
+                return p
+    return None
+
+
 # ------------------------------------------------------------------ jobs
 def claim_next() -> dict | None:
     sync()
@@ -268,6 +280,9 @@ def run_job(job: dict) -> None:
         return
 
     env = {k: v for k, v in os.environ.items() if k not in ("DCC_LAB_TOKEN", "DCC_TEAM_TOKEN")}
+    data_root = find_data_root()
+    if data_root and "DCC_DATA_ROOT" not in env:
+        env["DCC_DATA_ROOT"] = str(data_root)                # older team commits don't search Drive shortcuts
     env.update(LAB_EXP_ID=exp_id, LAB_OUT=str(out), LAB_WORK=str(work), DCC_RUN_ROOT=str(RUN_ROOT.parent),
                PYTHONUNBUFFERED="1",
                PYTHONPATH=os.pathsep.join([str(repo / "src"), os.environ.get("PYTHONPATH", "")]))
