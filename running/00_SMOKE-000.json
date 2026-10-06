@@ -23,5 +23,7 @@
   "commit": "734ea6e897e0aa5a48b0bde99f3491234f4e00ad",
   "submitted_at": "2026-10-06T19:11:27+09:00",
   "attempts": 0,
-  "max_attempts": 3
+  "max_attempts": 3,
+  "worker": "local-test",
+  "claimed_at": "2026-10-06T10:11:47+00:00"
 }
