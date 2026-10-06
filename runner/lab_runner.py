@@ -188,7 +188,13 @@ def claim_next() -> dict | None:
     running = sorted((LAB / "running").glob("*.json"))
     if running:
         return {"_name": running[0].name, **json.loads(running[0].read_text(encoding="utf-8"))}
-    queued = sorted((LAB / "queue").glob("*.json"))
+    has_gpu = gpu() != "none"
+
+    def runnable(p: Path) -> bool:                           # GPU jobs only on GPU workers
+        want = json.loads(p.read_text(encoding="utf-8"))["spec"].get("gpu", "T4")
+        return has_gpu or str(want).lower() == "none"
+
+    queued = [p for p in sorted((LAB / "queue").glob("*.json")) if runnable(p)]
     if not queued:
         return None
     name = queued[0].name
