@@ -137,11 +137,11 @@ def status(state: str, exp_id: str | None = None, force_git: bool = False, **ext
     try:
         entries = []
         for name, text in files.items():
-            sha = subprocess.run(["git", "-C", str(LAB), "hash-object", "-w", "--stdin"], input=text,
-                                 capture_output=True, text=True, check=True).stdout.strip()
+            sha = subprocess.run(["git", "-C", str(LAB), "hash-object", "-w", "--stdin"], input=text.encode(),
+                                 capture_output=True, check=True).stdout.decode().strip()
             entries.append(f"100644 blob {sha}\t{name}\n")
-        tree = subprocess.run(["git", "-C", str(LAB), "mktree"], input="".join(entries),
-                              capture_output=True, text=True, check=True).stdout.strip()
+        tree = subprocess.run(["git", "-C", str(LAB), "mktree"], input="".join(entries).encode(),
+                              capture_output=True, check=True).stdout.decode().strip()   # bytes: no CRLF in names
         commit = git(LAB, "commit-tree", tree, "-m", f"status {state} {exp_id or ''}")
         git(LAB, "push", "-q", "-f", "origin", f"{commit}:refs/heads/status")
         _last_git_status = time.time()

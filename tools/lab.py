@@ -175,7 +175,7 @@ def cmd_collect(a) -> None:
     hits = [j for f in ("done", "failed") for j in jobs(f) if j["spec"]["exp_id"] == a.exp_id]
     if not hits:
         die("결과 없음")
-    r = hits[-1]
+    r = max(hits, key=lambda j: j.get("finished_at") or "")
     s, m = r["spec"], r.get("metrics") or {}
     pm = m.get("primary_metric") or {}
     print(json.dumps(r, ensure_ascii=False, indent=2))
