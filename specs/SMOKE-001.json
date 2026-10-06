@@ -1,0 +1,21 @@
+{
+  "exp_id": "SMOKE-001",
+  "mission": 0,
+  "title": "Colab GPU + data path smoke",
+  "hypothesis": "러너·GitHub 큐·코드 checkout·데이터 경로·GPU 정상",
+  "change_vs_baseline": "",
+  "baseline": {
+    "exp_id": "",
+    "metric": "",
+    "value": null
+  },
+  "branch": "main",
+  "commit": "",
+  "command": "python -c \"import json,os;from pathlib import Path;t=__import__('importlib').util.find_spec('torch');import sys;cuda=None;g=None\nif t:\n import torch;cuda=torch.cuda.is_available();g=torch.cuda.get_device_name(0) if cuda else None\nfrom dcc_data.colab_env import find_data_root\ntry:\n r=str(find_data_root())\nexcept Exception as e:\n r='ERR '+str(e)[:200]\nm={'exp_id':os.environ['LAB_EXP_ID'],'primary_metric':{'name':'smoke','value':1.0,'split':'internal_holdout'},'seed':0,'metrics':{'cuda':cuda,'gpu':g,'data_root':r}};print(m)\njson.dump(m,open(os.path.join(os.environ['LAB_OUT'],'metrics.json'),'w'),ensure_ascii=False)\"",
+  "uses_official_val": false,
+  "success_criteria": "metrics.json에 cuda=true, data_root 정상",
+  "gpu": "T4",
+  "budget_hours": 0.5,
+  "priority": 0,
+  "notes": ""
+}
