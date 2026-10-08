@@ -1,20 +1,141 @@
 
-===== attempt 1 2026-10-08T12:25:51+00:00 colab-e28888ae commit=2e2077418cb016632cf6a7838da969a4639a0485 =====
+===== attempt 1 2026-10-08T14:44:40+00:00 colab-8ece0fff commit=b5744dea8ca776ea195162e601f2fdf16d4ba613 =====
 
 Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
-Fetching 4 files:  25%|██▌       | 1/4 [00:00<00:02,  1.37it/s]
-Fetching 4 files: 100%|██████████| 4/4 [00:06<00:00,  1.83s/it]
-Fetching 4 files: 100%|██████████| 4/4 [00:06<00:00,  1.75s/it]
-Traceback (most recent call last):
-  File "/content/lab_code/2e2077418cb0/scripts/lab/m3-kcbert-002.py", line 351, in <module>
-    main()
-    ~~~~^^
-  File "/content/lab_code/2e2077418cb0/scripts/lab/m3-kcbert-002.py", line 330, in main
-    data = prepare_tokens(out, work, model_path)
-  File "/content/lab_code/2e2077418cb0/scripts/lab/m3-kcbert-002.py", line 122, in prepare_tokens
-    labels = stage_labels(find_data_root(), work)
-  File "/content/lab_code/2e2077418cb0/scripts/lab/m3-kcbert-002.py", line 85, in stage_labels
-    raise ValueError(f"Need exactly one Training/{LABEL_DIR}.zip, found {archives}. "
-                     "Package the Seoul labels as a zip; loose Drive JSON reads are disabled.")
-ValueError: Need exactly one Training/TL_서울_구급.zip, found []. Package the Seoul labels as a zip; loose Drive JSON reads are disabled.
+Fetching 4 files:  25%|██▌       | 1/4 [00:00<00:00,  3.31it/s]
+Fetching 4 files: 100%|██████████| 4/4 [00:04<00:00,  1.22s/it]
+Fetching 4 files: 100%|██████████| 4/4 [00:04<00:00,  1.15s/it]
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3114.61it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=42 epoch=1 step=0/1463 loss=0.7199
+seed=42 epoch=1 step=200/1463 loss=0.2605
+seed=42 epoch=1 step=400/1463 loss=0.2753
+seed=42 epoch=1 step=600/1463 loss=0.2644
+seed=42 epoch=1 step=800/1463 loss=0.4088
+seed=42 epoch=1 step=1000/1463 loss=0.3978
+seed=42 epoch=1 step=1200/1463 loss=0.2302
+seed=42 epoch=1 step=1400/1463 loss=0.2195
+seed=42 epoch=1 macro_f1=0.563736
+seed=42 epoch=2 step=0/1463 loss=0.2231
+seed=42 epoch=2 step=200/1463 loss=0.3758
+seed=42 epoch=2 step=400/1463 loss=0.4384
+seed=42 epoch=2 step=600/1463 loss=0.2362
+seed=42 epoch=2 step=800/1463 loss=0.2693
+seed=42 epoch=2 step=1000/1463 loss=0.1786
+seed=42 epoch=2 step=1200/1463 loss=0.1961
+seed=42 epoch=2 step=1400/1463 loss=0.2578
+seed=42 epoch=2 macro_f1=0.594493
+seed=42 epoch=3 step=0/1463 loss=0.1795
+seed=42 epoch=3 step=200/1463 loss=0.2256
+seed=42 epoch=3 step=400/1463 loss=0.2136
+seed=42 epoch=3 step=600/1463 loss=0.1997
+seed=42 epoch=3 step=800/1463 loss=0.3152
+seed=42 epoch=3 step=1000/1463 loss=0.2154
+seed=42 epoch=3 step=1200/1463 loss=0.2559
+seed=42 epoch=3 step=1400/1463 loss=0.1235
+seed=42 epoch=3 macro_f1=0.569572
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:  79%|███████▉  | 158/199 [00:00<00:00, 1579.80it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1637.28it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=43 epoch=1 step=0/1463 loss=0.6672
+seed=43 epoch=1 step=200/1463 loss=0.3729
+seed=43 epoch=1 step=400/1463 loss=0.3576
+seed=43 epoch=1 step=600/1463 loss=0.2886
+seed=43 epoch=1 step=800/1463 loss=0.2181
+seed=43 epoch=1 step=1000/1463 loss=0.2509
+seed=43 epoch=1 step=1200/1463 loss=0.2784
+seed=43 epoch=1 step=1400/1463 loss=0.2830
+seed=43 epoch=1 macro_f1=0.578094
+seed=43 epoch=2 step=0/1463 loss=0.2163
+seed=43 epoch=2 step=200/1463 loss=0.2469
+seed=43 epoch=2 step=400/1463 loss=0.2231
+seed=43 epoch=2 step=600/1463 loss=0.2315
+seed=43 epoch=2 step=800/1463 loss=0.2087
+seed=43 epoch=2 step=1000/1463 loss=0.2449
+seed=43 epoch=2 step=1200/1463 loss=0.1677
+seed=43 epoch=2 step=1400/1463 loss=0.2331
+seed=43 epoch=2 macro_f1=0.592949
+seed=43 epoch=3 step=0/1463 loss=0.1278
+seed=43 epoch=3 step=200/1463 loss=0.2333
+seed=43 epoch=3 step=400/1463 loss=0.1898
+seed=43 epoch=3 step=600/1463 loss=0.2719
+seed=43 epoch=3 step=800/1463 loss=0.3602
+seed=43 epoch=3 step=1000/1463 loss=0.1914
+seed=43 epoch=3 step=1200/1463 loss=0.2461
+seed=43 epoch=3 step=1400/1463 loss=0.3263
+seed=43 epoch=3 macro_f1=0.586062
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:  29%|██▉       | 58/199 [00:00<00:00, 471.25it/s]
+Loading weights:  57%|█████▋    | 114/199 [00:00<00:00, 508.89it/s]
+Loading weights:  94%|█████████▍| 188/199 [00:00<00:00, 580.88it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 587.20it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=44 epoch=1 step=0/1463 loss=0.7536
+seed=44 epoch=1 step=200/1463 loss=0.2732
+seed=44 epoch=1 step=400/1463 loss=0.2781
+seed=44 epoch=1 step=600/1463 loss=0.2164
+seed=44 epoch=1 step=800/1463 loss=0.2619
+seed=44 epoch=1 step=1000/1463 loss=0.2348
+seed=44 epoch=1 step=1200/1463 loss=0.2630
+seed=44 epoch=1 step=1400/1463 loss=0.1639
+seed=44 epoch=1 macro_f1=0.573334
+seed=44 epoch=2 step=0/1463 loss=0.1974
+seed=44 epoch=2 step=200/1463 loss=0.2248
+seed=44 epoch=2 step=400/1463 loss=0.1970
+seed=44 epoch=2 step=600/1463 loss=0.1912
+seed=44 epoch=2 step=800/1463 loss=0.3076
+seed=44 epoch=2 step=1000/1463 loss=0.1434
+seed=44 epoch=2 step=1200/1463 loss=0.1842
+seed=44 epoch=2 step=1400/1463 loss=0.2364
+seed=44 epoch=2 macro_f1=0.591313
+seed=44 epoch=3 step=0/1463 loss=0.2640
+seed=44 epoch=3 step=200/1463 loss=0.1899
+seed=44 epoch=3 step=400/1463 loss=0.2116
+seed=44 epoch=3 step=600/1463 loss=0.1291
+seed=44 epoch=3 step=800/1463 loss=0.1808
+seed=44 epoch=3 step=1000/1463 loss=0.2361
+seed=44 epoch=3 step=1200/1463 loss=0.1174
+seed=44 epoch=3 step=1400/1463 loss=0.2476
+seed=44 epoch=3 macro_f1=0.594298
