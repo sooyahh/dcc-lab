@@ -1,0 +1,53 @@
+name: commander
+# Cloud commander: a token-free check decides whether there is work; Claude runs only when there is.
+on:
+  push:
+    branches: [main]
+    paths: ["done/**", "failed/**"]
+  issues:
+    types: [labeled]
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+concurrency:
+  group: commander
+  cancel-in-progress: false
+permissions:
+  contents: write
+  issues: write
+  id-token: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: eigensinn-dcc2026/prelim
+          token: ${{ secrets.TEAM_REPO_TOKEN }}
+          path: team
+          fetch-depth: 0
+      - name: Check for work (no LLM)
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEAM_GH_TOKEN: ${{ secrets.TEAM_REPO_TOKEN }}
+        run: python tools/commander_check.py
+      - name: Commander (Claude)
+        if: steps.check.outputs.work != '[]'
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEAM_GH_TOKEN: ${{ secrets.TEAM_REPO_TOKEN }}
+          TEAM_REPO_DIR: team
+          GROKBOT_WEBHOOK_URL: ${{ secrets.GROKBOT_WEBHOOK_URL }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            docs/commander_cloud.md 의 지시를 그대로 따른다.
+            WORK = ${{ steps.check.outputs.work }}
+          claude_args: "--max-turns 80 --allowedTools Bash,Read,Write,Edit,Glob,Grep"

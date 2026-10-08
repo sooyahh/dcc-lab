@@ -18,3 +18,20 @@ Drive dcc_runs/lab/<EXP>/: ckpt·로그 (재개용)
 ```
 
 `python tools/lab.py {new|submit|status|collect}` — 자세한 사용법은 파일 상단 docstring.
+
+## 2단계: 클라우드 자동 사이클 (GitHub Actions)
+
+```
+proposal 이슈(Claude) ──사용자 approved 라벨──▶ 팀 저장소 이슈 @codex ──▶ Codex PR
+   ▲                                                                   │
+   │                                            Claude 검토 PASS → queue/ (FAIL → @codex 수정)
+   │                                                                   ▼
+Claude 판정 → 팀 로그 PR(자동 병합) + 다음 proposal ◀── done/ ◀── Colab 러너 ◀── grokbot(watchdog 웹훅)
+```
+
+| 워크플로 | 주기 | LLM |
+|---|---|---|
+| `commander.yml` | 결과 push, 라벨 이벤트, 매시 17분 | 할 일이 있을 때만 Claude (`tools/commander_check.py`가 선판단) |
+| `watchdog.yml` | 30분, 큐 push | 없음 (`tools/watchdog.py`) |
+
+Secrets: `CLAUDE_CODE_OAUTH_TOKEN`, `TEAM_REPO_TOKEN`, `GROKBOT_WEBHOOK_URL`. 실행 기록은 `Commander log` 이슈.
