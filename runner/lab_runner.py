@@ -25,6 +25,7 @@ import socket
 import subprocess
 import sys
 import time
+import unicodedata
 from pathlib import Path
 
 LAB_REPO = "sooyahh/dcc-lab"
@@ -37,6 +38,7 @@ DRIVE_LAB = Path(os.environ.get("LAB_DRIVE_DIR", "/content/drive/MyDrive/dcc_lab
 RUN_ROOT = Path(os.environ.get("LAB_RUN_ROOT", "/content/drive/MyDrive/dcc_runs/lab"))
 WORKER = os.environ.get("LAB_WORKER", "colab-" + socket.gethostname()[:8])
 GIT_STATUS_EVERY_S = 15 * 60
+DATA_DIR = "대학부 데이터"
 
 
 def now() -> str:
@@ -178,10 +180,18 @@ def find_data_root() -> Path | None:
             os.listdir(drive / "MyDrive")                    # listing nudges the FUSE mount to resolve shortcuts
         except OSError:
             pass
-        cands = [drive / "MyDrive" / "대학부 데이터"] + sorted(drive.glob(".shortcut-targets-by-id/*/대학부 데이터"))
-        cands += sorted(drive.glob(".shortcut-targets-by-id/*/*/대학부 데이터"))
+        # Drive FUSE may return Hangul names in NFD; compare NFC-normalized names and use the real on-disk name
+        def named(parent: Path) -> list[Path]:
+            try:
+                return [parent / n for n in os.listdir(parent) if unicodedata.normalize("NFC", n) == DATA_DIR]
+            except OSError:
+                return []
+        cands = named(drive / "MyDrive")
+        sc = drive / ".shortcut-targets-by-id"
+        for d in (sorted(sc.iterdir()) if sc.is_dir() else []):
+            cands += named(d) + [q for sub in named(d) for q in named(sub)]
         for c in cands:
-            for p in (c, c / "대학부 데이터"):
+            for p in [c] + named(c):
                 try:
                     if (p / "Training").is_dir() and (p / "Validation").is_dir():
                         return p
