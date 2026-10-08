@@ -1,0 +1,210 @@
+
+===== attempt 1 2026-10-08T19:13:44+00:00 colab-6b832c56 commit=1bce6d550a0bf6afa1a54ed9933d26a055fe2aad =====
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:  38%|███▊      | 76/199 [00:00<00:00, 717.89it/s]
+Loading weights:  74%|███████▍  | 148/199 [00:00<00:00, 704.18it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 694.45it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:  34%|███▎      | 67/199 [00:00<00:00, 665.25it/s]
+Loading weights:  69%|██████▉   | 138/199 [00:00<00:00, 684.77it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 672.02it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=42 epoch=1 step=0 loss=0.7679
+seed=42 epoch=1 step=200 loss=0.2279
+seed=42 epoch=1 step=400 loss=0.3031
+seed=42 epoch=1 step=600 loss=0.2439
+seed=42 epoch=1 step=800 loss=0.4208
+seed=42 epoch=1 step=1000 loss=0.4327
+seed=42 epoch=1 step=1200 loss=0.3371
+seed=42 epoch=1 step=1400 loss=0.2674
+{"seed": 42, "epoch": 1, "macro_f1": 0.6011645190598072, "micro_f1": 0.6306995185499858, "per_symptom_f1": {"고열": 0.6236297198538368, "구토": 0.5596002855103498, "두통": 0.43765281173594134, "복통": 0.7812238055322716, "어지러움": 0.625, "열상": 0.8854314002828855, "오심": 0.2736625514403292, "전신쇠약": 0.5398645127670662, "호흡곤란": 0.6844155844155844}, "train_loss": 0.32170270045204513}
+seed=42 epoch=2 step=0 loss=0.2800
+seed=42 epoch=2 step=200 loss=0.4448
+seed=42 epoch=2 step=400 loss=0.2570
+seed=42 epoch=2 step=600 loss=0.2526
+seed=42 epoch=2 step=800 loss=0.2188
+seed=42 epoch=2 step=1000 loss=0.2673
+seed=42 epoch=2 step=1200 loss=0.3760
+seed=42 epoch=2 step=1400 loss=0.2468
+{"seed": 42, "epoch": 2, "macro_f1": 0.5970873451251149, "micro_f1": 0.6313544258798436, "per_symptom_f1": {"고열": 0.6409495548961425, "구토": 0.506405425772419, "두통": 0.49169435215946844, "복통": 0.7898193760262726, "어지러움": 0.6458797327394209, "열상": 0.8735294117647059, "오심": 0.21809744779582366, "전신쇠약": 0.5310421286031042, "호흡곤란": 0.6763686763686764}, "train_loss": 0.2769890161395399}
+seed=42 epoch=3 step=0 loss=0.2246
+seed=42 epoch=3 step=200 loss=0.2822
+seed=42 epoch=3 step=400 loss=0.2226
+seed=42 epoch=3 step=600 loss=0.1756
+seed=42 epoch=3 step=800 loss=0.2700
+seed=42 epoch=3 step=1000 loss=0.4050
+seed=42 epoch=3 step=1200 loss=0.2483
+seed=42 epoch=3 step=1400 loss=0.1678
+{"seed": 42, "epoch": 3, "macro_f1": 0.6165543680345013, "micro_f1": 0.6332516718532741, "per_symptom_f1": {"고열": 0.6452648475120385, "구토": 0.580952380952381, "두통": 0.49183673469387756, "복통": 0.7829427583557433, "어지러움": 0.643207126948775, "열상": 0.8625664388762339, "오심": 0.34435049961568026, "전신쇠약": 0.536406495547407, "호흡곤란": 0.6614620298083748}, "train_loss": 0.2466426016030781}
+seed=42 epoch=4 step=0 loss=0.2364
+seed=42 epoch=4 step=200 loss=0.1811
+seed=42 epoch=4 step=400 loss=0.1655
+seed=42 epoch=4 step=600 loss=0.1931
+seed=42 epoch=4 step=800 loss=0.1695
+seed=42 epoch=4 step=1000 loss=0.1832
+seed=42 epoch=4 step=1200 loss=0.1684
+seed=42 epoch=4 step=1400 loss=0.1291
+{"seed": 42, "epoch": 4, "macro_f1": 0.5997911533763172, "micro_f1": 0.625, "per_symptom_f1": {"고열": 0.637599093997735, "구토": 0.5835942391984972, "두통": 0.47347740667976423, "복통": 0.7779111644657863, "어지러움": 0.6378763866877971, "열상": 0.8680851063829788, "오심": 0.2659380692167577, "전신쇠약": 0.48655110579796773, "호흡곤란": 0.6670878079595705}, "train_loss": 0.20672298745797746}
+seed=42 epoch=5 step=0 loss=0.2122
+seed=42 epoch=5 step=200 loss=0.1471
+seed=42 epoch=5 step=400 loss=0.1674
+seed=42 epoch=5 step=600 loss=0.1408
+seed=42 epoch=5 step=800 loss=0.1005
+seed=42 epoch=5 step=1000 loss=0.1475
+seed=42 epoch=5 step=1200 loss=0.1276
+seed=42 epoch=5 step=1400 loss=0.1300
+{"seed": 42, "epoch": 5, "macro_f1": 0.5829297958157988, "micro_f1": 0.6126395016869971, "per_symptom_f1": {"고열": 0.621822033898305, "구토": 0.5626477541371159, "두통": 0.4485776805251641, "복통": 0.7718309859154929, "어지러움": 0.6192626034612491, "열상": 0.8745519713261649, "오심": 0.2045929018789144, "전신쇠약": 0.522343594836147, "호흡곤란": 0.6207386363636364}, "train_loss": 0.15813037507638325}
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:  29%|██▉       | 58/199 [00:00<00:00, 535.43it/s]
+Loading weights:  63%|██████▎   | 126/199 [00:00<00:00, 609.91it/s]
+Loading weights:  96%|█████████▌| 191/199 [00:00<00:00, 616.76it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 630.00it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=43 epoch=1 step=0 loss=0.7116
+seed=43 epoch=1 step=200 loss=0.3205
+seed=43 epoch=1 step=400 loss=0.2774
+seed=43 epoch=1 step=600 loss=0.3989
+seed=43 epoch=1 step=800 loss=0.3694
+seed=43 epoch=1 step=1000 loss=0.2993
+seed=43 epoch=1 step=1200 loss=0.2073
+seed=43 epoch=1 step=1400 loss=0.2657
+{"seed": 43, "epoch": 1, "macro_f1": 0.5825395004263098, "micro_f1": 0.6219146811242688, "per_symptom_f1": {"고열": 0.630217519106408, "구토": 0.5532223026792179, "두통": 0.47244094488188976, "복통": 0.772020725388601, "어지러움": 0.6301239275500476, "열상": 0.8743927827897293, "오심": 0.1123882503192848, "전신쇠약": 0.5410723069355632, "호흡곤란": 0.6569767441860465}, "train_loss": 0.31897085891324856}
+seed=43 epoch=2 step=0 loss=0.3397
+seed=43 epoch=2 step=200 loss=0.2925
+seed=43 epoch=2 step=400 loss=0.2260
+seed=43 epoch=2 step=600 loss=0.2717
+seed=43 epoch=2 step=800 loss=0.2956
+seed=43 epoch=2 step=1000 loss=0.3422
+seed=43 epoch=2 step=1200 loss=0.2667
+seed=43 epoch=2 step=1400 loss=0.3573
+{"seed": 43, "epoch": 2, "macro_f1": 0.6134884004768468, "micro_f1": 0.6380258454770416, "per_symptom_f1": {"고열": 0.6511369938990571, "구토": 0.5992010652463382, "두통": 0.49950641658440276, "복통": 0.7920875420875421, "어지러움": 0.6494755244755245, "열상": 0.8660578386605784, "오심": 0.2732919254658385, "전신쇠약": 0.5106382978723404, "호흡곤란": 0.68}, "train_loss": 0.2764122583180849}
+seed=43 epoch=3 step=0 loss=0.1890
+seed=43 epoch=3 step=200 loss=0.2093
+seed=43 epoch=3 step=400 loss=0.1865
+seed=43 epoch=3 step=600 loss=0.2246
+seed=43 epoch=3 step=800 loss=0.2269
+seed=43 epoch=3 step=1000 loss=0.2522
+seed=43 epoch=3 step=1200 loss=0.2308
+seed=43 epoch=3 step=1400 loss=0.1795
+{"seed": 43, "epoch": 3, "macro_f1": 0.6025942719825493, "micro_f1": 0.6336881653099562, "per_symptom_f1": {"고열": 0.6179775280898876, "구토": 0.5950726468730259, "두통": 0.5074626865671642, "복통": 0.7910271546635183, "어지러움": 0.632173095014111, "열상": 0.8603988603988604, "오심": 0.22779043280182232, "전신쇠약": 0.5184344866704481, "호흡곤란": 0.6730115567641061}, "train_loss": 0.24561981348064935}
+seed=43 epoch=4 step=0 loss=0.2548
+seed=43 epoch=4 step=200 loss=0.2052
+seed=43 epoch=4 step=400 loss=0.1979
+seed=43 epoch=4 step=600 loss=0.1535
+seed=43 epoch=4 step=800 loss=0.1574
+seed=43 epoch=4 step=1000 loss=0.1355
+seed=43 epoch=4 step=1200 loss=0.2378
+seed=43 epoch=4 step=1400 loss=0.1628
+{"seed": 43, "epoch": 4, "macro_f1": 0.5990198433213726, "micro_f1": 0.62567172301204, "per_symptom_f1": {"고열": 0.6535733769776323, "구토": 0.5644937586685159, "두통": 0.47855100095328884, "복통": 0.7868722815342032, "어지러움": 0.5978152929493545, "열상": 0.8649819494584837, "오심": 0.24922118380062305, "전신쇠약": 0.5361957064403395, "호흡곤란": 0.6594740391099123}, "train_loss": 0.20636419998768332}
+seed=43 epoch=5 step=0 loss=0.1999
+seed=43 epoch=5 step=200 loss=0.0998
+seed=43 epoch=5 step=400 loss=0.1601
+seed=43 epoch=5 step=600 loss=0.2416
+seed=43 epoch=5 step=800 loss=0.2347
+seed=43 epoch=5 step=1000 loss=0.2270
+seed=43 epoch=5 step=1200 loss=0.1944
+seed=43 epoch=5 step=1400 loss=0.1631
+{"seed": 43, "epoch": 5, "macro_f1": 0.5970683937332582, "micro_f1": 0.6175983700496626, "per_symptom_f1": {"고열": 0.6256239600665557, "구토": 0.565886287625418, "두통": 0.4525316455696203, "복통": 0.7766679984019177, "어지러움": 0.6322163907953169, "열상": 0.8658367911479945, "오심": 0.2810344827586207, "전신쇠약": 0.5170278637770898, "호흡곤란": 0.6567901234567901}, "train_loss": 0.16013347456309376}
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:  32%|███▏      | 64/199 [00:00<00:00, 639.47it/s]
+Loading weights:  66%|██████▌   | 131/199 [00:00<00:00, 626.95it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 666.18it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=44 epoch=1 step=0 loss=0.7993
+seed=44 epoch=1 step=200 loss=0.2441
+seed=44 epoch=1 step=400 loss=0.4426
+seed=44 epoch=1 step=600 loss=0.3203
+seed=44 epoch=1 step=800 loss=0.3230
+seed=44 epoch=1 step=1000 loss=0.3845
+seed=44 epoch=1 step=1200 loss=0.1946
+seed=44 epoch=1 step=1400 loss=0.4185
+{"seed": 44, "epoch": 1, "macro_f1": 0.5731596560789817, "micro_f1": 0.6226825028968713, "per_symptom_f1": {"고열": 0.6330275229357798, "구토": 0.5830639948287007, "두통": 0.5005512679162073, "복통": 0.7889385929239529, "어지러움": 0.6346899224806202, "열상": 0.8623087621696801, "오심": 0.07489597780859916, "전신쇠약": 0.4005621925509487, "호흡곤란": 0.6803986710963456}, "train_loss": 0.32271919872609217}
+seed=44 epoch=2 step=0 loss=0.3693
+seed=44 epoch=2 step=200 loss=0.2299
+seed=44 epoch=2 step=400 loss=0.3311
+seed=44 epoch=2 step=600 loss=0.2943
+seed=44 epoch=2 step=800 loss=0.2015
+seed=44 epoch=2 step=1000 loss=0.2443
+seed=44 epoch=2 step=1200 loss=0.2715
+seed=44 epoch=2 step=1400 loss=0.2216
+{"seed": 44, "epoch": 2, "macro_f1": 0.6132272631228864, "micro_f1": 0.6356250426708541, "per_symptom_f1": {"고열": 0.6399554813578185, "구토": 0.599009900990099, "두통": 0.5021739130434782, "복통": 0.7891714520098442, "어지러움": 0.6556233653007847, "열상": 0.8739255014326648, "오심": 0.32229965156794427, "전신쇠약": 0.4702194357366771, "호흡곤란": 0.6666666666666666}, "train_loss": 0.2767235668540327}
+seed=44 epoch=3 step=0 loss=0.2899
+seed=44 epoch=3 step=200 loss=0.2140
+seed=44 epoch=3 step=400 loss=0.1753
+seed=44 epoch=3 step=600 loss=0.2232
+seed=44 epoch=3 step=800 loss=0.2521
+seed=44 epoch=3 step=1000 loss=0.1731
+seed=44 epoch=3 step=1200 loss=0.2776
+seed=44 epoch=3 step=1400 loss=0.2754
+{"seed": 44, "epoch": 3, "macro_f1": 0.6132539491644788, "micro_f1": 0.6390250544662309, "per_symptom_f1": {"고열": 0.6447592067988669, "구토": 0.5741239892183289, "두통": 0.46846846846846846, "복통": 0.7933950865888039, "어지러움": 0.6435733819507748, "열상": 0.8671023965141612, "오심": 0.3108108108108108, "전신쇠약": 0.5305039787798409, "호흡곤란": 0.6865482233502538}, "train_loss": 0.2463532890398781}
+seed=44 epoch=4 step=0 loss=0.1805
+seed=44 epoch=4 step=200 loss=0.2258
+seed=44 epoch=4 step=400 loss=0.1431
+seed=44 epoch=4 step=600 loss=0.2838
+seed=44 epoch=4 step=800 loss=0.1548
+seed=44 epoch=4 step=1000 loss=0.1777
+seed=44 epoch=4 step=1200 loss=0.1718
+seed=44 epoch=4 step=1400 loss=0.1245
+{"seed": 44, "epoch": 4, "macro_f1": 0.6062884282533417, "micro_f1": 0.6291943003480203, "per_symptom_f1": {"고열": 0.6431246655965757, "구토": 0.5796766743648961, "두통": 0.47758081334723673, "복통": 0.7858530897784687, "어지러움": 0.6297137664697865, "열상": 0.8775948460987831, "오심": 0.29023746701846964, "전신쇠약": 0.5069949636261891, "호흡곤란": 0.6658195679796697}, "train_loss": 0.2058344106339504}
+seed=44 epoch=5 step=0 loss=0.1496
+seed=44 epoch=5 step=200 loss=0.1880
+seed=44 epoch=5 step=400 loss=0.1975
+seed=44 epoch=5 step=600 loss=0.2161
+seed=44 epoch=5 step=800 loss=0.2797
+seed=44 epoch=5 step=1000 loss=0.1826
+seed=44 epoch=5 step=1200 loss=0.1962
+seed=44 epoch=5 step=1400 loss=0.1811
+{"seed": 44, "epoch": 5, "macro_f1": 0.5848259051914559, "micro_f1": 0.6132358699908628, "per_symptom_f1": {"고열": 0.6311300639658849, "구토": 0.5603864734299517, "두통": 0.443010752688172, "복통": 0.7839235972940708, "어지러움": 0.6222400642312325, "열상": 0.87, "오심": 0.22906641000962463, "전신쇠약": 0.4822389666307858, "호흡곤란": 0.6414368184733804}, "train_loss": 0.1565222277096584}
