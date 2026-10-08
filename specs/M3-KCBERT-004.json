@@ -1,0 +1,21 @@
+{
+  "exp_id": "M3-KCBERT-004",
+  "mission": 3,
+  "title": "KcBERT head128+tail128 + 완화 가중 BCE (80:20 재평가 P4)",
+  "hypothesis": "긴 전사에서 앞 256토큰 절단으로 잘리는 후반부 증상 정보를 head+tail 입력으로 살리면 Macro F1이 KCBERT-003(0.5990)보다 오른다",
+  "change_vs_baseline": "M3-KCBERT-003 대비 입력만 변경: 앞 256토큰 → 앞 128 + 뒤 128 토큰(특수토큰 포함 총 256 이내). 손실(완화 가중 BCE)·분할·threshold 0.5·3 epochs·seed 42/43/44 동일",
+  "baseline": {
+    "exp_id": "M3-KCBERT-003",
+    "metric": "macro_f1 (80:20 split, thr 0.5)",
+    "value": 0.599
+  },
+  "branch": "sooyah/lab-m3-kcbert-004",
+  "commit": "",
+  "command": "python scripts/lab/m3-kcbert-004.py --out \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.599보다 +0.01 이상 높고 최소 2개 seed가 0.599 초과. threshold 0.5 고정, 튜닝 금지. pos_weight는 Training 분할에서만 계산. seed별 Macro/Micro/증상별 F1 기록",
+  "gpu": "T4",
+  "budget_hours": 4,
+  "priority": 2,
+  "notes": "전사 텍스트만, 공식 Val 미사용. m3-kcbert-003.py 재사용, 토큰 선택만 교체. 공개 모델 beomi/kcbert-base는 고정 revision으로 DCC_RUN_ROOT/models 캐시. 체크포인트 epoch마다 저장해 재개"
+}
