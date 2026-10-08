@@ -1,0 +1,35 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-004",
+    "mission": 3,
+    "title": "KcBERT head128+tail128 + 완화 가중 BCE (80:20 재평가 P4)",
+    "hypothesis": "긴 전사에서 앞 256토큰 절단으로 잘리는 후반부 증상 정보를 head+tail 입력으로 살리면 Macro F1이 KCBERT-003(0.5990)보다 오른다",
+    "change_vs_baseline": "M3-KCBERT-003 대비 입력만 변경: 앞 256토큰 → 앞 128 + 뒤 128 토큰(특수토큰 포함 총 256 이내). 손실(완화 가중 BCE)·분할·threshold 0.5·3 epochs·seed 42/43/44 동일",
+    "baseline": {
+      "exp_id": "M3-KCBERT-003",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.599
+    },
+    "branch": "sooyah/lab-m3-kcbert-004",
+    "commit": "00c14338e52876161e904e535a147fd9829c24b1",
+    "command": "python scripts/lab/m3-kcbert-004.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.599보다 +0.01 이상 높고 최소 2개 seed가 0.599 초과. threshold 0.5 고정, 튜닝 금지. pos_weight는 Training 분할에서만 계산. seed별 Macro/Micro/증상별 F1 기록",
+    "gpu": "T4",
+    "budget_hours": 4,
+    "priority": 2,
+    "notes": "전사 텍스트만, 공식 Val 미사용. m3-kcbert-003.py 재사용, 토큰 선택만 교체. 공개 모델 beomi/kcbert-base는 고정 revision으로 DCC_RUN_ROOT/models 캐시. 체크포인트 epoch마다 저장해 재개"
+  },
+  "commit": "00c14338e52876161e904e535a147fd9829c24b1",
+  "submitted_at": "2026-10-09T01:59:10+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-8ece0fff",
+  "claimed_at": "2026-10-08T16:59:58+00:00",
+  "status": "failed",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-08T17:00:46+00:00",
+  "reason": "exit 1, metrics.json 없음",
+  "elapsed_min": 0.6,
+  "log_tail": "\n===== attempt 1 2026-10-08T17:00:10+00:00 colab-8ece0fff commit=00c14338e52876161e904e535a147fd9829c24b1 =====\n\nLoading weights:   0%|          | 0/199 [00:00<?, ?it/s]\nLoading weights:  30%|███       | 60/199 [00:00<00:00, 597.22it/s]\nLoading weights:  65%|██████▍   | 129/199 [00:00<00:00, 651.44it/s]\nLoading weights:  99%|█████████▉| 198/199 [00:00<00:00, 668.86it/s]\nLoading weights: 100%|██████████| 199/199 [00:00<00:00, 660.95it/s]\n[transformers] \u001b[1mBertModel LOAD REPORT\u001b[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base\nKey                                        | Status     |  | \n-------------------------------------------+------------+--+-\ncls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | \ncls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | \ncls.predictions.transform.dense.weight     | UNEXPECTED |  | \ncls.seq_relationship.bias                  | UNEXPECTED |  | \ncls.predictions.bias                       | UNEXPECTED |  | \ncls.predictions.transform.dense.bias       | UNEXPECTED |  | \ncls.seq_relationship.weight                | UNEXPECTED |  | \n\nNotes:\n- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (319 > 300). Running this sequence through the model will result in indexing errors\nTraceback (most recent call last):\n  File \"/content/lab_code/00c14338e528/scripts/lab/m3-kcbert-004.py\", line 364, in <module>\n    main()\n    ~~~~^^\n  File \"/content/lab_code/00c14338e528/scripts/lab/m3-kcbert-004.py\", line 347, in main\n    tokens = tokenize_head_tail(tokenizer, [r[\"text\"] for r in rows])\n  File \"/content/lab_code/00c14338e528/scripts/lab/m3-kcbert-004.py\", line 279, in tokenize_head_tail\n    ids = tokenizer.build_inputs_with_special_tokens(select_content_tokens(content, special_count))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/dist-packages/transformers/tokenization_utils_base.py\", line 1306, in __getattr__\n    raise AttributeError(f\"{self.__class__.__name__} has no attribute {key}\")\nAttributeError: BertTokenizer has no attribute build_inputs_with_special_tokens\n"
+}
