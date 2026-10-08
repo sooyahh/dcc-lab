@@ -1,6 +1,7 @@
 {
  "judged": [
-  "failed/03_M2-SSL-001.json@2026-10-08T05:42:38+00:00"
+  "failed/03_M2-SSL-001.json@2026-10-08T05:42:38+00:00",
+  "failed/03_M2-SSL-001.json@2026-10-08T09:26:37+00:00"
  ],
  "implemented_issues": [
   1
@@ -11,6 +12,7 @@
  ],
  "merged_prs": [],
  "notes": [
-  "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result"
+  "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
+  "M2-SSL-001 failure 2026-10-08 09:25: infra (shared data folder holds only zip parts); sample staged from local copy"
  ]
 }
