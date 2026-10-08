@@ -16,7 +16,8 @@
   "a0eb12a0a2cecd427098e876f3933caf840fa58b",
   "2e2077418cb016632cf6a7838da969a4639a0485",
   "7143ad85aa642010fa475b68263267ccf0c22dc0",
-  "b5744dea8ca776ea195162e601f2fdf16d4ba613"
+  "b5744dea8ca776ea195162e601f2fdf16d4ba613",
+  "59caa1364f8ad0c8b6a9952c50b686b84e8dcb45"
  ],
  "merged_prs": [
   67,
@@ -30,6 +31,7 @@
   "M3-KCBERT-002: re-review b5744de after INFRA-DATA-003 created Training/TL_서울_구급.zip (FAIL cause was the missing zip)",
   "M3-KCBERT-002 PR #68 b5744de re-review PASS (label zip now exists); submitted",
   "M3-KCBERT-002 judged 채택 (mean Macro F1 0.5833, +0.0157); team log PR #70, PR #68 lab-adopted; next proposal issue #4 M3-KCBERT-003",
-  "PR #68 merge skipped 2026-10-08: merge-gate/verdict failure on b5744de (code PR); reported"
+  "PR #68 merge skipped 2026-10-08: merge-gate/verdict failure on b5744de (code PR); reported",
+  "M3-KCBERT-003 PR #71 59caa13 review PASS; submitted. PR #68 merge skipped again: merge-gate/verdict failure on b5744de (label 수정-필요), awaiting user"
  ]
 }
