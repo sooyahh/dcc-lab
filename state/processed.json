@@ -8,7 +8,8 @@
  ],
  "implemented_issues": [
   1,
-  3
+  3,
+  4
  ],
  "reviewed_shas": [
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
@@ -18,7 +19,8 @@
   "b5744dea8ca776ea195162e601f2fdf16d4ba613"
  ],
  "merged_prs": [
-  67
+  67,
+  70
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -27,6 +29,7 @@
   "M3-KCBERT-002 PR #68 b5744de FAIL (2nd FAIL, same zip MAJOR); no lab-fix label, escalated to user",
   "M3-KCBERT-002: re-review b5744de after INFRA-DATA-003 created Training/TL_서울_구급.zip (FAIL cause was the missing zip)",
   "M3-KCBERT-002 PR #68 b5744de re-review PASS (label zip now exists); submitted",
-  "M3-KCBERT-002 judged 채택 (mean Macro F1 0.5833, +0.0157); team log PR #70, PR #68 lab-adopted; next proposal issue #4 M3-KCBERT-003"
+  "M3-KCBERT-002 judged 채택 (mean Macro F1 0.5833, +0.0157); team log PR #70, PR #68 lab-adopted; next proposal issue #4 M3-KCBERT-003",
+  "PR #68 merge skipped 2026-10-08: merge-gate/verdict failure on b5744de (code PR); reported"
  ]
 }
