@@ -1,6 +1,6 @@
-VERDICT: 재시도
-- 실행 0.6분 만에 종료(exit 1), metrics.json 없음 — 학습 전 코드 오류이며 실험 결과가 아님.
-- 원인: scripts/lab/m3-kcbert-004.py:279 `tokenizer.build_inputs_with_special_tokens`가 현재 Colab transformers(BertTokenizer 래퍼)에 없음 (AttributeError).
-- 동일 커밋 00c1433 재제출은 같은 오류로 실패하므로 제출하지 않음. PR #73에 수정 요청(lab-fix) — 특수토큰을 직접 `[cls_token_id] + 내용 + [sep_token_id]`로 구성하도록 변경.
-- 수정 PR 재검토 PASS 후 재제출 (재시도 1회, 시도 1/3 소진).
-- 판정 대상 성능 지표 없음 (baseline KCBERT-003 0.5990 비교 불가).
+VERDICT: 기각
+- 3-seed(42/43/44) 평균 Macro F1 0.5925 vs KCBERT-003 0.5990: -0.0065. 성공 기준(+0.01 이상) 미충족, 오히려 하락.
+- seed별 0.6000 / 0.5852 / 0.5924 — 0.599 초과는 seed 42 하나뿐(기준: 최소 2개). 설정: 동일 80:20 분할(23,408/5,792), threshold 0.5, 공식 Val 미사용.
+- Micro F1 0.6281(003: 0.6315)로도 개선 없음. 오심 F1 평균 0.207(003: 0.237)로 더 낮음. 호흡곤란·열상은 소폭 상승했으나 전체를 뒤집지 못함.
+- 결론: head128+tail128 입력은 앞 256 절단 대비 이득이 없다. 입력 절단 방식 미세 조정은 재제안하지 않는다.
+- 후속: 코드 PR #73 닫기, KCBERT-003 설정 유지.
