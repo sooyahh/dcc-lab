@@ -29,7 +29,9 @@
  "merged_prs": [
   67,
   70,
-  72
+  72,
+  71,
+  68
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
