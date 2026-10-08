@@ -127,7 +127,7 @@ jobs:
           NEXT=$(GITHUB_OUTPUT=/dev/null python tools/commander_check.py | python3 -c '
           import json,os,sys
           start = json.loads(os.environ.get("START") or "[]")
-          nxt = [w for w in json.load(sys.stdin) if w["kind"] in ("implement", "review", "fix")]
+          nxt = [w for w in json.load(sys.stdin) if w["kind"] in ("implement", "review", "fix", "propose")]
           print(json.dumps([w for w in nxt if w not in start]))')
           echo "new work: $NEXT"
           [ "$NEXT" = "[]" ] || gh workflow run commander.yml -R "$GITHUB_REPOSITORY" --ref main
