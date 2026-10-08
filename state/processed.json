@@ -20,7 +20,8 @@
   6,
   7,
   8,
-  9
+  9,
+  10
  ],
  "reviewed_shas": [
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
@@ -47,7 +48,8 @@
   75,
   77,
   76,
-  79
+  79,
+  81
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -72,6 +74,7 @@
   "M3-KCBERT-006 judged 기각 (mean Macro F1 0.5883, -0.0209 vs 005); team log PR #79, code PR #78 closed, issue #8 closed. PR #76 (82d9823) merged (merge-gate success). Next proposal issue #9 M3-KCBERT-007 (3-seed ensemble)",
   "PR #79 (log, 279789f) merge skipped: merge-gate/verdict pending and behind main by 3 -> update-branch run; recheck next run",
   "M3-KCBERT-007 PR #80 0beb5ab review PASS; submitted. PR #79 (log, cce01cc) merge skipped: merge-gate/verdict pending, not behind main; recheck next run",
-  "M3-KCBERT-007 judged 기각 (ensemble Macro F1 0.6175, +0.0083 vs 005 < +0.01); team log PR #81, code PR #80 closed, issue #9 closed. PR #79 (log) merged (merge-gate success). Next proposal issue #10 M3-KLUEBERT-001"
+  "M3-KCBERT-007 judged 기각 (ensemble Macro F1 0.6175, +0.0083 vs 005 < +0.01); team log PR #81, code PR #80 closed, issue #9 closed. PR #79 (log) merged (merge-gate success). Next proposal issue #10 M3-KLUEBERT-001",
+  "PR #81 (log M3-KCBERT-007) merged (merge-gate success)"
  ]
 }
