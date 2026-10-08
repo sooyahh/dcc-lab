@@ -41,20 +41,22 @@ jobs:
           token: ${{ secrets.TEAM_REPO_TOKEN }}
           path: team
           fetch-depth: 0
+      - name: Clean secrets (strip BOM/whitespace added by PowerShell pipes)
+        env:
+          RAW_CLAUDE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          RAW_TEAM: ${{ secrets.TEAM_REPO_TOKEN }}
+        run: |
+          clean(){ printf '%s' "$1" | python3 -c 'import sys;print(sys.stdin.read().lstrip(chr(0xfeff)).strip())'; }
+          C=$(clean "$RAW_CLAUDE"); T=$(clean "$RAW_TEAM")
+          [[ $C == sk-ant-* ]] || { echo "::error::CLAUDE_CODE_OAUTH_TOKEN is not a Claude token"; exit 1; }
+          echo "::add-mask::$C"; echo "::add-mask::$T"
+          echo "CLAUDE_TOKEN_CLEAN=$C" >> "$GITHUB_ENV"
+          echo "TEAM_GH_TOKEN=$T" >> "$GITHUB_ENV"
       - name: Check for work (no LLM)
         id: check
         env:
           GH_TOKEN: ${{ github.token }}
-          TEAM_GH_TOKEN: ${{ secrets.TEAM_REPO_TOKEN }}
         run: python tools/commander_check.py
-      - name: Clean Claude token (strip BOM/whitespace added by PowerShell pipes)
-        env:
-          RAW: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-        run: |
-          T=$(printf '%s' "$RAW" | python3 -c 'import sys;print(sys.stdin.read().lstrip(chr(0xfeff)).strip())')
-          [[ $T == sk-ant-* ]] || { echo "::error::CLAUDE_CODE_OAUTH_TOKEN is not a Claude token (claude setup-token output expected)"; exit 1; }
-          echo "::add-mask::$T"
-          echo "CLAUDE_TOKEN_CLEAN=$T" >> "$GITHUB_ENV"
       - name: Set up Codex
         if: contains(steps.check.outputs.work, '"implement"') || contains(steps.check.outputs.work, '"fix"')
         env:
@@ -71,7 +73,6 @@ jobs:
         if: steps.check.outputs.work != '[]'
         env:
           GH_TOKEN: ${{ github.token }}
-          TEAM_GH_TOKEN: ${{ secrets.TEAM_REPO_TOKEN }}
           TEAM_REPO_DIR: team
           WORK: ${{ steps.check.outputs.work }}
         run: python tools/codex_implement.py
@@ -80,7 +81,6 @@ jobs:
         uses: anthropics/claude-code-action@v1
         env:
           GH_TOKEN: ${{ github.token }}
-          TEAM_GH_TOKEN: ${{ secrets.TEAM_REPO_TOKEN }}
           TEAM_REPO_DIR: team
           GROKBOT_WEBHOOK_URL: ${{ secrets.GROKBOT_WEBHOOK_URL }}
         with:

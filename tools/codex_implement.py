@@ -66,17 +66,21 @@ def implement(item: dict, state: dict) -> None:
     spec = json.loads(m.group(1))
     exp = spec["exp_id"]
     branch = f"sooyah/lab-{exp.lower()}"
-    run(["git", "fetch", "-q", "origin", "main"], cwd=TEAM)
-    run(["git", "checkout", "-q", "-B", branch, "origin/main"], cwd=TEAM)
     log = LAB / "reviews" / f"{exp}.implement.log.md"
-    out = codex(f"{guide()}\n\n## 명세\n```json\n{json.dumps(spec, ensure_ascii=False, indent=2)}\n```\n", log)
-    if not run(["git", "status", "--porcelain"], cwd=TEAM).strip():
-        raise RuntimeError(f"{exp}: codex가 파일을 바꾸지 않음")
+    run(["git", "fetch", "-q", "origin", "main"], cwd=TEAM)
+    if run(["git", "ls-remote", "--heads", "origin", branch], cwd=TEAM).strip() and log.exists():
+        out = log.read_text(encoding="utf-8")             # pushed by an earlier run that failed later: reuse it
+        print(f"{exp}: reuse existing branch {branch}")
+    else:
+        run(["git", "checkout", "-q", "-B", branch, "origin/main"], cwd=TEAM)
+        out = codex(f"{guide()}\n\n## 명세\n```json\n{json.dumps(spec, ensure_ascii=False, indent=2)}\n```\n", log)
+        if not run(["git", "status", "--porcelain"], cwd=TEAM).strip():
+            raise RuntimeError(f"{exp}: codex가 파일을 바꾸지 않음")
+        run(["git", "add", "-A"], cwd=TEAM)
+        run(["git", "-c", "user.name=dcc-lab-commander", "-c", "user.email=dcc-lab@users.noreply.github.com",
+             "commit", "-q", "-m", f"exp({exp}): {spec['title']}"], cwd=TEAM)
+        run(["git", "push", "-q", "-f", "origin", branch], cwd=TEAM)
     cmd = command_line(out)
-    run(["git", "add", "-A"], cwd=TEAM)
-    run(["git", "-c", "user.name=dcc-lab-commander", "-c", "user.email=dcc-lab@users.noreply.github.com",
-         "commit", "-q", "-m", f"exp({exp}): {spec['title']}"], cwd=TEAM)
-    run(["git", "push", "-q", "-f", "origin", branch], cwd=TEAM)
     pr_body = (f"자동 구현 (Codex) — 명세: sooyahh/dcc-lab#{item['issue']}\n\n"
                f"```json\n{json.dumps(spec, ensure_ascii=False, indent=2)}\n```\n\n"
                f"<details><summary>Codex 요약</summary>\n\n{out[-3000:]}\n</details>\n\nCOMMAND: {cmd}")
