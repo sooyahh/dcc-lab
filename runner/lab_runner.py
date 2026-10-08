@@ -183,7 +183,9 @@ def find_data_root() -> Path | None:
         # Drive FUSE may return Hangul names in NFD; compare NFC-normalized names and use the real on-disk name
         def named(parent: Path) -> list[Path]:
             try:
-                return [parent / n for n in os.listdir(parent) if unicodedata.normalize("NFC", n) == DATA_DIR]
+                # also accept duplicate-shortcut names like "대학부 데이터 (1)"; Training/Validation check decides
+                return [parent / n for n in sorted(os.listdir(parent))
+                        if unicodedata.normalize("NFC", n).startswith(DATA_DIR)]
             except OSError:
                 return []
         cands = named(drive / "MyDrive")
