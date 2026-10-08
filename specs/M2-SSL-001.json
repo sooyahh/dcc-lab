@@ -11,7 +11,7 @@
   },
   "branch": "sooyah/lab-m2-ssl-001",
   "commit": "",
-  "command": "python scripts/lab/m2_ssl_001.py --out \"$LAB_OUT\" --model-dir \"$LAB_WORK/models/wavlm-base-plus\"",
+  "command": "python scripts/lab/m2_ssl_001.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "Training 통화 표본(call_id 그룹 유지, 약 4,000통화≈12만 발화) 80/20 call_id holdout에서, 같은 분할로 재평가한 L1 53차원 LGBM 대비 accuracy +2%p 이상인 층·헤드 조합이 존재. metrics.json에 층×헤드별 holdout accuracy, L1 동일 분할 accuracy, 추출 처리량(발화/초, GPU), seed 기록",
   "gpu": "T4",
