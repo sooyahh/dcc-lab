@@ -16,7 +16,8 @@
   4,
   5,
   6,
-  7
+  7,
+  8
  ],
  "reviewed_shas": [
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
@@ -38,7 +39,8 @@
   72,
   71,
   68,
-  75
+  75,
+  77
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -57,6 +59,7 @@
   "PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user",
   "PR #71 (4e73a5e) and PR #68 (f3af923) merge skipped: merge-gate/verdict pending on both (heads updated, label 병합-대기); recheck next run",
   "M3-KCBERT-004 PR #73 5a71930 (build_head_tail_input fix) review PASS; resubmitted. PR #71 (4e73a5e) and #68 (f3af923) re-review PASS (main merges only, no code change); no submit (already run/adopted).",
-  "M3-KCBERT-005 judged 채택 (mean Macro F1 0.6092, +0.0102); team log PR #77, code PR #76 lab-adopted; issue #7 closed; next proposal #8 M3-KCBERT-006 (5 epochs)"
+  "M3-KCBERT-005 judged 채택 (mean Macro F1 0.6092, +0.0102); team log PR #77, code PR #76 lab-adopted; issue #7 closed; next proposal #8 M3-KCBERT-006 (5 epochs)",
+  "PR #76 (code, lab-adopted) behind main by 2 -> update-branch run; merge deferred to next run"
  ]
 }
