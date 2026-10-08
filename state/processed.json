@@ -42,6 +42,7 @@
   "PR #72 (log) merged. PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user",
   "M3-KCBERT-004 PR #73 00c1433 review PASS; submitted. PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user",
   "M3-KCBERT-004 failed 2026-10-08 17:00: code bug (build_inputs_with_special_tokens missing), verdict 재시도; PR #73 lab-fix, resubmit after fix+re-review. PR #71 skipped: merge-gate pending. PR #68 skipped: merge-gate failure (수정-필요), awaiting user",
-  "PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user"
+  "PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user",
+  "PR #71 (4e73a5e) and PR #68 (f3af923) merge skipped: merge-gate/verdict pending on both (heads updated, label 병합-대기); recheck next run"
  ]
 }
