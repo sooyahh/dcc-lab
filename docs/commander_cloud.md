@@ -44,6 +44,6 @@
 3. 코드 PR(`lab-adopted`)은 freeze 이후 병합 금지
 
 ## 마무리 (항상)
-1. `state/processed.json` 갱신: 처리 완료한 `judged`(EXP), `implemented_issues`(이슈 번호), `reviewed_shas`(sha), `merged_prs`(PR 번호)를 추가
+1. `state/processed.json` 갱신: 처리 완료한 `judged`(judge 항목의 `key` 값 그대로), `implemented_issues`(이슈 번호), `reviewed_shas`(sha), `merged_prs`(PR 번호)를 추가
 2. dcc-lab 변경을 커밋하고 `git pull --rebase` 후 push
 3. dcc-lab의 `Commander log` 이슈(없으면 생성, 라벨 `log`)에 이번 실행 요약 댓글: 처리 항목, 판정, 만든 PR·이슈 링크, 사용자 조치 필요 사항. 조치가 필요하면 `@sooyahh`를 멘션

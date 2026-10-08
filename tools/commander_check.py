@@ -44,9 +44,11 @@ def main() -> None:
 
     for folder in ("done", "failed"):
         for p in sorted((LAB / folder).glob("*.json")):
-            exp = json.loads(p.read_text(encoding="utf-8"))["spec"]["exp_id"]
-            if exp not in judged and not exp.startswith("SMOKE"):
-                work.append({"kind": "judge", "exp": exp})
+            rec = json.loads(p.read_text(encoding="utf-8"))
+            exp = rec["spec"]["exp_id"]
+            key = f"{folder}/{p.name}@{rec.get('finished_at', '')}"   # one judgment per result, not per experiment
+            if key not in judged and not exp.startswith("SMOKE"):
+                work.append({"kind": "judge", "exp": exp, "key": key})
 
     if not frozen:
         for it in gh_json("issue", "list", "-R", LAB_REPO, "--label", "approved", "--state", "open",

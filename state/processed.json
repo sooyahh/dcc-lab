@@ -1,5 +1,7 @@
 {
- "judged": [],
+ "judged": [
+  "failed/03_M2-SSL-001.json@2026-10-08T05:42:38+00:00"
+ ],
  "implemented_issues": [
   1
  ],
@@ -7,5 +9,8 @@
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
   "a0eb12a0a2cecd427098e876f3933caf840fa58b"
  ],
- "merged_prs": []
+ "merged_prs": [],
+ "notes": [
+  "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result"
+ ]
 }
