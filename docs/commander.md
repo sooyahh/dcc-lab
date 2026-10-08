@@ -23,6 +23,6 @@
 
 ## 자원 대응
 - `status` 브랜치 `colab_cu.json`의 잔량 < `colab_cu_floor` → 새 실험은 `gpu: T4`·epoch 축소, 큰 실험 보류
-- heartbeat `running`인데 40분 이상 갱신 없음 → grokbot에 러너 재기동 요청 (작업은 자동 재개)
+- heartbeat `running`인데 40분 이상 갱신 없음 → watchdog이 grokbot에 러너 재기동을 요청한다(commander 실행 끝에 watchdog 자동 호출, 작업은 자동 재개). 직접 웹훅을 부르지 않는다
 - OOM 실패 → batch 절반 + grad accumulation으로 명세 수정 후 재제출
 - 3회 실패 → 원인 요약해 사용자에게 보고, 해당 실험 중단

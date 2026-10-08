@@ -80,7 +80,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TEAM_REPO_DIR: team
-          GROKBOT_WEBHOOK_URL: ${{ secrets.GROKBOT_WEBHOOK_URL }}
+          # no grokbot webhook here: the "Wake runner" step below dispatches watchdog.yml instead
         with:
           claude_code_oauth_token: ${{ env.CLAUDE_TOKEN_CLEAN }}
           github_token: ${{ github.token }}
@@ -102,6 +102,18 @@ jobs:
           git config user.name dcc-lab-commander; git config user.email dcc-lab@users.noreply.github.com
           git add -A specs reviews state 2>/dev/null || true
           git diff --cached --quiet || { git commit -qm "commander: state"; git pull -q --rebase; git push -q; }
+      - name: Wake runner (dispatch watchdog; GITHUB_TOKEN pushes to queue/ do not trigger it)
+        # watchdog pings grokbot only if jobs wait and the runner heartbeat is stale, so this is safe to call often
+        if: always() && steps.check.outputs.work != '[]'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git pull -q --rebase || true
+          if ls queue/*.json running/*.json >/dev/null 2>&1; then
+            gh workflow run watchdog.yml -R "$GITHUB_REPOSITORY" --ref main
+          else
+            echo "no pending jobs"
+          fi
       - name: Chain next step now (re-dispatch if new build/review/fix work appeared)
         # e.g. Codex opened a PR -> review, review FAIL -> fix, fix pushed -> re-review.
         # Only when the work differs from what this run started with, so a stuck item cannot loop.
