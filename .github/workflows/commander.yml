@@ -109,7 +109,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           git pull -q --rebase || true
-          if ls queue/*.json running/*.json >/dev/null 2>&1; then
+          # ls exits non-zero if either glob is empty, so test the listed output instead
+          if ls queue/*.json running/*.json 2>/dev/null | grep -q .; then
             gh workflow run watchdog.yml -R "$GITHUB_REPOSITORY" --ref main
           else
             echo "no pending jobs"
