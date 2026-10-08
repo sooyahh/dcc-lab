@@ -13,7 +13,8 @@
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
   "a0eb12a0a2cecd427098e876f3933caf840fa58b",
   "2e2077418cb016632cf6a7838da969a4639a0485",
-  "7143ad85aa642010fa475b68263267ccf0c22dc0"
+  "7143ad85aa642010fa475b68263267ccf0c22dc0",
+  "b5744dea8ca776ea195162e601f2fdf16d4ba613"
  ],
  "merged_prs": [
   67
@@ -23,6 +24,7 @@
   "M2-SSL-001 failure 2026-10-08 09:25: infra (shared data folder holds only zip parts); sample staged from local copy",
   "M3-KCBERT-002 failure 2026-10-08 12:27: code expects Training/TL_서울_구급.zip but Drive has extracted JSON; PR #68 labeled lab-fix, resubmit after re-review PASS",
   "M3-KCBERT-002 PR #68 b5744de FAIL (2nd FAIL, same zip MAJOR); no lab-fix label, escalated to user",
-  "M3-KCBERT-002: re-review b5744de after INFRA-DATA-003 created Training/TL_서울_구급.zip (FAIL cause was the missing zip)"
+  "M3-KCBERT-002: re-review b5744de after INFRA-DATA-003 created Training/TL_서울_구급.zip (FAIL cause was the missing zip)",
+  "M3-KCBERT-002 PR #68 b5744de re-review PASS (label zip now exists); submitted"
  ]
 }
