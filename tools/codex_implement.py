@@ -97,19 +97,25 @@ def implement(item: dict, state: dict) -> None:
 def fix(item: dict, state: dict) -> None:
     pr = json.loads(gh_team("pr", "view", str(item["pr"]), "-R", TEAM_REPO, "--json", "headRefName,title,body"))
     exp = pr["title"].split("(", 1)[1].split(")", 1)[0]
-    reviews = sorted((LAB / "reviews").glob(f"{exp}_*.md"), key=lambda p: p.stat().st_mtime)
-    reviews = [r for r in reviews if not r.name.endswith((".implement.log.md", "_verdict.md"))]
+    # order by last commit time: a fresh Actions checkout gives every file the same mtime
+    reviews = sorted((LAB / "reviews").glob(f"{exp}_*.md"),
+                     key=lambda p: int(run(["git", "log", "-1", "--format=%ct", "--", str(p)], cwd=LAB).strip() or 0))
+    # lab-fix comes from a review FAIL or from a judge verdict (재시도 = code bug at run time): use the newest
+    reviews = [r for r in reviews if not r.name.endswith((".implement.log.md", ".fix.log.md"))]
     review = reviews[-1].read_text(encoding="utf-8") if reviews else "(검토 파일 없음: PR 댓글 참고)"
     run(["git", "fetch", "-q", "origin", pr["headRefName"]], cwd=TEAM)
     run(["git", "checkout", "-q", "-B", pr["headRefName"], f"origin/{pr['headRefName']}"], cwd=TEAM)
     log = LAB / "reviews" / f"{exp}.fix.log.md"
     out = codex(f"{guide()}\n\n## 원래 PR 본문(명세 포함)\n{pr['body'][:8000]}\n\n"
                 f"## 검토에서 지적된 문제 (BLOCKER/MAJOR 모두 해결)\n{review}\n", log)
-    if run(["git", "status", "--porcelain"], cwd=TEAM).strip():
-        run(["git", "add", "-A"], cwd=TEAM)
-        run(["git", "-c", "user.name=dcc-lab-commander", "-c", "user.email=dcc-lab@users.noreply.github.com",
-             "commit", "-q", "-m", f"exp({exp}): fix per review"], cwd=TEAM)
-        run(["git", "push", "-q", "origin", pr["headRefName"]], cwd=TEAM)
+    if not run(["git", "status", "--porcelain"], cwd=TEAM).strip():
+        # keep lab-fix so the item is not silently dropped; the error goes to Claude as a report item
+        raise RuntimeError(f"Codex made no changes for PR #{item['pr']} (review used: "
+                           f"{reviews[-1].name if reviews else 'none'}). Log: {log.name}")
+    run(["git", "add", "-A"], cwd=TEAM)
+    run(["git", "-c", "user.name=dcc-lab-commander", "-c", "user.email=dcc-lab@users.noreply.github.com",
+         "commit", "-q", "-m", f"exp({exp}): fix per review"], cwd=TEAM)
+    run(["git", "push", "-q", "origin", pr["headRefName"]], cwd=TEAM)
     cmd = command_line(out)
     if cmd:
         spec_p = LAB / "specs" / f"{exp}.json"
