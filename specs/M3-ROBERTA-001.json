@@ -10,7 +10,7 @@
     "value": 0.599
   },
   "branch": "sooyah/lab-m3-roberta-001",
-  "commit": "",
+  "commit": "716855e1a9e8cd0cd9c955e6cab1d1bc29e68bd4",
   "command": "python scripts/lab/m3-roberta-001.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.599보다 +0.01 이상 높고 최소 2개 seed가 0.599 초과. threshold 0.5 고정, 튜닝 금지. seed별 Macro/Micro/증상별 F1과 epoch별 내부 Val Macro F1, epoch 시간을 기록. 어느 seed가 학습 붕괴(epoch 1 이후 내부 Val Macro F1 < 0.3)하면 그 사실을 metrics에 명시",
