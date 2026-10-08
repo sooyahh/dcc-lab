@@ -5,7 +5,8 @@
   "done/03_M2-SSL-001.json@2026-10-08T11:36:35+00:00"
  ],
  "implemented_issues": [
-  1
+  1,
+  3
  ],
  "reviewed_shas": [
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
