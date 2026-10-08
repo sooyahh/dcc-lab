@@ -47,13 +47,21 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TEAM_GH_TOKEN: ${{ secrets.TEAM_REPO_TOKEN }}
         run: python tools/commander_check.py
+      - name: Clean Claude token (strip BOM/whitespace added by PowerShell pipes)
+        env:
+          RAW: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          T=$(printf '%s' "$RAW" | python3 -c 'import sys;print(sys.stdin.read().lstrip(chr(0xfeff)).strip())')
+          [[ $T == sk-ant-* ]] || { echo "::error::CLAUDE_CODE_OAUTH_TOKEN is not a Claude token (claude setup-token output expected)"; exit 1; }
+          echo "::add-mask::$T"
+          echo "CLAUDE_TOKEN_CLEAN=$T" >> "$GITHUB_ENV"
       - name: Set up Codex
         if: contains(steps.check.outputs.work, '"implement"') || contains(steps.check.outputs.work, '"fix"')
         env:
           CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
         run: |
           npm install -g @openai/codex >/dev/null 2>&1
-          mkdir -p ~/.codex && umask 077 && printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
+          mkdir -p ~/.codex && umask 077 && printf '%s' "$CODEX_AUTH_JSON" | python3 -c 'import sys;sys.stdout.write(sys.stdin.read().lstrip(chr(0xfeff)))' > ~/.codex/auth.json
           codex --version
       - name: Implement / fix with Codex
         id: codex
@@ -73,7 +81,7 @@ jobs:
           TEAM_REPO_DIR: team
           GROKBOT_WEBHOOK_URL: ${{ secrets.GROKBOT_WEBHOOK_URL }}
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ env.CLAUDE_TOKEN_CLEAN }}
           github_token: ${{ github.token }}
           prompt: |
             docs/commander_cloud.md 의 지시를 그대로 따른다.
