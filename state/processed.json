@@ -8,7 +8,8 @@
   "done/02_M3-KCBERT-003.json@2026-10-08T16:52:44+00:00",
   "failed/02_M3-KCBERT-004.json@2026-10-08T17:00:46+00:00",
   "done/02_M3-KCBERT-004.json@2026-10-08T18:07:34+00:00",
-  "done/02_M3-KCBERT-005.json@2026-10-08T19:07:14+00:00"
+  "done/02_M3-KCBERT-005.json@2026-10-08T19:07:14+00:00",
+  "done/02_M3-KCBERT-006.json@2026-10-08T20:40:13+00:00"
  ],
  "implemented_issues": [
   1,
@@ -41,7 +42,8 @@
   71,
   68,
   75,
-  77
+  77,
+  76
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -62,6 +64,7 @@
   "M3-KCBERT-004 PR #73 5a71930 (build_head_tail_input fix) review PASS; resubmitted. PR #71 (4e73a5e) and #68 (f3af923) re-review PASS (main merges only, no code change); no submit (already run/adopted).",
   "M3-KCBERT-005 judged 채택 (mean Macro F1 0.6092, +0.0102); team log PR #77, code PR #76 lab-adopted; issue #7 closed; next proposal #8 M3-KCBERT-006 (5 epochs)",
   "PR #76 (code, lab-adopted) behind main by 2 -> update-branch run; merge deferred to next run",
-  "M3-KCBERT-006 PR #78 1bce6d5 review PASS; submitted. PR #76 (82d9823) merge skipped: merge-gate/verdict pending, not behind main; recheck next run"
+  "M3-KCBERT-006 PR #78 1bce6d5 review PASS; submitted. PR #76 (82d9823) merge skipped: merge-gate/verdict pending, not behind main; recheck next run",
+  "M3-KCBERT-006 judged 기각 (mean Macro F1 0.5883, -0.0209 vs 005); team log PR #79, code PR #78 closed, issue #8 closed. PR #76 (82d9823) merged (merge-gate success). Next proposal issue #9 M3-KCBERT-007 (3-seed ensemble)"
  ]
 }
