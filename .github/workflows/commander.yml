@@ -21,6 +21,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
+      - name: Verify secrets are set (values never printed)
+        env:
+          A: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          B: ${{ secrets.TEAM_REPO_TOKEN }}
+          C: ${{ secrets.GROKBOT_WEBHOOK_URL }}
+        run: |
+          for n in A:CLAUDE_CODE_OAUTH_TOKEN B:TEAM_REPO_TOKEN C:GROKBOT_WEBHOOK_URL; do
+            v=${n%%:*}; name=${n#*:}
+            if [ -n "${!v}" ]; then echo "$name: set (${#v} chars var)"; else echo "::warning::$name is empty or missing"; fi
+          done
+          [ -n "$A" ] && [ -n "$B" ] || { echo "::error::required secret missing"; exit 1; }
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
