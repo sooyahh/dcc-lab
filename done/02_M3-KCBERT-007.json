@@ -1,0 +1,142 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-007",
+    "mission": 3,
+    "title": "KcBERT 앞 256 + 강화 가중 BCE 3-seed 확률 평균 앙상블 (80:20 재평가)",
+    "hypothesis": "KCBERT-005와 동일하게 학습한 seed 42/43/44 모델의 sigmoid 확률을 평균하면 seed 분산이 줄어 단일 모델 평균 Macro F1(0.6092)보다 앙상블 Macro F1이 오른다",
+    "change_vs_baseline": "M3-KCBERT-005 대비 학습 설정(앞 256토큰, pos_weight scale 0.5/max 6.0, 3 epochs, 분할, seed 42/43/44) 동일. 평가만 추가: 3개 모델의 sigmoid 확률을 단순 평균한 뒤 threshold 0.5 고정으로 Macro/Micro/증상별 F1 계산. 가중치 튜닝·best epoch 선택 금지. 단일 모델 3-seed 결과도 함께 기록",
+    "baseline": {
+      "exp_id": "M3-KCBERT-005",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6092
+    },
+    "branch": "sooyah/lab-m3-kcbert-007",
+    "commit": "0beb5ab415312bb76aa719f53bfcfe8507ef14a7",
+    "command": "python scripts/lab/m3-kcbert-007.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 앙상블 Macro F1이 0.6092보다 +0.01 이상 높고 seed별 단일 모델 최고값(0.6196)도 초과. threshold 0.5 고정, 튜닝 금지. 앙상블과 단일 모델의 Macro/Micro/증상별 F1 기록",
+    "gpu": "T4",
+    "budget_hours": 3,
+    "priority": 2,
+    "notes": "전사 텍스트만, 공식 Val 미사용. m3-kcbert-005.py 재사용, 마지막에 3개 seed 확률을 모아 평균하는 평가만 추가. 공개 모델 beomi/kcbert-base는 고정 revision으로 DCC_RUN_ROOT/models 캐시. 체크포인트 epoch마다 저장해 재개. 예상 소요 약 60~90분"
+  },
+  "commit": "0beb5ab415312bb76aa719f53bfcfe8507ef14a7",
+  "submitted_at": "2026-10-09T05:46:39+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-6b832c56",
+  "claimed_at": "2026-10-08T20:47:33+00:00",
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-08T21:41:13+00:00",
+  "elapsed_min": 53.5,
+  "metrics": {
+    "exp_id": "M3-KCBERT-007",
+    "primary_metric": {
+      "name": "macro_f1",
+      "value": 0.6174669903394812,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "ensemble": {
+        "macro_f1": 0.6174669903394812,
+        "micro_f1": 0.6438100504596669,
+        "per_symptom_f1": {
+          "고열": 0.6508120649651972,
+          "구토": 0.5911199469847581,
+          "두통": 0.4946004319654428,
+          "복통": 0.7972701726214372,
+          "어지러움": 0.6440204746393672,
+          "열상": 0.8815028901734104,
+          "오심": 0.2802802802802803,
+          "전신쇠약": 0.5264900662251656,
+          "호흡곤란": 0.6911065852002716
+        }
+      },
+      "seeds": [
+        {
+          "seed": 42,
+          "epoch": 3,
+          "macro_f1": 0.6151742903312286,
+          "micro_f1": 0.6327427734114827,
+          "per_symptom_f1": {
+            "고열": 0.6472805600430802,
+            "구토": 0.5792724776938916,
+            "두통": 0.4948875255623722,
+            "복통": 0.7823050058207218,
+            "어지러움": 0.6492932862190812,
+            "열상": 0.8704819277108434,
+            "오심": 0.334913112164297,
+            "전신쇠약": 0.5199786893979755,
+            "호흡곤란": 0.6581560283687943
+          },
+          "train_loss": 0.24674904292992997
+        },
+        {
+          "seed": 43,
+          "epoch": 3,
+          "macro_f1": 0.599703151775662,
+          "micro_f1": 0.6315570358034971,
+          "per_symptom_f1": {
+            "고열": 0.6151960784313726,
+            "구토": 0.6009913258983891,
+            "두통": 0.5034687809712587,
+            "복통": 0.7889328063241107,
+            "어지러움": 0.6391752577319587,
+            "열상": 0.8607773851590106,
+            "오심": 0.22145328719723184,
+            "전신쇠약": 0.49252013808975836,
+            "호흡곤란": 0.6748133061778683
+          },
+          "train_loss": 0.24566530599752193
+        },
+        {
+          "seed": 44,
+          "epoch": 3,
+          "macro_f1": 0.6113885715895055,
+          "micro_f1": 0.6375670355033602,
+          "per_symptom_f1": {
+            "고열": 0.6455981941309256,
+            "구토": 0.578042328042328,
+            "두통": 0.452353616532721,
+            "복통": 0.7910204081632654,
+            "어지러움": 0.6401463191586648,
+            "열상": 0.871977240398293,
+            "오심": 0.30592734225621415,
+            "전신쇠약": 0.5320813771517997,
+            "호흡곤란": 0.6853503184713375
+          },
+          "train_loss": 0.2456323174951994
+        }
+      ],
+      "mean_macro_f1": 0.6087553378987988,
+      "mean_micro_f1": 0.6339556149061133,
+      "mean_per_symptom_f1": {
+        "고열": 0.6360249442017928,
+        "구토": 0.5861020438782029,
+        "두통": 0.4835699743554506,
+        "복통": 0.787419406769366,
+        "어지러움": 0.6428716210365683,
+        "열상": 0.867745517756049,
+        "오심": 0.28743124720591434,
+        "전신쇠약": 0.5148600682131779,
+        "호흡곤란": 0.6727732176726667
+      },
+      "baseline_macro_f1": 0.6092,
+      "baseline_best_seed_macro_f1": 0.6196,
+      "improvement_vs_baseline": 0.008266990339481195,
+      "success": false
+    },
+    "seed": 42,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "train_rows": 23408,
+    "eval_rows": 5792,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Final epoch 3 for every seed; equal mean of sigmoid probabilities; strict >0.5 fixed, matching M3-KCBERT-005. No tuning or model selection. Training-only call-disjoint 80:20 split; official Validation unused. best.ckpt bundles all three final-epoch state dictionaries."
+  }
+}
