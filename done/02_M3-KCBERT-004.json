@@ -1,0 +1,122 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-004",
+    "mission": 3,
+    "title": "KcBERT head128+tail128 + 완화 가중 BCE (80:20 재평가 P4)",
+    "hypothesis": "긴 전사에서 앞 256토큰 절단으로 잘리는 후반부 증상 정보를 head+tail 입력으로 살리면 Macro F1이 KCBERT-003(0.5990)보다 오른다",
+    "change_vs_baseline": "M3-KCBERT-003 대비 입력만 변경: 앞 256토큰 → 앞 128 + 뒤 128 토큰(특수토큰 포함 총 256 이내). 손실(완화 가중 BCE)·분할·threshold 0.5·3 epochs·seed 42/43/44 동일",
+    "baseline": {
+      "exp_id": "M3-KCBERT-003",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.599
+    },
+    "branch": "sooyah/lab-m3-kcbert-004",
+    "commit": "5a71930b07da7fbe31655e7946c3758673d2c89b",
+    "command": "python scripts/lab/m3-kcbert-004.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.599보다 +0.01 이상 높고 최소 2개 seed가 0.599 초과. threshold 0.5 고정, 튜닝 금지. pos_weight는 Training 분할에서만 계산. seed별 Macro/Micro/증상별 F1 기록",
+    "gpu": "T4",
+    "budget_hours": 4,
+    "priority": 2,
+    "notes": "전사 텍스트만, 공식 Val 미사용. m3-kcbert-003.py 재사용, 토큰 선택만 교체. 공개 모델 beomi/kcbert-base는 고정 revision으로 DCC_RUN_ROOT/models 캐시. 체크포인트 epoch마다 저장해 재개"
+  },
+  "commit": "5a71930b07da7fbe31655e7946c3758673d2c89b",
+  "submitted_at": "2026-10-09T02:12:47+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-6b832c56",
+  "claimed_at": "2026-10-08T17:16:03+00:00",
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-08T18:07:34+00:00",
+  "elapsed_min": 51.3,
+  "metrics": {
+    "exp_id": "M3-KCBERT-004",
+    "primary_metric": {
+      "name": "macro_f1",
+      "value": 0.5925261481601565,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "seeds": [
+        {
+          "seed": 42,
+          "epoch": 3,
+          "macro_f1": 0.5999674114150545,
+          "micro_f1": 0.6268718230526171,
+          "per_symptom_f1": {
+            "고열": 0.6392092257001647,
+            "구토": 0.5714285714285714,
+            "두통": 0.46674182638105977,
+            "복통": 0.7844495765973826,
+            "어지러움": 0.6450466459351399,
+            "열상": 0.8524332810047096,
+            "오심": 0.29137760158572845,
+            "전신쇠약": 0.5252210088403536,
+            "호흡곤란": 0.6237989652623799
+          },
+          "train_loss": 0.22355394463117859
+        },
+        {
+          "seed": 43,
+          "epoch": 3,
+          "macro_f1": 0.5851809728832592,
+          "micro_f1": 0.6267084282460137,
+          "per_symptom_f1": {
+            "고열": 0.607940446650124,
+            "구토": 0.5883125410374261,
+            "두통": 0.47005649717514125,
+            "복통": 0.7772549019607843,
+            "어지러움": 0.6298763082778306,
+            "열상": 0.8666196189131969,
+            "오심": 0.13612565445026178,
+            "전신쇠약": 0.5204711160964667,
+            "호흡곤란": 0.669971671388102
+          },
+          "train_loss": 0.22409216257516276
+        },
+        {
+          "seed": 44,
+          "epoch": 3,
+          "macro_f1": 0.5924300601821557,
+          "micro_f1": 0.6305839518274752,
+          "per_symptom_f1": {
+            "고열": 0.6395821242019734,
+            "구토": 0.5741239892183289,
+            "두통": 0.4306569343065693,
+            "복통": 0.7817380857028434,
+            "어지러움": 0.6384364820846905,
+            "열상": 0.8638704930095659,
+            "오심": 0.19393939393939394,
+            "전신쇠약": 0.5257623554153522,
+            "호흡곤란": 0.6837606837606838
+          },
+          "train_loss": 0.22318726356357071
+        }
+      ],
+      "mean_micro_f1": 0.6280547343753686,
+      "mean_per_symptom_f1": {
+        "고열": 0.6289105988507541,
+        "구토": 0.5779550338947755,
+        "두통": 0.4558184192875901,
+        "복통": 0.7811475214203368,
+        "어지러움": 0.637786478765887,
+        "열상": 0.8609744643091575,
+        "오심": 0.20714754999179474,
+        "전신쇠약": 0.5238181601173908,
+        "호흡곤란": 0.6591771068037219
+      }
+    },
+    "seed": 42,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "train_rows": 23408,
+    "eval_rows": 5792,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Final epoch 3; threshold >0.5 fixed; seed42 representative checkpoint. Head127+tail127 content tokens plus CLS/SEP; KCBERT-003 training settings preserved."
+  }
+}
