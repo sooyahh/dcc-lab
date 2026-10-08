@@ -1,6 +1,8 @@
 {
  "judged": [],
- "implemented_issues": [],
+ "implemented_issues": [
+  1
+ ],
  "reviewed_shas": [],
  "merged_prs": []
 }
