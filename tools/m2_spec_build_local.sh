@@ -44,8 +44,9 @@ if [ ! -f "$IDX_L" ]; then
 fi
 
 if [ ! -f "$PACK" ]; then
-  python scripts/pack_mission2_spectrograms.py --index "$IDX_L" --spectrogram-dir "$WORK/m2_spec_train" \
-    --packed-output "$PACK" --index-output "$PIDX" > "$WORK/train_pack.log" 2>&1 \
+  # resumable drop-in for scripts/pack_mission2_spectrograms.py (same output); appends to the log across restarts
+  python "$(cygpath -w "$(dirname "$0")/m2_pack_resumable.py")" --index "$IDX_L" --spectrogram-dir "$WORK/m2_spec_train" \
+    --packed-output "$PACK" --index-output "$PIDX" >> "$WORK/train_pack.log" 2>&1 \
     || fail "train pack: $(tail -c 400 "$WORK/train_pack.log")"
   st "TRAIN_PACK_DONE $(grep -E '^Packed' "$WORK/train_pack.log" | head -1)"
 fi
