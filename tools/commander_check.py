@@ -63,12 +63,14 @@ def main() -> None:
                 continue
             if not pr["title"].startswith("exp("):
                 continue                                                  # teammates' PRs are never touched
-            if "lab-fix" in labels:
+            if "lab-adopted" in labels:
+                # already run and judged: new commits here are main merged in (update-branch), never re-review/re-run
+                if str(pr["number"]) not in merged:
+                    work.append({"kind": "merge", "pr": pr["number"]})
+            elif "lab-fix" in labels:
                 work.append({"kind": "fix", "pr": pr["number"]})          # Codex fixes per review
             elif pr["headRefOid"] not in reviewed:
                 work.append({"kind": "review", "pr": pr["number"], "sha": pr["headRefOid"]})
-            elif "lab-adopted" in labels and str(pr["number"]) not in merged:
-                work.append({"kind": "merge", "pr": pr["number"]})
 
     # idle pipeline: nothing to judge/build/review and no experiment queued or running -> ask for the next proposal
     if not frozen and not any(w["kind"] in ("judge", "implement", "review", "fix") for w in work):
