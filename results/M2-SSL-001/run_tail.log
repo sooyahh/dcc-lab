@@ -1,0 +1,27 @@
+
+===== attempt 1 2026-10-08T05:05:15+00:00 colab-fdc375a4 commit=a0eb12a0a2cecd427098e876f3933caf840fa58b =====
+
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 3 files:  33%|███▎      | 1/3 [00:00<00:00,  2.15it/s]
+Fetching 3 files: 100%|██████████| 3/3 [00:04<00:00,  1.48s/it]
+Fetching 3 files: 100%|██████████| 3/3 [00:04<00:00,  1.38s/it]
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 26313.87it/s]
+Traceback (most recent call last):
+  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 401, in <module>
+    main()
+    ~~~~^^
+  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 395, in main
+    rows = stage(args.out, args.work, args.n_calls)
+  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 127, in stage
+    root = find_data_root()
+  File "/content/lab_code/a0eb12a0a2ce/src/dcc_data/colab_env.py", line 86, in find_data_root
+    raise FileNotFoundError(
+    ...<4 lines>...
+    )
+FileNotFoundError: Official data folder '대학부 데이터' (with Training/ and Validation/) was not found.
+  repo default: /content/lab_code/a0eb12a0a2ce/data/raw_original
+  drive: /content/drive/MyDrive/대학부 데이터
+Colab: add a Drive shortcut named '대학부 데이터' under My Drive (see docs/team_colab_setup.md). Local: set DCC_DATA_ROOT.
