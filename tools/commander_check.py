@@ -5,7 +5,8 @@ Work items:
   {"kind": "judge",     "exp": EXP}              result in done/ or failed/ not yet judged
   {"kind": "implement", "issue": N, "exp": EXP}  dcc-lab issue labeled `approved` (spec proposal), not yet sent to Codex
   {"kind": "review",    "pr": N, "sha": SHA}     open team-repo PR titled `exp(...)` whose head sha was not reviewed yet
-  {"kind": "merge",     "pr": N}                 team-repo lab PR marked adopted, not merged yet
+  {"kind": "fix",       "pr": N}                 team-repo exp PR labeled lab-fix (review FAIL) -> Codex fixes it
+  {"kind": "merge",     "pr": N}                 team-repo lab PR marked adopted / lab-log, not merged yet
 State: state/processed.json (committed by the commander run).
 Tokens: GH_TOKEN = this repo (workflow token), TEAM_GH_TOKEN = team repo (fine-grained PAT).
 """
@@ -59,7 +60,9 @@ def main() -> None:
                 continue
             if not pr["title"].startswith("exp("):
                 continue                                                  # teammates' PRs are never touched
-            if pr["headRefOid"] not in reviewed:
+            if "lab-fix" in labels:
+                work.append({"kind": "fix", "pr": pr["number"]})          # Codex fixes per review
+            elif pr["headRefOid"] not in reviewed:
                 work.append({"kind": "review", "pr": pr["number"], "sha": pr["headRefOid"]})
             elif "lab-adopted" in labels and str(pr["number"]) not in merged:
                 work.append({"kind": "merge", "pr": pr["number"]})

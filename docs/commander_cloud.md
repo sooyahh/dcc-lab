@@ -27,17 +27,16 @@
 6. 다음 실험 제안: dcc-lab에 `proposal` 라벨이 달린 열린 이슈가 없을 때만 1건 생성. 제목 `<NEXT-EXP-ID> <제목>`, 본문은 명세 JSON(```json 블록, `tools/lab.py new`의 필드 구조)과 근거. 사용자가 `approved` 라벨을 달아야 진행된다
    - 제안 시 고려: 가장 약한 Mission 우선, `status` 브랜치 `colab_cu.json`의 남은 단위, 공식 Val 예산, 이미 기각된 아이디어 재제안 금지
 
-### implement (승인된 명세 → Codex에 구현 지시)
-1. dcc-lab 이슈 본문의 JSON을 `specs/<EXP>.json`으로 저장 (`branch`, `commit`, `command`는 비워 둠)
-2. 팀 저장소에 이슈 생성: 제목 `exp(<EXP>): <제목>`, 본문 = 명세 JSON + `docs/implementer.md` 전문 + 마지막 줄
-   `@codex 위 명세와 지시대로 구현하고 PR을 열어 주세요. PR 제목은 exp(<EXP>): 로 시작하고 본문 마지막 줄은 COMMAND: ... 입니다.`
-3. dcc-lab 이슈에 팀 이슈 링크 댓글
+### report (Codex 단계 오류)
+- Codex 구현/수정 단계가 실패한 항목이다. `error`를 요약해 Commander log에 `@sooyahh` 멘션으로 보고하고, 원인이 명세라면 명세를 고친 새 proposal 이슈를 만든다
+
+(implement·fix 항목은 이 단계 전에 `tools/codex_implement.py`가 Codex로 처리한다. 너에게는 오지 않는다)
 
 ### review (Codex PR 검토)
 1. `gh pr view <PR> -R eigensinn-dcc2026/prelim --json title,body,headRefName,headRefOid`, `gh pr diff <PR> -R ...`로 변경분을 읽는다. 필요하면 `./team`에서 `git fetch origin <headRefName>` 후 파일 확인
 2. `docs/reviewer.md` 기준으로 `reviews/<EXP>_<sha 앞 7자>.md` 작성 (마지막 줄 `VERDICT: PASS` 또는 `VERDICT: FAIL`)
 3. PASS: `specs/<EXP>.json`의 `branch`=headRefName, `commit`=headRefOid, `command`=PR 본문의 `COMMAND:` 줄 → `TEAM_REPO_DIR=./team python tools/lab.py submit <EXP>`
-4. FAIL: PR에 BLOCKER/MAJOR 목록 댓글 + `@codex 위 문제를 같은 PR에서 수정해 주세요.` 같은 실험이 2회 FAIL이면 수정 지시 대신 사용자에게 보고(아래 보고 이슈)
+4. FAIL: PR에 BLOCKER/MAJOR 목록 댓글을 남기고 `lab-fix` 라벨을 단다(없으면 생성). 다음 실행에서 Codex가 같은 PR을 고친다. 같은 실험이 2회 FAIL이면 라벨 대신 사용자에게 보고
 
 ### merge (병합)
 1. `gh pr view <PR> -R ... --json headRefOid,labels,mergeable` 후 `gh api repos/eigensinn-dcc2026/prelim/commits/<sha>/status`에서 `merge-gate/verdict`가 `success`인지 확인
