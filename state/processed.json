@@ -31,7 +31,8 @@
   "4e73a5e2c7aa2f652a2fd402a7eed7ab17423b36",
   "f3af923918f7a8eb8a03ddcc550ddb00a1e9687d",
   "716855e1a9e8cd0cd9c955e6cab1d1bc29e68bd4",
-  "dcd1b0241b3fe1dddd4c4e4b275ab45c5052eeea"
+  "dcd1b0241b3fe1dddd4c4e4b275ab45c5052eeea",
+  "1bce6d550a0bf6afa1a54ed9933d26a055fe2aad"
  ],
  "merged_prs": [
   67,
@@ -60,6 +61,7 @@
   "PR #71 (4e73a5e) and PR #68 (f3af923) merge skipped: merge-gate/verdict pending on both (heads updated, label 병합-대기); recheck next run",
   "M3-KCBERT-004 PR #73 5a71930 (build_head_tail_input fix) review PASS; resubmitted. PR #71 (4e73a5e) and #68 (f3af923) re-review PASS (main merges only, no code change); no submit (already run/adopted).",
   "M3-KCBERT-005 judged 채택 (mean Macro F1 0.6092, +0.0102); team log PR #77, code PR #76 lab-adopted; issue #7 closed; next proposal #8 M3-KCBERT-006 (5 epochs)",
-  "PR #76 (code, lab-adopted) behind main by 2 -> update-branch run; merge deferred to next run"
+  "PR #76 (code, lab-adopted) behind main by 2 -> update-branch run; merge deferred to next run",
+  "M3-KCBERT-006 PR #78 1bce6d5 review PASS; submitted. PR #76 (82d9823) merge skipped: merge-gate/verdict pending, not behind main; recheck next run"
  ]
 }
