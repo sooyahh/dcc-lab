@@ -161,7 +161,8 @@ def cmd_status(a) -> None:
         names = [j["spec"]["exp_id"] for j in jobs(folder)]
         print(f"{folder:8s} {len(names):3d}  {', '.join(names[-8:])}")
     git(LAB, "fetch", "-q", "origin", "status", check=False)
-    for f in ("heartbeat.json", "colab_cu.json"):
+    names = git(LAB, "ls-tree", "--name-only", "origin/status", check=False).split()
+    for f in sorted(n for n in names if n.startswith("heartbeat_")) + ["colab_cu.json"]:
         txt = git(LAB, "show", f"origin/status:{f}", check=False)
         if not txt:
             print(f"{f}: 없음")

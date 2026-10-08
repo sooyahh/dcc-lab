@@ -11,7 +11,8 @@ Code:   team repo checked out at job["commit"] (read-only token).
 Outputs (ckpt etc.): Drive MyDrive/dcc_runs/lab/<EXP>/  -> survives runtime death, enables resume.
 
 Experiment contract: see docs/implementer.md. Success = exit 0 AND $LAB_OUT/metrics.json.
-Single worker assumed: a job left in running/ is ours and is resumed first.
+Multiple workers: each Colab notebook sets LAB_WORKER (colab-a / colab-b). A job left in running/ with our
+worker name is ours and is resumed first; other workers' jobs are left alone.
 """
 from __future__ import annotations
 
@@ -37,6 +38,7 @@ WORK_ROOT = Path(os.environ.get("LAB_WORK_ROOT", "/content/lab_work"))
 DRIVE_LAB = Path(os.environ.get("LAB_DRIVE_DIR", "/content/drive/MyDrive/dcc_lab"))
 RUN_ROOT = Path(os.environ.get("LAB_RUN_ROOT", "/content/drive/MyDrive/dcc_runs/lab"))
 WORKER = os.environ.get("LAB_WORKER", "colab-" + socket.gethostname()[:8])
+KNOWN_WORKERS = ("colab-a", "colab-b")
 GIT_STATUS_EVERY_S = 15 * 60
 DATA_DIR = "대학부 데이터"
 
@@ -133,27 +135,43 @@ def status(state: str, exp_id: str | None = None, force_git: bool = False, **ext
     global _last_git_status
     hb = {"at": now(), "worker": WORKER, "state": state, "exp_id": exp_id, "gpu": gpu(), **extra}
     (DRIVE_LAB / "status").mkdir(parents=True, exist_ok=True)
-    (DRIVE_LAB / "status" / "heartbeat.json").write_text(json.dumps(hb, ensure_ascii=False), encoding="utf-8")
+    for fname in (f"heartbeat_{WORKER}.json", "heartbeat.json"):      # heartbeat.json = last writer (legacy readers)
+        (DRIVE_LAB / "status" / fname).write_text(json.dumps(hb, ensure_ascii=False), encoding="utf-8")
     pending = len(list((LAB / "queue").glob("*.json"))) + len(list((LAB / "running").glob("*.json")))
     (DRIVE_LAB / "status" / "queue_pending.json").write_text(
         json.dumps({"at": hb["at"], "count": pending, "gpu": "T4"}), encoding="utf-8")
     if not force_git and time.time() - _last_git_status < GIT_STATUS_EVERY_S:
         return
-    files = {"heartbeat.json": json.dumps(hb, ensure_ascii=False, indent=2)}
+    hb_text = json.dumps(hb, ensure_ascii=False, indent=2)
     cu = DRIVE_LAB / "status" / "colab_cu.json"            # written by grokbot
-    if cu.exists():
-        files["colab_cu.json"] = cu.read_text(encoding="utf-8")
     try:
-        entries = []
-        for name, text in files.items():
-            sha = subprocess.run(["git", "-C", str(LAB), "hash-object", "-w", "--stdin"], input=text.encode(),
-                                 capture_output=True, check=True).stdout.decode().strip()
-            entries.append(f"100644 blob {sha}\t{name}\n")
-        tree = subprocess.run(["git", "-C", str(LAB), "mktree"], input="".join(entries).encode(),
-                              capture_output=True, check=True).stdout.decode().strip()   # bytes: no CRLF in names
-        commit = git(LAB, "commit-tree", tree, "-m", f"status {state} {exp_id or ''}")
-        git(LAB, "push", "-q", "-f", "origin", f"{commit}:refs/heads/status")
-        _last_git_status = time.time()
+        for attempt in range(4):
+            # status branch is shared by all workers: keep the others' files, replace ours, push with a lease
+            git(LAB, "fetch", "-q", "origin", "status", check=False)
+            parent = git(LAB, "rev-parse", "-q", "--verify", "origin/status", check=False)
+            files: dict[str, str] = {}
+            if parent:
+                for n in git(LAB, "ls-tree", "--name-only", parent).splitlines():
+                    if n.startswith("heartbeat") or n == "colab_cu.json":
+                        files[n] = git(LAB, "show", f"{parent}:{n}")
+            files[f"heartbeat_{WORKER}.json"] = hb_text
+            files["heartbeat.json"] = hb_text
+            if cu.exists():
+                files["colab_cu.json"] = cu.read_text(encoding="utf-8")
+            entries = []
+            for name, text in files.items():
+                sha = subprocess.run(["git", "-C", str(LAB), "hash-object", "-w", "--stdin"], input=text.encode(),
+                                     capture_output=True, check=True).stdout.decode().strip()
+                entries.append(f"100644 blob {sha}\t{name}\n")
+            tree = subprocess.run(["git", "-C", str(LAB), "mktree"], input="".join(entries).encode(),
+                                  capture_output=True, check=True).stdout.decode().strip()   # bytes: no CRLF in names
+            commit = git(LAB, "commit-tree", tree, "-m", f"status {WORKER} {state} {exp_id or ''}")
+            lease = f"--force-with-lease=refs/heads/status:{parent}" if parent else "--force"
+            if subprocess.run(["git", "-C", str(LAB), "push", "-q", lease, "origin", f"{commit}:refs/heads/status"],
+                              capture_output=True).returncode == 0:
+                _last_git_status = time.time()
+                break
+            time.sleep(2 + attempt * 3)
     except Exception as exc:                                 # status is best-effort
         log(f"status push 실패: {redact(str(exc))}")
 
@@ -208,9 +226,11 @@ def find_data_root() -> Path | None:
 # ------------------------------------------------------------------ jobs
 def claim_next() -> dict | None:
     sync()
-    running = sorted((LAB / "running").glob("*.json"))
-    if running:
-        return {"_name": running[0].name, **json.loads(running[0].read_text(encoding="utf-8"))}
+    for p in sorted((LAB / "running").glob("*.json")):
+        w = json.loads(p.read_text(encoding="utf-8")).get("worker")
+        # ours; or a legacy hostname-named worker's job, adopted by colab-a
+        if w == WORKER or (w not in KNOWN_WORKERS and WORKER == "colab-a"):
+            return {"_name": p.name, **json.loads(p.read_text(encoding="utf-8"))}
     has_gpu = gpu() != "none"
 
     def runnable(p: Path) -> bool:                           # GPU jobs only on GPU workers
@@ -234,7 +254,12 @@ def claim_next() -> dict | None:
 
     commit_push(f"claim {name} by {WORKER}", mutate)
     p = LAB / "running" / name
-    return {"_name": name, **json.loads(p.read_text(encoding="utf-8"))} if p.exists() else None
+    if not p.exists():
+        return None
+    job = json.loads(p.read_text(encoding="utf-8"))
+    if job.get("worker") != WORKER:                          # lost the claim race to another worker
+        return None
+    return {"_name": name, **job}
 
 
 def update_running(name: str, **fields) -> None:
