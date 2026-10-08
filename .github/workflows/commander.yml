@@ -1,11 +1,8 @@
 name: commander
 # Cloud commander: a token-free check decides whether there is work; Claude runs only when there is.
 on:
-  push:
-    branches: [main]
-    paths: ["done/**", "failed/**"]
-  issues:
-    types: [labeled]
+  # claude-code-action does not accept push/label events with a custom prompt;
+  # those are relayed to workflow_dispatch by relay.yml.
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:

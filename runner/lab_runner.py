@@ -173,12 +173,23 @@ def gpu() -> str:
 def find_data_root() -> Path | None:
     """Official data folder (has Training/ and Validation/) on the mounted Drive, via shortcut or MyDrive."""
     drive = DRIVE_LAB.parent.parent                          # /content/drive
-    cands = [drive / "MyDrive" / "대학부 데이터"] + sorted(drive.glob(".shortcut-targets-by-id/*/대학부 데이터"))
-    cands += sorted(drive.glob(".shortcut-targets-by-id/*/*/대학부 데이터"))
-    for c in cands:
-        for p in (c, c / "대학부 데이터"):
-            if (p / "Training").is_dir() and (p / "Validation").is_dir():
-                return p
+    for attempt in range(13):                                # shared-folder shortcuts can take a while to resolve
+        try:
+            os.listdir(drive / "MyDrive")                    # listing nudges the FUSE mount to resolve shortcuts
+        except OSError:
+            pass
+        cands = [drive / "MyDrive" / "대학부 데이터"] + sorted(drive.glob(".shortcut-targets-by-id/*/대학부 데이터"))
+        cands += sorted(drive.glob(".shortcut-targets-by-id/*/*/대학부 데이터"))
+        for c in cands:
+            for p in (c, c / "대학부 데이터"):
+                try:
+                    if (p / "Training").is_dir() and (p / "Validation").is_dir():
+                        return p
+                except OSError:
+                    pass
+        if attempt < 12:
+            log(f"데이터 폴더 대기 중 ({attempt + 1}/12)")
+            time.sleep(10)
     return None
 
 

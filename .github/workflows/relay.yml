@@ -1,0 +1,19 @@
+name: relay
+# Turn result pushes and approval labels into a commander run (workflow_dispatch). No LLM here.
+on:
+  push:
+    branches: [main]
+    paths: ["done/**", "failed/**"]
+  issues:
+    types: [labeled]
+permissions:
+  actions: write
+jobs:
+  dispatch:
+    if: github.event_name == 'push' || github.event.label.name == 'approved'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - run: gh workflow run commander.yml -R "$GITHUB_REPOSITORY"
+        env:
+          GH_TOKEN: ${{ github.token }}
