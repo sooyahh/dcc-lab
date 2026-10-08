@@ -7,7 +7,8 @@
   "done/02_M3-KCBERT-002.json@2026-10-08T15:45:48+00:00",
   "done/02_M3-KCBERT-003.json@2026-10-08T16:52:44+00:00",
   "failed/02_M3-KCBERT-004.json@2026-10-08T17:00:46+00:00",
-  "done/02_M3-KCBERT-004.json@2026-10-08T18:07:34+00:00"
+  "done/02_M3-KCBERT-004.json@2026-10-08T18:07:34+00:00",
+  "done/02_M3-KCBERT-005.json@2026-10-08T19:07:14+00:00"
  ],
  "implemented_issues": [
   1,
@@ -55,6 +56,7 @@
   "M3-KCBERT-004 failed 2026-10-08 17:00: code bug (build_inputs_with_special_tokens missing), verdict 재시도; PR #73 lab-fix, resubmit after fix+re-review. PR #71 skipped: merge-gate pending. PR #68 skipped: merge-gate failure (수정-필요), awaiting user",
   "PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user",
   "PR #71 (4e73a5e) and PR #68 (f3af923) merge skipped: merge-gate/verdict pending on both (heads updated, label 병합-대기); recheck next run",
-  "M3-KCBERT-004 PR #73 5a71930 (build_head_tail_input fix) review PASS; resubmitted. PR #71 (4e73a5e) and #68 (f3af923) re-review PASS (main merges only, no code change); no submit (already run/adopted)."
+  "M3-KCBERT-004 PR #73 5a71930 (build_head_tail_input fix) review PASS; resubmitted. PR #71 (4e73a5e) and #68 (f3af923) re-review PASS (main merges only, no code change); no submit (already run/adopted).",
+  "M3-KCBERT-005 judged 채택 (mean Macro F1 0.6092, +0.0102); team log PR #77, code PR #76 lab-adopted; issue #7 closed; next proposal #8 M3-KCBERT-006 (5 epochs)"
  ]
 }
