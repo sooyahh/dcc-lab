@@ -1,0 +1,34 @@
+{
+  "exp_id": "INFRA-DATA-001",
+  "seed": 0,
+  "primary_metric": {
+    "name": "copy_complete",
+    "value": 1.0,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "zip_parts": 12,
+    "local": {
+      "Training": {
+        "wav": 29200,
+        "json": 29200
+      },
+      "Validation": {
+        "wav": 3640,
+        "json": 3640
+      }
+    },
+    "drive": {
+      "Training": {
+        "wav": 29200,
+        "json": 29200
+      },
+      "Validation": {
+        "wav": 3640,
+        "json": 3640
+      }
+    },
+    "dest": "/content/drive/MyDrive/대학부 데이터 압축해제/대학부 데이터",
+    "minutes": 44.7
+  }
+}

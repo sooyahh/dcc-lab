@@ -1,0 +1,18 @@
+
+===== attempt 1 2026-10-08T11:38:48+00:00 colab-e28888ae commit=518161cb71732a14c05bb9c45c5ce7e2927d2946 =====
+zip parts: 12 (21.4 GB)
+extracted 대학부 데이터-20260901T090511Z-1-001.zip
+extracted 대학부 데이터-20260901T090511Z-1-002.zip
+extracted 대학부 데이터-20260901T090511Z-1-003.zip
+extracted 대학부 데이터-20260901T090511Z-1-004.zip
+extracted 대학부 데이터-20260901T090511Z-1-005.zip
+extracted 대학부 데이터-20260901T090511Z-1-006.zip
+extracted 대학부 데이터-20260901T090511Z-1-007.zip
+extracted 대학부 데이터-20260901T090511Z-1-008.zip
+extracted 대학부 데이터-20260901T090511Z-1-009.zip
+extracted 대학부 데이터-20260901T090511Z-1-010.zip
+extracted 대학부 데이터-20260901T090511Z-1-011.zip
+extracted 대학부 데이터-20260901T090511Z-1-012.zip
+local counts: {'Training': {'wav': 29200, 'json': 29200}, 'Validation': {'wav': 3640, 'json': 3640}}
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+{'exp_id': 'INFRA-DATA-001', 'seed': 0, 'primary_metric': {'name': 'copy_complete', 'value': 1.0, 'split': 'internal_holdout'}, 'metrics': {'zip_parts': 12, 'local': {'Training': {'wav': 29200, 'json': 29200}, 'Validation': {'wav': 3640, 'json': 3640}}, 'drive': {'Training': {'wav': 29200, 'json': 29200}, 'Validation': {'wav': 3640, 'json': 3640}}, 'dest': '/content/drive/MyDrive/대학부 데이터 압축해제/대학부 데이터', 'minutes': 44.7}}
