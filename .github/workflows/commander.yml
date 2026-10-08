@@ -10,6 +10,7 @@ concurrency:
   group: commander
   cancel-in-progress: false
 permissions:
+  actions: write
   contents: write
   issues: write
   id-token: write
@@ -89,6 +90,11 @@ jobs:
             docs/commander_cloud.md 의 지시를 그대로 따른다.
             WORK = ${{ steps.codex.outputs.rest }}
           claude_args: "--max-turns 80 --allowedTools Bash,Read,Write,Edit,Glob,Grep"
+      - name: Auto-approve proposals (no LLM; hard limits in tools/auto_approve.py)
+        if: always() && steps.check.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/auto_approve.py
       - name: Commit dcc-lab state
         if: always() && steps.check.outputs.work != '[]'
         run: |

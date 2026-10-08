@@ -28,7 +28,8 @@
 7. 다음 실험 제안: 아래 propose 절차를 따른다
 
 ### propose (다음 실험 제안)
-1. dcc-lab에 `proposal` 라벨이 달린 열린 이슈가 없을 때만 1건 생성. 제목 `<NEXT-EXP-ID> <제목>`, 본문은 명세 JSON(```json 블록, `tools/lab.py new`의 필드 구조)과 근거. 사용자가 `approved` 라벨을 달아야 진행된다
+1. dcc-lab에 `proposal` 라벨이 달린 열린 이슈가 없을 때만 1건 생성. 제목 `<NEXT-EXP-ID> <제목>`, 본문은 명세 JSON(```json 블록, `tools/lab.py new`의 필드 구조)과 근거. 승인은 이 실행 뒤 `tools/auto_approve.py`가 고정 조건(공식 Val 미사용, gpu T4/none, 예산 ≤ `default_budget_hours`, Colab 잔량 하한, 신규 ID)으로 자동 처리하고, 조건 밖이면 `needs-human` 라벨로 사람에게 넘긴다. 사람 확인을 요청하는 문구를 쓰지 말고 규정 안에서 확정된 명세만 제안한다
+   - 규정상 허용: Hugging Face 등 공개 사전학습 모델 가중치를 내려받아 로컬 Inference·Fine-tuning (2026-08-22 주최 측 Q&A). 금지: 외부 데이터·다른 AI-Hub 데이터 추가, 상용 AI API 호출, Validation으로 학습, threshold 튜닝, M2에서 대상 발화 외 정보 사용. 금지 사항이 필요한 아이디어는 제안하지 않는다
    - 제안 시 고려: 가장 약한 Mission 우선, `status` 브랜치 `colab_cu.json`의 남은 단위, 공식 Val 예산, 이미 기각된 아이디어 재제안 금지
 
 ### report (Codex 단계 오류)
