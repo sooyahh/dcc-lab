@@ -26,5 +26,42 @@
   "max_attempts": 3,
   "worker": "colab-e28888ae",
   "claimed_at": "2026-10-08T09:42:06+00:00",
-  "started_at": "2026-10-08T09:42:07+00:00"
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-08T11:36:35+00:00",
+  "elapsed_min": 112.3,
+  "metrics": {
+    "exp_id": "M2-SSL-001",
+    "primary_metric": {
+      "name": "accuracy",
+      "value": 0.8617666611268073,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "holdout_accuracy": {
+        "l1_LGBM": 0.8436097723117832,
+        "4_LR": 0.8617666611268073,
+        "4_LGBM": 0.8534153232507894,
+        "8_LR": 0.8028918065481137,
+        "8_LGBM": 0.8192205417982383,
+        "12_LR": 0.8021439255442911,
+        "12_LGBM": 0.8053431942828652
+      },
+      "l1_same_split_accuracy": 0.8436097723117832,
+      "delta_vs_l1": 0.018156888815024086,
+      "meets_success_criteria": false,
+      "extraction_utterances_per_second": 24.894553210065443,
+      "extraction_seconds": 4885.52652356199,
+      "gpu": "Tesla T4",
+      "selected": "4_LR",
+      "train_calls": 3200,
+      "eval_calls": 800
+    },
+    "seed": 42,
+    "train_rows": 97555,
+    "eval_rows": 24068,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "LR: SGD log_loss, 30 epochs; LGBM: baseline defaults, 100 trees. Throughput includes L1 extraction and cache writes. No official Validation read. Winner selected on the reported holdout; delta and success criterion are exploratory and may be optimistic."
+  }
 }

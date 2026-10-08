@@ -1,112 +1,748 @@
-
-===== attempt 1 2026-10-08T05:05:15+00:00 colab-fdc375a4 commit=a0eb12a0a2cecd427098e876f3933caf840fa58b =====
-
-Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-
-Fetching 3 files:  33%|███▎      | 1/3 [00:00<00:00,  2.15it/s]
-Fetching 3 files: 100%|██████████| 3/3 [00:04<00:00,  1.48s/it]
-Fetching 3 files: 100%|██████████| 3/3 [00:04<00:00,  1.38s/it]
-
-Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 248/248 [00:00<00:00, 26313.87it/s]
-Traceback (most recent call last):
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 401, in <module>
-    main()
-    ~~~~^^
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 395, in main
-    rows = stage(args.out, args.work, args.n_calls)
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 127, in stage
-    root = find_data_root()
-  File "/content/lab_code/a0eb12a0a2ce/src/dcc_data/colab_env.py", line 86, in find_data_root
-    raise FileNotFoundError(
-    ...<4 lines>...
-    )
-FileNotFoundError: Official data folder '대학부 데이터' (with Training/ and Validation/) was not found.
-  repo default: /content/lab_code/a0eb12a0a2ce/data/raw_original
-  drive: /content/drive/MyDrive/대학부 데이터
-Colab: add a Drive shortcut named '대학부 데이터' under My Drive (see docs/team_colab_setup.md). Local: set DCC_DATA_ROOT.
-
-===== attempt 1 2026-10-08T05:09:58+00:00 colab-fdc375a4 commit=a0eb12a0a2cecd427098e876f3933caf840fa58b =====
-
-Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 248/248 [00:00<00:00, 16438.89it/s]
-Traceback (most recent call last):
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 401, in <module>
-    main()
-    ~~~~^^
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 395, in main
-    rows = stage(args.out, args.work, args.n_calls)
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 127, in stage
-    root = find_data_root()
-  File "/content/lab_code/a0eb12a0a2ce/src/dcc_data/colab_env.py", line 86, in find_data_root
-    raise FileNotFoundError(
-    ...<4 lines>...
-    )
-FileNotFoundError: Official data folder '대학부 데이터' (with Training/ and Validation/) was not found.
-  repo default: /content/lab_code/a0eb12a0a2ce/data/raw_original
-  drive: /content/drive/MyDrive/대학부 데이터
-Colab: add a Drive shortcut named '대학부 데이터' under My Drive (see docs/team_colab_setup.md). Local: set DCC_DATA_ROOT.
-
-===== attempt 2 2026-10-08T05:24:18+00:00 colab-2967ac60 commit=a0eb12a0a2cecd427098e876f3933caf840fa58b =====
-
-Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 248/248 [00:00<00:00, 13439.11it/s]
-Traceback (most recent call last):
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 401, in <module>
-    main()
-    ~~~~^^
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 395, in main
-    rows = stage(args.out, args.work, args.n_calls)
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 127, in stage
-    root = find_data_root()
-  File "/content/lab_code/a0eb12a0a2ce/src/dcc_data/colab_env.py", line 86, in find_data_root
-    raise FileNotFoundError(
-    ...<4 lines>...
-    )
-FileNotFoundError: Official data folder '대학부 데이터' (with Training/ and Validation/) was not found.
-  repo default: /content/lab_code/a0eb12a0a2ce/data/raw_original
-  drive: /content/drive/MyDrive/대학부 데이터
-Colab: add a Drive shortcut named '대학부 데이터' under My Drive (see docs/team_colab_setup.md). Local: set DCC_DATA_ROOT.
-
-===== attempt 1 2026-10-08T05:41:39+00:00 colab-23c8ed88 commit=a0eb12a0a2cecd427098e876f3933caf840fa58b =====
-
-Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 248/248 [00:00<00:00, 21571.70it/s]
-Traceback (most recent call last):
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 401, in <module>
-    main()
-    ~~~~^^
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 395, in main
-    rows = stage(args.out, args.work, args.n_calls)
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 127, in stage
-    root = find_data_root()
-  File "/content/lab_code/a0eb12a0a2ce/src/dcc_data/colab_env.py", line 86, in find_data_root
-    raise FileNotFoundError(
-    ...<4 lines>...
-    )
-FileNotFoundError: Official data folder '대학부 데이터' (with Training/ and Validation/) was not found.
-  repo default: /content/lab_code/a0eb12a0a2ce/data/raw_original
-  drive: /content/drive/MyDrive/대학부 데이터
-Colab: add a Drive shortcut named '대학부 데이터' under My Drive (see docs/team_colab_setup.md). Local: set DCC_DATA_ROOT.
-
-===== attempt 1 2026-10-08T09:25:40+00:00 colab-8a3174d8 commit=a0eb12a0a2cecd427098e876f3933caf840fa58b =====
-
-Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 248/248 [00:00<00:00, 23387.09it/s]
-Traceback (most recent call last):
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 401, in <module>
-    main()
-    ~~~~^^
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 395, in main
-    rows = stage(args.out, args.work, args.n_calls)
-  File "/content/lab_code/a0eb12a0a2ce/scripts/lab/m2_ssl_001.py", line 127, in stage
-    root = find_data_root()
-  File "/content/lab_code/a0eb12a0a2ce/src/dcc_data/colab_env.py", line 86, in find_data_root
-    raise FileNotFoundError(
-    ...<4 lines>...
-    )
-FileNotFoundError: Official data folder '대학부 데이터' (with Training/ and Validation/) was not found.
-  repo default: /content/lab_code/a0eb12a0a2ce/data/raw_original
-  drive: /content/drive/MyDrive/대학부 데이터
-  drive: /content/drive/.shortcut-targets-by-id/1cL-a0SsbT8Gxo1OSLc3eTy3Rccf2zeBo/대학부 데이터
-Colab: add a Drive shortcut named '대학부 데이터' under My Drive (see docs/team_colab_setup.md). Local: set DCC_DATA_ROOT.
+extracted 3261/4000 calls
+extracted 3262/4000 calls
+extracted 3263/4000 calls
+extracted 3264/4000 calls
+extracted 3265/4000 calls
+extracted 3266/4000 calls
+extracted 3267/4000 calls
+extracted 3268/4000 calls
+extracted 3269/4000 calls
+extracted 3270/4000 calls
+extracted 3271/4000 calls
+extracted 3272/4000 calls
+extracted 3273/4000 calls
+extracted 3274/4000 calls
+extracted 3275/4000 calls
+extracted 3276/4000 calls
+extracted 3277/4000 calls
+extracted 3278/4000 calls
+extracted 3279/4000 calls
+extracted 3280/4000 calls
+extracted 3281/4000 calls
+extracted 3282/4000 calls
+extracted 3283/4000 calls
+extracted 3284/4000 calls
+extracted 3285/4000 calls
+extracted 3286/4000 calls
+extracted 3287/4000 calls
+extracted 3288/4000 calls
+extracted 3289/4000 calls
+extracted 3290/4000 calls
+extracted 3291/4000 calls
+extracted 3292/4000 calls
+extracted 3293/4000 calls
+extracted 3294/4000 calls
+extracted 3295/4000 calls
+extracted 3296/4000 calls
+extracted 3297/4000 calls
+extracted 3298/4000 calls
+extracted 3299/4000 calls
+extracted 3300/4000 calls
+extracted 3301/4000 calls
+extracted 3302/4000 calls
+extracted 3303/4000 calls
+extracted 3304/4000 calls
+extracted 3305/4000 calls
+extracted 3306/4000 calls
+extracted 3307/4000 calls
+extracted 3308/4000 calls
+extracted 3309/4000 calls
+extracted 3310/4000 calls
+extracted 3311/4000 calls
+extracted 3312/4000 calls
+extracted 3313/4000 calls
+extracted 3314/4000 calls
+extracted 3315/4000 calls
+extracted 3316/4000 calls
+extracted 3317/4000 calls
+extracted 3318/4000 calls
+extracted 3319/4000 calls
+extracted 3320/4000 calls
+extracted 3321/4000 calls
+extracted 3322/4000 calls
+extracted 3323/4000 calls
+extracted 3324/4000 calls
+extracted 3325/4000 calls
+extracted 3326/4000 calls
+extracted 3327/4000 calls
+extracted 3328/4000 calls
+extracted 3329/4000 calls
+extracted 3330/4000 calls
+extracted 3331/4000 calls
+extracted 3332/4000 calls
+extracted 3333/4000 calls
+extracted 3334/4000 calls
+extracted 3335/4000 calls
+extracted 3336/4000 calls
+extracted 3337/4000 calls
+extracted 3338/4000 calls
+extracted 3339/4000 calls
+extracted 3340/4000 calls
+extracted 3341/4000 calls
+extracted 3342/4000 calls
+extracted 3343/4000 calls
+extracted 3344/4000 calls
+extracted 3345/4000 calls
+extracted 3346/4000 calls
+extracted 3347/4000 calls
+extracted 3348/4000 calls
+extracted 3349/4000 calls
+extracted 3350/4000 calls
+extracted 3351/4000 calls
+extracted 3352/4000 calls
+extracted 3353/4000 calls
+extracted 3354/4000 calls
+extracted 3355/4000 calls
+extracted 3356/4000 calls
+extracted 3357/4000 calls
+extracted 3358/4000 calls
+extracted 3359/4000 calls
+extracted 3360/4000 calls
+extracted 3361/4000 calls
+extracted 3362/4000 calls
+extracted 3363/4000 calls
+extracted 3364/4000 calls
+extracted 3365/4000 calls
+extracted 3366/4000 calls
+extracted 3367/4000 calls
+extracted 3368/4000 calls
+extracted 3369/4000 calls
+extracted 3370/4000 calls
+extracted 3371/4000 calls
+extracted 3372/4000 calls
+extracted 3373/4000 calls
+extracted 3374/4000 calls
+extracted 3375/4000 calls
+extracted 3376/4000 calls
+extracted 3377/4000 calls
+extracted 3378/4000 calls
+extracted 3379/4000 calls
+extracted 3380/4000 calls
+extracted 3381/4000 calls
+extracted 3382/4000 calls
+extracted 3383/4000 calls
+extracted 3384/4000 calls
+extracted 3385/4000 calls
+extracted 3386/4000 calls
+extracted 3387/4000 calls
+extracted 3388/4000 calls
+extracted 3389/4000 calls
+extracted 3390/4000 calls
+extracted 3391/4000 calls
+extracted 3392/4000 calls
+extracted 3393/4000 calls
+extracted 3394/4000 calls
+extracted 3395/4000 calls
+extracted 3396/4000 calls
+extracted 3397/4000 calls
+extracted 3398/4000 calls
+extracted 3399/4000 calls
+extracted 3400/4000 calls
+extracted 3401/4000 calls
+extracted 3402/4000 calls
+extracted 3403/4000 calls
+extracted 3404/4000 calls
+extracted 3405/4000 calls
+extracted 3406/4000 calls
+extracted 3407/4000 calls
+extracted 3408/4000 calls
+extracted 3409/4000 calls
+extracted 3410/4000 calls
+extracted 3411/4000 calls
+extracted 3412/4000 calls
+extracted 3413/4000 calls
+extracted 3414/4000 calls
+extracted 3415/4000 calls
+extracted 3416/4000 calls
+extracted 3417/4000 calls
+extracted 3418/4000 calls
+extracted 3419/4000 calls
+extracted 3420/4000 calls
+extracted 3421/4000 calls
+extracted 3422/4000 calls
+extracted 3423/4000 calls
+extracted 3424/4000 calls
+extracted 3425/4000 calls
+extracted 3426/4000 calls
+extracted 3427/4000 calls
+extracted 3428/4000 calls
+extracted 3429/4000 calls
+extracted 3430/4000 calls
+extracted 3431/4000 calls
+extracted 3432/4000 calls
+extracted 3433/4000 calls
+extracted 3434/4000 calls
+extracted 3435/4000 calls
+extracted 3436/4000 calls
+extracted 3437/4000 calls
+extracted 3438/4000 calls
+extracted 3439/4000 calls
+extracted 3440/4000 calls
+extracted 3441/4000 calls
+extracted 3442/4000 calls
+extracted 3443/4000 calls
+extracted 3444/4000 calls
+extracted 3445/4000 calls
+extracted 3446/4000 calls
+extracted 3447/4000 calls
+extracted 3448/4000 calls
+extracted 3449/4000 calls
+extracted 3450/4000 calls
+extracted 3451/4000 calls
+extracted 3452/4000 calls
+extracted 3453/4000 calls
+extracted 3454/4000 calls
+extracted 3455/4000 calls
+extracted 3456/4000 calls
+extracted 3457/4000 calls
+extracted 3458/4000 calls
+extracted 3459/4000 calls
+extracted 3460/4000 calls
+extracted 3461/4000 calls
+extracted 3462/4000 calls
+extracted 3463/4000 calls
+extracted 3464/4000 calls
+extracted 3465/4000 calls
+extracted 3466/4000 calls
+extracted 3467/4000 calls
+extracted 3468/4000 calls
+extracted 3469/4000 calls
+extracted 3470/4000 calls
+extracted 3471/4000 calls
+extracted 3472/4000 calls
+extracted 3473/4000 calls
+extracted 3474/4000 calls
+extracted 3475/4000 calls
+extracted 3476/4000 calls
+extracted 3477/4000 calls
+extracted 3478/4000 calls
+extracted 3479/4000 calls
+extracted 3480/4000 calls
+extracted 3481/4000 calls
+extracted 3482/4000 calls
+extracted 3483/4000 calls
+extracted 3484/4000 calls
+extracted 3485/4000 calls
+extracted 3486/4000 calls
+extracted 3487/4000 calls
+extracted 3488/4000 calls
+extracted 3489/4000 calls
+extracted 3490/4000 calls
+extracted 3491/4000 calls
+extracted 3492/4000 calls
+extracted 3493/4000 calls
+extracted 3494/4000 calls
+extracted 3495/4000 calls
+extracted 3496/4000 calls
+extracted 3497/4000 calls
+extracted 3498/4000 calls
+extracted 3499/4000 calls
+extracted 3500/4000 calls
+extracted 3501/4000 calls
+extracted 3502/4000 calls
+extracted 3503/4000 calls
+extracted 3504/4000 calls
+extracted 3505/4000 calls
+extracted 3506/4000 calls
+extracted 3507/4000 calls
+extracted 3508/4000 calls
+extracted 3509/4000 calls
+extracted 3510/4000 calls
+extracted 3511/4000 calls
+extracted 3512/4000 calls
+extracted 3513/4000 calls
+extracted 3514/4000 calls
+extracted 3515/4000 calls
+extracted 3516/4000 calls
+extracted 3517/4000 calls
+extracted 3518/4000 calls
+extracted 3519/4000 calls
+extracted 3520/4000 calls
+extracted 3521/4000 calls
+extracted 3522/4000 calls
+extracted 3523/4000 calls
+extracted 3524/4000 calls
+extracted 3525/4000 calls
+extracted 3526/4000 calls
+extracted 3527/4000 calls
+extracted 3528/4000 calls
+extracted 3529/4000 calls
+extracted 3530/4000 calls
+extracted 3531/4000 calls
+extracted 3532/4000 calls
+extracted 3533/4000 calls
+extracted 3534/4000 calls
+extracted 3535/4000 calls
+extracted 3536/4000 calls
+extracted 3537/4000 calls
+extracted 3538/4000 calls
+extracted 3539/4000 calls
+extracted 3540/4000 calls
+extracted 3541/4000 calls
+extracted 3542/4000 calls
+extracted 3543/4000 calls
+extracted 3544/4000 calls
+extracted 3545/4000 calls
+extracted 3546/4000 calls
+extracted 3547/4000 calls
+extracted 3548/4000 calls
+extracted 3549/4000 calls
+extracted 3550/4000 calls
+extracted 3551/4000 calls
+extracted 3552/4000 calls
+extracted 3553/4000 calls
+extracted 3554/4000 calls
+extracted 3555/4000 calls
+extracted 3556/4000 calls
+extracted 3557/4000 calls
+extracted 3558/4000 calls
+extracted 3559/4000 calls
+extracted 3560/4000 calls
+extracted 3561/4000 calls
+extracted 3562/4000 calls
+extracted 3563/4000 calls
+extracted 3564/4000 calls
+extracted 3565/4000 calls
+extracted 3566/4000 calls
+extracted 3567/4000 calls
+extracted 3568/4000 calls
+extracted 3569/4000 calls
+extracted 3570/4000 calls
+extracted 3571/4000 calls
+extracted 3572/4000 calls
+extracted 3573/4000 calls
+extracted 3574/4000 calls
+extracted 3575/4000 calls
+extracted 3576/4000 calls
+extracted 3577/4000 calls
+extracted 3578/4000 calls
+extracted 3579/4000 calls
+extracted 3580/4000 calls
+extracted 3581/4000 calls
+extracted 3582/4000 calls
+extracted 3583/4000 calls
+extracted 3584/4000 calls
+extracted 3585/4000 calls
+extracted 3586/4000 calls
+extracted 3587/4000 calls
+extracted 3588/4000 calls
+extracted 3589/4000 calls
+extracted 3590/4000 calls
+extracted 3591/4000 calls
+extracted 3592/4000 calls
+extracted 3593/4000 calls
+extracted 3594/4000 calls
+extracted 3595/4000 calls
+extracted 3596/4000 calls
+extracted 3597/4000 calls
+extracted 3598/4000 calls
+extracted 3599/4000 calls
+extracted 3600/4000 calls
+extracted 3601/4000 calls
+extracted 3602/4000 calls
+extracted 3603/4000 calls
+extracted 3604/4000 calls
+extracted 3605/4000 calls
+extracted 3606/4000 calls
+extracted 3607/4000 calls
+extracted 3608/4000 calls
+extracted 3609/4000 calls
+extracted 3610/4000 calls
+extracted 3611/4000 calls
+extracted 3612/4000 calls
+extracted 3613/4000 calls
+extracted 3614/4000 calls
+extracted 3615/4000 calls
+extracted 3616/4000 calls
+extracted 3617/4000 calls
+extracted 3618/4000 calls
+extracted 3619/4000 calls
+extracted 3620/4000 calls
+extracted 3621/4000 calls
+extracted 3622/4000 calls
+extracted 3623/4000 calls
+extracted 3624/4000 calls
+extracted 3625/4000 calls
+extracted 3626/4000 calls
+extracted 3627/4000 calls
+extracted 3628/4000 calls
+extracted 3629/4000 calls
+extracted 3630/4000 calls
+extracted 3631/4000 calls
+extracted 3632/4000 calls
+extracted 3633/4000 calls
+extracted 3634/4000 calls
+extracted 3635/4000 calls
+extracted 3636/4000 calls
+extracted 3637/4000 calls
+extracted 3638/4000 calls
+extracted 3639/4000 calls
+extracted 3640/4000 calls
+extracted 3641/4000 calls
+extracted 3642/4000 calls
+extracted 3643/4000 calls
+extracted 3644/4000 calls
+extracted 3645/4000 calls
+extracted 3646/4000 calls
+extracted 3647/4000 calls
+extracted 3648/4000 calls
+extracted 3649/4000 calls
+extracted 3650/4000 calls
+extracted 3651/4000 calls
+extracted 3652/4000 calls
+extracted 3653/4000 calls
+extracted 3654/4000 calls
+extracted 3655/4000 calls
+extracted 3656/4000 calls
+extracted 3657/4000 calls
+extracted 3658/4000 calls
+extracted 3659/4000 calls
+extracted 3660/4000 calls
+extracted 3661/4000 calls
+extracted 3662/4000 calls
+extracted 3663/4000 calls
+extracted 3664/4000 calls
+extracted 3665/4000 calls
+extracted 3666/4000 calls
+extracted 3667/4000 calls
+extracted 3668/4000 calls
+extracted 3669/4000 calls
+extracted 3670/4000 calls
+extracted 3671/4000 calls
+extracted 3672/4000 calls
+extracted 3673/4000 calls
+extracted 3674/4000 calls
+extracted 3675/4000 calls
+extracted 3676/4000 calls
+extracted 3677/4000 calls
+extracted 3678/4000 calls
+extracted 3679/4000 calls
+extracted 3680/4000 calls
+extracted 3681/4000 calls
+extracted 3682/4000 calls
+extracted 3683/4000 calls
+extracted 3684/4000 calls
+extracted 3685/4000 calls
+extracted 3686/4000 calls
+extracted 3687/4000 calls
+extracted 3688/4000 calls
+extracted 3689/4000 calls
+extracted 3690/4000 calls
+extracted 3691/4000 calls
+extracted 3692/4000 calls
+extracted 3693/4000 calls
+extracted 3694/4000 calls
+extracted 3695/4000 calls
+extracted 3696/4000 calls
+extracted 3697/4000 calls
+extracted 3698/4000 calls
+extracted 3699/4000 calls
+extracted 3700/4000 calls
+extracted 3701/4000 calls
+extracted 3702/4000 calls
+extracted 3703/4000 calls
+extracted 3704/4000 calls
+extracted 3705/4000 calls
+extracted 3706/4000 calls
+extracted 3707/4000 calls
+extracted 3708/4000 calls
+extracted 3709/4000 calls
+extracted 3710/4000 calls
+extracted 3711/4000 calls
+extracted 3712/4000 calls
+extracted 3713/4000 calls
+extracted 3714/4000 calls
+extracted 3715/4000 calls
+extracted 3716/4000 calls
+extracted 3717/4000 calls
+extracted 3718/4000 calls
+extracted 3719/4000 calls
+extracted 3720/4000 calls
+extracted 3721/4000 calls
+extracted 3722/4000 calls
+extracted 3723/4000 calls
+extracted 3724/4000 calls
+extracted 3725/4000 calls
+extracted 3726/4000 calls
+extracted 3727/4000 calls
+extracted 3728/4000 calls
+extracted 3729/4000 calls
+extracted 3730/4000 calls
+extracted 3731/4000 calls
+extracted 3732/4000 calls
+extracted 3733/4000 calls
+extracted 3734/4000 calls
+extracted 3735/4000 calls
+extracted 3736/4000 calls
+extracted 3737/4000 calls
+extracted 3738/4000 calls
+extracted 3739/4000 calls
+extracted 3740/4000 calls
+extracted 3741/4000 calls
+extracted 3742/4000 calls
+extracted 3743/4000 calls
+extracted 3744/4000 calls
+extracted 3745/4000 calls
+extracted 3746/4000 calls
+extracted 3747/4000 calls
+extracted 3748/4000 calls
+extracted 3749/4000 calls
+extracted 3750/4000 calls
+extracted 3751/4000 calls
+extracted 3752/4000 calls
+extracted 3753/4000 calls
+extracted 3754/4000 calls
+extracted 3755/4000 calls
+extracted 3756/4000 calls
+extracted 3757/4000 calls
+extracted 3758/4000 calls
+extracted 3759/4000 calls
+extracted 3760/4000 calls
+extracted 3761/4000 calls
+extracted 3762/4000 calls
+extracted 3763/4000 calls
+extracted 3764/4000 calls
+extracted 3765/4000 calls
+extracted 3766/4000 calls
+extracted 3767/4000 calls
+extracted 3768/4000 calls
+extracted 3769/4000 calls
+extracted 3770/4000 calls
+extracted 3771/4000 calls
+extracted 3772/4000 calls
+extracted 3773/4000 calls
+extracted 3774/4000 calls
+extracted 3775/4000 calls
+extracted 3776/4000 calls
+extracted 3777/4000 calls
+extracted 3778/4000 calls
+extracted 3779/4000 calls
+extracted 3780/4000 calls
+extracted 3781/4000 calls
+extracted 3782/4000 calls
+extracted 3783/4000 calls
+extracted 3784/4000 calls
+extracted 3785/4000 calls
+extracted 3786/4000 calls
+extracted 3787/4000 calls
+extracted 3788/4000 calls
+extracted 3789/4000 calls
+extracted 3790/4000 calls
+extracted 3791/4000 calls
+extracted 3792/4000 calls
+extracted 3793/4000 calls
+extracted 3794/4000 calls
+extracted 3795/4000 calls
+extracted 3796/4000 calls
+extracted 3797/4000 calls
+extracted 3798/4000 calls
+extracted 3799/4000 calls
+extracted 3800/4000 calls
+extracted 3801/4000 calls
+extracted 3802/4000 calls
+extracted 3803/4000 calls
+extracted 3804/4000 calls
+extracted 3805/4000 calls
+extracted 3806/4000 calls
+extracted 3807/4000 calls
+extracted 3808/4000 calls
+extracted 3809/4000 calls
+extracted 3810/4000 calls
+extracted 3811/4000 calls
+extracted 3812/4000 calls
+extracted 3813/4000 calls
+extracted 3814/4000 calls
+extracted 3815/4000 calls
+extracted 3816/4000 calls
+extracted 3817/4000 calls
+extracted 3818/4000 calls
+extracted 3819/4000 calls
+extracted 3820/4000 calls
+extracted 3821/4000 calls
+extracted 3822/4000 calls
+extracted 3823/4000 calls
+extracted 3824/4000 calls
+extracted 3825/4000 calls
+extracted 3826/4000 calls
+extracted 3827/4000 calls
+extracted 3828/4000 calls
+extracted 3829/4000 calls
+extracted 3830/4000 calls
+extracted 3831/4000 calls
+extracted 3832/4000 calls
+extracted 3833/4000 calls
+extracted 3834/4000 calls
+extracted 3835/4000 calls
+extracted 3836/4000 calls
+extracted 3837/4000 calls
+extracted 3838/4000 calls
+extracted 3839/4000 calls
+extracted 3840/4000 calls
+extracted 3841/4000 calls
+extracted 3842/4000 calls
+extracted 3843/4000 calls
+extracted 3844/4000 calls
+extracted 3845/4000 calls
+extracted 3846/4000 calls
+extracted 3847/4000 calls
+extracted 3848/4000 calls
+extracted 3849/4000 calls
+extracted 3850/4000 calls
+extracted 3851/4000 calls
+extracted 3852/4000 calls
+extracted 3853/4000 calls
+extracted 3854/4000 calls
+extracted 3855/4000 calls
+extracted 3856/4000 calls
+extracted 3857/4000 calls
+extracted 3858/4000 calls
+extracted 3859/4000 calls
+extracted 3860/4000 calls
+extracted 3861/4000 calls
+extracted 3862/4000 calls
+extracted 3863/4000 calls
+extracted 3864/4000 calls
+extracted 3865/4000 calls
+extracted 3866/4000 calls
+extracted 3867/4000 calls
+extracted 3868/4000 calls
+extracted 3869/4000 calls
+extracted 3870/4000 calls
+extracted 3871/4000 calls
+extracted 3872/4000 calls
+extracted 3873/4000 calls
+extracted 3874/4000 calls
+extracted 3875/4000 calls
+extracted 3876/4000 calls
+extracted 3877/4000 calls
+extracted 3878/4000 calls
+extracted 3879/4000 calls
+extracted 3880/4000 calls
+extracted 3881/4000 calls
+extracted 3882/4000 calls
+extracted 3883/4000 calls
+extracted 3884/4000 calls
+extracted 3885/4000 calls
+extracted 3886/4000 calls
+extracted 3887/4000 calls
+extracted 3888/4000 calls
+extracted 3889/4000 calls
+extracted 3890/4000 calls
+extracted 3891/4000 calls
+extracted 3892/4000 calls
+extracted 3893/4000 calls
+extracted 3894/4000 calls
+extracted 3895/4000 calls
+extracted 3896/4000 calls
+extracted 3897/4000 calls
+extracted 3898/4000 calls
+extracted 3899/4000 calls
+extracted 3900/4000 calls
+extracted 3901/4000 calls
+extracted 3902/4000 calls
+extracted 3903/4000 calls
+extracted 3904/4000 calls
+extracted 3905/4000 calls
+extracted 3906/4000 calls
+extracted 3907/4000 calls
+extracted 3908/4000 calls
+extracted 3909/4000 calls
+extracted 3910/4000 calls
+extracted 3911/4000 calls
+extracted 3912/4000 calls
+extracted 3913/4000 calls
+extracted 3914/4000 calls
+extracted 3915/4000 calls
+extracted 3916/4000 calls
+extracted 3917/4000 calls
+extracted 3918/4000 calls
+extracted 3919/4000 calls
+extracted 3920/4000 calls
+extracted 3921/4000 calls
+extracted 3922/4000 calls
+extracted 3923/4000 calls
+extracted 3924/4000 calls
+extracted 3925/4000 calls
+extracted 3926/4000 calls
+extracted 3927/4000 calls
+extracted 3928/4000 calls
+extracted 3929/4000 calls
+extracted 3930/4000 calls
+extracted 3931/4000 calls
+extracted 3932/4000 calls
+extracted 3933/4000 calls
+extracted 3934/4000 calls
+extracted 3935/4000 calls
+extracted 3936/4000 calls
+extracted 3937/4000 calls
+extracted 3938/4000 calls
+extracted 3939/4000 calls
+extracted 3940/4000 calls
+extracted 3941/4000 calls
+extracted 3942/4000 calls
+extracted 3943/4000 calls
+extracted 3944/4000 calls
+extracted 3945/4000 calls
+extracted 3946/4000 calls
+extracted 3947/4000 calls
+extracted 3948/4000 calls
+extracted 3949/4000 calls
+extracted 3950/4000 calls
+extracted 3951/4000 calls
+extracted 3952/4000 calls
+extracted 3953/4000 calls
+extracted 3954/4000 calls
+extracted 3955/4000 calls
+extracted 3956/4000 calls
+extracted 3957/4000 calls
+extracted 3958/4000 calls
+extracted 3959/4000 calls
+extracted 3960/4000 calls
+extracted 3961/4000 calls
+extracted 3962/4000 calls
+extracted 3963/4000 calls
+extracted 3964/4000 calls
+extracted 3965/4000 calls
+extracted 3966/4000 calls
+extracted 3967/4000 calls
+extracted 3968/4000 calls
+extracted 3969/4000 calls
+extracted 3970/4000 calls
+extracted 3971/4000 calls
+extracted 3972/4000 calls
+extracted 3973/4000 calls
+extracted 3974/4000 calls
+extracted 3975/4000 calls
+extracted 3976/4000 calls
+extracted 3977/4000 calls
+extracted 3978/4000 calls
+extracted 3979/4000 calls
+extracted 3980/4000 calls
+extracted 3981/4000 calls
+extracted 3982/4000 calls
+extracted 3983/4000 calls
+extracted 3984/4000 calls
+extracted 3985/4000 calls
+extracted 3986/4000 calls
+extracted 3987/4000 calls
+extracted 3988/4000 calls
+extracted 3989/4000 calls
+extracted 3990/4000 calls
+extracted 3991/4000 calls
+extracted 3992/4000 calls
+extracted 3993/4000 calls
+extracted 3994/4000 calls
+extracted 3995/4000 calls
+extracted 3996/4000 calls
+extracted 3997/4000 calls
+extracted 3998/4000 calls
+extracted 3999/4000 calls
+extracted 4000/4000 calls
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
