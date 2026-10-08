@@ -7,6 +7,7 @@ Work items:
   {"kind": "review",    "pr": N, "sha": SHA}     open team-repo PR titled `exp(...)` whose head sha was not reviewed yet
   {"kind": "fix",       "pr": N}                 team-repo exp PR labeled lab-fix (review FAIL) -> Codex fixes it
   {"kind": "merge",     "pr": N}                 team-repo lab PR marked adopted / lab-log, not merged yet
+  {"kind": "propose"}                            pipeline idle (no open proposal, no exp job/PR in flight) -> new proposal
 State: state/processed.json (committed by the commander run).
 Tokens: GH_TOKEN = this repo (workflow token), TEAM_GH_TOKEN = team repo (fine-grained PAT).
 """
@@ -68,6 +69,16 @@ def main() -> None:
                 work.append({"kind": "review", "pr": pr["number"], "sha": pr["headRefOid"]})
             elif "lab-adopted" in labels and str(pr["number"]) not in merged:
                 work.append({"kind": "merge", "pr": pr["number"]})
+
+    # idle pipeline: nothing to judge/build/review and no experiment queued or running -> ask for the next proposal
+    if not frozen and not any(w["kind"] in ("judge", "implement", "review", "fix") for w in work):
+        in_flight = [p for d in ("queue", "running") for p in (LAB / d).glob("*.json")
+                     if not json.loads(p.read_text(encoding="utf-8"))["spec"]["exp_id"].startswith(("SMOKE", "INFRA"))]
+        open_exp_prs = [pr for pr in gh_json("pr", "list", "-R", TEAM, "--state", "open", "--json", "title", team=True)
+                        if pr["title"].startswith("exp(")]
+        proposals = gh_json("issue", "list", "-R", LAB_REPO, "--label", "proposal", "--state", "open", "--json", "number")
+        if not in_flight and not open_exp_prs and not proposals:
+            work.append({"kind": "propose"})
 
     print(json.dumps(work, ensure_ascii=False, indent=1))
     out = os.environ.get("GITHUB_OUTPUT")
