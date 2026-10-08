@@ -61,6 +61,9 @@ jobs:
           CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
         run: |
           npm install -g @openai/codex >/dev/null 2>&1
+          # Ubuntu 24.04 runners block unprivileged user namespaces (AppArmor) -> codex's bwrap sandbox fails. Allow it on this ephemeral VM.
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
+          sudo sysctl -w kernel.unprivileged_userns_clone=1 2>/dev/null || true
           mkdir -p ~/.codex && umask 077 && printf '%s' "$CODEX_AUTH_JSON" | python3 -c 'import sys;sys.stdout.write(sys.stdin.read().lstrip(chr(0xfeff)))' > ~/.codex/auth.json
           codex --version
       - name: Implement / fix with Codex
