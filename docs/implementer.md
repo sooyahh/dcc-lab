@@ -16,6 +16,7 @@
 - 환경 변수: `LAB_EXP_ID`, `LAB_OUT`(Drive, 영구 보존), `LAB_WORK`(/content 로컬 디스크, 임시), `DCC_RUN_ROOT`
 - 데이터 경로는 `dcc_data.colab_env.find_data_root()`로 찾는다. 하드코딩 금지
 - Drive에서 작은 파일 수천 개를 직접 읽지 말 것. 큰 파일로 묶어 `LAB_WORK`로 복사 후 사용
+  - 묶음은 이미 있다: `find_data_root()/<Training|Validation>/<폴더>.zip` (예: `Training/TL_서울_구급.zip` = 라벨 JSON, `Training/TS_서울_구급.zip` = wav, Validation은 `VL_`/`VS_`). zip 안 경로는 `<폴더>/...`. 이 zip 1개를 `LAB_WORK`로 복사해 압축을 풀어 쓴다. 낱개 파일 폴더를 rglob하지 말고 `<split>/<폴더>.zip`을 직접 지정한다
 - **재개 가능해야 한다**: 런타임은 언제든 끊긴다. 같은 명령을 다시 실행하면
   - 끝난 단계(특징 추출, 각 seed 학습 등)는 `LAB_OUT`의 산출물을 보고 건너뛰고
   - 학습 중이던 것은 `LAB_OUT/ckpt_last.pt`(모델·옵티마이저·스케줄러·epoch·RNG 상태)에서 이어 간다
