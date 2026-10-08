@@ -19,7 +19,8 @@
   "2e2077418cb016632cf6a7838da969a4639a0485",
   "7143ad85aa642010fa475b68263267ccf0c22dc0",
   "b5744dea8ca776ea195162e601f2fdf16d4ba613",
-  "59caa1364f8ad0c8b6a9952c50b686b84e8dcb45"
+  "59caa1364f8ad0c8b6a9952c50b686b84e8dcb45",
+  "00c14338e52876161e904e535a147fd9829c24b1"
  ],
  "merged_prs": [
   67,
@@ -37,6 +38,7 @@
   "PR #68 merge skipped 2026-10-08: merge-gate/verdict failure on b5744de (code PR); reported",
   "M3-KCBERT-003 PR #71 59caa13 review PASS; submitted. PR #68 merge skipped again: merge-gate/verdict failure on b5744de (label 수정-필요), awaiting user",
   "M3-KCBERT-003 judged 채택 (mean Macro F1 0.5990, +0.0157); team log PR #72, PR #71 lab-adopted; next proposal M3-KCBERT-004. PR #68 merge skipped again: merge-gate/verdict failure on b5744de",
-  "PR #72 (log) merged. PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user"
+  "PR #72 (log) merged. PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user",
+  "M3-KCBERT-004 PR #73 00c1433 review PASS; submitted. PR #71 skipped: merge-gate pending on 59caa13. PR #68 skipped: merge-gate failure on b5744de (수정-필요), awaiting user"
  ]
 }
