@@ -1,0 +1,21 @@
+{
+  "exp_id": "INFRA-DATA-001",
+  "mission": 0,
+  "title": "공식 데이터 zip 파트를 내 Drive에 압축 해제 (대학부 데이터 압축해제/)",
+  "hypothesis": "-",
+  "change_vs_baseline": "-",
+  "baseline": {
+    "exp_id": "",
+    "metric": "",
+    "value": null
+  },
+  "branch": "main",
+  "commit": "",
+  "command": "python $LAB_HOME/tools/extract_dcc_zips.py",
+  "uses_official_val": false,
+  "success_criteria": "Drive 복사본 파일 수 = 로컬 압축 해제 파일 수",
+  "gpu": "none",
+  "budget_hours": 3,
+  "priority": 9,
+  "notes": "인프라 작업. 판정·팀 로그 대상 아님"
+}

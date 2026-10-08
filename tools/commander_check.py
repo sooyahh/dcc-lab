@@ -47,7 +47,7 @@ def main() -> None:
             rec = json.loads(p.read_text(encoding="utf-8"))
             exp = rec["spec"]["exp_id"]
             key = f"{folder}/{p.name}@{rec.get('finished_at', '')}"   # one judgment per result, not per experiment
-            if key not in judged and not exp.startswith("SMOKE"):
+            if key not in judged and not exp.startswith(("SMOKE", "INFRA")):   # infra jobs are not experiments
                 work.append({"kind": "judge", "exp": exp, "key": key})
 
     if not frozen:
