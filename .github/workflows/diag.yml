@@ -38,7 +38,9 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
           T=$(printf '%s' "$CLAUDE_CODE_OAUTH_TOKEN" | python3 -c 'import sys;print(sys.stdin.read().lstrip("﻿").strip())')
-          echo "raw length: ${#CLAUDE_CODE_OAUTH_TOKEN}, cleaned length: ${#T}, looks like Claude token: $([[ $T == sk-ant-* ]] && echo yes || echo NO)"
+          echo "raw length: ${#CLAUDE_CODE_OAUTH_TOKEN}, cleaned length: ${#T}, looks like Claude token: $([[ $T == sk-ant-oat* ]] && echo yes || echo NO)"
+          case "$T" in github_pat_*|ghp_*) k="GitHub token";; sk-ant-api*) k="Anthropic API key";; sk-ant-*) k="Anthropic token(other)";; eyJ*) k="JWT";; sk-*) k="OpenAI-style key";; *" "*) k="text with spaces (not a token)";; *) k="unknown";; esac
+          echo "kind: $k"
           export CLAUDE_CODE_OAUTH_TOKEN="$T"
           npm install -g @anthropic-ai/claude-code >/dev/null 2>&1
           timeout 120 claude -p "Reply with exactly: OK" 2>&1 | tail -5 || true
