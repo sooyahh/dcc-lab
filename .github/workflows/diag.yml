@@ -1,0 +1,42 @@
+name: diag
+# Manual auth diagnostics for Claude and Codex. Prints shapes/status only, never secret values.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  auth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Codex auth.json shape
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+        run: |
+          printf '%s' "$CODEX_AUTH_JSON" | python3 -c '
+          import sys, json
+          raw = sys.stdin.buffer.read()
+          print("bytes", len(raw), "starts_with_bom", raw[:3] == b"\xef\xbb\xbf", "first_char", repr(raw[:1]))
+          try:
+              d = json.loads(raw.decode("utf-8-sig"))
+              print("json ok, keys", sorted(d), "auth_mode", d.get("auth_mode"),
+                    "token keys", sorted((d.get("tokens") or {}).keys()))
+          except Exception as e:
+              print("json FAIL", type(e).__name__, str(e)[:120])'
+      - name: Codex login status + tiny exec
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+        run: |
+          npm install -g @openai/codex >/dev/null 2>&1
+          mkdir -p ~/.codex && umask 077 && printf '%s' "$CODEX_AUTH_JSON" | python3 -c 'import sys;sys.stdout.write(sys.stdin.read().lstrip("﻿"))' > ~/.codex/auth.json
+          codex --version
+          codex login status || true
+          timeout 120 codex exec --skip-git-repo-check -s read-only "Reply with exactly: OK" 2>&1 | tail -5 || true
+          rm -f ~/.codex/auth.json
+      - name: Claude OAuth token tiny run
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          echo "token length: ${#CLAUDE_CODE_OAUTH_TOKEN}, prefix ok: $([[ $CLAUDE_CODE_OAUTH_TOKEN == sk-ant-oat* ]] && echo yes || echo no)"
+          npm install -g @anthropic-ai/claude-code >/dev/null 2>&1
+          timeout 120 claude -p "Reply with exactly: OK" 2>&1 | tail -5 || true
