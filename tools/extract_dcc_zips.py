@@ -6,8 +6,8 @@ verifies counts, then copies the tree to /content/drive/MyDrive/<DEST>/ so the r
 Validation/ (lab_runner.find_data_root accepts folders whose NFC name starts with '대학부 데이터').
 Resumable by marker files in LAB_OUT. Writes LAB_OUT/metrics.json.
 
-Also packs every top-level folder of Training/ and Validation/ (TS_/TL_/VS_/VL_<region>_구급) into
-<split>/<folder>.zip next to it, built from the local copy, so experiments copy one big file to LAB_WORK
+Also packs every TS_/TL_/VS_/VL_<region>_구급 folder (nested under 1.원천데이터/ and 2.라벨링데이터/) into
+<split>/<folder>.zip, built from the local copy, so experiments copy one big file to LAB_WORK
 instead of reading thousands of small Drive files (docs/implementer.md).
 `--pack-only` skips the loose-file Drive copy (already done by INFRA-DATA-001).
 """
@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -28,6 +29,7 @@ DEST = DRIVE / "대학부 데이터 압축해제"
 LOCAL = Path("/content/dcc_extract")
 OUT = Path(os.environ["LAB_OUT"])
 NAME = "대학부 데이터"
+PACK_DIR = re.compile(r"^(TS|TL|VS|VL)_.+_구급$")
 
 
 def nfc(s: str) -> str:
@@ -58,7 +60,7 @@ def pack(root: Path, target: Path) -> dict:
     """Zip each <split>/<folder> locally (wav stored, json deflated) and copy it to target/<split>/<folder>.zip."""
     res = {}
     for split in ("Training", "Validation"):
-        for d in sorted(p for p in (root / split).iterdir() if p.is_dir()):
+        for d in sorted(p for p in (root / split).rglob("*") if p.is_dir() and PACK_DIR.match(nfc(p.name))):
             name = nfc(d.name)
             dst = target / split / f"{name}.zip"
             files = sorted(f for f in d.rglob("*") if f.is_file())
@@ -69,7 +71,7 @@ def pack(root: Path, target: Path) -> dict:
                 with zipfile.ZipFile(local_zip, "w") as zf:
                     for f in files:
                         comp = zipfile.ZIP_STORED if f.suffix.lower() == ".wav" else zipfile.ZIP_DEFLATED
-                        zf.write(f, nfc(str(f.relative_to(root / split))), compress_type=comp)
+                        zf.write(f, nfc(str(f.relative_to(d.parent))), compress_type=comp)
                 dst.parent.mkdir(parents=True, exist_ok=True)
                 tmp = dst.with_name(dst.name + ".tmp")
                 shutil.copyfile(local_zip, tmp)              # one big sequential write to Drive
