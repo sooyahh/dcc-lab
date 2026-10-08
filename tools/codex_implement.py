@@ -4,8 +4,7 @@ Reads WORK (json list from commander_check.py) from argv[1] or env WORK, handles
   implement {"issue": N, "exp": EXP}  dcc-lab issue (approved spec) -> team branch sooyah/lab-<exp> -> codex exec
                                        -> commit/push -> team PR "exp(<EXP>): ..." (body ends with COMMAND: ...)
   fix       {"pr": N, "exp": EXP}     team PR labeled lab-fix -> codex exec with the latest review -> push to the PR branch
-Prints the remaining WORK (other kinds) as `rest=<json>` to $GITHUB_OUTPUT for the Claude step,
-and `pushed=true` when a PR was opened or fixed (commander.yml then re-dispatches itself for review).
+Prints the remaining WORK (other kinds) as `rest=<json>` to $GITHUB_OUTPUT for the Claude step.
 
 Env: GH_TOKEN (dcc-lab), TEAM_GH_TOKEN (team repo), TEAM_REPO_DIR (team checkout), CODEX_SANDBOX (default workspace-write).
 Tokens are removed from the environment codex runs in.
@@ -127,15 +126,12 @@ def main() -> None:
     work = json.loads(sys.argv[1] if len(sys.argv) > 1 else os.environ.get("WORK", "[]"))
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
     rest, errors = [], []
-    pushed = False
     for item in work:
         try:
             if item["kind"] == "implement":
                 implement(item, state)
-                pushed = True
             elif item["kind"] == "fix":
                 fix(item, state)
-                pushed = True
             else:
                 rest.append(item)
         except Exception as exc:                                  # report to Claude instead of failing the run
@@ -148,7 +144,6 @@ def main() -> None:
     if out:
         with open(out, "a", encoding="utf-8") as f:
             f.write(f"rest={json.dumps(rest, ensure_ascii=False)}\n")
-            f.write(f"pushed={'true' if pushed else 'false'}\n")
 
 
 if __name__ == "__main__":

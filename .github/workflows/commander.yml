@@ -102,8 +102,19 @@ jobs:
           git config user.name dcc-lab-commander; git config user.email dcc-lab@users.noreply.github.com
           git add -A specs reviews state 2>/dev/null || true
           git diff --cached --quiet || { git commit -qm "commander: state"; git pull -q --rebase; git push -q; }
-      - name: Review new Codex PR now (re-dispatch; waits behind this run via concurrency)
-        if: always() && steps.codex.outputs.pushed == 'true'
+      - name: Chain next step now (re-dispatch if new build/review/fix work appeared)
+        # e.g. Codex opened a PR -> review, review FAIL -> fix, fix pushed -> re-review.
+        # Only when the work differs from what this run started with, so a stuck item cannot loop.
+        if: always() && steps.check.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run commander.yml -R "$GITHUB_REPOSITORY" --ref main
+          START: ${{ steps.check.outputs.work }}
+        run: |
+          git pull -q --rebase || true
+          NEXT=$(GITHUB_OUTPUT=/dev/null python tools/commander_check.py | python3 -c '
+          import json,os,sys
+          start = json.loads(os.environ.get("START") or "[]")
+          nxt = [w for w in json.load(sys.stdin) if w["kind"] in ("implement", "review", "fix")]
+          print(json.dumps([w for w in nxt if w not in start]))')
+          echo "new work: $NEXT"
+          [ "$NEXT" = "[]" ] || gh workflow run commander.yml -R "$GITHUB_REPOSITORY" --ref main
