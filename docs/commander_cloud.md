@@ -45,7 +45,7 @@
 
 ### merge (병합)
 1. `gh pr view <PR> -R ... --json headRefOid,labels,mergeable` 후 `gh api repos/eigensinn-dcc2026/prelim/commits/<sha>/status`에서 `merge-gate/verdict`가 `success`인지 확인
-2. 성공이면 `gh pr merge <PR> -R eigensinn-dcc2026/prelim --merge --delete-branch`. 아직 pending이면 이번에는 건너뛴다(다음 실행에서 재확인, state에 기록하지 않음). failure면 사유를 보고
+2. 성공이면 `gh pr merge <PR> -R eigensinn-dcc2026/prelim --merge --delete-branch`. pending 또는 failure이면 먼저 `GH_TOKEN=$TEAM_GH_TOKEN gh api repos/eigensinn-dcc2026/prelim/compare/main...<headRefOid> --jq .behind_by`로 팀 main보다 뒤처졌는지 본다. 뒤처졌으면 `GH_TOKEN=$TEAM_GH_TOKEN gh pr update-branch <PR> -R eigensinn-dcc2026/prelim`로 main을 반영하고(CI가 다시 돈다) 이번에는 건너뛴다. 뒤처지지 않았는데 pending이면 건너뛴다(다음 실행에서 재확인, state에 기록하지 않음). 뒤처지지 않았는데 failure면 사유를 보고. merge-gate를 우회한 병합은 하지 않는다
 3. 코드 PR(`lab-adopted`)은 freeze 이후 병합 금지
 
 ## 마무리 (항상)
