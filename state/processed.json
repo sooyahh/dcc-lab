@@ -14,7 +14,8 @@
   3,
   4,
   5,
-  6
+  6,
+  7
  ],
  "reviewed_shas": [
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
@@ -34,7 +35,8 @@
   70,
   72,
   71,
-  68
+  68,
+  75
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
