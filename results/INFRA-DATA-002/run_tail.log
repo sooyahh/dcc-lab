@@ -1,0 +1,21 @@
+
+===== attempt 1 2026-10-08T13:03:48+00:00 colab-e7392224 commit=0a4030ef027dc2e104866820b3dd20142170b163 =====
+zip parts: 12 (21.4 GB)
+extracted 대학부 데이터-20260901T090511Z-1-001.zip
+extracted 대학부 데이터-20260901T090511Z-1-002.zip
+extracted 대학부 데이터-20260901T090511Z-1-003.zip
+extracted 대학부 데이터-20260901T090511Z-1-004.zip
+extracted 대학부 데이터-20260901T090511Z-1-005.zip
+extracted 대학부 데이터-20260901T090511Z-1-006.zip
+extracted 대학부 데이터-20260901T090511Z-1-007.zip
+extracted 대학부 데이터-20260901T090511Z-1-008.zip
+extracted 대학부 데이터-20260901T090511Z-1-009.zip
+extracted 대학부 데이터-20260901T090511Z-1-010.zip
+extracted 대학부 데이터-20260901T090511Z-1-011.zip
+extracted 대학부 데이터-20260901T090511Z-1-012.zip
+local counts: {'Training': {'wav': 29200, 'json': 29200}, 'Validation': {'wav': 3640, 'json': 3640}}
+packed Training/1.원천데이터.zip (29200 files)
+packed Training/2.라벨링데이터.zip (29200 files)
+packed Validation/1.원천데이터.zip (3640 files)
+packed Validation/2.라벨링데이터.zip (3640 files)
+{'exp_id': 'INFRA-DATA-002', 'seed': 0, 'primary_metric': {'name': 'copy_complete', 'value': 1.0, 'split': 'internal_holdout'}, 'metrics': {'zip_parts': 12, 'local': {'Training': {'wav': 29200, 'json': 29200}, 'Validation': {'wav': 3640, 'json': 3640}}, 'drive': None, 'packs': {'Training/1.원천데이터': {'files': 29200, 'zip_entries': 29200}, 'Training/2.라벨링데이터': {'files': 29200, 'zip_entries': 29200}, 'Validation/1.원천데이터': {'files': 3640, 'zip_entries': 3640}, 'Validation/2.라벨링데이터': {'files': 3640, 'zip_entries': 3640}}, 'dest': '/content/drive/MyDrive/대학부 데이터 압축해제/대학부 데이터', 'minutes': 28.1}}
