@@ -20,7 +20,7 @@ M2 L2 CNN(SpeakerCNNLarge) 3-seed 재학습을 맡아 줄 수 있을까? Trainin
 ## 2. 노트북에 한 줄 채우기
 설정 셀의 아래 줄을 그대로 바꿔 넣기 (값은 Training 스펙트로그램 sha256):
 ```python
-TRAIN_PACKED_SHA256 = {"m2_spectrograms_packed.npy": "<PACK_SHA>", "m2_spectrogram_index_packed.parquet": "<INDEX_SHA>"}
+TRAIN_PACKED_SHA256 = {"m2_spectrograms_packed.npy": "69a770c8100f6851c2f6a642a801dc1e0dd0a14691bc3b37f047ebf2ba4712b8", "m2_spectrogram_index_packed.parquet": "6afe3caacbf5916e291009849d4ff27d32ead3699b80c1a23ec038c4eda79aad"}
 ```
 나머지 설정(`SEEDS`, `EPOCHS=30`, `RUN_BUILD=False` 등)은 건드리지 말 것.
 
