@@ -102,3 +102,8 @@ jobs:
           git config user.name dcc-lab-commander; git config user.email dcc-lab@users.noreply.github.com
           git add -A specs reviews state 2>/dev/null || true
           git diff --cached --quiet || { git commit -qm "commander: state"; git pull -q --rebase; git push -q; }
+      - name: Review new Codex PR now (re-dispatch; waits behind this run via concurrency)
+        if: always() && steps.codex.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run commander.yml -R "$GITHUB_REPOSITORY" --ref main
