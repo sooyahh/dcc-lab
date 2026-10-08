@@ -10,7 +10,7 @@
     "value": 0.5676
   },
   "branch": "sooyah/lab-m3-kcbert-002",
-  "commit": "",
+  "commit": "2e2077418cb016632cf6a7838da969a4639a0485",
   "command": "python scripts/lab/m3-kcbert-002.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "P0과 동일한 JSON 샘플 단위 80:20 multilabel stratified split(Train 23,408 / Val 5,792)에서 3-seed 평균 Macro F1이 0.5676보다 +0.01 이상 높고 최소 2개 seed가 0.5676 초과. threshold 0.5 고정, 튜닝 금지. metrics.json에 seed별 Macro/Micro F1, 증상별 F1, 학습 시간 기록",
