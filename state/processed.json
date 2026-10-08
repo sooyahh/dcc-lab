@@ -34,7 +34,8 @@
   "f3af923918f7a8eb8a03ddcc550ddb00a1e9687d",
   "716855e1a9e8cd0cd9c955e6cab1d1bc29e68bd4",
   "dcd1b0241b3fe1dddd4c4e4b275ab45c5052eeea",
-  "1bce6d550a0bf6afa1a54ed9933d26a055fe2aad"
+  "1bce6d550a0bf6afa1a54ed9933d26a055fe2aad",
+  "0beb5ab415312bb76aa719f53bfcfe8507ef14a7"
  ],
  "merged_prs": [
   67,
@@ -67,6 +68,7 @@
   "PR #76 (code, lab-adopted) behind main by 2 -> update-branch run; merge deferred to next run",
   "M3-KCBERT-006 PR #78 1bce6d5 review PASS; submitted. PR #76 (82d9823) merge skipped: merge-gate/verdict pending, not behind main; recheck next run",
   "M3-KCBERT-006 judged 기각 (mean Macro F1 0.5883, -0.0209 vs 005); team log PR #79, code PR #78 closed, issue #8 closed. PR #76 (82d9823) merged (merge-gate success). Next proposal issue #9 M3-KCBERT-007 (3-seed ensemble)",
-  "PR #79 (log, 279789f) merge skipped: merge-gate/verdict pending and behind main by 3 -> update-branch run; recheck next run"
+  "PR #79 (log, 279789f) merge skipped: merge-gate/verdict pending and behind main by 3 -> update-branch run; recheck next run",
+  "M3-KCBERT-007 PR #80 0beb5ab review PASS; submitted. PR #79 (log, cce01cc) merge skipped: merge-gate/verdict pending, not behind main; recheck next run"
  ]
 }
