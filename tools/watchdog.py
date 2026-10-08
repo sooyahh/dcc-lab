@@ -35,7 +35,7 @@ def main() -> None:
     print(f"queued={len(queued)} running={len(running)} heartbeat={hb.get('state')} age_min={age_min}")
     if alive:
         return
-    hook = os.environ.get("GROKBOT_WEBHOOK_URL")
+    hook = os.environ.get("GROKBOT_WEBHOOK_URL", "").lstrip("﻿").strip()
     if not hook:
         print("::warning::runner down with pending jobs, but GROKBOT_WEBHOOK_URL is not set")
         return
@@ -43,11 +43,17 @@ def main() -> None:
     for p in (LAB / "queue").glob("*.json"):
         if json.loads(p.read_text(encoding="utf-8"))["spec"].get("gpu") == "L4":
             gpu = "L4"
-    body = {"event": "runner_stale" if running else "job_queued", "pending": len(queued) + len(running),
-            "gpu": gpu, "heartbeat": hb}
-    req = urllib.request.Request(hook, data=json.dumps(body).encode(), headers={"Content-Type": "application/json"})
+    body = {"event": "job_queued", "reason": "runner_stale" if running else "pending_jobs",
+            "pending": len(queued) + len(running), "gpu": gpu, "heartbeat": hb}
+    headers = {"Content-Type": "application/json"}
+    auth = os.environ.get("GROKBOT_WEBHOOK_AUTH", "").lstrip("﻿").strip()
+    if auth.lower().startswith("authorization:"):
+        auth = auth.split(":", 1)[1].strip()                 # tolerate a copied "Authorization: ..." line
+    if auth:
+        headers["Authorization"] = auth                      # full header value as shown in grokbot's routine
+    req = urllib.request.Request(hook, data=json.dumps(body).encode(), headers=headers)
     urllib.request.urlopen(req, timeout=30)
-    print(f"pinged grokbot: {body['event']}")
+    print(f"pinged grokbot: {body['event']} ({body['reason']})")
 
 
 if __name__ == "__main__":

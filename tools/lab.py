@@ -96,7 +96,11 @@ def ping_grokbot(event: str, **data) -> None:
         print("[lab] grokbot 웹훅 미설정 — Colab 러너가 꺼져 있으면 grokbot 예약 점검 때 시작됨")
         return
     body = json.dumps({"event": event, **data}, ensure_ascii=False).encode()
-    req = urllib.request.Request(hook, data=body, headers={"Content-Type": "application/json"})
+    headers = {"Content-Type": "application/json"}
+    auth = LOCAL_CFG.get("grokbot_webhook_auth") or os.environ.get("GROKBOT_WEBHOOK_AUTH")
+    if auth:
+        headers["Authorization"] = auth.strip()
+    req = urllib.request.Request(hook, data=body, headers=headers)
     try:
         urllib.request.urlopen(req, timeout=20)
         print(f"[lab] grokbot 웹훅 전송: {event}")
