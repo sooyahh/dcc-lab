@@ -363,8 +363,14 @@ def main() -> None:
     log(f"worker={WORKER} gpu={gpu()}")
     status("idle", force_git=True)
     idle_since, done_jobs = time.time(), 0
+    me = Path(__file__).resolve()
+    my_code = me.read_bytes()
     while True:
         try:
+            sync()
+            if me.exists() and me.read_bytes() != my_code:   # self-update before claiming: no notebook restart needed
+                log("러너 코드가 갱신되어 재시작")
+                os.execv(sys.executable, [sys.executable, str(me), *sys.argv[1:]])
             job = claim_next()
         except Exception as exc:
             log(f"큐 확인 실패: {redact(str(exc))}")
