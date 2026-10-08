@@ -1,0 +1,43 @@
+{
+  "exp_id": "INFRA-DATA-003",
+  "seed": 0,
+  "primary_metric": {
+    "name": "copy_complete",
+    "value": 1.0,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "zip_parts": 12,
+    "local": {
+      "Training": {
+        "wav": 29200,
+        "json": 29200
+      },
+      "Validation": {
+        "wav": 3640,
+        "json": 3640
+      }
+    },
+    "drive": null,
+    "packs": {
+      "Training/TS_서울_구급": {
+        "files": 29200,
+        "zip_entries": 29200
+      },
+      "Training/TL_서울_구급": {
+        "files": 29200,
+        "zip_entries": 29200
+      },
+      "Validation/VS_서울_구급": {
+        "files": 3640,
+        "zip_entries": 3640
+      },
+      "Validation/VL_서울_구급": {
+        "files": 3640,
+        "zip_entries": 3640
+      }
+    },
+    "dest": "/content/drive/MyDrive/대학부 데이터 압축해제/대학부 데이터",
+    "minutes": 14.4
+  }
+}
