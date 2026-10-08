@@ -41,3 +41,13 @@
 - 전처리 통계(정규화 평균·분산 등)는 Training에서만 추정
 - 사전학습 모델은 HF 등 공개 모델을 로컬로 받아 사용. 추론 코드에서 외부 API·네트워크 호출 금지
 - seed 고정 (`random`, `numpy`, `torch`, `cuda`), 사용한 seed를 metrics.json에 기록
+
+## 사전학습 모델 가중치 (사령탑 결정, 2026-10-08)
+- 대회 규정상 Hugging Face 등 **공개 사전학습 모델을 내려받아** 자체 환경에서 쓰는 것은 허용된다(외부 API 호출과 다름)
+- 첫 실행 때 `huggingface_hub.snapshot_download(repo_id, revision=<고정 커밋 해시>, local_dir=$DCC_RUN_ROOT/models/<모델이름>)`으로 **Drive 영구 경로**에 받고, 이미 있으면 건너뛴다. 이후 로드는 그 경로에서 `local_files_only=True`
+- `main()` 시작 직후(데이터 준비 전) 모델 경로를 확인·준비해서, 문제가 있으면 수십 분 작업 전에 바로 실패하게 한다
+- 제출용 추론 코드는 이 로컬 경로만 읽고 네트워크를 쓰지 않는다
+
+## requirements.txt
+- 이미 있는 패키지(또는 그 의존성으로 설치되는 패키지: joblib, numpy 등)를 추가·버전 고정하지 않는다. 팀 공용 파일이라 다른 팀원 환경을 바꾼다
+- 정말 새 패키지가 필요할 때만 한 줄 추가

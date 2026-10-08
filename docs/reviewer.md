@@ -12,7 +12,9 @@
    그 밖의 라벨 JSON 키(정답 라벨, 성별, 증상 등)를 특징으로 쓰는가
 4. **M2 발화 독립성**: 대상 발화 구간 밖의 정보(같은 통화의 다른 발화, 통화 단위 정규화, 발화 순서)를 쓰는가
 5. **외부 데이터·네트워크·비밀**: Training(서울) 외 데이터, 추론 경로의 외부 API·다운로드 호출,
-   `dcc_lab/.secrets`·환경 변수 토큰 접근, `LAB_OUT`/`LAB_WORK` 밖 Drive 파일 수정·삭제 (모두 BLOCKER)
+   `dcc_lab/.secrets`·환경 변수 토큰 접근, `LAB_OUT`/`LAB_WORK` 밖 Drive 파일 수정·삭제 (모두 BLOCKER).
+   단, 공개 사전학습 모델을 고정 revision으로 `$DCC_RUN_ROOT/models/`에 내려받는 것은 허용(implementer.md 규칙)
+9. **requirements.txt**: 기존 패키지 추가·버전 고정은 MAJOR (팀원 환경 변경)
 6. **실행 계약**: `LAB_OUT/metrics.json` 작성, 재실행 시 이어 가기(완료 단계 건너뛰기, ckpt_last 복원),
    하드코딩 경로, Drive에서 작은 파일 대량 읽기
 7. **명세 일치**: 코드가 명세의 가설·변경점을 실제로 구현하는가. `command`가 실제 스크립트 인자와 맞는가
