@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-006",
+    "mission": 3,
+    "title": "KcBERT 앞 256 + 강화 가중 BCE, 5 epochs 80:20 재평가",
+    "hypothesis": "KCBERT-005 설정에서 epoch를 3→5로 늘리면 희소 증상(오심·두통·전신쇠약) 수렴이 진행되어 Macro F1이 KCBERT-005(0.6092)보다 오른다",
+    "change_vs_baseline": "M3-KCBERT-005 대비 epoch만 3→5로 변경. 입력(앞 256토큰)·pos_weight(scale 0.5, max 6.0)·분할·threshold 0.5·seed 42/43/44 동일. 최종 epoch(5) 기준 평가, best epoch 선택 금지",
+    "baseline": {
+      "exp_id": "M3-KCBERT-005",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6092
+    },
+    "branch": "sooyah/lab-m3-kcbert-006",
+    "commit": "1bce6d550a0bf6afa1a54ed9933d26a055fe2aad",
+    "command": "python scripts/lab/m3-kcbert-006.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6092보다 +0.01 이상 높고 최소 2개 seed가 0.6092 초과. threshold 0.5 고정, 튜닝 금지. seed별 Macro/Micro/증상별 F1 기록",
+    "gpu": "T4",
+    "budget_hours": 4,
+    "priority": 2,
+    "notes": "전사 텍스트만, 공식 Val 미사용. m3-kcbert-005.py 재사용, epoch 상수만 5로 변경. 공개 모델 beomi/kcbert-base는 고정 revision으로 DCC_RUN_ROOT/models 캐시. 체크포인트 epoch마다 저장해 재개. 예상 소요 약 90분"
+  },
+  "commit": "1bce6d550a0bf6afa1a54ed9933d26a055fe2aad",
+  "submitted_at": "2026-10-09T04:13:20+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
