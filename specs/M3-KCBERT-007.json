@@ -10,7 +10,7 @@
     "value": 0.6092
   },
   "branch": "sooyah/lab-m3-kcbert-007",
-  "commit": "",
+  "commit": "0beb5ab415312bb76aa719f53bfcfe8507ef14a7",
   "command": "python scripts/lab/m3-kcbert-007.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 앙상블 Macro F1이 0.6092보다 +0.01 이상 높고 seed별 단일 모델 최고값(0.6196)도 초과. threshold 0.5 고정, 튜닝 금지. 앙상블과 단일 모델의 Macro/Micro/증상별 F1 기록",
