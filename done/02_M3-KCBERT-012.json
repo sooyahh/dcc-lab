@@ -1,0 +1,134 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-012",
+    "mission": 3,
+    "title": "KcBERT 앞 256 + 강화 가중 BCE + soft macro-F1 손실 (80:20 재평가)",
+    "hypothesis": "BCE에 증상별 soft-F1(확률로 계산한 F1)의 macro 평균 손실을 더하면 threshold 0.5에서의 증상별 판정 균형이 F1 기준으로 맞춰져, 특히 오심·두통·전신쇠약 F1이 오르고 Macro F1이 KCBERT-005(0.6092)보다 오른다",
+    "change_vs_baseline": "M3-KCBERT-005 대비 손실만 변경: loss = BCEWithLogits(pos_weight는 005와 동일 scale 0.5/max 6.0, Training 분할에서만 계산) + 1.0 * (1 - mean_j softF1_j). softF1_j = 2*sum(p*y) / (sum(p) + sum(y) + 1e-8), p = sigmoid(logit), 미니배치 단위로 계산하고 fp32로 계산. 가중치 1.0은 고정(튜닝 금지). 인코더 beomi/kcbert-base(고정 revision 0f2f3f8)·[CLS] 헤드·앞 256토큰·lr 2e-5·batch 16·3 epochs·80:20 분할·threshold 0.5·seed 42/43/44 동일",
+    "baseline": {
+      "exp_id": "M3-KCBERT-005",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6092
+    },
+    "branch": "sooyah/lab-m3-kcbert-012",
+    "commit": "815c57dbe84ab683a35b30b60352e20b75f79939",
+    "command": "python scripts/lab/m3-kcbert-012.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6092보다 +0.01 이상 높고 최소 2개 seed가 0.6092 초과. threshold는 >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). seed별 Macro/Micro/증상별 F1, 빈 예측(모든 증상 < 0.5) 샘플 수, epoch별 BCE·softF1 항 값을 기록",
+    "gpu": "T4",
+    "budget_hours": 3,
+    "priority": 2,
+    "notes": "m3-kcbert-005.py 재사용, criterion만 교체. 평가는 >= 0.5로(005는 > 0.5였으나 확률이 정확히 0.5인 경우가 없어 비교에 영향 없음). seed 42 best.ckpt는 005와 같은 형식({config, seed, epoch, model}, Classifier state_dict)으로 저장해 scripts/mission3_export_bert_ckpt.py로 바로 내보낼 수 있게. 공식 Val 미사용"
+  },
+  "commit": "815c57dbe84ab683a35b30b60352e20b75f79939",
+  "submitted_at": "2026-10-10T01:00:25+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-a",
+  "claimed_at": "2026-10-09T17:37:17+00:00",
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-09T18:33:12+00:00",
+  "elapsed_min": 55.6,
+  "metrics": {
+    "exp_id": "M3-KCBERT-012",
+    "primary_metric": {
+      "name": "macro_f1",
+      "value": 0.6265129311190437,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "seeds": [
+        {
+          "seed": 42,
+          "epoch": 3,
+          "macro_f1": 0.6336520822312462,
+          "micro_f1": 0.6436538102062433,
+          "per_symptom_f1": {
+            "고열": 0.6457002457002456,
+            "구토": 0.5975994946304485,
+            "두통": 0.5113327289211242,
+            "복통": 0.7941525088897669,
+            "어지러움": 0.6584116140051238,
+            "열상": 0.8804034582132565,
+            "오심": 0.37942551770207084,
+            "전신쇠약": 0.5455421686746988,
+            "호흡곤란": 0.6903010033444816
+          },
+          "empty_predictions": 244,
+          "train_loss": 0.7120340090252647,
+          "train_bce": 0.26978456602519046,
+          "train_soft_f1_loss": 0.4422494434202198,
+          "train_soft_f1": 0.5577505565797802
+        },
+        {
+          "seed": 43,
+          "epoch": 3,
+          "macro_f1": 0.6245621017533364,
+          "micro_f1": 0.6402767102229054,
+          "per_symptom_f1": {
+            "고열": 0.6397694524495677,
+            "구토": 0.6026894865525673,
+            "두통": 0.4964912280701754,
+            "복통": 0.7867446393762183,
+            "어지러움": 0.6522116218560278,
+            "열상": 0.8613861386138614,
+            "오심": 0.3460639127045986,
+            "전신쇠약": 0.549800796812749,
+            "호흡곤란": 0.6859016393442623
+          },
+          "empty_predictions": 289,
+          "train_loss": 0.7126297905521692,
+          "train_bce": 0.27019426511041694,
+          "train_soft_f1_loss": 0.4424355261063462,
+          "train_soft_f1": 0.5575644738936538
+        },
+        {
+          "seed": 44,
+          "epoch": 3,
+          "macro_f1": 0.6213246093725484,
+          "micro_f1": 0.6343307086614173,
+          "per_symptom_f1": {
+            "고열": 0.6484751203852327,
+            "구토": 0.5781151170145478,
+            "두통": 0.4585152838427948,
+            "복통": 0.7892196299275945,
+            "어지러움": 0.6566135286514433,
+            "열상": 0.8640850417615793,
+            "오심": 0.3656357388316151,
+            "전신쇠약": 0.5477815699658704,
+            "호흡곤란": 0.6834804539722572
+          },
+          "empty_predictions": 226,
+          "train_loss": 0.7180707714204012,
+          "train_bce": 0.27094136813040554,
+          "train_soft_f1_loss": 0.4471294043492717,
+          "train_soft_f1": 0.5528705956507283
+        }
+      ],
+      "mean_micro_f1": 0.6394204096968553,
+      "mean_per_symptom_f1": {
+        "고열": 0.6446482728450154,
+        "구토": 0.5928013660658545,
+        "두통": 0.48877974694469817,
+        "복통": 0.7900389260645265,
+        "어지러움": 0.6557455881708649,
+        "열상": 0.8686248795295657,
+        "오심": 0.3637083897460949,
+        "전신쇠약": 0.5477081784844394,
+        "호흡곤란": 0.6865610322203337
+      }
+    },
+    "seed": 42,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "train_rows": 23408,
+    "eval_rows": 5792,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Final epoch 3; threshold >=0.5 fixed; empty predictions unchanged; seed42 representative checkpoint. M3-KCBERT-005 settings and split reused; BCE + 1.0 * soft macro-F1 loss; pos_weight scale 0.5, cap 6.0; weights computed from Training partition only; official Validation unused."
+  }
+}
