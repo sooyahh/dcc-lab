@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-015",
+    "mission": 3,
+    "title": "KcBERT 앞 256 + 012 손실 + small-loss 샘플 선택(노이즈 라벨 대응) 80:20 재평가",
+    "hypothesis": "통화에 근거 없는 라벨이 큰 BCE 손실로 기울기를 왜곡한다. 3 epoch 중 2·3 epoch에서 배치 내 샘플별 BCE 합 상위 10%를 BCE 항에서 제외하면 오심·두통 F1과 Macro F1이 KCBERT-012보다 오른다",
+    "change_vs_baseline": "M3-KCBERT-012 대비 BCE 항만 변경: epoch 1은 012와 동일(전 샘플), epoch 2·3은 배치(16) 안에서 샘플별 가중 BCE 합이 큰 상위 10%(2건)를 BCE 평균에서 제외(그래디언트 차단, 비율 고정, 튜닝 금지). soft macro-F1 보조 손실(가중 1.0)은 전 샘플로 012와 동일. 앞 256토큰, [CLS] 헤드, lr 2e-5, batch 16, 3 epochs, 80:20 동일 분할, threshold 0.5 고정(>=0.5), seed 42/43/44. 추론·후처리 변경 없음(min-1 금지)",
+    "baseline": {
+      "exp_id": "M3-KCBERT-012",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6265
+    },
+    "branch": "sooyah/lab-m3-kcbert-015",
+    "commit": "f76597158ced52923842bf1ab4ccc8207057d395",
+    "command": "PYTHONPATH=src python scripts/lab/m3-kcbert-015.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6265보다 +0.01 이상 높고 최소 2개 seed가 0.6265 초과. threshold 튜닝·후처리 금지. seed별 Macro/Micro/증상별 F1, 빈 예측 수, 제외 샘플 수 기록",
+    "gpu": "T4",
+    "budget_hours": 3,
+    "priority": 2,
+    "notes": "m3-kcbert-012.py 재사용, BCE 항에 샘플 마스크만 추가. 013·014 기각 후 손실·학습 목표 축의 마지막 후보. 공식 Val 미사용. Training 분할 통계만 사용. 012 실측 약 56분"
+  },
+  "commit": "f76597158ced52923842bf1ab4ccc8207057d395",
+  "submitted_at": "2026-10-10T05:44:31+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
