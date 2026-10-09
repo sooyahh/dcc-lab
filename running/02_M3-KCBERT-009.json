@@ -22,8 +22,9 @@
   },
   "commit": "b07771710e776f50e62f87536469912545cab2c2",
   "submitted_at": "2026-10-09T21:10:53+09:00",
-  "attempts": 0,
+  "attempts": 1,
   "max_attempts": 3,
   "worker": "colab-a",
-  "claimed_at": "2026-10-09T13:18:24+00:00"
+  "claimed_at": "2026-10-09T13:18:24+00:00",
+  "started_at": "2026-10-09T13:18:25+00:00"
 }
