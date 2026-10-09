@@ -26,5 +26,10 @@
   "max_attempts": 3,
   "worker": "colab-b",
   "claimed_at": "2026-10-09T10:52:21+00:00",
-  "started_at": "2026-10-09T10:52:23+00:00"
+  "started_at": "2026-10-09T10:52:23+00:00",
+  "status": "failed",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-09T18:23:32+00:00",
+  "reason": "budget_hours 초과",
+  "elapsed_min": 301.4
 }
