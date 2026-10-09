@@ -42,7 +42,8 @@
   "1bce6d550a0bf6afa1a54ed9933d26a055fe2aad",
   "0beb5ab415312bb76aa719f53bfcfe8507ef14a7",
   "bd1cc07824db4fc8a399054955e058a778343740",
-  "2f962036ad4095573e1e63422da5a9534e19d683"
+  "2f962036ad4095573e1e63422da5a9534e19d683",
+  "97b6d5b4e17cd4ceaf4dabd728dcdb882fefd1e8"
  ],
  "merged_prs": [
   67,
@@ -82,6 +83,7 @@
   "M3-KCBERT-007 PR #80 0beb5ab review PASS; submitted. PR #79 (log, cce01cc) merge skipped: merge-gate/verdict pending, not behind main; recheck next run",
   "M3-KCBERT-007 judged 기각 (ensemble Macro F1 0.6175, +0.0083 vs 005 < +0.01); team log PR #81, code PR #80 closed, issue #9 closed. PR #79 (log) merged (merge-gate success). Next proposal issue #10 M3-KLUEBERT-001",
   "PR #81 (log M3-KCBERT-007) merged (merge-gate success)",
-  "M3-KLUEBERT-001 PR #82 bd1cc07 review PASS; submitted"
+  "M3-KLUEBERT-001 PR #82 bd1cc07 review PASS; submitted",
+  "M3-KCBERT-008 PR #84 97b6d5b review PASS; submitted (retry after code-bug fix)"
  ]
 }
