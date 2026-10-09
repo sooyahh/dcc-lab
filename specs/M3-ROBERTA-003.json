@@ -15,7 +15,7 @@
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6241보다 +0.01 이상 높고 최소 2개 seed가 0.6241 초과. threshold는 >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). seed별 Macro/Micro/증상별 F1, 빈 예측 샘플 수, epoch별 BCE·softF1 항 값 기록",
   "gpu": "T4",
-  "budget_hours": 3,
+  "budget_hours": 4,
   "priority": 2,
   "notes": "m3-roberta-002.py 재사용, criterion만 교체(m3-kcbert-012.py의 soft-F1 항 참고). 모델은 DCC_RUN_ROOT/models 캐시 재사용. 체크포인트 epoch마다 저장해 재개. ROBERTA-002 실측 약 43분(재시도분) ~ 5시간(1차 누적)이라 예산 3h 안에 재개로 완료 가능. 공식 Val 미사용"
 }
