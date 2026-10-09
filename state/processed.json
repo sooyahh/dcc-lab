@@ -82,7 +82,8 @@
   92,
   96,
   101,
-  103
+  103,
+  104
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
