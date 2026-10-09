@@ -18,7 +18,8 @@
   "done/02_M3-KCBERT-009.json@2026-10-09T14:13:32+00:00",
   "done/02_M3-KCBERT-010.json@2026-10-09T15:48:14+00:00",
   "done/02_M3-KCBERT-011.json@2026-10-09T17:37:04+00:00",
-  "failed/02_M3-ROBERTA-002.json@2026-10-09T18:23:32+00:00"
+  "failed/02_M3-ROBERTA-002.json@2026-10-09T18:23:32+00:00",
+  "done/02_M3-KCBERT-012.json@2026-10-09T18:33:12+00:00"
  ],
  "implemented_issues": [
   1,
@@ -115,6 +116,7 @@
   "PR #92 (log M3-KCBERT-009, 44e6d7c) merge skipped: merge-gate/verdict pending and behind main by 2 -> update-branch run; recheck next run",
   "M3-KCBERT-010 PR #93 006a9e6 review PASS; submitted. PR #92 (log M3-KCBERT-009) merged (merge-gate success)",
   "M3-KCBERT-010 judged 기각 (mean Macro F1 0.6096, +0.0004 vs 005 < +0.01); team log PR #96, code PR #93 closed, issue #15 closed. Next proposal issue #16 M3-KCBERT-011 (R-Drop)",
-  "M3-KCBERT-011 judged 기각 (mean Macro F1 0.6132, +0.0040 vs 005 < +0.01); team log PR #101. Code PR #97 was already merged (not closed). No new proposal: open proposals #17, #18 already at max_workers=2"
+  "M3-KCBERT-011 judged 기각 (mean Macro F1 0.6132, +0.0040 vs 005 < +0.01); team log PR #101. Code PR #97 was already merged (not closed). No new proposal: open proposals #17, #18 already at max_workers=2",
+  "M3-KCBERT-012 judged 채택 (mean Macro F1 0.6265, +0.0173 vs 005, 3 seeds all above); team log PR #104, code PR #99 labeled lab-adopted, issue #17 closed. No new proposal: open proposals #13, #18 at max_workers=2"
  ]
 }
