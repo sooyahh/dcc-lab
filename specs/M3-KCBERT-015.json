@@ -10,7 +10,7 @@
     "value": 0.6265
   },
   "branch": "sooyah/lab-m3-kcbert-015",
-  "commit": "",
+  "commit": "f76597158ced52923842bf1ab4ccc8207057d395",
   "command": "PYTHONPATH=src python scripts/lab/m3-kcbert-015.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6265보다 +0.01 이상 높고 최소 2개 seed가 0.6265 초과. threshold 튜닝·후처리 금지. seed별 Macro/Micro/증상별 F1, 빈 예측 수, 제외 샘플 수 기록",
