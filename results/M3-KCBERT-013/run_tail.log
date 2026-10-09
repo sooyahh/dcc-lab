@@ -1,0 +1,175 @@
+
+===== attempt 1 2026-10-09T18:23:51+00:00 colab-b commit=90d7981daded3b0064aa3ec4f3750e7c1ca95581 =====
+
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]
+Loading weights:  13%|█▎        | 26/202 [00:00<00:04, 36.32it/s]
+Loading weights:  15%|█▍        | 30/202 [00:01<00:10, 16.13it/s]
+Loading weights:  16%|█▌        | 32/202 [00:02<00:15, 10.73it/s]
+Loading weights:  19%|█▉        | 39/202 [00:02<00:10, 15.40it/s]
+Loading weights:  23%|██▎       | 47/202 [00:03<00:11, 13.85it/s]
+Loading weights:  34%|███▎      | 68/202 [00:03<00:06, 19.74it/s]
+Loading weights:  37%|███▋      | 74/202 [00:04<00:08, 14.51it/s]
+Loading weights:  52%|█████▏    | 105/202 [00:05<00:04, 23.89it/s]
+Loading weights:  53%|█████▎    | 108/202 [00:05<00:04, 23.39it/s]
+Loading weights:  60%|█████▉    | 121/202 [00:05<00:02, 31.55it/s]
+Loading weights:  63%|██████▎   | 127/202 [00:05<00:02, 32.41it/s]
+Loading weights:  70%|██████▉   | 141/202 [00:05<00:01, 43.72it/s]
+Loading weights:  73%|███████▎  | 148/202 [00:06<00:01, 40.36it/s]
+Loading weights:  87%|████████▋ | 176/202 [00:06<00:00, 36.12it/s]
+Loading weights:  93%|█████████▎| 188/202 [00:07<00:00, 41.26it/s]
+Loading weights: 100%|██████████| 202/202 [00:07<00:00, 28.23it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2435.59it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+TAPT holdout MLM loss before=2.866333 (diagnostic only)
+TAPT epoch=1 step=0 loss=3.0021
+TAPT epoch=1 step=200 loss=1.8068
+TAPT epoch=1 step=400 loss=1.7208
+TAPT epoch=1 step=600 loss=1.7132
+TAPT epoch=2 step=0 loss=1.6870
+TAPT epoch=2 step=200 loss=1.4947
+TAPT epoch=2 step=400 loss=1.5855
+TAPT epoch=2 step=600 loss=1.7441
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:03<00:00,  3.43s/it]
+Writing model shards: 100%|██████████| 1/1 [00:03<00:00,  3.44s/it]
+{"seed": 42, "epochs": 2, "train_rows": 23408, "eval_rows": 5792, "holdout_mlm_loss_before": 2.8663333829379356, "holdout_mlm_loss_after": 1.5449732604421373, "history": [{"epoch": 1, "train_mlm_loss": 1.8804677219733623}, {"epoch": 2, "train_mlm_loss": 1.606018479025527}], "encoder": "/content/drive/MyDrive/dcc_runs/lab/M3-KCBERT-013/tapt_encoder", "diagnostic_only": true}
+
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 197/197 [00:00<00:00, 2500.17it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/lab/M3-KCBERT-013/tapt_encoder
+Key                 | Status  | 
+--------------------+---------+-
+pooler.dense.bias   | MISSING | 
+pooler.dense.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+seed=42 epoch=1 step=0 loss=0.7989
+seed=42 epoch=1 step=200 loss=0.2271
+seed=42 epoch=1 step=400 loss=0.3291
+seed=42 epoch=1 step=600 loss=0.2208
+seed=42 epoch=1 step=800 loss=0.4051
+seed=42 epoch=1 step=1000 loss=0.4186
+seed=42 epoch=1 step=1200 loss=0.3263
+seed=42 epoch=1 step=1400 loss=0.2594
+{"seed": 42, "epoch": 1, "macro_f1": 0.6067999836250705, "micro_f1": 0.6329790977549441, "per_symptom_f1": {"고열": 0.6208991494532199, "구토": 0.5720221606648199, "두통": 0.44755244755244755, "복통": 0.7820620284995808, "어지러움": 0.634765625, "열상": 0.8837545126353791, "오심": 0.2975369458128079, "전신쇠약": 0.5336179295624333, "호흡곤란": 0.6889890534449453}, "train_loss": 0.31665738882345446}
+seed=42 epoch=2 step=0 loss=0.2655
+seed=42 epoch=2 step=200 loss=0.4445
+seed=42 epoch=2 step=400 loss=0.2730
+seed=42 epoch=2 step=600 loss=0.2531
+seed=42 epoch=2 step=800 loss=0.2152
+seed=42 epoch=2 step=1000 loss=0.2534
+seed=42 epoch=2 step=1200 loss=0.3554
+seed=42 epoch=2 step=1400 loss=0.2444
+{"seed": 42, "epoch": 2, "macro_f1": 0.6006449615852961, "micro_f1": 0.6376133786848073, "per_symptom_f1": {"고열": 0.6447058823529411, "구토": 0.5344189489267209, "두통": 0.48220436280137774, "복통": 0.7954729183508489, "어지러움": 0.6555944055944056, "열상": 0.8768898488120951, "오심": 0.2116279069767442, "전신쇠약": 0.5238917674150835, "호흡곤란": 0.680998613037448}, "train_loss": 0.27503174898340044}
+seed=42 epoch=3 step=0 loss=0.2217
+seed=42 epoch=3 step=200 loss=0.2599
+seed=42 epoch=3 step=400 loss=0.2195
+seed=42 epoch=3 step=600 loss=0.1981
+seed=42 epoch=3 step=800 loss=0.2625
+seed=42 epoch=3 step=1000 loss=0.3882
+seed=42 epoch=3 step=1200 loss=0.2436
+seed=42 epoch=3 step=1400 loss=0.1939
+{"seed": 42, "epoch": 3, "macro_f1": 0.6191935635248581, "micro_f1": 0.6361373165618449, "per_symptom_f1": {"고열": 0.6521739130434783, "구토": 0.5901417960837272, "두통": 0.4833164812942366, "복통": 0.7937864077669903, "어지러움": 0.6511024643320363, "열상": 0.8597842835130971, "오심": 0.3420647149460709, "전신쇠약": 0.5420560747663551, "호흡곤란": 0.6583159359777314}, "train_loss": 0.24499537701058371}
+
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]
+Loading weights:  28%|██▊       | 56/197 [00:00<00:00, 479.13it/s]
+Loading weights:  72%|███████▏  | 142/197 [00:00<00:00, 669.09it/s]
+Loading weights: 100%|██████████| 197/197 [00:00<00:00, 670.91it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/lab/M3-KCBERT-013/tapt_encoder
+Key                 | Status  | 
+--------------------+---------+-
+pooler.dense.bias   | MISSING | 
+pooler.dense.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+seed=43 epoch=1 step=0 loss=0.7676
+seed=43 epoch=1 step=200 loss=0.3033
+seed=43 epoch=1 step=400 loss=0.2659
+seed=43 epoch=1 step=600 loss=0.3835
+seed=43 epoch=1 step=800 loss=0.3712
+seed=43 epoch=1 step=1000 loss=0.2895
+seed=43 epoch=1 step=1200 loss=0.2066
+seed=43 epoch=1 step=1400 loss=0.2642
+{"seed": 43, "epoch": 1, "macro_f1": 0.5970498741351011, "micro_f1": 0.6304688613367536, "per_symptom_f1": {"고열": 0.6380223660977046, "구토": 0.5556353194544149, "두통": 0.49095022624434387, "복통": 0.777157578359811, "어지러움": 0.6444026340545626, "열상": 0.8776779543883898, "오심": 0.1927144535840188, "전신쇠약": 0.5360824742268041, "호흡곤란": 0.6608058608058608}, "train_loss": 0.31417238856942703}
+seed=43 epoch=2 step=0 loss=0.3478
+seed=43 epoch=2 step=200 loss=0.2857
+seed=43 epoch=2 step=400 loss=0.2269
+seed=43 epoch=2 step=600 loss=0.2885
+seed=43 epoch=2 step=800 loss=0.3104
+seed=43 epoch=2 step=1000 loss=0.3494
+seed=43 epoch=2 step=1200 loss=0.2482
+seed=43 epoch=2 step=1400 loss=0.3434
+{"seed": 43, "epoch": 2, "macro_f1": 0.6190150452583248, "micro_f1": 0.6455635491606715, "per_symptom_f1": {"고열": 0.6557377049180327, "구토": 0.5921938088829072, "두통": 0.514344262295082, "복통": 0.7970297029702971, "어지러움": 0.6608996539792388, "열상": 0.8751902587519026, "오심": 0.26963906581740976, "전신쇠약": 0.5185601799775028, "호흡곤란": 0.6875407697325505}, "train_loss": 0.27457642072451416}
+seed=43 epoch=3 step=0 loss=0.2055
+seed=43 epoch=3 step=200 loss=0.2004
+seed=43 epoch=3 step=400 loss=0.2056
+seed=43 epoch=3 step=600 loss=0.2052
+seed=43 epoch=3 step=800 loss=0.2253
+seed=43 epoch=3 step=1000 loss=0.2744
+seed=43 epoch=3 step=1200 loss=0.2285
+seed=43 epoch=3 step=1400 loss=0.1846
+{"seed": 43, "epoch": 3, "macro_f1": 0.6085508433023737, "micro_f1": 0.6388394690023266, "per_symptom_f1": {"고열": 0.6374549819927972, "구토": 0.5933806146572104, "두통": 0.5057692307692307, "복통": 0.7916006339144216, "어지러움": 0.64979665612291, "열상": 0.8806290207290922, "오심": 0.22838137472283815, "전신쇠약": 0.5011764705882353, "호흡곤란": 0.6887686062246279}, "train_loss": 0.2450915922398691}
+
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]
+Loading weights:  34%|███▎      | 66/197 [00:00<00:00, 646.38it/s]
+Loading weights:  69%|██████▉   | 136/197 [00:00<00:00, 669.66it/s]
+Loading weights: 100%|██████████| 197/197 [00:00<00:00, 690.85it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/lab/M3-KCBERT-013/tapt_encoder
+Key                 | Status  | 
+--------------------+---------+-
+pooler.dense.bias   | MISSING | 
+pooler.dense.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+seed=44 epoch=1 step=0 loss=0.7958
+seed=44 epoch=1 step=200 loss=0.2618
+seed=44 epoch=1 step=400 loss=0.4229
+seed=44 epoch=1 step=600 loss=0.3728
+seed=44 epoch=1 step=800 loss=0.3160
+seed=44 epoch=1 step=1000 loss=0.3656
+seed=44 epoch=1 step=1200 loss=0.2098
+seed=44 epoch=1 step=1400 loss=0.4154
+{"seed": 44, "epoch": 1, "macro_f1": 0.5729100381925997, "micro_f1": 0.6255740528128588, "per_symptom_f1": {"고열": 0.6412382531785517, "구토": 0.5871794871794872, "두통": 0.49327354260089684, "복통": 0.7864157119476268, "어지러움": 0.6211538461538462, "열상": 0.8727025187202179, "오심": 0.029282576866764276, "전신쇠약": 0.44045242847638055, "호흡곤란": 0.6844919786096256}, "train_loss": 0.31711464153726215}
+seed=44 epoch=2 step=0 loss=0.3828
+seed=44 epoch=2 step=200 loss=0.2371
+seed=44 epoch=2 step=400 loss=0.3189
+seed=44 epoch=2 step=600 loss=0.2790
+seed=44 epoch=2 step=800 loss=0.1867
+seed=44 epoch=2 step=1000 loss=0.2395
+seed=44 epoch=2 step=1200 loss=0.2592
+seed=44 epoch=2 step=1400 loss=0.2186
+{"seed": 44, "epoch": 2, "macro_f1": 0.6111677614733527, "micro_f1": 0.6383419689119171, "per_symptom_f1": {"고열": 0.6498316498316499, "구토": 0.5880923450789793, "두통": 0.49445676274944567, "복통": 0.7891936144085141, "어지러움": 0.6624775583482945, "열상": 0.876577840112202, "오심": 0.2908745247148289, "전신쇠약": 0.4744245524296675, "호흡곤란": 0.6745810055865922}, "train_loss": 0.2738798842221111}
+seed=44 epoch=3 step=0 loss=0.2791
+seed=44 epoch=3 step=200 loss=0.2203
+seed=44 epoch=3 step=400 loss=0.1879
+seed=44 epoch=3 step=600 loss=0.2172
+seed=44 epoch=3 step=800 loss=0.2697
+seed=44 epoch=3 step=1000 loss=0.1728
+seed=44 epoch=3 step=1200 loss=0.2751
+seed=44 epoch=3 step=1400 loss=0.2691
+{"seed": 44, "epoch": 3, "macro_f1": 0.6075199228059449, "micro_f1": 0.6371198690849584, "per_symptom_f1": {"고열": 0.6399535423925667, "구토": 0.5700280112044818, "두통": 0.45336481700118064, "복통": 0.7985347985347986, "어지러움": 0.648892905558066, "열상": 0.8685314685314686, "오심": 0.28378378378378377, "전신쇠약": 0.5234042553191489, "호흡곤란": 0.6811857229280097}, "train_loss": 0.24426695279731217}
