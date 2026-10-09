@@ -11,6 +11,7 @@ import datetime as dt
 import json
 import os
 import subprocess
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -93,7 +94,11 @@ def main() -> None:
     if auth:
         headers["Authorization"] = auth                      # full header value as shown in grokbot's routine
     req = urllib.request.Request(hook, data=json.dumps(body).encode(), headers=headers)
-    urllib.request.urlopen(req, timeout=30)
+    try:
+        urllib.request.urlopen(req, timeout=30)
+    except urllib.error.HTTPError as exc:                    # show grokbot's reason (body has no secrets of ours)
+        print(f"::error::grokbot webhook HTTP {exc.code}: {exc.read()[:500].decode('utf-8', 'replace')}")
+        raise
     print(f"pinged grokbot: {body['event']} ({body['reason']})")
 
 
