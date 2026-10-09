@@ -17,7 +17,8 @@
   "done/02_M3-KCBERT-008.json@2026-10-09T12:04:54+00:00",
   "done/02_M3-KCBERT-009.json@2026-10-09T14:13:32+00:00",
   "done/02_M3-KCBERT-010.json@2026-10-09T15:48:14+00:00",
-  "done/02_M3-KCBERT-011.json@2026-10-09T17:37:04+00:00"
+  "done/02_M3-KCBERT-011.json@2026-10-09T17:37:04+00:00",
+  "failed/02_M3-ROBERTA-002.json@2026-10-09T18:23:32+00:00"
  ],
  "implemented_issues": [
   1,
