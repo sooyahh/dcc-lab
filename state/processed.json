@@ -29,7 +29,8 @@
   10,
   12,
   13,
-  14
+  14,
+  15
  ],
  "reviewed_shas": [
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
@@ -96,6 +97,7 @@
   "M3-KLUEBERT-001 PR #82 bd1cc07 review PASS; submitted",
   "M3-KCBERT-008 PR #84 97b6d5b review PASS; submitted (retry after code-bug fix)",
   "M3-KCBERT-008 judged 기각 (mean Macro F1 0.6087 vs 005 0.6092); team log PR #88, code PR #84 closed, issue #12 closed. PR #74 (ROBERTA-001 code, lab-adopted) merged (merge-gate success). Next proposal issue #14 M3-KCBERT-009 (mean pooling)",
-  "M3-KCBERT-009 judged 기각 (mean Macro F1 0.6115, +0.0023 vs 005 < +0.01); team log PR #92, code PR #89 closed, issue #14 closed. Next proposal M3-KCBERT-010 (LLRD)"
+  "M3-KCBERT-009 judged 기각 (mean Macro F1 0.6115, +0.0023 vs 005 < +0.01); team log PR #92, code PR #89 closed, issue #14 closed. Next proposal M3-KCBERT-010 (LLRD)",
+  "PR #92 (log M3-KCBERT-009, 44e6d7c) merge skipped: merge-gate/verdict pending and behind main by 2 -> update-branch run; recheck next run"
  ]
 }
