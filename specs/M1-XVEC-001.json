@@ -10,7 +10,7 @@
     "value": 0.9502
   },
   "branch": "sooyah/lab-m1-xvec-001",
-  "commit": "",
+  "commit": "971d089244ca3721726295778dba2b5904883cf7",
   "command": "python scripts/lab/m1-xvec-001.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "Training 29,200통화를 성별 층화 8:2(seed 42, 통화=샘플이므로 call_id 단위)로 나눈 holdout에서 (c) 결합 LR 정확도가 같은 분할의 (a) 52D LR보다 +1.0%p 이상. 주 지표는 (c)로 사전 고정(holdout에서 조합 고르지 않음). metrics.json에 (a)(b)(c) 정확도·성별 recall, (a) 대비 (c) paired McNemar p값, 추출 처리량(통화/초), 신고자 구간 길이 분포, seed 기록",
