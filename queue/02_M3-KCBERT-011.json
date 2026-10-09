@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-011",
+    "mission": 3,
+    "title": "KcBERT R-Drop 일관성 정규화 + 강화 가중 BCE (80:20 재평가)",
+    "hypothesis": "같은 배치를 dropout만 다르게 두 번 순전파하고 두 sigmoid 출력의 대칭 KL 일관성 손실을 더하면 희소 증상(오심·두통)의 seed 불안정이 줄어 3-seed 평균 Macro F1이 KCBERT-005(0.6092)보다 오른다",
+    "change_vs_baseline": "M3-KCBERT-005 대비 학습 손실만 변경: loss = 강화 가중 BCE(두 번의 순전파 평균) + 1.0 * 라벨별 베르누이 대칭 KL(p1||p2, p2||p1)/2. 추론은 dropout 비활성 단일 순전파. 인코더 beomi/kcbert-base·[CLS] 풀링·pos_weight scale 0.5/max 6.0·lr·3 epochs·앞 256토큰·80:20 분할·threshold 0.5·seed 42/43/44는 동일",
+    "baseline": {
+      "exp_id": "M3-KCBERT-005",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6092
+    },
+    "branch": "sooyah/lab-m3-kcbert-011",
+    "commit": "885573aecf50ee38c3341a8ac4605b49f01d09d4",
+    "command": "python scripts/lab/m3-kcbert-011.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6092보다 +0.01 이상 높고 최소 2개 seed가 0.6092 초과. threshold 0.5 고정, 튜닝 금지. seed별 Macro/Micro/증상별 F1 기록",
+    "gpu": "T4",
+    "budget_hours": 3,
+    "priority": 2,
+    "notes": "전사 텍스트만, 공식 Val 미사용. m3-kcbert-005.py 재사용, 손실 계산부만 교체(학습 순전파 2회로 시간 약 2배 예상). 체크포인트 epoch마다 저장해 재개. 예상 소요: 약 60~100분"
+  },
+  "commit": "885573aecf50ee38c3341a8ac4605b49f01d09d4",
+  "submitted_at": "2026-10-10T00:58:36+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
