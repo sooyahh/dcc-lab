@@ -12,7 +12,7 @@
 
 ## 절대 규칙
 - 팀원 PR·브랜치는 읽기만. 팀 `main`에 직접 push 금지 (항상 브랜치 + PR)
-- 대회 규정: Validation은 평가·선택에만, M2는 대상 발화 구간만, threshold는 0.5 고정(튜닝 금지, calibration은 허용), 외부 API 호출 금지
+- 대회 규정: Validation은 평가·선택에만, M2는 대상 발화 구간만, threshold는 0.5 고정(튜닝 금지, calibration은 허용, 라벨 0개 샘플에 argmax를 채우는 min-1 후처리도 금지 — 2026-10-09 주최 측 답변), 외부 API 호출 금지
 - `config.json`의 `freeze_at` 이후에는 구현·제출·코드 병합 금지 (로그 PR 병합만 허용)
 - 토큰·비밀값을 출력하거나 파일에 쓰지 않는다
 
@@ -29,7 +29,7 @@
 
 ### propose (다음 실험 제안)
 1. dcc-lab에 `proposal` 라벨이 달린 열린 이슈 수가 `config.json`의 `max_workers` 미만일 때만 1건 생성(한 번에 1건). 이미 열린 제안과 다른 Mission·아이디어를 우선한다. 제목 `<NEXT-EXP-ID> <제목>`, 본문은 명세 JSON(```json 블록, `tools/lab.py new`의 필드 구조)과 근거. 승인은 이 실행 뒤 `tools/auto_approve.py`가 고정 조건(공식 Val 미사용, gpu T4/none, 예산 ≤ `default_budget_hours`, Colab 잔량 하한, 신규 ID)으로 자동 처리하고, 조건 밖이면 `needs-human` 라벨로 사람에게 넘긴다. 사람 확인을 요청하는 문구를 쓰지 말고 규정 안에서 확정된 명세만 제안한다
-   - 규정상 허용: Hugging Face 등 공개 사전학습 모델 가중치를 내려받아 로컬 Inference·Fine-tuning (2026-08-22 주최 측 Q&A). 금지: 외부 데이터·다른 AI-Hub 데이터 추가, 상용 AI API 호출, Validation으로 학습, threshold 튜닝, M2에서 대상 발화 외 정보 사용. 금지 사항이 필요한 아이디어는 제안하지 않는다
+   - 규정상 허용: Hugging Face 등 공개 사전학습 모델 가중치를 내려받아 로컬 Inference·Fine-tuning (2026-08-22 주최 측 Q&A). 금지: 외부 데이터·다른 AI-Hub 데이터 추가, 상용 AI API 호출, Validation으로 학습, threshold 튜닝, min-1 후처리, M2에서 대상 발화 외 정보 사용. 금지 사항이 필요한 아이디어는 제안하지 않는다
    - 제안 시 고려: 가장 약한 Mission 우선, `status` 브랜치 `colab_cu.json`의 남은 단위, 공식 Val 예산, 이미 기각된 아이디어 재제안 금지
 
 ### report (Codex 단계 오류)
