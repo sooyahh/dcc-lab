@@ -34,6 +34,29 @@ def gh_json(*args: str, team: bool = False) -> list:
     return json.loads(p.stdout or "[]") if p.returncode == 0 else []
 
 
+def pr_experiment(title: str) -> str:
+    """`exp(M3-KCBERT-011): ...` -> `M3-KCBERT-011`."""
+    return title[len("exp("):].split(")", 1)[0].strip() if title.startswith("exp(") else ""
+
+
+def withdrawn_experiments() -> set[str]:
+    """Experiments whose proposal was withdrawn: closed as not planned, with no open or completed proposal left.
+
+    The judge closes proposals as completed; a duplicate proposal closed as not planned (e.g. M3-KCBERT-008)
+    does not withdraw the experiment while another proposal for it is open or completed.
+    """
+    issues = gh_json("issue", "list", "-R", LAB_REPO, "--label", "proposal", "--state", "all", "--limit", "200",
+                     "--json", "title,state,stateReason")
+    not_planned, kept = set(), set()
+    for it in issues:
+        exp = it["title"].split()[0] if it["title"].split() else ""
+        if it["state"] == "CLOSED" and it.get("stateReason") == "NOT_PLANNED":
+            not_planned.add(exp)
+        else:
+            kept.add(exp)
+    return not_planned - kept
+
+
 def main() -> None:
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
     judged = set(state.get("judged", []))
@@ -56,6 +79,7 @@ def main() -> None:
                           "--json", "number,title"):
             if str(it["number"]) not in sent:
                 work.append({"kind": "implement", "issue": it["number"], "exp": it["title"].split()[0]})
+        withdrawn = withdrawn_experiments()
         for pr in gh_json("pr", "list", "-R", TEAM, "--state", "open", "--json", "number,title,headRefOid,labels", team=True):
             labels = {l["name"] for l in pr["labels"]}
             if "lab-log" in labels and str(pr["number"]) not in merged:
@@ -63,6 +87,8 @@ def main() -> None:
                 continue
             if not pr["title"].startswith("exp("):
                 continue                                                  # teammates' PRs are never touched
+            if pr_experiment(pr["title"]) in withdrawn:
+                continue                                                  # proposal closed as not planned: never review/fix/run
             if "lab-adopted" in labels:
                 # already run and judged: new commits here are main merged in (update-branch), never re-review/re-run
                 if str(pr["number"]) not in merged:

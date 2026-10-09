@@ -24,7 +24,7 @@
 3. `재시도`(OOM·시간 초과 등 실행 문제)면 명세를 고쳐(배치 절반, epoch 축소 등) `specs/`에 저장하고 `python tools/lab.py submit <EXP> --force`. 같은 실험 재시도는 1회까지
 4. 팀 저장소 로그 PR: `./team`에서 `origin/main` 기준 브랜치 `sooyah/lab-log-<exp 소문자>` 생성 → `experiment_log.md` 해당 Mission 표에 1행 추가(`python tools/lab.py collect <EXP>` 초안 참고) → 채택·기각이면 `decisions.md` 맨 위(구분선 아래)에 항목 추가 → 커밋·push → `gh pr create -R eigensinn-dcc2026/prelim --title "docs(lab): <EXP> 결과 기록" --label lab-log` (라벨이 없으면 먼저 `gh label create lab-log -R eigensinn-dcc2026/prelim`)
 5. 채택이고 해당 코드 PR(`exp(<EXP>)`)이 열려 있으면 그 PR에 `lab-adopted` 라벨 (없으면 생성). 기각이면 코드 PR에 판정 요약 댓글 후 닫기
-6. `재시도`가 아니면 이 실험의 proposal 이슈(제목이 `<EXP> `로 시작하는 열린 이슈)를 판정 요약 댓글과 함께 닫는다. 열어 두면 다음 제안이 막힌다
+6. `재시도`가 아니면 이 실험의 proposal 이슈(제목이 `<EXP> `로 시작하는 열린 이슈)를 판정 요약 댓글과 함께 닫는다(사유는 기본값 completed. `not planned`는 사용자의 실험 철회 표시라 쓰지 않는다 — `tools/commander_check.py`가 철회된 실험의 PR을 검토·수정·큐 등록에서 뺀다). 열어 두면 다음 제안이 막힌다
 7. 다음 실험 제안: 아래 propose 절차를 따른다
 
 ### propose (다음 실험 제안)
