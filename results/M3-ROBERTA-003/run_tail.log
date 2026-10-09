@@ -150,3 +150,64 @@ seed=44 epoch=2 step=0 loss=1.0579
 seed=44 epoch=2 step=200 loss=0.7556
 
 [runner] budget_hours 초과로 중단
+
+===== attempt 1 2026-10-09T22:27:36+00:00 colab-a commit=551cbf33720ed93850593b4770c5cb21546b08a3 =====
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  15%|█▍        | 58/389 [00:00<00:00, 515.96it/s]
+Loading weights:  37%|███▋      | 144/389 [00:00<00:00, 690.72it/s]
+Loading weights:  55%|█████▌    | 214/389 [00:00<00:00, 652.04it/s]
+Loading weights:  76%|███████▌  | 296/389 [00:00<00:00, 699.78it/s]
+Loading weights:  94%|█████████▍| 367/389 [00:00<00:00, 680.39it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 677.04it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  65%|██████▌   | 254/389 [00:00<00:00, 2521.22it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2440.64it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=44 epoch=2 step=0 loss=1.0579
+seed=44 epoch=2 step=200 loss=0.7556
+seed=44 epoch=2 step=400 loss=1.0238
+seed=44 epoch=2 step=600 loss=0.9026
+seed=44 epoch=2 step=800 loss=0.8132
+seed=44 epoch=2 step=1000 loss=1.0559
+seed=44 epoch=2 step=1200 loss=0.8843
+seed=44 epoch=2 step=1400 loss=0.6320
+{"seed": 44, "epoch": 2, "macro_f1": 0.6449077606245314, "micro_f1": 0.6552212171558673, "per_symptom_f1": {"고열": 0.6695050558807877, "구토": 0.6059082338152105, "두통": 0.5291396854764108, "복통": 0.7990430622009569, "어지러움": 0.661902971041745, "열상": 0.888268156424581, "오심": 0.38676844783715014, "전신쇠약": 0.5775950668036999, "호흡곤란": 0.6860391661402401}, "empty_predictions": 178, "train_loss": 0.8548330493622746, "train_bce": 0.2845868566840561, "train_soft_f1_loss": 0.5702461941716448, "train_soft_f1": 0.4297538058283552, "epoch_seconds": 1412.6913560959983, "training_collapse": false}
+seed=44 epoch=3 step=0 loss=0.9018
+seed=44 epoch=3 step=200 loss=0.7069
+seed=44 epoch=3 step=400 loss=0.6474
+seed=44 epoch=3 step=600 loss=0.7701
+seed=44 epoch=3 step=800 loss=0.7537
+seed=44 epoch=3 step=1000 loss=0.4985
+seed=44 epoch=3 step=1200 loss=0.8351
+seed=44 epoch=3 step=1400 loss=0.4932
+{"seed": 44, "epoch": 3, "macro_f1": 0.6437436895820862, "micro_f1": 0.658251577829157, "per_symptom_f1": {"고열": 0.6680738786279683, "구토": 0.610231425091352, "두통": 0.5233480176211454, "복통": 0.8004798080767693, "어지러움": 0.6709991876523151, "열상": 0.8902865129280224, "오심": 0.37259430331023863, "전신쇠약": 0.5715672003881611, "호흡곤란": 0.6861128725428028}, "empty_predictions": 153, "train_loss": 0.8003030962024905, "train_bce": 0.25897052994867503, "train_soft_f1_loss": 0.5413325677281443, "train_soft_f1": 0.4586674322718557, "epoch_seconds": 1438.2046995839992, "training_collapse": false}
