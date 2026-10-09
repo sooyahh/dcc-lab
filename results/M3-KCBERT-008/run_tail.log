@@ -1,0 +1,44 @@
+
+===== attempt 1 2026-10-09T10:27:25+00:00 colab-a commit=2f962036ad4095573e1e63422da5a9534e19d683 =====
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:   8%|▊         | 15/199 [00:00<00:10, 16.85it/s]
+Loading weights:  19%|█▉        | 38/199 [00:01<00:03, 43.52it/s]
+Loading weights:  27%|██▋       | 54/199 [00:01<00:02, 60.04it/s]
+Loading weights:  33%|███▎      | 66/199 [00:01<00:02, 58.66it/s]
+Loading weights:  39%|███▉      | 78/199 [00:01<00:01, 69.36it/s]
+Loading weights:  46%|████▌     | 92/199 [00:01<00:01, 76.06it/s]
+Loading weights:  51%|█████▏    | 102/199 [00:01<00:01, 79.28it/s]
+Loading weights:  57%|█████▋    | 113/199 [00:01<00:01, 79.65it/s]
+Loading weights:  62%|██████▏   | 123/199 [00:02<00:00, 76.99it/s]
+Loading weights:  72%|███████▏  | 144/199 [00:02<00:00, 98.35it/s]
+Loading weights:  78%|███████▊  | 155/199 [00:02<00:00, 96.02it/s]
+Loading weights:  83%|████████▎ | 166/199 [00:03<00:00, 36.37it/s]
+Loading weights:  88%|████████▊ | 176/199 [00:03<00:00, 37.14it/s]
+Loading weights:  93%|█████████▎| 186/199 [00:03<00:00, 40.54it/s]
+Loading weights: 100%|██████████| 199/199 [00:03<00:00, 56.18it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/kcbert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Traceback (most recent call last):
+  File "/content/lab_code/2f962036ad40/scripts/lab/m3-kcbert-008.py", line 402, in <module>
+    main()
+    ~~~~^^
+  File "/content/lab_code/2f962036ad40/scripts/lab/m3-kcbert-008.py", line 376, in main
+    tokens = tokenize_calls(rows, tokenizer)
+  File "/content/lab_code/2f962036ad40/scripts/lab/m3-kcbert-008.py", line 167, in tokenize_calls
+    encoded = tokenizer.prepare_for_model(window, add_special_tokens=True,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/transformers/tokenization_utils_base.py", line 1306, in __getattr__
+    raise AttributeError(f"{self.__class__.__name__} has no attribute {key}")
+AttributeError: BertTokenizer has no attribute prepare_for_model
