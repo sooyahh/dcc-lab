@@ -1,0 +1,187 @@
+
+===== attempt 1 2026-10-08T21:47:38+00:00 colab-6b832c56 commit=bd1cc07824db4fc8a399054955e058a778343740 =====
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 5 files:  20%|██        | 1/5 [00:00<00:01,  2.01it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:04<00:00,  1.01s/it]
+Fetching 5 files: 100%|██████████| 5/5 [00:04<00:00,  1.02it/s]
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2339.45it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/klue-bert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2101.62it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/klue-bert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=42 epoch=1 step=0 loss=0.7259
+seed=42 epoch=1 step=200 loss=0.2384
+seed=42 epoch=1 step=400 loss=0.2692
+seed=42 epoch=1 step=600 loss=0.2374
+seed=42 epoch=1 step=800 loss=0.4134
+seed=42 epoch=1 step=1000 loss=0.4161
+seed=42 epoch=1 step=1200 loss=0.3313
+seed=42 epoch=1 step=1400 loss=0.2555
+{"seed": 42, "epoch": 1, "macro_f1": 0.6053643183965394, "micro_f1": 0.6337581860432364, "per_symptom_f1": {"고열": 0.6345238095238095, "구토": 0.5631616090331687, "두통": 0.46768507638072854, "복통": 0.7799490229396772, "어지러움": 0.6211671612265084, "열상": 0.872852233676976, "오심": 0.2697768762677485, "전신쇠약": 0.5501618122977346, "호흡곤란": 0.6890012642225032}, "train_loss": 0.31860186136184454}
+seed=42 epoch=2 step=0 loss=0.2825
+seed=42 epoch=2 step=200 loss=0.4047
+seed=42 epoch=2 step=400 loss=0.2745
+seed=42 epoch=2 step=600 loss=0.2466
+seed=42 epoch=2 step=800 loss=0.2174
+seed=42 epoch=2 step=1000 loss=0.2560
+seed=42 epoch=2 step=1200 loss=0.3369
+seed=42 epoch=2 step=1400 loss=0.2398
+{"seed": 42, "epoch": 2, "macro_f1": 0.6103994211106459, "micro_f1": 0.6439499304589708, "per_symptom_f1": {"고열": 0.6559816828849456, "구토": 0.5555555555555556, "두통": 0.4957081545064378, "복통": 0.7922077922077922, "어지러움": 0.6580587711487088, "열상": 0.8768683274021353, "오심": 0.2254791431792559, "전신쇠약": 0.5490628445424476, "호흡곤란": 0.6846725185685347}, "train_loss": 0.27578659243601605}
+seed=42 epoch=3 step=0 loss=0.2066
+seed=42 epoch=3 step=200 loss=0.2676
+seed=42 epoch=3 step=400 loss=0.1992
+seed=42 epoch=3 step=600 loss=0.1808
+seed=42 epoch=3 step=800 loss=0.3164
+seed=42 epoch=3 step=1000 loss=0.3871
+
+===== attempt 2 2026-10-09T09:44:31+00:00 colab-a commit=bd1cc07824db4fc8a399054955e058a778343740 =====
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:   4%|▍         | 8/199 [00:01<00:29,  6.46it/s]
+Loading weights:   7%|▋         | 14/199 [00:01<00:23,  8.02it/s]
+Loading weights:  10%|█         | 20/199 [00:02<00:23,  7.74it/s]
+Loading weights:  12%|█▏        | 23/199 [00:03<00:27,  6.31it/s]
+Loading weights:  15%|█▌        | 30/199 [00:05<00:34,  4.93it/s]
+Loading weights:  19%|█▉        | 38/199 [00:05<00:22,  7.27it/s]
+Loading weights:  23%|██▎       | 46/199 [00:06<00:20,  7.62it/s]
+Loading weights:  24%|██▍       | 48/199 [00:07<00:23,  6.32it/s]
+Loading weights:  29%|██▉       | 58/199 [00:08<00:18,  7.83it/s]
+Loading weights:  40%|████      | 80/199 [00:08<00:08, 14.15it/s]
+Loading weights:  42%|████▏     | 84/199 [00:09<00:09, 11.79it/s]
+Loading weights:  50%|█████     | 100/199 [00:10<00:07, 13.79it/s]
+Loading weights:  53%|█████▎    | 106/199 [00:11<00:07, 11.75it/s]
+Loading weights:  69%|██████▉   | 138/199 [00:11<00:02, 21.23it/s]
+Loading weights:  72%|███████▏  | 144/199 [00:12<00:02, 21.64it/s]
+Loading weights:  78%|███████▊  | 155/199 [00:12<00:02, 18.93it/s]
+Loading weights:  80%|████████  | 160/199 [00:13<00:01, 19.71it/s]
+Loading weights:  88%|████████▊ | 175/199 [00:13<00:00, 27.75it/s]
+Loading weights:  93%|█████████▎| 185/199 [00:13<00:00, 31.86it/s]
+Loading weights: 100%|██████████| 199/199 [00:13<00:00, 14.66it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/klue-bert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3410.35it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/klue-bert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=43 epoch=1 step=0 loss=0.7172
+seed=43 epoch=1 step=200 loss=0.3647
+seed=43 epoch=1 step=400 loss=0.2800
+seed=43 epoch=1 step=600 loss=0.3880
+seed=43 epoch=1 step=800 loss=0.3554
+seed=43 epoch=1 step=1000 loss=0.2627
+seed=43 epoch=1 step=1200 loss=0.2091
+seed=43 epoch=1 step=1400 loss=0.2400
+{"seed": 43, "epoch": 1, "macro_f1": 0.6018222575583683, "micro_f1": 0.6351275581721334, "per_symptom_f1": {"고열": 0.6349206349206349, "구토": 0.5655853314527504, "두통": 0.5050709939148073, "복통": 0.7770700636942676, "어지러움": 0.6521145975443383, "열상": 0.8792742498255408, "오심": 0.1809635722679201, "전신쇠약": 0.5604566683964712, "호흡곤란": 0.6609442060085837}, "train_loss": 0.32718514413741545}
+seed=43 epoch=2 step=0 loss=0.3586
+seed=43 epoch=2 step=200 loss=0.2551
+seed=43 epoch=2 step=400 loss=0.2307
+seed=43 epoch=2 step=600 loss=0.2967
+seed=43 epoch=2 step=800 loss=0.2880
+seed=43 epoch=2 step=1000 loss=0.2873
+seed=43 epoch=2 step=1200 loss=0.2210
+seed=43 epoch=2 step=1400 loss=0.3359
+{"seed": 43, "epoch": 2, "macro_f1": 0.6217883510273088, "micro_f1": 0.6452489302451946, "per_symptom_f1": {"고열": 0.6555183946488294, "구토": 0.5968939905469277, "두통": 0.5114427860696518, "복통": 0.7875259875259876, "어지러움": 0.6655304644226673, "열상": 0.8736517719568567, "오심": 0.2755203171456888, "전신쇠약": 0.5382528486163863, "호흡곤란": 0.6917585983127839}, "train_loss": 0.27663776809152313}
+seed=43 epoch=3 step=0 loss=0.2191
+seed=43 epoch=3 step=200 loss=0.2027
+seed=43 epoch=3 step=400 loss=0.1869
+seed=43 epoch=3 step=600 loss=0.2224
+seed=43 epoch=3 step=800 loss=0.2253
+seed=43 epoch=3 step=1000 loss=0.2485
+seed=43 epoch=3 step=1200 loss=0.2666
+seed=43 epoch=3 step=1400 loss=0.2205
+{"seed": 43, "epoch": 3, "macro_f1": 0.6098799648065023, "micro_f1": 0.6405708743245115, "per_symptom_f1": {"고열": 0.646685878962536, "구토": 0.5889967637540453, "두통": 0.505324298160697, "복통": 0.7898140662894099, "어지러움": 0.6406396989651929, "열상": 0.8786299329858526, "오심": 0.20649651972157773, "전신쇠약": 0.5449591280653951, "호흡곤란": 0.687373396353815}, "train_loss": 0.2521893949345294}
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3241.01it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/klue-bert-base
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+seed=44 epoch=1 step=0 loss=0.7462
+seed=44 epoch=1 step=200 loss=0.2723
+seed=44 epoch=1 step=400 loss=0.4443
+seed=44 epoch=1 step=600 loss=0.3278
+seed=44 epoch=1 step=800 loss=0.2982
+seed=44 epoch=1 step=1000 loss=0.3399
+seed=44 epoch=1 step=1200 loss=0.2044
+seed=44 epoch=1 step=1400 loss=0.4355
+{"seed": 44, "epoch": 1, "macro_f1": 0.5858709818800626, "micro_f1": 0.63353684509442, "per_symptom_f1": {"고열": 0.6499162479061976, "구토": 0.5894465894465895, "두통": 0.48903508771929827, "복통": 0.7874509803921569, "어지러움": 0.6329606222654351, "열상": 0.875270367700072, "오심": 0.07702888583218707, "전신쇠약": 0.48341836734693877, "호흡곤란": 0.6883116883116883}, "train_loss": 0.3229230298970712}
+seed=44 epoch=2 step=0 loss=0.4113
+seed=44 epoch=2 step=200 loss=0.2186
+seed=44 epoch=2 step=400 loss=0.3644
+seed=44 epoch=2 step=600 loss=0.2898
+seed=44 epoch=2 step=800 loss=0.1847
+seed=44 epoch=2 step=1000 loss=0.2830
+seed=44 epoch=2 step=1200 loss=0.2730
+seed=44 epoch=2 step=1400 loss=0.2150
+{"seed": 44, "epoch": 2, "macro_f1": 0.6192896813392887, "micro_f1": 0.6407222488201901, "per_symptom_f1": {"고열": 0.6589018302828619, "구토": 0.5929526123936817, "두통": 0.5043103448275862, "복통": 0.7880523731587561, "어지러움": 0.6639676113360324, "열상": 0.8757225433526011, "오심": 0.3333333333333333, "전신쇠약": 0.4925187032418953, "호흡곤란": 0.6638477801268499}, "train_loss": 0.27570057370058904}
+seed=44 epoch=3 step=0 loss=0.3303
+seed=44 epoch=3 step=200 loss=0.2121
+seed=44 epoch=3 step=400 loss=0.2002
+seed=44 epoch=3 step=600 loss=0.2066
+seed=44 epoch=3 step=800 loss=0.2731
+seed=44 epoch=3 step=1000 loss=0.1757
+seed=44 epoch=3 step=1200 loss=0.2581
+seed=44 epoch=3 step=1400 loss=0.3004
+{"seed": 44, "epoch": 3, "macro_f1": 0.6145026105066648, "micro_f1": 0.6378237987834051, "per_symptom_f1": {"고열": 0.6533180778032036, "구토": 0.5783298826777088, "두통": 0.48822269807280516, "복통": 0.7857733664185277, "어지러움": 0.6441441441441441, "열상": 0.8724340175953079, "오심": 0.2914285714285714, "전신쇠약": 0.5435791645177926, "호흡곤란": 0.6732935719019219}, "train_loss": 0.2507603331249378}
