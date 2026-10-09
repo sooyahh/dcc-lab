@@ -89,7 +89,10 @@ jobs:
           prompt: |
             docs/commander_cloud.md 의 지시를 그대로 따른다.
             WORK = ${{ steps.codex.outputs.rest }}
-          claude_args: "--max-turns 80 --allowedTools Bash,Read,Write,Edit,Glob,Grep"
+          # Opus only when this run proposes the next experiment (rare); review/judge/log stay on the default model.
+          claude_args: >-
+            ${{ contains(steps.codex.outputs.rest, '"propose"') && '--model claude-opus-5-5' || '' }}
+            --max-turns 80 --allowedTools Bash,Read,Write,Edit,Glob,Grep
       - name: Auto-approve proposals (no LLM; hard limits in tools/auto_approve.py)
         if: always() && steps.check.outcome == 'success'
         env:
