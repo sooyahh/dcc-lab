@@ -1,0 +1,253 @@
+
+===== attempt 1 2026-10-08T18:02:38+00:00 colab-b commit=716855e1a9e8cd0cd9c955e6cab1d1bc29e68bd4 =====
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 5 files:  20%|██        | 1/5 [00:00<00:01,  2.70it/s]
+Fetching 5 files:  40%|████      | 2/5 [00:00<00:00,  4.49it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:11<00:00,  2.68s/it]
+Fetching 5 files: 100%|██████████| 5/5 [00:11<00:00,  2.29s/it]
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  50%|████▉     | 194/389 [00:00<00:00, 1939.52it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2105.78it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  56%|█████▋    | 219/389 [00:00<00:00, 2182.91it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2189.13it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=1 step=0 loss=0.6572
+seed=42 epoch=1 step=200 loss=0.3635
+seed=42 epoch=1 step=400 loss=0.2204
+seed=42 epoch=1 step=600 loss=0.1831
+seed=42 epoch=1 step=800 loss=0.5261
+seed=42 epoch=1 step=1000 loss=0.4646
+seed=42 epoch=1 step=1200 loss=0.2317
+seed=42 epoch=1 step=1400 loss=0.2642
+{"seed": 42, "epoch": 1, "macro_f1": 0.6030447400022189, "micro_f1": 0.6360014487504527, "per_symptom_f1": {"고열": 0.6336391437308868, "구토": 0.5621854780733285, "두통": 0.47337278106508873, "복통": 0.7831273966766085, "어지러움": 0.6408787010506208, "열상": 0.876967095851216, "오심": 0.2292849035187287, "전신쇠약": 0.536106296938186, "호흡곤란": 0.6918408631153068}, "train_loss": 0.30289025962739796, "epoch_seconds": 1526.2772085390002, "training_collapse": false}
+seed=42 epoch=2 step=0 loss=0.1899
+seed=42 epoch=2 step=200 loss=0.4187
+seed=42 epoch=2 step=400 loss=0.1714
+seed=42 epoch=2 step=600 loss=0.2136
+seed=42 epoch=2 step=800 loss=0.1107
+seed=42 epoch=2 step=1000 loss=0.3356
+seed=42 epoch=2 step=1200 loss=0.2619
+seed=42 epoch=2 step=1400 loss=0.0989
+{"seed": 42, "epoch": 2, "macro_f1": 0.5953318537220132, "micro_f1": 0.6425248693909683, "per_symptom_f1": {"고열": 0.6586483390607102, "구토": 0.5659574468085107, "두통": 0.49377123442808607, "복통": 0.8006522625356706, "어지러움": 0.6525079078174424, "열상": 0.8864306784660767, "오심": 0.0743801652892562, "전신쇠약": 0.5504794134235759, "호흡곤란": 0.6751592356687898}, "train_loss": 0.24513869930214044, "epoch_seconds": 1542.5494722919998, "training_collapse": false}
+seed=42 epoch=3 step=0 loss=0.1888
+seed=42 epoch=3 step=200 loss=0.2943
+seed=42 epoch=3 step=400 loss=0.1978
+seed=42 epoch=3 step=600 loss=0.1837
+seed=42 epoch=3 step=800 loss=0.1680
+seed=42 epoch=3 step=1000 loss=0.3973
+seed=42 epoch=3 step=1200 loss=0.2801
+seed=42 epoch=3 step=1400 loss=0.1647
+{"seed": 42, "epoch": 3, "macro_f1": 0.6130832011841538, "micro_f1": 0.6499062434891312, "per_symptom_f1": {"고열": 0.6509009009009009, "구토": 0.585499316005472, "두통": 0.5010893246187363, "복통": 0.8054443554843875, "어지러움": 0.6537102473498233, "열상": 0.8880866425992779, "오심": 0.1881785283474065, "전신쇠약": 0.5586470267321331, "호흡곤란": 0.6861924686192469}, "train_loss": 0.22041210067354688, "epoch_seconds": 1553.053154624, "training_collapse": false}
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  17%|█▋        | 66/389 [00:00<00:00, 597.65it/s]
+Loading weights:  33%|███▎      | 127/389 [00:00<00:00, 597.69it/s]
+Loading weights:  48%|████▊     | 187/389 [00:00<00:00, 528.66it/s]
+Loading weights:  64%|██████▍   | 250/389 [00:00<00:00, 549.03it/s]
+Loading weights:  82%|████████▏ | 318/389 [00:00<00:00, 570.81it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 592.10it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+seed=43 epoch=1 step=0 loss=0.7655
+seed=43 epoch=1 step=200 loss=0.3826
+seed=43 epoch=1 step=400 loss=0.1881
+seed=43 epoch=1 step=600 loss=0.3060
+seed=43 epoch=1 step=800 loss=0.4338
+seed=43 epoch=1 step=1000 loss=0.2165
+seed=43 epoch=1 step=1200 loss=0.2342
+seed=43 epoch=1 step=1400 loss=0.1697
+{"seed": 43, "epoch": 1, "macro_f1": 0.583806442607993, "micro_f1": 0.6328068395884654, "per_symptom_f1": {"고열": 0.6415981198589894, "구토": 0.5505780346820809, "두통": 0.48899188876013905, "복통": 0.7759139784946236, "어지러움": 0.6551563229118059, "열상": 0.8766550522648083, "오심": 0.04028776978417266, "전신쇠약": 0.5423913043478261, "호흡곤란": 0.6826855123674912}, "train_loss": 0.3091269120910114, "epoch_seconds": 1542.9848418129995, "training_collapse": false}
+seed=43 epoch=2 step=0 loss=0.3150
+seed=43 epoch=2 step=200 loss=0.2743
+seed=43 epoch=2 step=400 loss=0.2188
+seed=43 epoch=2 step=600 loss=0.3614
+seed=43 epoch=2 step=800 loss=0.2920
+seed=43 epoch=2 step=1000 loss=0.2839
+seed=43 epoch=2 step=1200 loss=0.1356
+seed=43 epoch=2 step=1400 loss=0.2579
+{"seed": 43, "epoch": 2, "macro_f1": 0.6179954480903969, "micro_f1": 0.6488411058363586, "per_symptom_f1": {"고열": 0.6596452328159645, "구토": 0.5934515688949522, "두통": 0.4938820912124583, "복통": 0.7937293729372937, "어지러움": 0.6672428694900605, "열상": 0.8847023360964582, "오심": 0.24890829694323144, "전신쇠약": 0.5237529691211401, "호흡곤란": 0.6966442953020134}, "train_loss": 0.2459300835556411, "epoch_seconds": 1561.6701313419999, "training_collapse": false}
+seed=43 epoch=3 step=0 loss=0.1847
+seed=43 epoch=3 step=200 loss=0.1438
+seed=43 epoch=3 step=400 loss=0.1298
+seed=43 epoch=3 step=600 loss=0.1993
+seed=43 epoch=3 step=800 loss=0.2863
+seed=43 epoch=3 step=1000 loss=0.1701
+seed=43 epoch=3 step=1200 loss=0.1963
+seed=43 epoch=3 step=1400 loss=0.1556
+{"seed": 43, "epoch": 3, "macro_f1": 0.6095181774835926, "micro_f1": 0.6488597531208592, "per_symptom_f1": {"고열": 0.651685393258427, "구토": 0.5957161981258366, "두통": 0.4893854748603352, "복통": 0.793354943273906, "어지러움": 0.6602112676056338, "열상": 0.8953068592057761, "오심": 0.16414141414141414, "전신쇠약": 0.543918918918919, "호흡곤란": 0.6919431279620853}, "train_loss": 0.22224718788339518, "epoch_seconds": 1564.6598538039998, "training_collapse": false}
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  15%|█▌        | 59/389 [00:00<00:00, 536.57it/s]
+Loading weights:  31%|███       | 120/389 [00:00<00:00, 553.35it/s]
+Loading weights:  45%|████▌     | 176/389 [00:00<00:00, 549.09it/s]
+Loading weights:  59%|█████▉    | 231/389 [00:00<00:00, 466.20it/s]
+Loading weights:  72%|███████▏  | 280/389 [00:00<00:00, 464.70it/s]
+Loading weights:  84%|████████▍ | 328/389 [00:00<00:00, 439.12it/s]
+Loading weights:  96%|█████████▌| 373/389 [00:01<00:00, 269.40it/s]
+Loading weights: 100%|██████████| 389/389 [00:01<00:00, 377.80it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+seed=44 epoch=1 step=0 loss=0.7009
+seed=44 epoch=1 step=200 loss=0.3651
+seed=44 epoch=1 step=400 loss=0.4097
+seed=44 epoch=1 step=600 loss=0.2763
+seed=44 epoch=1 step=800 loss=0.2975
+seed=44 epoch=1 step=1000 loss=0.2990
+seed=44 epoch=1 step=1200 loss=0.1668
+seed=44 epoch=1 step=1400 loss=0.2899
+{"seed": 44, "epoch": 1, "macro_f1": 0.5810509410838978, "micro_f1": 0.6346433770014556, "per_symptom_f1": {"고열": 0.633769322235434, "구토": 0.6023316062176166, "두통": 0.4734982332155477, "복통": 0.7946537059538274, "어지러움": 0.6381135707410972, "열상": 0.8819133034379671, "오심": 0.005961251862891207, "전신쇠약": 0.5104039167686658, "호흡곤란": 0.6888135593220339}, "train_loss": 0.3072366582220821, "epoch_seconds": 1542.8920402439999, "training_collapse": false}
+seed=44 epoch=2 step=0 loss=0.3306
+seed=44 epoch=2 step=200 loss=0.1828
+seed=44 epoch=2 step=400 loss=0.2976
+seed=44 epoch=2 step=600 loss=0.2384
+seed=44 epoch=2 step=800 loss=0.1799
+
+===== attempt 2 2026-10-09T09:49:09+00:00 colab-b commit=716855e1a9e8cd0cd9c955e6cab1d1bc29e68bd4 =====
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:   4%|▍         | 15/389 [00:02<00:50,  7.41it/s]
+Loading weights:   7%|▋         | 26/389 [00:04<01:05,  5.51it/s]
+Loading weights:  11%|█▏        | 44/389 [00:06<00:48,  7.16it/s]
+Loading weights:  12%|█▏        | 45/389 [00:07<01:03,  5.44it/s]
+Loading weights:  12%|█▏        | 46/389 [00:08<01:17,  4.42it/s]
+Loading weights:  15%|█▍        | 57/389 [00:08<00:44,  7.52it/s]
+Loading weights:  15%|█▌        | 59/389 [00:09<00:51,  6.37it/s]
+Loading weights:  24%|██▍       | 94/389 [00:10<00:19, 15.05it/s]
+Loading weights:  28%|██▊       | 108/389 [00:11<00:17, 16.45it/s]
+Loading weights:  33%|███▎      | 127/389 [00:12<00:13, 19.61it/s]
+Loading weights:  39%|███▉      | 151/389 [00:12<00:07, 29.76it/s]
+Loading weights:  41%|████      | 158/389 [00:12<00:07, 29.94it/s]
+Loading weights:  42%|████▏     | 164/389 [00:13<00:12, 17.82it/s]
+Loading weights:  47%|████▋     | 184/389 [00:13<00:07, 28.09it/s]
+Loading weights:  49%|████▉     | 192/389 [00:14<00:08, 22.05it/s]
+Loading weights:  52%|█████▏    | 204/389 [00:14<00:06, 28.87it/s]
+Loading weights:  54%|█████▍    | 212/389 [00:15<00:07, 22.52it/s]
+Loading weights:  57%|█████▋    | 220/389 [00:15<00:07, 23.27it/s]
+Loading weights:  58%|█████▊    | 225/389 [00:15<00:08, 20.22it/s]
+Loading weights:  59%|█████▉    | 229/389 [00:15<00:07, 20.96it/s]
+Loading weights:  62%|██████▏   | 240/389 [00:16<00:05, 25.21it/s]
+Loading weights:  64%|██████▍   | 250/389 [00:17<00:08, 16.53it/s]
+Loading weights:  65%|██████▌   | 254/389 [00:17<00:09, 14.17it/s]
+Loading weights:  66%|██████▋   | 258/389 [00:18<00:09, 14.41it/s]
+Loading weights:  69%|██████▉   | 270/389 [00:18<00:05, 20.59it/s]
+Loading weights:  70%|███████   | 273/389 [00:18<00:06, 19.07it/s]
+Loading weights:  72%|███████▏  | 282/389 [00:18<00:04, 26.59it/s]
+Loading weights:  75%|███████▍  | 290/389 [00:19<00:04, 23.68it/s]
+Loading weights:  76%|███████▌  | 296/389 [00:19<00:04, 21.68it/s]
+Loading weights:  78%|███████▊  | 305/389 [00:21<00:10,  8.29it/s]
+Loading weights:  80%|███████▉  | 311/389 [00:22<00:09,  8.09it/s]
+Loading weights:  80%|████████  | 313/389 [00:22<00:09,  7.80it/s]
+Loading weights:  87%|████████▋ | 339/389 [00:23<00:03, 15.54it/s]
+Loading weights:  88%|████████▊ | 341/389 [00:23<00:03, 15.78it/s]
+Loading weights:  88%|████████▊ | 344/389 [00:23<00:02, 15.80it/s]
+Loading weights:  90%|████████▉ | 349/389 [00:24<00:02, 14.24it/s]
+Loading weights:  93%|█████████▎| 361/389 [00:24<00:01, 21.07it/s]
+Loading weights:  94%|█████████▎| 364/389 [00:24<00:01, 20.16it/s]
+Loading weights: 100%|██████████| 389/389 [00:24<00:00, 15.66it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 5070.69it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=44 epoch=2 step=0 loss=0.3306
+seed=44 epoch=2 step=200 loss=0.1829
+seed=44 epoch=2 step=400 loss=0.2977
+seed=44 epoch=2 step=600 loss=0.2384
+seed=44 epoch=2 step=800 loss=0.1799
+seed=44 epoch=2 step=1000 loss=0.3205
+seed=44 epoch=2 step=1200 loss=0.2415
+seed=44 epoch=2 step=1400 loss=0.2432
+{"seed": 44, "epoch": 2, "macro_f1": 0.6095473067965191, "micro_f1": 0.6450389719823046, "per_symptom_f1": {"고열": 0.6621848739495798, "구토": 0.5957161981258366, "두통": 0.46153846153846156, "복통": 0.7945431996692849, "어지러움": 0.6702792830345977, "열상": 0.8793363499245852, "오심": 0.2322435174746336, "전신쇠약": 0.5137952176578786, "호흡곤란": 0.6762886597938145}, "train_loss": 0.24515207038119038, "epoch_seconds": 1542.044390776, "training_collapse": false}
+seed=44 epoch=3 step=0 loss=0.2065
+seed=44 epoch=3 step=200 loss=0.2507
+seed=44 epoch=3 step=400 loss=0.1226
+seed=44 epoch=3 step=600 loss=0.2351
+seed=44 epoch=3 step=800 loss=0.2285
+seed=44 epoch=3 step=1000 loss=0.1127
+seed=44 epoch=3 step=1200 loss=0.2292
+seed=44 epoch=3 step=1400 loss=0.1162
+{"seed": 44, "epoch": 3, "macro_f1": 0.611417961451709, "micro_f1": 0.649307247789459, "per_symptom_f1": {"고열": 0.6550561797752809, "구토": 0.6017461383478845, "두통": 0.49836779107725787, "복통": 0.793354943273906, "어지러움": 0.664323374340949, "열상": 0.8908296943231441, "오심": 0.17142857142857143, "전신쇠약": 0.5535911602209945, "호흡곤란": 0.6740638002773925}, "train_loss": 0.22031387589968643, "epoch_seconds": 1560.1063593940003, "training_collapse": false}
