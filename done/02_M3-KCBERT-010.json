@@ -1,0 +1,123 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-010",
+    "mission": 3,
+    "title": "KcBERT 레이어별 학습률 감쇠(LLRD) + 강화 가중 BCE (80:20 재평가)",
+    "hypothesis": "상위 층에 큰 lr, 하위 층에 작은 lr을 주는 LLRD(감쇠 0.9)가 사전학습 표현을 보존해 희소 증상(오심·두통) 일반화를 개선, 3-seed 평균 Macro F1이 KCBERT-005(0.6092)보다 오른다",
+    "change_vs_baseline": "M3-KCBERT-005 대비 옵티마이저 param group만 변경: 분류 헤드·마지막 층 lr 2e-5, 아래 층으로 갈수록 ×0.9 감쇠(임베딩 포함). [CLS] 풀링·손실(강화 가중 BCE scale 0.5/max 6.0)·3 epochs·beomi/kcbert-base·앞 256토큰·80:20 분할·threshold 0.5·seed 42/43/44는 동일",
+    "baseline": {
+      "exp_id": "M3-KCBERT-005",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6092
+    },
+    "branch": "sooyah/lab-m3-kcbert-010",
+    "commit": "006a9e61956cbb3dcdc90dd0ea5c55e84dadbabd",
+    "command": "python scripts/lab/m3-kcbert-010.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6092보다 +0.01 이상 높고 최소 2개 seed가 0.6092 초과. threshold 0.5 고정, 튜닝 금지. seed별 Macro/Micro/증상별 F1 기록",
+    "gpu": "T4",
+    "budget_hours": 3,
+    "priority": 2,
+    "notes": "전사 텍스트만, 공식 Val 미사용. m3-kcbert-005.py 재사용, param group만 교체. 체크포인트 epoch마다 저장해 재개. 예상 소요: 005와 동일(약 30~60분)"
+  },
+  "commit": "006a9e61956cbb3dcdc90dd0ea5c55e84dadbabd",
+  "submitted_at": "2026-10-09T23:19:09+09:00",
+  "attempts": 2,
+  "max_attempts": 3,
+  "worker": "colab-a",
+  "claimed_at": "2026-10-09T14:19:47+00:00",
+  "started_at": "2026-10-09T14:19:49+00:00",
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-09T15:48:14+00:00",
+  "elapsed_min": 19.5,
+  "metrics": {
+    "exp_id": "M3-KCBERT-010",
+    "primary_metric": {
+      "name": "macro_f1",
+      "value": 0.6096277174749658,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "seeds": [
+        {
+          "seed": 42,
+          "epoch": 3,
+          "macro_f1": 0.6154737939684337,
+          "micro_f1": 0.6344260083636855,
+          "per_symptom_f1": {
+            "고열": 0.656266810112964,
+            "구토": 0.5838424983027835,
+            "두통": 0.49266247379454925,
+            "복통": 0.789431545236189,
+            "어지러움": 0.6437728937728938,
+            "열상": 0.8665689149560117,
+            "오심": 0.3336045565500407,
+            "전신쇠약": 0.5225806451612903,
+            "호흡곤란": 0.6505338078291815
+          },
+          "train_loss": 0.25781093211876394
+        },
+        {
+          "seed": 43,
+          "epoch": 3,
+          "macro_f1": 0.605901691690676,
+          "micro_f1": 0.6377479742944957,
+          "per_symptom_f1": {
+            "고열": 0.6317073170731707,
+            "구토": 0.6024563671622495,
+            "두통": 0.5025432349949135,
+            "복통": 0.784452296819788,
+            "어지러움": 0.6454332552693208,
+            "열상": 0.8635014836795252,
+            "오심": 0.2122260668973472,
+            "전신쇠약": 0.5243488108720272,
+            "호흡곤란": 0.6864463924477411
+          },
+          "train_loss": 0.2586910952078669
+        },
+        {
+          "seed": 44,
+          "epoch": 3,
+          "macro_f1": 0.6075076667657877,
+          "micro_f1": 0.6340419657647709,
+          "per_symptom_f1": {
+            "고열": 0.6401384083044983,
+            "구토": 0.5684790089470062,
+            "두통": 0.4646017699115044,
+            "복통": 0.7929334428923582,
+            "어지러움": 0.649090909090909,
+            "열상": 0.8695652173913043,
+            "오심": 0.29063097514340347,
+            "전신쇠약": 0.5155993431855501,
+            "호흡곤란": 0.6765299260255548
+          },
+          "train_loss": 0.2585200620732402
+        }
+      ],
+      "mean_micro_f1": 0.6354053161409841,
+      "mean_per_symptom_f1": {
+        "고열": 0.6427041784968777,
+        "구토": 0.5849259581373464,
+        "두통": 0.48660249290032237,
+        "복통": 0.7889390949827785,
+        "어지러움": 0.6460990193777079,
+        "열상": 0.8665452053422804,
+        "오심": 0.2788205328635971,
+        "전신쇠약": 0.5208429330729559,
+        "호흡곤란": 0.6711700421008259
+      }
+    },
+    "seed": 42,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "train_rows": 23408,
+    "eval_rows": 5792,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Final epoch 3; threshold >0.5 fixed; seed42 representative checkpoint. M3-KCBERT-005 settings and split reused; LLRD decay 0.9 including embeddings; head/last-layer lr 2e-5; pos_weight scale 0.5, cap 6.0; weights computed from Training partition only; official Validation unused."
+  }
+}
