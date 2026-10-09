@@ -1,0 +1,21 @@
+{
+  "exp_id": "M3-KCBERT-014",
+  "mission": 3,
+  "title": "KcBERT 앞 256 + 비대칭 손실(ASL) + soft macro-F1 손실 80:20 재평가",
+  "hypothesis": "오심·두통처럼 양성이 드물고 라벨 근거가 약한 증상에서 음성 쉬운 샘플의 기울기가 학습을 지배한다. 비대칭 손실(음성 쪽만 focusing, γ-=2, 확률 이동 m=0.05)로 쉬운 음성의 기여를 줄이면 KCBERT-012 대비 Macro F1이 오른다",
+  "change_vs_baseline": "M3-KCBERT-012 대비 BCE 항만 교체: 강화 가중 BCE(scale 0.5/max 6.0) 대신 Asymmetric Loss(γ+=0, γ-=2, m=0.05, 양성 가중은 쓰지 않음)를 쓰고, soft macro-F1 보조 손실(가중 1.0)은 012와 동일하게 유지. 앞 256토큰, [CLS] 헤드, lr 2e-5, batch 16, 3 epochs, 80:20 동일 분할, threshold 0.5 고정(평가 >= 0.5), seed 42/43/44. 추론·후처리 변경 없음(min-1 금지)",
+  "baseline": {
+    "exp_id": "M3-KCBERT-012",
+    "metric": "macro_f1 (80:20 split, thr 0.5)",
+    "value": 0.6265
+  },
+  "branch": "sooyah/lab-m3-kcbert-014",
+  "commit": "",
+  "command": "python scripts/lab/m3-kcbert-014.py --out \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6265(KCBERT-012)보다 +0.01 이상 높고 최소 2개 seed가 0.6265 초과. threshold 튜닝·후처리 금지. seed별 Macro/Micro/증상별 F1과 빈 예측 수 기록",
+  "gpu": "T4",
+  "budget_hours": 3,
+  "priority": 2,
+  "notes": "손실·학습 목표 축(012 채택에 이은 후속). 새로운 축 후보: TAPT(013)는 기각됨. 공식 Val 미사용. Training 분할 통계만 사용"
+}
