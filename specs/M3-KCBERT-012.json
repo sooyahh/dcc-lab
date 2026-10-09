@@ -1,0 +1,21 @@
+{
+  "exp_id": "M3-KCBERT-012",
+  "mission": 3,
+  "title": "KcBERT 앞 256 + 강화 가중 BCE + soft macro-F1 손실 (80:20 재평가)",
+  "hypothesis": "BCE에 증상별 soft-F1(확률로 계산한 F1)의 macro 평균 손실을 더하면 threshold 0.5에서의 증상별 판정 균형이 F1 기준으로 맞춰져, 특히 오심·두통·전신쇠약 F1이 오르고 Macro F1이 KCBERT-005(0.6092)보다 오른다",
+  "change_vs_baseline": "M3-KCBERT-005 대비 손실만 변경: loss = BCEWithLogits(pos_weight는 005와 동일 scale 0.5/max 6.0, Training 분할에서만 계산) + 1.0 * (1 - mean_j softF1_j). softF1_j = 2*sum(p*y) / (sum(p) + sum(y) + 1e-8), p = sigmoid(logit), 미니배치 단위로 계산하고 fp32로 계산. 가중치 1.0은 고정(튜닝 금지). 인코더 beomi/kcbert-base(고정 revision 0f2f3f8)·[CLS] 헤드·앞 256토큰·lr 2e-5·batch 16·3 epochs·80:20 분할·threshold 0.5·seed 42/43/44 동일",
+  "baseline": {
+    "exp_id": "M3-KCBERT-005",
+    "metric": "macro_f1 (80:20 split, thr 0.5)",
+    "value": 0.6092
+  },
+  "branch": "sooyah/lab-m3-kcbert-012",
+  "commit": "",
+  "command": "python scripts/lab/m3-kcbert-012.py --out \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6092보다 +0.01 이상 높고 최소 2개 seed가 0.6092 초과. threshold는 >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). seed별 Macro/Micro/증상별 F1, 빈 예측(모든 증상 < 0.5) 샘플 수, epoch별 BCE·softF1 항 값을 기록",
+  "gpu": "T4",
+  "budget_hours": 3,
+  "priority": 2,
+  "notes": "m3-kcbert-005.py 재사용, criterion만 교체. 평가는 >= 0.5로(005는 > 0.5였으나 확률이 정확히 0.5인 경우가 없어 비교에 영향 없음). seed 42 best.ckpt는 005와 같은 형식({config, seed, epoch, model}, Classifier state_dict)으로 저장해 scripts/mission3_export_bert_ckpt.py로 바로 내보낼 수 있게. 공식 Val 미사용"
+}
