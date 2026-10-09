@@ -10,7 +10,7 @@
     "value": 0.6427
   },
   "branch": "sooyah/lab-m3-ens-001",
-  "commit": "",
+  "commit": "1ed4e478b89c3931b78069f9c5abe5268d517dd2",
   "command": "python scripts/lab/m3-ens-001.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 3-seed 평균 앙상블 Macro F1이 0.6427보다 +0.01 이상 높고 최소 2개 seed가 0.6427 초과. threshold >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). seed별 단일 모델 2개와 앙상블의 Macro/Micro/증상별 F1, 빈 예측 샘플 수, 두 모델 오류 겹침(둘 다 틀린 라벨 비율) 기록",
