@@ -10,7 +10,7 @@
     "value": 0.6092
   },
   "branch": "sooyah/lab-m3-kcbert-013",
-  "commit": "",
+  "commit": "90d7981daded3b0064aa3ec4f3750e7c1ca95581",
   "command": "python scripts/lab/m3-kcbert-013.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6092보다 +0.01 이상 높고 최소 2개 seed가 0.6092 초과. threshold는 >= 0.5 고정(튜닝·후처리 금지). TAPT 전후 holdout MLM loss(참고용, 선택에 쓰지 않음), seed별 Macro/Micro/증상별 F1 기록",
