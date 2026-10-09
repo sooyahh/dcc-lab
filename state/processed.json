@@ -64,7 +64,8 @@
   "006a9e61956cbb3dcdc90dd0ea5c55e84dadbabd",
   "885573aecf50ee38c3341a8ac4605b49f01d09d4",
   "815c57dbe84ab683a35b30b60352e20b75f79939",
-  "90d7981daded3b0064aa3ec4f3750e7c1ca95581"
+  "90d7981daded3b0064aa3ec4f3750e7c1ca95581",
+  "551cbf33720ed93850593b4770c5cb21546b08a3"
  ],
  "merged_prs": [
   67,
@@ -86,7 +87,8 @@
   101,
   103,
   104,
-  99
+  99,
+  105
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -122,6 +124,7 @@
   "M3-KCBERT-010 judged 기각 (mean Macro F1 0.6096, +0.0004 vs 005 < +0.01); team log PR #96, code PR #93 closed, issue #15 closed. Next proposal issue #16 M3-KCBERT-011 (R-Drop)",
   "M3-KCBERT-011 judged 기각 (mean Macro F1 0.6132, +0.0040 vs 005 < +0.01); team log PR #101. Code PR #97 was already merged (not closed). No new proposal: open proposals #17, #18 already at max_workers=2",
   "M3-KCBERT-012 judged 채택 (mean Macro F1 0.6265, +0.0173 vs 005, 3 seeds all above); team log PR #104, code PR #99 labeled lab-adopted, issue #17 closed. No new proposal: open proposals #13, #18 at max_workers=2",
-  "M3-ROBERTA-002 judged 채택 (retry done, mean Macro F1 0.6241, +0.0128 vs ROBERTA-001, 3 seeds all above); team log PR #105, code PR #86 labeled lab-adopted, issue #13 closed. PR #99 (KCBERT-012 code) merged (merge-gate success). Next proposal issue #19 M3-ROBERTA-003 (roberta-large + soft-F1)"
+  "M3-ROBERTA-002 judged 채택 (retry done, mean Macro F1 0.6241, +0.0128 vs ROBERTA-001, 3 seeds all above); team log PR #105, code PR #86 labeled lab-adopted, issue #13 closed. PR #99 (KCBERT-012 code) merged (merge-gate success). Next proposal issue #19 M3-ROBERTA-003 (roberta-large + soft-F1)",
+  "M3-ROBERTA-003 PR #106 551cbf3 review PASS; submitted. PR #105 (log ROBERTA-002) merged (merge-gate success). PR #86 (ROBERTA-002 code, 24a3c02) merge skipped: merge-gate pending, not behind main; recheck next run"
  ]
 }
