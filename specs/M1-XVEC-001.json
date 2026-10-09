@@ -1,0 +1,21 @@
+{
+  "exp_id": "M1-XVEC-001",
+  "mission": 1,
+  "title": "WavLM-base-plus-sv x-vector(신고자 구간) + 52차원 음향 특징 결합 LR (Training 8:2 holdout)",
+  "hypothesis": "화자 검증용으로 학습된 x-vector가 성별을 52차원 손설계 통계보다 잘 분리해, 52D+x-vector 결합 LR의 holdout 정확도가 같은 분할의 52D LR보다 1%p 이상 높다",
+  "change_vs_baseline": "입력 특징만 변경: 통화별 신고자(Speaker 신고자) 구간을 startAt/endAt로 잘라 이어 붙인 파형(src/dcc_data/mission1.py의 extract_caller_segments·concatenate_caller_waveforms 재사용, 16kHz mono)에서 앞 최대 20초를 microsoft/wavlm-base-plus-sv(transformers WavLMForXVector, 고정 revision 커밋 해시) 로 512차원 x-vector 추출(L2 정규화). 0.5초 미만은 zero-pad. 비교 3종을 같은 분할·같은 헤드(StandardScaler+LogisticRegression, mission1_train._build_lr_pipeline 설정)로 학습: (a) 52D 단독(baseline 재현) (b) x-vector 단독 (c) 52D+x-vector 결합. 헤드 하이퍼파라미터 탐색 없음",
+  "baseline": {
+    "exp_id": "M1-EXP-001",
+    "metric": "accuracy (Training 8:2 stratified holdout, seed 42)",
+    "value": 0.9502
+  },
+  "branch": "sooyah/lab-m1-xvec-001",
+  "commit": "",
+  "command": "python scripts/lab/m1-xvec-001.py --out \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "Training 29,200통화를 성별 층화 8:2(seed 42, 통화=샘플이므로 call_id 단위)로 나눈 holdout에서 (c) 결합 LR 정확도가 같은 분할의 (a) 52D LR보다 +1.0%p 이상. 주 지표는 (c)로 사전 고정(holdout에서 조합 고르지 않음). metrics.json에 (a)(b)(c) 정확도·성별 recall, (a) 대비 (c) paired McNemar p값, 추출 처리량(통화/초), 신고자 구간 길이 분포, seed 기록",
+  "gpu": "T4",
+  "budget_hours": 4,
+  "priority": 2,
+  "notes": "Training(서울) TL_/TS_ zip만 LAB_WORK로 복사해 사용, Validation 폴더는 읽지 않음. 입력은 음성+startAt/endAt/Speaker만(성별 라벨은 정답으로만). 모델은 snapshot_download(revision 고정)로 $DCC_RUN_ROOT/models/wavlm-base-plus-sv에 받고 이후 local_files_only, main() 시작 직후 준비. 52D 특징과 x-vector는 LAB_OUT에 청크(예: 2,000통화) 단위 .npy/.parquet로 저장해 재개 시 완료 청크 건너뜀. 최종 ckpt는 (c) 파이프라인 joblib.dump → best.ckpt. 새 패키지 없음(transformers·sklearn 기존). seed 42 고정. 승인 시 Codex가 scripts/lab/m1-xvec-001.py로 구현"
+}
