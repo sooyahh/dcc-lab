@@ -14,7 +14,8 @@
   "done/02_M3-KLUEBERT-001.json@2026-10-09T10:21:04+00:00",
   "failed/02_M3-KCBERT-008.json@2026-10-09T10:28:10+00:00",
   "done/02_M3-ROBERTA-001.json@2026-10-09T10:45:35+00:00",
-  "done/02_M3-KCBERT-008.json@2026-10-09T12:04:54+00:00"
+  "done/02_M3-KCBERT-008.json@2026-10-09T12:04:54+00:00",
+  "done/02_M3-KCBERT-009.json@2026-10-09T14:13:32+00:00"
  ],
  "implemented_issues": [
   1,
@@ -94,6 +95,7 @@
   "PR #81 (log M3-KCBERT-007) merged (merge-gate success)",
   "M3-KLUEBERT-001 PR #82 bd1cc07 review PASS; submitted",
   "M3-KCBERT-008 PR #84 97b6d5b review PASS; submitted (retry after code-bug fix)",
-  "M3-KCBERT-008 judged 기각 (mean Macro F1 0.6087 vs 005 0.6092); team log PR #88, code PR #84 closed, issue #12 closed. PR #74 (ROBERTA-001 code, lab-adopted) merged (merge-gate success). Next proposal issue #14 M3-KCBERT-009 (mean pooling)"
+  "M3-KCBERT-008 judged 기각 (mean Macro F1 0.6087 vs 005 0.6092); team log PR #88, code PR #84 closed, issue #12 closed. PR #74 (ROBERTA-001 code, lab-adopted) merged (merge-gate success). Next proposal issue #14 M3-KCBERT-009 (mean pooling)",
+  "M3-KCBERT-009 judged 기각 (mean Macro F1 0.6115, +0.0023 vs 005 < +0.01); team log PR #92, code PR #89 closed, issue #14 closed. Next proposal M3-KCBERT-010 (LLRD)"
  ]
 }
