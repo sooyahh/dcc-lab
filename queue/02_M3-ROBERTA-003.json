@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M3-ROBERTA-003",
+    "mission": 3,
+    "title": "klue/roberta-large 앞 256 + 강화 가중 BCE + soft macro-F1 손실 (80:20 재평가)",
+    "hypothesis": "ROBERTA-002에 증상별 soft-F1 macro 손실을 더하면 오심·두통 F1이 올라 3-seed 평균 Macro F1이 ROBERTA-002(0.6241)보다 오른다",
+    "change_vs_baseline": "M3-ROBERTA-002 대비 손실만 변경: loss = BCEWithLogits(pos_weight는 002와 동일 scale 0.5/max 6.0, Training 분할에서만 계산) + 1.0 * (1 - mean_j softF1_j). softF1_j = 2*sum(p*y)/(sum(p)+sum(y)+1e-8), p=sigmoid(logit), 미니배치 단위 fp32 계산. 가중치 1.0 고정(튜닝 금지). 인코더 klue/roberta-large(고정 revision)·lr 1e-5·warmup 10%·weight decay 0.01·fp16·실효 batch 16·앞 256토큰·3 epochs·80:20 분할·threshold 0.5·seed 42/43/44 동일",
+    "baseline": {
+      "exp_id": "M3-ROBERTA-002",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6241
+    },
+    "branch": "sooyah/lab-m3-roberta-003",
+    "commit": "551cbf33720ed93850593b4770c5cb21546b08a3",
+    "command": "python scripts/lab/m3-roberta-003.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6241보다 +0.01 이상 높고 최소 2개 seed가 0.6241 초과. threshold는 >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). seed별 Macro/Micro/증상별 F1, 빈 예측 샘플 수, epoch별 BCE·softF1 항 값 기록",
+    "gpu": "T4",
+    "budget_hours": 3,
+    "priority": 2,
+    "notes": "m3-roberta-002.py 재사용, criterion만 교체(m3-kcbert-012.py의 soft-F1 항 참고). 모델은 DCC_RUN_ROOT/models 캐시 재사용. 체크포인트 epoch마다 저장해 재개. ROBERTA-002 실측 약 43분(재시도분) ~ 5시간(1차 누적)이라 예산 3h 안에 재개로 완료 가능. 공식 Val 미사용"
+  },
+  "commit": "551cbf33720ed93850593b4770c5cb21546b08a3",
+  "submitted_at": "2026-10-10T04:22:12+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
