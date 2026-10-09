@@ -51,7 +51,8 @@
   "2f962036ad4095573e1e63422da5a9534e19d683",
   "97b6d5b4e17cd4ceaf4dabd728dcdb882fefd1e8",
   "b84de44a09a61f5487fa93fd7e1e4c64a802bbb2",
-  "b07771710e776f50e62f87536469912545cab2c2"
+  "b07771710e776f50e62f87536469912545cab2c2",
+  "006a9e61956cbb3dcdc90dd0ea5c55e84dadbabd"
  ],
  "merged_prs": [
   67,
@@ -67,7 +68,8 @@
   83,
   85,
   74,
-  88
+  88,
+  92
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -98,6 +100,7 @@
   "M3-KCBERT-008 PR #84 97b6d5b review PASS; submitted (retry after code-bug fix)",
   "M3-KCBERT-008 judged 기각 (mean Macro F1 0.6087 vs 005 0.6092); team log PR #88, code PR #84 closed, issue #12 closed. PR #74 (ROBERTA-001 code, lab-adopted) merged (merge-gate success). Next proposal issue #14 M3-KCBERT-009 (mean pooling)",
   "M3-KCBERT-009 judged 기각 (mean Macro F1 0.6115, +0.0023 vs 005 < +0.01); team log PR #92, code PR #89 closed, issue #14 closed. Next proposal M3-KCBERT-010 (LLRD)",
-  "PR #92 (log M3-KCBERT-009, 44e6d7c) merge skipped: merge-gate/verdict pending and behind main by 2 -> update-branch run; recheck next run"
+  "PR #92 (log M3-KCBERT-009, 44e6d7c) merge skipped: merge-gate/verdict pending and behind main by 2 -> update-branch run; recheck next run",
+  "M3-KCBERT-010 PR #93 006a9e6 review PASS; submitted. PR #92 (log M3-KCBERT-009) merged (merge-gate success)"
  ]
 }
