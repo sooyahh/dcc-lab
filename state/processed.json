@@ -78,7 +78,8 @@
   "b00c122060c3008410e7c1c3fbc05b61853a51b7",
   "f76597158ced52923842bf1ab4ccc8207057d395",
   "971d089244ca3721726295778dba2b5904883cf7",
-  "a46067f820074c19dd7030b62bbf2091ab46da2a"
+  "a46067f820074c19dd7030b62bbf2091ab46da2a",
+  "1ed4e478b89c3931b78069f9c5abe5268d517dd2"
  ],
  "merged_prs": [
   67,
@@ -107,7 +108,8 @@
   109,
   111,
   113,
-  114
+  114,
+  106
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
