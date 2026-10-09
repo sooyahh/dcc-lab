@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M3-ROBERTA-002",
+    "mission": 3,
+    "title": "klue/roberta-large 앞 256토큰 + 강화 가중 BCE (80:20 재평가)",
+    "hypothesis": "large 인코더에 강화 가중 BCE를 조합하면 오심·두통 재현율이 올라 3-seed 평균 Macro F1이 ROBERTA-001(0.6113)보다 오른다",
+    "change_vs_baseline": "M3-ROBERTA-001 대비 손실 가중만 변경: pos_weight = clip(sqrt(neg/pos)*0.5 정규화, 1.0~6.0) (Training 분할에서만 계산). 인코더 klue/roberta-large(고정 revision)·lr 1e-5·warmup 10%·weight decay 0.01·fp16·실효 batch 16·앞 256토큰·3 epochs·80:20 분할·threshold 0.5·seed 42/43/44는 동일",
+    "baseline": {
+      "exp_id": "M3-ROBERTA-001",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6113
+    },
+    "branch": "sooyah/lab-m3-roberta-002",
+    "commit": "b84de44a09a61f5487fa93fd7e1e4c64a802bbb2",
+    "command": "python scripts/lab/m3-roberta-002.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6113보다 +0.01 이상 높고 최소 2개 seed가 0.6113 초과. threshold 0.5 고정, 튜닝 금지. seed별 Macro/Micro/증상별 F1과 epoch별 내부 Val Macro F1, 학습 붕괴 여부 기록",
+    "gpu": "T4",
+    "budget_hours": 5,
+    "priority": 2,
+    "notes": "전사 텍스트만, 공식 Val 미사용. m3-roberta-001.py 재사용, pos_weight 계산 인자만 교체. 모델은 DCC_RUN_ROOT/models 캐시 재사용. 체크포인트 epoch마다 저장해 재개. 예상 소요: ROBERTA-001 실측 약 56분(3 seed 합산 실측 경과) ~ 4시간"
+  },
+  "commit": "b84de44a09a61f5487fa93fd7e1e4c64a802bbb2",
+  "submitted_at": "2026-10-09T19:52:11+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
