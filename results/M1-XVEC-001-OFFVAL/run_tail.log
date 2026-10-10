@@ -1,0 +1,103 @@
+
+===== attempt 1 2026-10-10T08:48:47+00:00 colab-a commit=3db888ec38b1694893b42176a45afc64a8aa4541 =====
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.2/13.2 MB 20.3 MB/s eta 0:00:00
+
+Loading weights:   0%|          | 0/266 [00:00<?, ?it/s]
+Loading weights:  26%|██▌       | 69/266 [00:00<00:00, 670.48it/s]
+Loading weights:  54%|█████▍    | 143/266 [00:00<00:00, 709.37it/s]
+Loading weights:  82%|████████▏ | 217/266 [00:00<00:00, 721.42it/s]
+Loading weights: 100%|██████████| 266/266 [00:00<00:00, 721.45it/s]
+/usr/local/lib/python3.13/dist-packages/torch/nn/functional.py:6409: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  key_padding_mask = _canonical_mask(
+Validation 40/3640, elapsed 33.2s
+Validation 80/3640, elapsed 46.6s
+Validation 120/3640, elapsed 59.3s
+Validation 160/3640, elapsed 71.1s
+Validation 200/3640, elapsed 83.8s
+Validation 240/3640, elapsed 96.0s
+Validation 280/3640, elapsed 108.5s
+Validation 320/3640, elapsed 121.8s
+Validation 360/3640, elapsed 134.1s
+Validation 400/3640, elapsed 146.6s
+Validation 440/3640, elapsed 160.3s
+Validation 480/3640, elapsed 173.7s
+Validation 520/3640, elapsed 187.4s
+Validation 560/3640, elapsed 201.0s
+Validation 600/3640, elapsed 214.2s
+Validation 640/3640, elapsed 226.7s
+Validation 680/3640, elapsed 239.4s
+Validation 720/3640, elapsed 252.4s
+Validation 760/3640, elapsed 265.1s
+Validation 800/3640, elapsed 278.2s
+Validation 840/3640, elapsed 290.8s
+Validation 880/3640, elapsed 303.8s
+Validation 920/3640, elapsed 316.9s
+Validation 960/3640, elapsed 330.6s
+Validation 1000/3640, elapsed 343.4s
+Validation 1040/3640, elapsed 356.2s
+Validation 1080/3640, elapsed 368.6s
+Validation 1120/3640, elapsed 381.3s
+Validation 1160/3640, elapsed 394.2s
+Validation 1200/3640, elapsed 407.2s
+Validation 1240/3640, elapsed 420.1s
+Validation 1280/3640, elapsed 433.5s
+Validation 1320/3640, elapsed 446.4s
+Validation 1360/3640, elapsed 459.4s
+Validation 1400/3640, elapsed 472.3s
+Validation 1440/3640, elapsed 485.2s
+Validation 1480/3640, elapsed 498.2s
+Validation 1520/3640, elapsed 511.4s
+Validation 1560/3640, elapsed 525.2s
+Validation 1600/3640, elapsed 538.5s
+Validation 1640/3640, elapsed 551.4s
+Validation 1680/3640, elapsed 564.3s
+Validation 1720/3640, elapsed 577.9s
+Validation 1760/3640, elapsed 591.2s
+Validation 1800/3640, elapsed 604.5s
+Validation 1840/3640, elapsed 617.5s
+Validation 1880/3640, elapsed 630.8s
+Validation 1920/3640, elapsed 643.9s
+Validation 1960/3640, elapsed 656.6s
+Validation 2000/3640, elapsed 669.9s
+Validation 2040/3640, elapsed 683.4s
+Validation 2080/3640, elapsed 696.5s
+Validation 2120/3640, elapsed 709.2s
+Validation 2160/3640, elapsed 722.0s
+Validation 2200/3640, elapsed 736.0s
+Validation 2240/3640, elapsed 748.9s
+Validation 2280/3640, elapsed 762.5s
+Validation 2320/3640, elapsed 775.9s
+Validation 2360/3640, elapsed 788.9s
+Validation 2400/3640, elapsed 802.0s
+Validation 2440/3640, elapsed 815.9s
+Validation 2480/3640, elapsed 828.8s
+Validation 2520/3640, elapsed 841.3s
+Validation 2560/3640, elapsed 854.7s
+Validation 2600/3640, elapsed 866.7s
+Validation 2640/3640, elapsed 879.6s
+Validation 2680/3640, elapsed 892.5s
+Validation 2720/3640, elapsed 905.5s
+Validation 2760/3640, elapsed 918.4s
+Validation 2800/3640, elapsed 931.2s
+Validation 2840/3640, elapsed 944.0s
+Validation 2880/3640, elapsed 957.0s
+Validation 2920/3640, elapsed 970.5s
+Validation 2960/3640, elapsed 983.8s
+Validation 3000/3640, elapsed 996.6s
+Validation 3040/3640, elapsed 1009.7s
+Validation 3080/3640, elapsed 1023.5s
+Validation 3120/3640, elapsed 1037.1s
+Validation 3160/3640, elapsed 1051.1s
+Validation 3200/3640, elapsed 1064.8s
+Validation 3240/3640, elapsed 1078.8s
+Validation 3280/3640, elapsed 1092.7s
+Validation 3320/3640, elapsed 1106.0s
+Validation 3360/3640, elapsed 1119.2s
+Validation 3400/3640, elapsed 1133.1s
+Validation 3440/3640, elapsed 1146.8s
+Validation 3480/3640, elapsed 1160.6s
+Validation 3520/3640, elapsed 1173.5s
+Validation 3560/3640, elapsed 1186.3s
+Validation 3600/3640, elapsed 1199.4s
+Validation 3640/3640, elapsed 1211.8s
+{"accuracy": 0.9747252747252747, "confusion_matrix_labels": ["F", "M"], "confusion_matrix": [[1919, 40], [52, 1629]], "recall_F": 0.9795814190913732, "recall_M": 0.9690660321237359, "n_samples": 3640, "n_F": 1959, "n_M": 1681}
