@@ -38,7 +38,8 @@
   "failed/02_M1-ECAPA-001.json@2026-10-10T10:35:50+00:00",
   "failed/02_M1-ECAPA-001.json@2026-10-10T10:39:13+00:00",
   "done/02_M1-ECAPA-001.json@2026-10-10T11:22:30+00:00",
-  "done/03_M1-HEAD-001.json@2026-10-10T11:30:26+00:00"
+  "done/03_M1-HEAD-001.json@2026-10-10T11:30:26+00:00",
+  "done/00_M1-XVEC-002-OFFVAL.json@2026-10-10T11:31:18+00:00"
  ],
  "implemented_issues": [
   1,
@@ -155,7 +156,8 @@
   131,
   133,
   134,
-  135
+  135,
+  139
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
