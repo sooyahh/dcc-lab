@@ -119,7 +119,9 @@
   106,
   102,
   118,
-  112
+  112,
+  121,
+  120
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -159,6 +161,7 @@
   "M3-ROBERTA-003 PR #106 551cbf3 review PASS; submitted. PR #105 (log ROBERTA-002) merged (merge-gate success). PR #86 (ROBERTA-002 code, 24a3c02) merge skipped: merge-gate pending, not behind main; recheck next run",
   "M3-KCBERT-015 judged 기각 (mean Macro F1 0.6249, -0.0016 vs 012, 1 seed above); team log PR #111, code PR #110 closed, issue #21 closed. No new proposal: M3 loss axis exhausted pending ROBERTA-003, remaining ideas are fine-tuning variants",
   "PR #112 (M1-XVEC-001 code, lab-adopted) merged (merge-gate success)",
-  "M3-ROBERTA-004 PR #119 0eaac55 review PASS; submitted"
+  "M3-ROBERTA-004 PR #119 0eaac55 review PASS; submitted",
+  "PR #121 (log ROBERTA-003) and #120 (symptom lift heatmap docs) merged (merge-gate success)"
  ]
 }
