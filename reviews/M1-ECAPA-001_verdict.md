@@ -1,5 +1,6 @@
-VERDICT: 보류
-- 2차 실패(0.2분, metrics 없음): torchaudio shim으로 speechbrain import는 통과했으나 `EncoderClassifier.from_hparams`가 Drive 모델 폴더에 심볼릭 링크를 만들지 못함(`OSError: [Errno 95]`, label_encoder.txt -> .ckpt).
-- 실험 결과가 아닌 환경 호환성 문제이며 가설은 아직 판정 불가. GPU 시간 손실은 거의 없음.
-- 같은 실험 재시도 1회를 이미 사용했고, 명세 수정만으로는 해결 불가(코드의 모델 로드 경로 수정 필요) → 재시도 대신 보류.
-- 조치: 팀 PR #132에 `lab-fix` 라벨과 수정 지시(모델을 LAB_WORK 로컬로 복사해 로드, shim을 스크립트 내부로). Codex 수정 → 재검토 PASS 후 새 commit으로 재제출.
+VERDICT: 기각
+- 3차 실행 성공(37.0분, T4). (d) 52D+x-vector+ECAPA holdout 정확도 0.9765 vs 같은 실행 (c) 0.9738(재현, 기준 ±0.2%p 이내): +0.27%p로 성공 기준 +0.4%p 미달.
+- (c)→(d) paired McNemar 정확검정 p=0.056(2×2: 둘 다 맞음 5664, c만 맞음 23, d만 맞음 39, 둘 다 틀림 114)으로 p<0.05도 미충족. 단일 seed 1회.
+- 이득은 40초 초과 통화(0.9679→0.9748)에 몰리고 20초 이하는 오히려 −0.1%p. x-vector·ECAPA 오답 겹침은 둘 다 틀림 97 / x-vector만 74 / ECAPA만 26으로 보완성은 있으나 크지 않음.
+- 진단용 (b) ECAPA 단독 0.9789가 (d)보다 높음. 주 지표를 (d)로 사전 고정했으므로 holdout에서 조합을 고르지 않고 채택 근거로 쓰지 않음(후속 아이디어 후보로만 기록).
+- 추론 비용: 통화당 ECAPA 약 0.040초(p95 0.047초)로 작음. 판정 기준은 정확도 이득이므로 기각. M1 제출 후보는 M1-XVEC-001 결합 LR 유지.
