@@ -26,5 +26,101 @@
   "max_attempts": 3,
   "worker": "colab-b",
   "claimed_at": "2026-10-10T10:57:49+00:00",
-  "started_at": "2026-10-10T10:57:51+00:00"
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-10T11:31:18+00:00",
+  "elapsed_min": 33.2,
+  "metrics": {
+    "exp_id": "M1-XVEC-002-OFFVAL",
+    "primary_metric": {
+      "name": "accuracy",
+      "value": 0.9813186813186813,
+      "split": "official_val"
+    },
+    "metrics": {
+      "accuracy": 0.9813186813186813,
+      "confusion_matrix_labels": [
+        "F",
+        "M"
+      ],
+      "confusion_matrix": [
+        [
+          1924,
+          35
+        ],
+        [
+          33,
+          1648
+        ]
+      ],
+      "recall_F": 0.9821337417049515,
+      "recall_M": 0.9803688280785247,
+      "n_samples": 3640,
+      "n_F": 1959,
+      "n_M": 1681,
+      "caller_duration_accuracy": {
+        "le20": {
+          "rows": 587,
+          "accuracy": 0.9761499148211243
+        },
+        "gt20_le40": {
+          "rows": 2060,
+          "accuracy": 0.9844660194174757
+        },
+        "gt40": {
+          "rows": 993,
+          "accuracy": 0.9778449144008057
+        }
+      },
+      "windows_per_call": {
+        "1": 898,
+        "2": 1937,
+        "3": 608,
+        "4": 197
+      },
+      "xvector_extraction_seconds": 1355.365904150011,
+      "paired_mcnemar": null,
+      "fitting_performed": false,
+      "ckpt_sha256": "8985afbaa94aa637baf366c92768908ee7179e16dd5b97be75ec16524b49a447",
+      "model_revision": "1bfd64eca136543feb28c5ffaf05381c6af33121",
+      "input_sha256": "a689272b1f4995b7e7a3e887180c9265bffeddc8687eefec7af2416c5f95a731",
+      "archive_sha256": {
+        "VL_서울_구급.zip": "51eed828136640209e5aeb37383b6d79c3aae53d3b9ea0d6d57bb17885295ec7",
+        "VS_서울_구급.zip": "ae069ef17a3a161edbdf443b684dff398eb744e64aad296d7393ce8fd146181e"
+      },
+      "sklearn_version": "1.6.1",
+      "baseline_accuracy": 0.9747252747252747,
+      "accuracy_gain": 0.00659340659340657,
+      "fixed_success_threshold": 0.9777,
+      "success_criterion_met": true
+    },
+    "seed": 42,
+    "train_rows": 0,
+    "eval_rows": 3640,
+    "official_val": {
+      "accuracy": 0.9813186813186813,
+      "confusion_matrix_labels": [
+        "F",
+        "M"
+      ],
+      "confusion_matrix": [
+        [
+          1924,
+          35
+        ],
+        [
+          33,
+          1648
+        ]
+      ],
+      "recall_F": 0.9821337417049515,
+      "recall_M": 0.9803688280785247,
+      "n_samples": 3640,
+      "n_F": 1959,
+      "n_M": 1681
+    },
+    "fitting_performed": false,
+    "ckpt": "best.ckpt",
+    "notes": "Frozen M1-XVEC-002 (c) evaluation only; no fitting or tuning."
+  }
 }

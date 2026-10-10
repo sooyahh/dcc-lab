@@ -1,0 +1,111 @@
+
+===== attempt 1 2026-10-10T10:58:03+00:00 colab-b commit=0c7b5af5d57ffa0d58685a788b46675075795bee =====
+Collecting scikit-learn==1.6.1
+  Downloading scikit_learn-1.6.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (18 kB)
+Downloading scikit_learn-1.6.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.2/13.2 MB 110.1 MB/s eta 0:00:00
+Installing collected packages: scikit-learn
+Successfully installed scikit-learn-1.6.1
+
+Loading weights:   0%|          | 0/266 [00:00<?, ?it/s]
+Loading weights:   1%|          | 2/266 [00:01<02:20,  1.87it/s]
+Loading weights:   6%|▋         | 17/266 [00:01<00:22, 11.17it/s]
+Loading weights:  12%|█▏        | 32/266 [00:02<00:15, 14.86it/s]
+Loading weights:  13%|█▎        | 34/266 [00:03<00:23,  9.82it/s]
+Loading weights:  19%|█▉        | 51/266 [00:05<00:25,  8.30it/s]
+Loading weights:  22%|██▏       | 58/266 [00:06<00:27,  7.59it/s]
+Loading weights:  22%|██▏       | 59/266 [00:07<00:28,  7.25it/s]
+Loading weights:  26%|██▌       | 69/266 [00:07<00:21,  9.18it/s]
+Loading weights:  33%|███▎      | 88/266 [00:09<00:18,  9.52it/s]
+Loading weights:  38%|███▊      | 102/266 [00:10<00:14, 11.70it/s]
+Loading weights:  42%|████▏     | 111/266 [00:10<00:10, 14.88it/s]
+Loading weights:  47%|████▋     | 124/266 [00:10<00:07, 18.78it/s]
+Loading weights:  48%|████▊     | 128/266 [00:11<00:07, 18.67it/s]
+Loading weights:  55%|█████▌    | 147/266 [00:11<00:05, 23.46it/s]
+Loading weights:  57%|█████▋    | 151/266 [00:11<00:04, 24.04it/s]
+Loading weights:  58%|█████▊    | 155/266 [00:11<00:04, 23.19it/s]
+Loading weights:  67%|██████▋   | 178/266 [00:12<00:02, 43.45it/s]
+Loading weights:  70%|██████▉   | 185/266 [00:12<00:02, 32.92it/s]
+Loading weights:  74%|███████▍  | 198/266 [00:12<00:02, 32.27it/s]
+Loading weights:  77%|███████▋  | 205/266 [00:13<00:01, 33.11it/s]
+Loading weights:  79%|███████▉  | 210/266 [00:14<00:03, 16.12it/s]
+Loading weights:  83%|████████▎ | 222/266 [00:14<00:02, 17.29it/s]
+Loading weights:  85%|████████▍ | 225/266 [00:15<00:02, 15.51it/s]
+Loading weights:  90%|█████████ | 240/266 [00:15<00:01, 18.26it/s]
+Loading weights: 100%|██████████| 266/266 [00:15<00:00, 16.78it/s]
+/usr/local/lib/python3.13/dist-packages/torch/nn/functional.py:6409: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  key_padding_mask = _canonical_mask(
+Completed Validation feature chunk 0:50
+Completed Validation feature chunk 50:100
+Completed Validation feature chunk 100:150
+Completed Validation feature chunk 150:200
+Completed Validation feature chunk 200:250
+Completed Validation feature chunk 250:300
+Completed Validation feature chunk 300:350
+Completed Validation feature chunk 350:400
+Completed Validation feature chunk 400:450
+Completed Validation feature chunk 450:500
+Completed Validation feature chunk 500:550
+Completed Validation feature chunk 550:600
+Completed Validation feature chunk 600:650
+Completed Validation feature chunk 650:700
+Completed Validation feature chunk 700:750
+Completed Validation feature chunk 750:800
+Completed Validation feature chunk 800:850
+Completed Validation feature chunk 850:900
+Completed Validation feature chunk 900:950
+Completed Validation feature chunk 950:1000
+Completed Validation feature chunk 1000:1050
+Completed Validation feature chunk 1050:1100
+Completed Validation feature chunk 1100:1150
+Completed Validation feature chunk 1150:1200
+Completed Validation feature chunk 1200:1250
+Completed Validation feature chunk 1250:1300
+Completed Validation feature chunk 1300:1350
+Completed Validation feature chunk 1350:1400
+Completed Validation feature chunk 1400:1450
+Completed Validation feature chunk 1450:1500
+Completed Validation feature chunk 1500:1550
+Completed Validation feature chunk 1550:1600
+Completed Validation feature chunk 1600:1650
+Completed Validation feature chunk 1650:1700
+Completed Validation feature chunk 1700:1750
+Completed Validation feature chunk 1750:1800
+Completed Validation feature chunk 1800:1850
+Completed Validation feature chunk 1850:1900
+Completed Validation feature chunk 1900:1950
+Completed Validation feature chunk 1950:2000
+Completed Validation feature chunk 2000:2050
+Completed Validation feature chunk 2050:2100
+Completed Validation feature chunk 2100:2150
+Completed Validation feature chunk 2150:2200
+Completed Validation feature chunk 2200:2250
+Completed Validation feature chunk 2250:2300
+Completed Validation feature chunk 2300:2350
+Completed Validation feature chunk 2350:2400
+Completed Validation feature chunk 2400:2450
+Completed Validation feature chunk 2450:2500
+Completed Validation feature chunk 2500:2550
+Completed Validation feature chunk 2550:2600
+Completed Validation feature chunk 2600:2650
+Completed Validation feature chunk 2650:2700
+Completed Validation feature chunk 2700:2750
+Completed Validation feature chunk 2750:2800
+Completed Validation feature chunk 2800:2850
+Completed Validation feature chunk 2850:2900
+Completed Validation feature chunk 2900:2950
+Completed Validation feature chunk 2950:3000
+Completed Validation feature chunk 3000:3050
+Completed Validation feature chunk 3050:3100
+Completed Validation feature chunk 3100:3150
+Completed Validation feature chunk 3150:3200
+Completed Validation feature chunk 3200:3250
+Completed Validation feature chunk 3250:3300
+Completed Validation feature chunk 3300:3350
+Completed Validation feature chunk 3350:3400
+Completed Validation feature chunk 3400:3450
+Completed Validation feature chunk 3450:3500
+Completed Validation feature chunk 3500:3550
+Completed Validation feature chunk 3550:3600
+Completed Validation feature chunk 3600:3640
+Official Validation accuracy: 0.98131868
