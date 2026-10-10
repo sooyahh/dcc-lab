@@ -11,7 +11,7 @@
   },
   "branch": "sooyah/lab-m1-ecapa-001",
   "commit": "1a8841718e3aa9a86cb884801d75cca975253f14",
-  "command": "python -c \"import sys,runpy,torchaudio; torchaudio.list_audio_backends=getattr(torchaudio,'list_audio_backends',lambda: ['soundfile']); sys.argv=['scripts/lab/m1-ecapa-001.py','--out',sys.argv[1]]; runpy.run_path('scripts/lab/m1-ecapa-001.py', run_name='__main__')\" \"$LAB_OUT\"",
+  "command": "python scripts/lab/m1-ecapa-001.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "M1-XVEC-001과 같은 Training 29,200통화 성별 층화 8:2 분할(seed 42)의 holdout 5,840통화에서 주 지표 (d) 정확도가 같은 실행의 (c)보다 +0.4%p 이상이고, (c) 대비 (d) paired McNemar 정확검정 p < 0.05. 주 지표는 (d)로 사전 고정(holdout에서 조합을 고르지 않음). (c)가 0.9738에서 ±0.2%p 밖이면 재현 실패로 기록. metrics.json에 (a)(b)(c)(d) 정확도·성별 recall·혼동행렬, (c)·(d) McNemar 2×2 칸과 p값, x-vector 단독 오답과 ECAPA 단독 오답의 겹침 수(둘 다 틀림/한쪽만 틀림), 신고자 구간 길이 구간별(≤20초, 20~40초, 40초 초과) (c)(d) 정확도, 통화당 ECAPA 추출 시간(제출 추론 비용), seed 기록",
   "gpu": "T4",
