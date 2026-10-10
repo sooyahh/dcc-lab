@@ -1,0 +1,103 @@
+{
+  "exp_id": "M1-XVEC-001",
+  "primary_metric": {
+    "name": "accuracy",
+    "value": 0.9738013698630137,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "heads": {
+      "acoustic_52d": {
+        "accuracy": 0.9501712328767123,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            2978,
+            130
+          ],
+          [
+            161,
+            2571
+          ]
+        ],
+        "recall_F": 0.9581724581724582,
+        "recall_M": 0.9410688140556369,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732
+      },
+      "xvector_512d": {
+        "accuracy": 0.9707191780821918,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3031,
+            77
+          ],
+          [
+            94,
+            2638
+          ]
+        ],
+        "recall_F": 0.9752252252252253,
+        "recall_M": 0.9655929721815519,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732
+      },
+      "combined_564d": {
+        "accuracy": 0.9738013698630137,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3038,
+            70
+          ],
+          [
+            83,
+            2649
+          ]
+        ],
+        "recall_F": 0.9774774774774775,
+        "recall_M": 0.969619326500732,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732
+      }
+    },
+    "paired_mcnemar": {
+      "exact_two_sided_p": 3.5201781942590924e-20,
+      "baseline_wrong_combined_right": 187,
+      "baseline_right_combined_wrong": 49
+    },
+    "accuracy_gain": 0.023630136986301342,
+    "extraction_calls_per_second": 3.0494505636099354,
+    "extraction_seconds": 9575.495451034,
+    "caller_duration_seconds": {
+      "min": 0.872,
+      "p25": 22.81675,
+      "median": 30.252499999999998,
+      "p75": 41.264250000000004,
+      "p95": 62.90615,
+      "max": 129.228
+    },
+    "caller_duration_mean_seconds": 33.54156393835617,
+    "padded_calls": 0,
+    "truncated_calls": 24425
+  },
+  "seed": 42,
+  "train_rows": 23360,
+  "eval_rows": 5840,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "notes": "Fixed combined head; no official Validation. LR interrupted fit restarts that head."
+}
