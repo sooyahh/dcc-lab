@@ -1,0 +1,14 @@
+# M3-KCELECTRA-001 실행 전 검토 (PR #145, 58a0f61)
+1. Validation 누수: OK — 공식 Val 접근 없음, Training/TL_서울_구급.zip만 읽음 (uses_official_val=false).
+2. 분할 누수: OK — P0와 같은 MultilabelStratifiedShuffleSplit(seed 42), call_id 교집합 검사.
+3. 입력 필드: OK — utterances[].text만 입력, symptom은 타깃으로만 사용.
+4. M2 발화 독립성: 해당 없음(M3).
+5. 외부 데이터·네트워크·비밀: OK — 고정 revision 공개 가중치를 DCC_RUN_ROOT/models에 1회 내려받음(허용), 비밀·Drive 외부 수정 없음. 모델 revision은 HF API로 실재 확인.
+9. requirements.txt: 변경 없음.
+6. 실행 계약: OK — metrics.json 작성, epoch별 원자적 ckpt_last 재개, 완료 시 재사용.
+7. 명세 일치: OK — 모델만 교체, 손실·하이퍼파라미터 명세와 일치. command 인자(--out)와 일치.
+8. 명백한 버그: 없음.
+- [MINOR] 데이터 적재가 scripts/mission3_baseline 최종 수정본.py(P0 로더)를 경로로 불러옴 — 팀 main 포함 파일이라 문제없으나 파일명 변경 시 깨짐. 로더는 text·symptom만 사용.
+- [MINOR] ECE 평탄화 방식, 평균 예측 확률−양성 비율 미기록.
+
+VERDICT: PASS

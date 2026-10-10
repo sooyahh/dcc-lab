@@ -10,7 +10,7 @@
     "value": 0.6441
   },
   "branch": "sooyah/lab-m3-xlmr-001",
-  "commit": "",
+  "commit": "f666e1f1f809de8c500aa3c304f18418fd7f5fb5",
   "command": "python scripts/lab/m3-xlmr-001.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "seed 42 holdout Macro F1 0.6541 이상(ROBERTA-003 seed 42 대비 +0.01)이면 seed 43/44 후속 제안. 미달이어도 앙상블 후보 판단을 위해 holdout 5,792건의 9개 증상 예측 확률을 LAB_OUT/holdout_probs.npy(행 순서는 split의 holdout 순서, 같은 순서의 샘플 id를 holdout_ids.json)로 저장. metrics.json에 증상별 F1·Macro/Micro F1, 빈 예측 수, ECE·Brier, epoch별 holdout Macro F1, 학습 시간, 모델 revision 기록",
