@@ -10,7 +10,7 @@
     "value": 0.9738
   },
   "branch": "sooyah/lab-m1-xvec-002",
-  "commit": "",
+  "commit": "bb9921b0a2f12e7d8d2cc0f2053f53221cf41a91",
   "command": "python scripts/lab/m1-xvec-002.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "M1-XVEC-001과 같은 Training 29,200통화 성별 층화 8:2 분할(seed 42)의 holdout 5,840통화에서 주 지표 (c) 결합 LR 정확도가 같은 실행의 (b)보다 +0.4%p 이상이고, (b) 대비 (c) paired McNemar 정확검정 p < 0.05. 주 지표는 (c)로 사전 고정(holdout에서 조합·창 수를 고르지 않음). (b)가 0.9738에서 ±0.2%p 밖이면 재현 실패로 기록. metrics.json에 (a)(b)(c) 정확도·성별 recall·혼동행렬, McNemar 2×2 칸과 p값, 신고자 구간 길이 구간별(≤20초, 20~40초, 40초 초과) (b)(c) 정확도, 통화당 창 수 분포, 통화당 x-vector 추출 시간(제출 추론 비용), seed 기록",
