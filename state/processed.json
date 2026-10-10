@@ -40,7 +40,8 @@
   "done/02_M1-ECAPA-001.json@2026-10-10T11:22:30+00:00",
   "done/03_M1-HEAD-001.json@2026-10-10T11:30:26+00:00",
   "done/00_M1-XVEC-002-OFFVAL.json@2026-10-10T11:31:18+00:00",
-  "failed/01_M3-ROBERTA-006.json@2026-10-10T18:27:39+00:00"
+  "failed/01_M3-ROBERTA-006.json@2026-10-10T18:27:39+00:00",
+  "done/01_M3-KCELECTRA-001.json@2026-10-10T19:41:52+00:00"
  ],
  "implemented_issues": [
   1,
