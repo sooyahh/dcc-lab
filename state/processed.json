@@ -116,7 +116,8 @@
   114,
   106,
   102,
-  118
+  118,
+  112
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -154,6 +155,7 @@
   "M3-KCBERT-012 judged 채택 (mean Macro F1 0.6265, +0.0173 vs 005, 3 seeds all above); team log PR #104, code PR #99 labeled lab-adopted, issue #17 closed. No new proposal: open proposals #13, #18 at max_workers=2",
   "M3-ROBERTA-002 judged 채택 (retry done, mean Macro F1 0.6241, +0.0128 vs ROBERTA-001, 3 seeds all above); team log PR #105, code PR #86 labeled lab-adopted, issue #13 closed. PR #99 (KCBERT-012 code) merged (merge-gate success). Next proposal issue #19 M3-ROBERTA-003 (roberta-large + soft-F1)",
   "M3-ROBERTA-003 PR #106 551cbf3 review PASS; submitted. PR #105 (log ROBERTA-002) merged (merge-gate success). PR #86 (ROBERTA-002 code, 24a3c02) merge skipped: merge-gate pending, not behind main; recheck next run",
-  "M3-KCBERT-015 judged 기각 (mean Macro F1 0.6249, -0.0016 vs 012, 1 seed above); team log PR #111, code PR #110 closed, issue #21 closed. No new proposal: M3 loss axis exhausted pending ROBERTA-003, remaining ideas are fine-tuning variants"
+  "M3-KCBERT-015 judged 기각 (mean Macro F1 0.6249, -0.0016 vs 012, 1 seed above); team log PR #111, code PR #110 closed, issue #21 closed. No new proposal: M3 loss axis exhausted pending ROBERTA-003, remaining ideas are fine-tuning variants",
+  "PR #112 (M1-XVEC-001 code, lab-adopted) merged (merge-gate success)"
  ]
 }
