@@ -37,7 +37,8 @@
   "done/01_M3-ROBERTA-005.json@2026-10-10T10:30:13+00:00",
   "failed/02_M1-ECAPA-001.json@2026-10-10T10:35:50+00:00",
   "failed/02_M1-ECAPA-001.json@2026-10-10T10:39:13+00:00",
-  "done/02_M1-ECAPA-001.json@2026-10-10T11:22:30+00:00"
+  "done/02_M1-ECAPA-001.json@2026-10-10T11:22:30+00:00",
+  "done/03_M1-HEAD-001.json@2026-10-10T11:30:26+00:00"
  ],
  "implemented_issues": [
   1,
@@ -205,6 +206,7 @@
   "PR #133 (log M3-ROBERTA-005) merged (merge-gate success). No new proposal: #29 M1-ECAPA-001 실행 중, M3 새 축 후보 없음·colab_cu 추정 40 미만(01:26 기록 48.3 이후 약 9시간 이상 T4 사용)이라 세부 기법 변경 불가, M2는 팀 결정(2026-10-04)으로 마무리",
   "PR #134 (log M1-ECAPA-001 1차) merged (merge-gate success). M1-ECAPA-001 2차 실패 judged 보류 (Drive symlink OSError, 재시도 1회 소진); team log PR #135, code PR #132 lab-fix + 수정 지시. Issue #29 kept open (실험 계속). No new proposal: #29 open, M3 새 축 후보 없음",
   "M1-XVEC-002-OFFVAL PR #137 0c7b5af review PASS; submitted",
-  "M1-ECAPA-001 judged 기각 (3차 성공: (d) 0.9765 vs (c) 0.9738, +0.27%p < +0.4%p, McNemar p=0.056); team log PR #138, code PR #132 closed, issue #29 closed. No new proposal: open proposals #30, #31 at max_workers=2"
+  "M1-ECAPA-001 judged 기각 (3차 성공: (d) 0.9765 vs (c) 0.9738, +0.27%p < +0.4%p, McNemar p=0.056); team log PR #138, code PR #132 closed, issue #29 closed. No new proposal: open proposals #30, #31 at max_workers=2",
+  "M1-HEAD-001 judged 기각 ((e) SVM 0.9771 vs (b) LR 0.9738, +0.33%p < +0.4%p, McNemar p=0.011); team log PR #139, code PR #136 closed, issue #31 closed. PR #138 merge-gate pending, not behind -> skipped (not recorded). No new proposal: colab units_left 28.3 (<40, M3 세부 기법 불가), M3 새 축 후보 없음, M1 헤드/입력 변경 소진, M2 후보는 명세 근거 부족"
  ]
 }
