@@ -10,7 +10,7 @@
     "value": 0.6441
   },
   "branch": "sooyah/lab-m3-roberta-004",
-  "commit": "",
+  "commit": "0eaac55c75493f602f558d3d12291512df745b1f",
   "command": "python scripts/lab/m3-roberta-004.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 seed 42 Macro F1이 0.6441보다 +0.01 이상(0.6541 이상). ROBERTA-003 seed 편차(±0.002)를 참고로 함께 적음. 평가는 9개 증상만, threshold >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). 9개 증상의 Macro/Micro/증상별 F1, ECE(증상별 15구간 평균), Brier, 평균 예측 확률 − 실제 양성 비율, 빈 예측 수, epoch별 holdout Macro F1을 기록. 참고로 보조 K개의 holdout macro F1도 기록(판정에는 쓰지 않음)",
