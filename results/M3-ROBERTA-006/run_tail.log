@@ -3,3 +3,206 @@
 usage: m3-roberta-006.py [-h] [--out OUT] [--smoke] [--aux-labels AUX_LABELS]
                          [--split SPLIT] [--split-sha256 SPLIT_SHA256]
 m3-roberta-006.py: error: --aux-labels, --split, --split-sha256 (or LAB_AUX_LABELS/LAB_P0_SPLIT/LAB_P0_SPLIT_SHA256) required
+
+===== attempt 1 2026-10-10T18:33:51+00:00 colab-a commit=635842d419b0f1912968553f869e2387c6a50a6e =====
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:   1%|          | 2/389 [00:00<00:23, 16.70it/s]
+Loading weights:   9%|▉         | 35/389 [00:02<00:21, 16.17it/s]
+Loading weights:  14%|█▍        | 55/389 [00:02<00:17, 19.35it/s]
+Loading weights:  16%|█▌        | 61/389 [00:03<00:19, 16.97it/s]
+Loading weights:  20%|█▉        | 77/389 [00:04<00:16, 18.61it/s]
+Loading weights:  25%|██▍       | 96/389 [00:05<00:17, 16.29it/s]
+Loading weights:  30%|███       | 118/389 [00:05<00:10, 24.87it/s]
+Loading weights:  32%|███▏      | 124/389 [00:06<00:12, 20.45it/s]
+Loading weights:  39%|███▉      | 151/389 [00:07<00:09, 24.04it/s]
+Loading weights:  41%|████      | 158/389 [00:08<00:14, 16.33it/s]
+Loading weights:  41%|████▏     | 161/389 [00:08<00:13, 16.39it/s]
+Loading weights:  44%|████▍     | 172/389 [00:09<00:11, 19.08it/s]
+Loading weights:  47%|████▋     | 183/389 [00:09<00:08, 24.86it/s]
+Loading weights:  48%|████▊     | 188/389 [00:09<00:08, 24.22it/s]
+Loading weights:  49%|████▉     | 192/389 [00:09<00:08, 23.56it/s]
+Loading weights:  52%|█████▏    | 204/389 [00:10<00:07, 24.44it/s]
+Loading weights:  53%|█████▎    | 208/389 [00:10<00:07, 23.88it/s]
+Loading weights:  58%|█████▊    | 224/389 [00:10<00:04, 37.15it/s]
+Loading weights:  59%|█████▉    | 229/389 [00:10<00:04, 38.57it/s]
+Loading weights:  60%|██████    | 234/389 [00:10<00:04, 37.85it/s]
+Loading weights:  62%|██████▏   | 240/389 [00:10<00:04, 34.20it/s]
+Loading weights:  64%|██████▍   | 250/389 [00:12<00:09, 13.98it/s]
+Loading weights:  67%|██████▋   | 262/389 [00:15<00:17,  7.10it/s]
+Loading weights:  82%|████████▏ | 318/389 [00:16<00:04, 16.66it/s]
+Loading weights:  87%|████████▋ | 337/389 [00:19<00:04, 12.37it/s]
+Loading weights: 100%|██████████| 389/389 [00:19<00:00, 19.79it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  69%|██████▉   | 270/389 [00:00<00:00, 2675.95it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2672.96it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=1 step=0 loss=2.3064
+seed=42 epoch=1 step=200 loss=1.8836
+seed=42 epoch=1 step=400 loss=1.5258
+seed=42 epoch=1 step=600 loss=1.3889
+seed=42 epoch=1 step=800 loss=1.8516
+seed=42 epoch=1 step=1000 loss=1.7829
+seed=42 epoch=1 step=1200 loss=1.4976
+seed=42 epoch=1 step=1400 loss=1.5031
+{"seed": 42, "epoch": 1, "macro_f1": 0.6375039164574443, "micro_f1": 0.6466504034528054, "per_symptom_f1": {"고열": 0.6576117713638936, "구토": 0.5921052631578947, "두통": 0.5168756027000965, "복통": 0.7945091514143094, "어지러움": 0.6542783059636992, "열상": 0.8759424263193969, "오심": 0.3883984867591425, "전신쇠약": 0.5675805675805676, "호흡곤란": 0.6902336728579987}, "empty_predictions": 287, "train_loss": 1.61310583128965, "train_bce": 0.3502386812036647, "train_soft_f1_loss": 0.6477336236775451, "train_soft_f1": 0.35226637632245494, "epoch_seconds": 1340.671966082, "ece": 0.03531678469692676, "brier": 0.08284671604633331, "ece_definition": "15 equal-width bins; flattened label-positive probabilities", "aux_macro_f1": 0.13549264287535034, "head_h_mean_abs_weight": 0.016012633219361305, "head_p_aux_mean_abs_weight": 0.014485527761280537, "training_collapse": false}
+seed=42 epoch=2 step=0 loss=1.3358
+seed=42 epoch=2 step=200 loss=1.6309
+seed=42 epoch=2 step=400 loss=1.2987
+seed=42 epoch=2 step=600 loss=1.5788
+seed=42 epoch=2 step=800 loss=1.2095
+seed=42 epoch=2 step=1000 loss=1.7965
+seed=42 epoch=2 step=1200 loss=1.3864
+seed=42 epoch=2 step=1400 loss=1.1366
+
+===== attempt 2 2026-10-10T19:42:01+00:00 colab-a commit=635842d419b0f1912968553f869e2387c6a50a6e =====
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/389 [00:01<10:00,  1.55s/it]
+Loading weights:   1%|▏         | 5/389 [00:03<03:48,  1.68it/s]
+Loading weights:   8%|▊         | 30/389 [00:03<00:34, 10.50it/s]
+Loading weights:   8%|▊         | 32/389 [00:05<00:49,  7.21it/s]
+Loading weights:   9%|▊         | 34/389 [00:06<01:18,  4.51it/s]
+Loading weights:  10%|█         | 40/389 [00:08<01:14,  4.68it/s]
+Loading weights:  11%|█         | 41/389 [00:08<01:31,  3.79it/s]
+Loading weights:  12%|█▏        | 46/389 [00:10<01:42,  3.35it/s]
+Loading weights:  12%|█▏        | 47/389 [00:12<02:33,  2.22it/s]
+Loading weights:  12%|█▏        | 48/389 [00:13<02:36,  2.18it/s]
+Loading weights:  13%|█▎        | 52/389 [00:13<01:48,  3.10it/s]
+Loading weights:  14%|█▍        | 54/389 [00:14<01:50,  3.04it/s]
+Loading weights:  14%|█▍        | 55/389 [00:15<02:14,  2.48it/s]
+Loading weights:  21%|██        | 80/389 [00:19<01:05,  4.70it/s]
+Loading weights:  22%|██▏       | 87/389 [00:20<00:59,  5.09it/s]
+Loading weights:  23%|██▎       | 90/389 [00:20<00:54,  5.48it/s]
+Loading weights:  24%|██▎       | 92/389 [00:21<01:02,  4.79it/s]
+Loading weights:  25%|██▍       | 96/389 [00:25<01:50,  2.65it/s]
+Loading weights:  26%|██▌       | 100/389 [00:26<01:39,  2.92it/s]
+Loading weights:  27%|██▋       | 104/389 [00:26<01:18,  3.62it/s]
+Loading weights:  28%|██▊       | 107/389 [00:27<01:23,  3.38it/s]
+Loading weights:  29%|██▉       | 114/389 [00:29<01:13,  3.75it/s]
+Loading weights:  30%|██▉       | 115/389 [00:30<01:22,  3.33it/s]
+Loading weights:  30%|███       | 117/389 [00:31<01:31,  2.99it/s]
+Loading weights:  31%|███       | 121/389 [00:31<01:18,  3.41it/s]
+Loading weights:  35%|███▌      | 138/389 [00:34<00:49,  5.12it/s]
+Loading weights:  37%|███▋      | 144/389 [00:35<00:50,  4.87it/s]
+Loading weights:  39%|███▉      | 153/389 [00:36<00:33,  6.97it/s]
+Loading weights:  40%|████      | 156/389 [00:39<01:11,  3.27it/s]
+Loading weights:  43%|████▎     | 166/389 [00:40<00:42,  5.26it/s]
+Loading weights:  44%|████▍     | 171/389 [00:40<00:34,  6.36it/s]
+Loading weights:  45%|████▍     | 174/389 [00:40<00:30,  6.96it/s]
+Loading weights:  45%|████▌     | 176/389 [00:42<00:49,  4.28it/s]
+Loading weights:  46%|████▌     | 178/389 [00:42<00:51,  4.12it/s]
+Loading weights:  47%|████▋     | 183/389 [00:43<00:38,  5.42it/s]
+Loading weights:  48%|████▊     | 188/389 [00:43<00:27,  7.38it/s]
+Loading weights:  49%|████▉     | 191/389 [00:45<00:55,  3.54it/s]
+Loading weights:  52%|█████▏    | 202/389 [00:46<00:27,  6.76it/s]
+Loading weights:  53%|█████▎    | 208/389 [00:47<00:28,  6.38it/s]
+Loading weights:  54%|█████▍    | 211/389 [00:48<00:39,  4.53it/s]
+Loading weights:  58%|█████▊    | 224/389 [00:52<00:40,  4.11it/s]
+Loading weights:  58%|█████▊    | 225/389 [00:52<00:39,  4.19it/s]
+Loading weights:  61%|██████    | 238/389 [00:53<00:23,  6.45it/s]
+Loading weights:  61%|██████▏   | 239/389 [00:54<00:30,  4.87it/s]
+Loading weights:  62%|██████▏   | 240/389 [00:54<00:30,  4.96it/s]
+Loading weights:  62%|██████▏   | 241/389 [00:54<00:29,  5.09it/s]
+Loading weights:  63%|██████▎   | 244/389 [00:55<00:32,  4.49it/s]
+Loading weights:  63%|██████▎   | 245/389 [00:56<00:42,  3.39it/s]
+Loading weights:  68%|██████▊   | 264/389 [00:56<00:09, 12.81it/s]
+Loading weights:  69%|██████▉   | 270/389 [00:57<00:11, 10.15it/s]
+Loading weights:  72%|███████▏  | 281/389 [01:01<00:19,  5.41it/s]
+Loading weights:  74%|███████▍  | 287/389 [01:01<00:16,  6.11it/s]
+Loading weights:  74%|███████▍  | 289/389 [01:02<00:17,  5.87it/s]
+Loading weights:  75%|███████▍  | 291/389 [01:03<00:25,  3.88it/s]
+Loading weights:  77%|███████▋  | 299/389 [01:04<00:17,  5.04it/s]
+Loading weights:  78%|███████▊  | 302/389 [01:06<00:20,  4.15it/s]
+Loading weights:  85%|████████▌ | 332/389 [01:06<00:04, 11.96it/s]
+Loading weights:  86%|████████▌ | 334/389 [01:08<00:08,  6.68it/s]
+Loading weights:  86%|████████▋ | 336/389 [01:10<00:10,  5.17it/s]
+Loading weights:  87%|████████▋ | 340/389 [01:11<00:09,  5.21it/s]
+Loading weights:  89%|████████▉ | 347/389 [01:11<00:06,  6.53it/s]
+Loading weights:  90%|████████▉ | 350/389 [01:12<00:08,  4.85it/s]
+Loading weights:  91%|█████████ | 354/389 [01:13<00:07,  4.84it/s]
+Loading weights:  92%|█████████▏| 358/389 [01:13<00:05,  6.15it/s]
+Loading weights:  94%|█████████▎| 364/389 [01:14<00:02,  8.70it/s]
+Loading weights:  94%|█████████▍| 366/389 [01:14<00:02,  9.11it/s]
+Loading weights:  95%|█████████▍| 368/389 [01:16<00:05,  3.63it/s]
+Loading weights: 100%|██████████| 389/389 [01:16<00:00,  5.09it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  72%|███████▏  | 280/389 [00:00<00:00, 2797.73it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2748.27it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=2 step=0 loss=1.3358
+seed=42 epoch=2 step=200 loss=1.6309
+seed=42 epoch=2 step=400 loss=1.2985
+seed=42 epoch=2 step=600 loss=1.5798
+seed=42 epoch=2 step=800 loss=1.2168
+seed=42 epoch=2 step=1000 loss=1.7878
+seed=42 epoch=2 step=1200 loss=1.3801
+seed=42 epoch=2 step=1400 loss=1.1343
+{"seed": 42, "epoch": 2, "macro_f1": 0.6410159600266596, "micro_f1": 0.6579214195183777, "per_symptom_f1": {"고열": 0.675531914893617, "구토": 0.6062143310082435, "두통": 0.5308310991957105, "복통": 0.7944664031620553, "어지러움": 0.6542597187758478, "열상": 0.8811674774148714, "오심": 0.34631317315658655, "전신쇠약": 0.5811209439528023, "호흡곤란": 0.699238578680203}, "empty_predictions": 216, "train_loss": 1.4343978664847326, "train_bce": 0.28662088024605037, "train_soft_f1_loss": 0.5764831736816255, "train_soft_f1": 0.4235168263183745, "epoch_seconds": 1563.113589785, "ece": 0.03730424779908648, "brier": 0.08004501461982727, "ece_definition": "15 equal-width bins; flattened label-positive probabilities", "aux_macro_f1": 0.2644537239673611, "head_h_mean_abs_weight": 0.016288282349705696, "head_p_aux_mean_abs_weight": 0.01451454684138298, "training_collapse": false}
+seed=42 epoch=3 step=0 loss=1.2643
+seed=42 epoch=3 step=200 loss=1.5651
+seed=42 epoch=3 step=400 loss=1.2880
+seed=42 epoch=3 step=600 loss=1.0628
+seed=42 epoch=3 step=800 loss=1.1577
+seed=42 epoch=3 step=1000 loss=1.6348
+seed=42 epoch=3 step=1200 loss=1.5288
+seed=42 epoch=3 step=1400 loss=1.2817
+{"seed": 42, "epoch": 3, "macro_f1": 0.644575323584051, "micro_f1": 0.6581473631716743, "per_symptom_f1": {"고열": 0.6698162729658793, "구토": 0.6081582200247219, "두통": 0.5203252032520326, "복통": 0.7973343786750294, "어지러움": 0.6590257879656161, "열상": 0.8901329601119664, "오심": 0.3673174258857556, "전신쇠약": 0.5888125613346418, "호흡곤란": 0.7002551020408163}, "empty_predictions": 180, "train_loss": 1.37518311518557, "train_bce": 0.2611947317065968, "train_soft_f1_loss": 0.5521938231450927, "train_soft_f1": 0.4478061768549073, "epoch_seconds": 1590.809004793, "ece": 0.0431984064396556, "brier": 0.08162400126457214, "ece_definition": "15 equal-width bins; flattened label-positive probabilities", "aux_macro_f1": 0.28806543691124603, "head_h_mean_abs_weight": 0.01640075072646141, "head_p_aux_mean_abs_weight": 0.014532589353621006, "training_collapse": false}
