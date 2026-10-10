@@ -1,0 +1,47 @@
+
+===== attempt 1 2026-10-10T05:48:21+00:00 colab-b commit=bb9921b0a2f12e7d8d2cc0f2053f53221cf41a91 =====
+
+Loading weights:   0%|          | 0/266 [00:00<?, ?it/s]
+Loading weights:   1%|          | 2/266 [00:00<02:01,  2.18it/s]
+Loading weights:   6%|▋         | 17/266 [00:01<00:23, 10.41it/s]
+Loading weights:   7%|▋         | 19/266 [00:02<00:32,  7.54it/s]
+Loading weights:  11%|█▏        | 30/266 [00:03<00:25,  9.23it/s]
+Loading weights:  13%|█▎        | 35/266 [00:04<00:26,  8.63it/s]
+Loading weights:  14%|█▍        | 37/266 [00:05<00:37,  6.06it/s]
+Loading weights:  18%|█▊        | 47/266 [00:05<00:27,  8.11it/s]
+Loading weights:  20%|█▉        | 52/266 [00:07<00:32,  6.65it/s]
+Loading weights:  20%|█▉        | 53/266 [00:08<00:48,  4.41it/s]
+Loading weights:  21%|██        | 56/266 [00:08<00:38,  5.40it/s]
+Loading weights:  25%|██▌       | 67/266 [00:10<00:34,  5.71it/s]
+Loading weights:  30%|███       | 80/266 [00:10<00:18, 10.25it/s]
+Loading weights:  32%|███▏      | 85/266 [00:11<00:19,  9.17it/s]
+Loading weights:  40%|███▉      | 106/266 [00:12<00:10, 14.76it/s]
+Loading weights:  41%|████      | 109/266 [00:12<00:13, 11.66it/s]
+Loading weights:  48%|████▊     | 128/266 [00:14<00:12, 11.46it/s]
+Loading weights:  56%|█████▌    | 149/266 [00:15<00:07, 15.07it/s]
+Loading weights:  59%|█████▊    | 156/266 [00:15<00:06, 16.86it/s]
+Loading weights:  61%|██████    | 162/266 [00:16<00:07, 13.64it/s]
+Loading weights:  69%|██████▉   | 184/266 [00:17<00:04, 17.65it/s]
+Loading weights:  73%|███████▎  | 194/266 [00:17<00:03, 21.06it/s]
+Loading weights:  74%|███████▍  | 198/266 [00:17<00:03, 22.09it/s]
+Loading weights:  76%|███████▌  | 202/266 [00:18<00:04, 14.53it/s]
+Loading weights:  83%|████████▎ | 220/266 [00:20<00:04, 11.27it/s]
+Loading weights:  95%|█████████▌| 253/266 [00:21<00:00, 16.24it/s]
+Loading weights: 100%|██████████| 266/266 [00:21<00:00, 12.34it/s]
+/usr/local/lib/python3.13/dist-packages/torch/nn/functional.py:6409: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  key_padding_mask = _canonical_mask(
+Completed feature chunk 0:2000
+Completed feature chunk 2000:4000
+Completed feature chunk 4000:6000
+Completed feature chunk 6000:8000
+Completed feature chunk 8000:10000
+Completed feature chunk 10000:12000
+Completed feature chunk 12000:14000
+Completed feature chunk 14000:16000
+Completed feature chunk 16000:18000
+Completed feature chunk 18000:20000
+Completed feature chunk 20000:22000
+Completed feature chunk 22000:24000
+Completed feature chunk 24000:26000
+
+[runner] budget_hours 초과로 중단
