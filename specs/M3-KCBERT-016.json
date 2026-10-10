@@ -10,7 +10,7 @@
     "value": 0.6265
   },
   "branch": "sooyah/lab-m3-kcbert-016",
-  "commit": "",
+  "commit": "5fe2cbb4396e13b914ad839ace86a2efb14eeffa",
   "command": "python scripts/lab/m3-kcbert-016.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "λ=0.1·0.3 각각 3-seed 평균으로 판단. 채택 조건(둘 중 하나): (a) Macro F1이 0.6265보다 +0.01 이상 높고 최소 2개 seed가 0.6265 초과, 또는 (b) Macro F1이 0.6265와 0.005 이내이면서 3-seed 평균 ECE와 Brier가 모두 KCBERT-012(같은 스크립트로 재계산한 값)보다 낮음. threshold >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). λ ∈ {0, 0.1, 0.3, 1}의 seed별·평균 Macro/Micro/증상별 F1, ECE(증상별 15구간 평균), Brier, 평균 예측 확률 − 실제 양성 비율, 0.5 이상 예측 비율, 빈 예측 수, epoch별 holdout Macro F1, seed 표준편차를 한 표로 기록",
