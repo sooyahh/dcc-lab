@@ -12,7 +12,7 @@
 - 워커별 상태: Drive `dcc_lab/status/heartbeat_colab-a.json`, `heartbeat_colab-b.json` (`heartbeat.json`은 마지막 기록자라 판단에 쓰지 않는다)
 - 워커 이름은 노트북이 고정한다. 러너는 자기 이름의 작업만 이어받으므로, 끊긴 워커는 **같은 노트북**으로 다시 켜야 작업이 재개된다
 
-## 작업 A — 정기 점검 (예약: 1시간마다)
+## 작업 A — 정기 점검 (예약: 20분마다, 매시 11·31·51분)
 - GitHub Actions의 예약 watchdog은 몇 시간씩 건너뛸 때가 있어 러너 재기동은 이 점검이 주 경로다. 점검 자체는 Drive 파일 2개 읽기라 가볍다
 1. `heartbeat_colab-a.json`, `heartbeat_colab-b.json`을 읽는다 (Drive 커넥터)
 2. 워커마다 판단:
