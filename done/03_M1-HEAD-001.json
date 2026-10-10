@@ -1,0 +1,308 @@
+{
+  "spec": {
+    "exp_id": "M1-HEAD-001",
+    "mission": 1,
+    "title": "52D + x-vector 결합 특징에 RBF-SVM 헤드 (캐시 특징 재사용, Training 8:2 holdout)",
+    "hypothesis": "현재 헤드(StandardScaler+LogisticRegression)는 선형이라 52D 음향 특징(피치·스펙트럼)과 512차원 x-vector 사이의 상호작용을 쓰지 못한다. 같은 564차원 입력에 RBF 커널 SVM을 쓰면 경계 근처의 오답이 줄어, 같은 분할의 M1-XVEC-001 결합 LR보다 holdout 정확도가 높다",
+    "change_vs_baseline": "입력·분할은 그대로 두고 헤드만 바꾼다. M1-XVEC-001의 $DCC_RUN_ROOT/lab/M1-XVEC-001/features/chunk_*.npz(acoustic 52D, xvector 512D)와 split.json(train 23,360 / holdout 5,840통화)을 읽어 564D 결합 특징을 만든다. 비교 헤드: (b) StandardScaler+LogisticRegression(mission1_train._build_lr_pipeline 설정 그대로, M1-XVEC-001 결합 재현) (e) StandardScaler+SVC(kernel='rbf', gamma='scale', class_weight=None). C는 train 23,360통화 안에서만 성별 층화 5-fold CV 정확도로 {0.3, 1, 3} 중 고르고(같은 값이면 작은 C), 고른 C로 train 전체에 다시 학습한다. holdout은 C 선택에 쓰지 않는다. 판정은 SVC.predict(decision_function 0 기준, 조정 없음). 진단용 (f) HistGradientBoostingClassifier(기본값, random_state=42), (g) MLPClassifier(hidden_layer_sizes=(256,), early_stopping=True, validation_fraction=0.1, random_state=42, StandardScaler 뒤)도 같은 분할로 학습해 기록만 한다(주 지표 아님)",
+    "baseline": {
+      "exp_id": "M1-XVEC-001",
+      "metric": "accuracy (Training 8:2 stratified holdout, seed 42, 52D + 앞 20초 x-vector 결합 LR)",
+      "value": 0.9738
+    },
+    "branch": "sooyah/lab-m1-head-001",
+    "commit": "1aef54a5a9e1c6abd4769345f151db9199870d6a",
+    "command": "python scripts/lab/m1-head-001.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "M1-XVEC-001과 같은 Training 29,200통화 성별 층화 8:2 분할(seed 42)의 holdout 5,840통화에서 주 지표 (e) RBF-SVM 정확도가 같은 실행의 (b)보다 +0.4%p 이상이고, (b) 대비 (e) paired McNemar 정확검정 p < 0.05. 주 지표는 (e)로 사전 고정(holdout에서 헤드·C를 고르지 않음, (f)(g)는 진단용). (b)가 0.9738에서 ±0.2%p 밖이면 재현 실패로 기록. metrics.json에 (b)(e)(f)(g) 정확도·성별 recall·혼동행렬, (b)·(e) McNemar 2×2 칸과 p값, C별 5-fold CV 정확도 평균·표준편차와 고른 C, (b)와 (e)의 오답 겹침 수(둘 다 틀림/한쪽만 틀림), 신고자 구간 길이 구간별(≤20초, 20~40초, 40초 초과) (b)(e) 정확도, 헤드별 학습 시간과 holdout 5,840통화 예측 시간(제출 추론 비용), seed 기록",
+    "gpu": "none",
+    "budget_hours": 2,
+    "priority": 3,
+    "notes": "새 특징 추출 없음. $DCC_RUN_ROOT/lab/M1-XVEC-001/features/chunk_*.npz와 split.json이 없거나 행 수(29,200)·분할 크기(23,360/5,840)가 맞지 않으면 main() 시작 직후 바로 실패한다(다시 추출하지 않는다). Validation 폴더는 읽지 않는다. 성별 라벨은 정답으로만 쓴다. 전처리 통계(StandardScaler)는 각 fold/train에서만 추정한다. 재개: CV 결과(C별 fold 정확도)와 헤드별 학습 결과를 LAB_OUT에 단계별 json·joblib로 저장하고, 다시 실행하면 끝난 단계는 건너뛴다. seed 42 고정(random, numpy, CV 분할 StratifiedKFold(shuffle=True, random_state=42)). 학습 헤드별 holdout 확률을 seed_42/holdout_probs.npy로 저장(행 순서 = seed_42/val_files.txt; 열 = (b) LR predict_proba[:,1], (e) SVM decision_function, (f) HGB predict_proba[:,1], (g) MLP predict_proba[:,1]; 열 이름은 seed_42/holdout_probs_columns.json). 최종 ckpt는 (e) 파이프라인 joblib.dump → best.ckpt. 새 패키지 없음(scikit-learn 기존 버전). 승인 시 Codex가 scripts/lab/m1-head-001.py로 구현(M1-XVEC-001 스크립트의 특징 로드·분할·평가 코드 재사용 가능)"
+  },
+  "commit": "1aef54a5a9e1c6abd4769345f151db9199870d6a",
+  "submitted_at": "2026-10-10T19:54:50+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-a",
+  "claimed_at": "2026-10-10T11:22:36+00:00",
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-10T11:30:26+00:00",
+  "elapsed_min": 7.6,
+  "metrics": {
+    "exp_id": "M1-HEAD-001",
+    "primary_metric": {
+      "name": "accuracy",
+      "value": 0.977054794520548,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "heads": {
+        "b": {
+          "accuracy": 0.9738013698630137,
+          "confusion_matrix_labels": [
+            "F",
+            "M"
+          ],
+          "confusion_matrix": [
+            [
+              3038,
+              70
+            ],
+            [
+              83,
+              2649
+            ]
+          ],
+          "recall_F": 0.9774774774774775,
+          "recall_M": 0.969619326500732,
+          "n_samples": 5840,
+          "n_F": 3108,
+          "n_M": 2732,
+          "fit_seconds": 5.912750982002763,
+          "holdout_predict_seconds": 0.08693682200100739
+        },
+        "e": {
+          "accuracy": 0.977054794520548,
+          "confusion_matrix_labels": [
+            "F",
+            "M"
+          ],
+          "confusion_matrix": [
+            [
+              3051,
+              57
+            ],
+            [
+              77,
+              2655
+            ]
+          ],
+          "recall_F": 0.9816602316602316,
+          "recall_M": 0.9718155197657394,
+          "n_samples": 5840,
+          "n_F": 3108,
+          "n_M": 2732,
+          "fit_seconds": 32.63277519500116,
+          "holdout_predict_seconds": 7.048179189994698
+        },
+        "f": {
+          "accuracy": 0.9758561643835616,
+          "confusion_matrix_labels": [
+            "F",
+            "M"
+          ],
+          "confusion_matrix": [
+            [
+              3051,
+              57
+            ],
+            [
+              84,
+              2648
+            ]
+          ],
+          "recall_F": 0.9816602316602316,
+          "recall_M": 0.9692532942898975,
+          "n_samples": 5840,
+          "n_F": 3108,
+          "n_M": 2732,
+          "fit_seconds": 13.423944574002235,
+          "holdout_predict_seconds": 0.14471986099670175
+        },
+        "g": {
+          "accuracy": 0.9773972602739726,
+          "confusion_matrix_labels": [
+            "F",
+            "M"
+          ],
+          "confusion_matrix": [
+            [
+              3050,
+              58
+            ],
+            [
+              74,
+              2658
+            ]
+          ],
+          "recall_F": 0.9813384813384813,
+          "recall_M": 0.972913616398243,
+          "n_samples": 5840,
+          "n_F": 3108,
+          "n_M": 2732,
+          "fit_seconds": 14.812033140005951,
+          "holdout_predict_seconds": 0.043882688994926866
+        }
+      },
+      "cv": {
+        "0.3": {
+          "folds": [
+            {
+              "C": 0.3,
+              "fold": 0,
+              "accuracy": 0.9762414383561644,
+              "seconds": 23.42479618399375
+            },
+            {
+              "C": 0.3,
+              "fold": 1,
+              "accuracy": 0.9747431506849316,
+              "seconds": 20.66252508299658
+            },
+            {
+              "C": 0.3,
+              "fold": 2,
+              "accuracy": 0.978595890410959,
+              "seconds": 22.643838351999875
+            },
+            {
+              "C": 0.3,
+              "fold": 3,
+              "accuracy": 0.9762414383561644,
+              "seconds": 20.207231357999262
+            },
+            {
+              "C": 0.3,
+              "fold": 4,
+              "accuracy": 0.9777397260273972,
+              "seconds": 20.81448526299937
+            }
+          ],
+          "mean": 0.9767123287671232,
+          "std": 0.0013360005594458182,
+          "std_ddof": 0
+        },
+        "1.0": {
+          "folds": [
+            {
+              "C": 1.0,
+              "fold": 0,
+              "accuracy": 0.9766695205479452,
+              "seconds": 21.48777027500182
+            },
+            {
+              "C": 1.0,
+              "fold": 1,
+              "accuracy": 0.9788099315068494,
+              "seconds": 22.79235231000348
+            },
+            {
+              "C": 1.0,
+              "fold": 2,
+              "accuracy": 0.979666095890411,
+              "seconds": 21.781351792997157
+            },
+            {
+              "C": 1.0,
+              "fold": 3,
+              "accuracy": 0.978595890410959,
+              "seconds": 23.79675576099544
+            },
+            {
+              "C": 1.0,
+              "fold": 4,
+              "accuracy": 0.9779537671232876,
+              "seconds": 21.486517940997146
+            }
+          ],
+          "mean": 0.9783390410958905,
+          "std": 0.0009984506669255824,
+          "std_ddof": 0
+        },
+        "3.0": {
+          "folds": [
+            {
+              "C": 3.0,
+              "fold": 0,
+              "accuracy": 0.9762414383561644,
+              "seconds": 26.040037307000603
+            },
+            {
+              "C": 3.0,
+              "fold": 1,
+              "accuracy": 0.9805222602739726,
+              "seconds": 27.238249909998558
+            },
+            {
+              "C": 3.0,
+              "fold": 2,
+              "accuracy": 0.980736301369863,
+              "seconds": 25.364903654000955
+            },
+            {
+              "C": 3.0,
+              "fold": 3,
+              "accuracy": 0.978167808219178,
+              "seconds": 25.47068921200116
+            },
+            {
+              "C": 3.0,
+              "fold": 4,
+              "accuracy": 0.9777397260273972,
+              "seconds": 24.796748754000873
+            }
+          ],
+          "mean": 0.978681506849315,
+          "std": 0.0017155363792392036,
+          "std_ddof": 0
+        }
+      },
+      "selected_C": 3.0,
+      "accuracy_gain": 0.0032534246575343095,
+      "baseline_reference": 0.9738,
+      "baseline_reproduced": true,
+      "success_criteria_met": false,
+      "paired_mcnemar": {
+        "table": [
+          [
+            5671,
+            16
+          ],
+          [
+            35,
+            118
+          ]
+        ],
+        "rows": [
+          "b_correct",
+          "b_wrong"
+        ],
+        "columns": [
+          "e_correct",
+          "e_wrong"
+        ],
+        "exact_two_sided_p": 0.010973562899720513
+      },
+      "error_overlap": {
+        "both_wrong": 118,
+        "b_only_wrong": 35,
+        "e_only_wrong": 16
+      },
+      "duration_bins": {
+        "<=20s": {
+          "rows": 903,
+          "b_accuracy": 0.9745293466223699,
+          "e_accuracy": 0.9756367663344407
+        },
+        "20-40s": {
+          "rows": 3349,
+          "b_accuracy": 0.9764108689160944,
+          "e_accuracy": 0.9802926246640788
+        },
+        ">40s": {
+          "rows": 1588,
+          "b_accuracy": 0.9678841309823678,
+          "e_accuracy": 0.9710327455919395
+        }
+      }
+    },
+    "seed": 42,
+    "train_rows": 23360,
+    "eval_rows": 5840,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Fixed primary head (e); (f)/(g) diagnostic only. No official Validation. Interrupted sklearn fits restart; completed folds/heads resume. LR reproduced."
+  }
+}

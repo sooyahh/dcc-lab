@@ -1,0 +1,275 @@
+{
+  "exp_id": "M1-HEAD-001",
+  "primary_metric": {
+    "name": "accuracy",
+    "value": 0.977054794520548,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "heads": {
+      "b": {
+        "accuracy": 0.9738013698630137,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3038,
+            70
+          ],
+          [
+            83,
+            2649
+          ]
+        ],
+        "recall_F": 0.9774774774774775,
+        "recall_M": 0.969619326500732,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732,
+        "fit_seconds": 5.912750982002763,
+        "holdout_predict_seconds": 0.08693682200100739
+      },
+      "e": {
+        "accuracy": 0.977054794520548,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3051,
+            57
+          ],
+          [
+            77,
+            2655
+          ]
+        ],
+        "recall_F": 0.9816602316602316,
+        "recall_M": 0.9718155197657394,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732,
+        "fit_seconds": 32.63277519500116,
+        "holdout_predict_seconds": 7.048179189994698
+      },
+      "f": {
+        "accuracy": 0.9758561643835616,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3051,
+            57
+          ],
+          [
+            84,
+            2648
+          ]
+        ],
+        "recall_F": 0.9816602316602316,
+        "recall_M": 0.9692532942898975,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732,
+        "fit_seconds": 13.423944574002235,
+        "holdout_predict_seconds": 0.14471986099670175
+      },
+      "g": {
+        "accuracy": 0.9773972602739726,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3050,
+            58
+          ],
+          [
+            74,
+            2658
+          ]
+        ],
+        "recall_F": 0.9813384813384813,
+        "recall_M": 0.972913616398243,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732,
+        "fit_seconds": 14.812033140005951,
+        "holdout_predict_seconds": 0.043882688994926866
+      }
+    },
+    "cv": {
+      "0.3": {
+        "folds": [
+          {
+            "C": 0.3,
+            "fold": 0,
+            "accuracy": 0.9762414383561644,
+            "seconds": 23.42479618399375
+          },
+          {
+            "C": 0.3,
+            "fold": 1,
+            "accuracy": 0.9747431506849316,
+            "seconds": 20.66252508299658
+          },
+          {
+            "C": 0.3,
+            "fold": 2,
+            "accuracy": 0.978595890410959,
+            "seconds": 22.643838351999875
+          },
+          {
+            "C": 0.3,
+            "fold": 3,
+            "accuracy": 0.9762414383561644,
+            "seconds": 20.207231357999262
+          },
+          {
+            "C": 0.3,
+            "fold": 4,
+            "accuracy": 0.9777397260273972,
+            "seconds": 20.81448526299937
+          }
+        ],
+        "mean": 0.9767123287671232,
+        "std": 0.0013360005594458182,
+        "std_ddof": 0
+      },
+      "1.0": {
+        "folds": [
+          {
+            "C": 1.0,
+            "fold": 0,
+            "accuracy": 0.9766695205479452,
+            "seconds": 21.48777027500182
+          },
+          {
+            "C": 1.0,
+            "fold": 1,
+            "accuracy": 0.9788099315068494,
+            "seconds": 22.79235231000348
+          },
+          {
+            "C": 1.0,
+            "fold": 2,
+            "accuracy": 0.979666095890411,
+            "seconds": 21.781351792997157
+          },
+          {
+            "C": 1.0,
+            "fold": 3,
+            "accuracy": 0.978595890410959,
+            "seconds": 23.79675576099544
+          },
+          {
+            "C": 1.0,
+            "fold": 4,
+            "accuracy": 0.9779537671232876,
+            "seconds": 21.486517940997146
+          }
+        ],
+        "mean": 0.9783390410958905,
+        "std": 0.0009984506669255824,
+        "std_ddof": 0
+      },
+      "3.0": {
+        "folds": [
+          {
+            "C": 3.0,
+            "fold": 0,
+            "accuracy": 0.9762414383561644,
+            "seconds": 26.040037307000603
+          },
+          {
+            "C": 3.0,
+            "fold": 1,
+            "accuracy": 0.9805222602739726,
+            "seconds": 27.238249909998558
+          },
+          {
+            "C": 3.0,
+            "fold": 2,
+            "accuracy": 0.980736301369863,
+            "seconds": 25.364903654000955
+          },
+          {
+            "C": 3.0,
+            "fold": 3,
+            "accuracy": 0.978167808219178,
+            "seconds": 25.47068921200116
+          },
+          {
+            "C": 3.0,
+            "fold": 4,
+            "accuracy": 0.9777397260273972,
+            "seconds": 24.796748754000873
+          }
+        ],
+        "mean": 0.978681506849315,
+        "std": 0.0017155363792392036,
+        "std_ddof": 0
+      }
+    },
+    "selected_C": 3.0,
+    "accuracy_gain": 0.0032534246575343095,
+    "baseline_reference": 0.9738,
+    "baseline_reproduced": true,
+    "success_criteria_met": false,
+    "paired_mcnemar": {
+      "table": [
+        [
+          5671,
+          16
+        ],
+        [
+          35,
+          118
+        ]
+      ],
+      "rows": [
+        "b_correct",
+        "b_wrong"
+      ],
+      "columns": [
+        "e_correct",
+        "e_wrong"
+      ],
+      "exact_two_sided_p": 0.010973562899720513
+    },
+    "error_overlap": {
+      "both_wrong": 118,
+      "b_only_wrong": 35,
+      "e_only_wrong": 16
+    },
+    "duration_bins": {
+      "<=20s": {
+        "rows": 903,
+        "b_accuracy": 0.9745293466223699,
+        "e_accuracy": 0.9756367663344407
+      },
+      "20-40s": {
+        "rows": 3349,
+        "b_accuracy": 0.9764108689160944,
+        "e_accuracy": 0.9802926246640788
+      },
+      ">40s": {
+        "rows": 1588,
+        "b_accuracy": 0.9678841309823678,
+        "e_accuracy": 0.9710327455919395
+      }
+    }
+  },
+  "seed": 42,
+  "train_rows": 23360,
+  "eval_rows": 5840,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "notes": "Fixed primary head (e); (f)/(g) diagnostic only. No official Validation. Interrupted sklearn fits restart; completed folds/heads resume. LR reproduced."
+}
