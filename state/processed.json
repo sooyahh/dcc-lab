@@ -27,7 +27,8 @@
   "failed/02_M3-ROBERTA-003.json@2026-10-09T22:25:18+00:00",
   "done/02_M3-ROBERTA-003.json@2026-10-09T23:17:44+00:00",
   "done/02_M1-XVEC-001.json@2026-10-10T02:18:47+00:00",
-  "done/01_M3-KCBERT-016.json@2026-10-10T04:17:19+00:00"
+  "done/01_M3-KCBERT-016.json@2026-10-10T04:17:19+00:00",
+  "done/02_M3-ENS-001.json@2026-10-10T05:14:53+00:00"
  ],
  "implemented_issues": [
   1,
@@ -123,7 +124,8 @@
   112,
   121,
   120,
-  122
+  122,
+  123
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -164,6 +166,7 @@
   "M3-KCBERT-015 judged 기각 (mean Macro F1 0.6249, -0.0016 vs 012, 1 seed above); team log PR #111, code PR #110 closed, issue #21 closed. No new proposal: M3 loss axis exhausted pending ROBERTA-003, remaining ideas are fine-tuning variants",
   "PR #112 (M1-XVEC-001 code, lab-adopted) merged (merge-gate success)",
   "M3-ROBERTA-004 PR #119 0eaac55 review PASS; submitted",
-  "PR #121 (log ROBERTA-003) and #120 (symptom lift heatmap docs) merged (merge-gate success)"
+  "PR #121 (log ROBERTA-003) and #120 (symptom lift heatmap docs) merged (merge-gate success)",
+  "M3-ENS-001 judged 기각 (3-seed 평균 Macro F1 0.6455, +0.0028 vs ROBERTA-003 0.6427 < +0.01); team log PR #124, code PR #115 closed, issue #23 closed. PR #123 (docs, ROBERTA-002 vs 003 calibration) merged (merge-gate success). No new proposal: open proposals #24, #26 at max_workers=2"
  ]
 }
