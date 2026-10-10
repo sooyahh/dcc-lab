@@ -1,0 +1,113 @@
+
+===== attempt 1 2026-10-10T04:18:07+00:00 colab-b commit=0eaac55c75493f602f558d3d12291512df745b1f =====
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:   3%|▎         | 12/389 [00:01<00:42,  8.84it/s]
+Loading weights:   4%|▍         | 15/389 [00:02<01:06,  5.65it/s]
+Loading weights:   4%|▍         | 17/389 [00:04<02:01,  3.06it/s]
+Loading weights:   5%|▍         | 18/389 [00:05<02:26,  2.53it/s]
+Loading weights:   9%|▉         | 35/389 [00:06<00:52,  6.75it/s]
+Loading weights:  12%|█▏        | 46/389 [00:06<00:31, 10.79it/s]
+Loading weights:  13%|█▎        | 50/389 [00:08<00:54,  6.22it/s]
+Loading weights:  15%|█▍        | 58/389 [00:09<00:52,  6.31it/s]
+Loading weights:  19%|█▉        | 75/389 [00:09<00:26, 11.74it/s]
+Loading weights:  20%|██        | 79/389 [00:10<00:32,  9.44it/s]
+Loading weights:  24%|██▍       | 95/389 [00:11<00:24, 12.12it/s]
+Loading weights:  26%|██▌       | 100/389 [00:12<00:31,  9.24it/s]
+Loading weights:  30%|██▉       | 115/389 [00:12<00:18, 15.13it/s]
+Loading weights:  31%|███       | 121/389 [00:14<00:24, 10.74it/s]
+Loading weights:  36%|███▌      | 140/389 [00:15<00:20, 12.33it/s]
+Loading weights:  37%|███▋      | 144/389 [00:15<00:20, 12.21it/s]
+Loading weights:  39%|███▉      | 153/389 [00:16<00:19, 11.88it/s]
+Loading weights:  44%|████▎     | 170/389 [00:17<00:15, 14.44it/s]
+Loading weights:  46%|████▌     | 179/389 [00:17<00:11, 18.03it/s]
+Loading weights:  48%|████▊     | 188/389 [00:17<00:10, 18.80it/s]
+Loading weights:  50%|████▉     | 194/389 [00:18<00:10, 18.11it/s]
+Loading weights:  51%|█████     | 198/389 [00:18<00:10, 18.54it/s]
+Loading weights:  53%|█████▎    | 206/389 [00:18<00:08, 21.65it/s]
+Loading weights:  54%|█████▍    | 212/389 [00:19<00:08, 20.68it/s]
+Loading weights:  55%|█████▌    | 215/389 [00:19<00:08, 20.24it/s]
+Loading weights:  57%|█████▋    | 220/389 [00:19<00:11, 14.93it/s]
+Loading weights:  57%|█████▋    | 222/389 [00:20<00:17,  9.59it/s]
+Loading weights:  60%|██████    | 234/389 [00:21<00:15,  9.70it/s]
+Loading weights:  61%|██████    | 236/389 [00:22<00:23,  6.42it/s]
+Loading weights:  66%|██████▌   | 257/389 [00:23<00:08, 15.32it/s]
+Loading weights:  72%|███████▏  | 279/389 [00:23<00:04, 27.10it/s]
+Loading weights:  74%|███████▎  | 286/389 [00:23<00:03, 26.49it/s]
+Loading weights:  75%|███████▌  | 292/389 [00:23<00:04, 23.40it/s]
+Loading weights:  77%|███████▋  | 300/389 [00:24<00:03, 27.67it/s]
+Loading weights:  78%|███████▊  | 305/389 [00:24<00:04, 20.78it/s]
+Loading weights:  80%|████████  | 312/389 [00:24<00:03, 23.68it/s]
+Loading weights:  84%|████████▎ | 325/389 [00:25<00:03, 21.03it/s]
+Loading weights:  85%|████████▍ | 329/389 [00:25<00:03, 19.33it/s]
+Loading weights:  85%|████████▌ | 332/389 [00:27<00:06,  8.64it/s]
+Loading weights:  88%|████████▊ | 342/389 [00:27<00:04, 10.35it/s]
+Loading weights:  90%|████████▉ | 350/389 [00:28<00:03, 12.80it/s]
+Loading weights:  91%|█████████ | 353/389 [00:28<00:02, 12.37it/s]
+Loading weights:  92%|█████████▏| 358/389 [00:28<00:02, 13.80it/s]
+Loading weights:  95%|█████████▌| 370/389 [00:29<00:01, 16.88it/s]
+Loading weights: 100%|██████████| 389/389 [00:29<00:00, 13.26it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  19%|█▉        | 75/389 [00:00<00:00, 727.87it/s]
+Loading weights:  38%|███▊      | 148/389 [00:00<00:00, 698.99it/s]
+Loading weights:  56%|█████▌    | 218/389 [00:00<00:00, 641.37it/s]
+Loading weights:  74%|███████▍  | 289/389 [00:00<00:00, 665.93it/s]
+Loading weights:  98%|█████████▊| 382/389 [00:00<00:00, 749.16it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 719.30it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=1 step=0 loss=1.7972
+seed=42 epoch=1 step=200 loss=1.3075
+seed=42 epoch=1 step=400 loss=0.9417
+seed=42 epoch=1 step=600 loss=0.8728
+seed=42 epoch=1 step=800 loss=1.2903
+seed=42 epoch=1 step=1000 loss=1.2584
+seed=42 epoch=1 step=1200 loss=0.9866
+seed=42 epoch=1 step=1400 loss=1.0338
+{"seed": 42, "epoch": 1, "macro_f1": 0.6358885411650239, "micro_f1": 0.6451210381831795, "per_symptom_f1": {"고열": 0.6525472238122496, "구토": 0.5957957957957958, "두통": 0.511070110701107, "복통": 0.7942148760330578, "어지러움": 0.6525063721325404, "열상": 0.8716577540106952, "오심": 0.3893591293833132, "전신쇠약": 0.5686475409836066, "호흡곤란": 0.6871980676328503}, "empty_predictions": 257, "train_loss": 1.079647037177076, "train_bce": 0.34686051919465594, "train_soft_f1_loss": 0.6464379205535881, "train_soft_f1": 0.35356207944641194, "epoch_seconds": 1479.378459032001, "ece": 0.05114415923165723, "per_symptom_ece": {"고열": 0.040714161125145525, "구토": 0.05010086017820305, "두통": 0.047215294185832896, "복통": 0.03630206039019742, "어지러움": 0.05150255195420874, "열상": 0.024714861904658138, "오심": 0.10995577515787265, "전신쇠약": 0.05574355464498126, "호흡곤란": 0.04404831354381537}, "brier": 0.08336513489484787, "per_symptom_brier": {"고열": 0.08482925593852997, "구토": 0.0921313539147377, "두통": 0.07135824114084244, "복통": 0.0731431394815445, "어지러움": 0.1056796982884407, "열상": 0.025396021082997322, "오심": 0.11624971777200699, "전신쇠약": 0.10944461077451706, "호흡곤란": 0.0720541700720787}, "probability_minus_prevalence": 0.02567492425441742, "per_symptom_probability_minus_prevalence": {"고열": -0.02232581377029419, "구토": 0.05010129511356354, "두통": 0.04721546173095703, "복통": -0.02188822627067566, "어지러움": 0.006861507892608643, "열상": 0.02471492439508438, "오심": 0.10995536297559738, "전신쇠약": 0.002694040536880493, "호흡곤란": 0.033747196197509766}, "aux_holdout_macro_f1": 0.0, "train_aux_bce": 0.1726972006543992, "training_collapse": false}
+seed=42 epoch=2 step=0 loss=0.8155
+seed=42 epoch=2 step=200 loss=1.0809
+seed=42 epoch=2 step=400 loss=0.7837
+seed=42 epoch=2 step=600 loss=1.0859
+seed=42 epoch=2 step=800 loss=0.7191
+seed=42 epoch=2 step=1000 loss=1.2174
+seed=42 epoch=2 step=1200 loss=0.8605
+seed=42 epoch=2 step=1400 loss=0.6497
+{"seed": 42, "epoch": 2, "macro_f1": 0.6443439068265717, "micro_f1": 0.6605193827625141, "per_symptom_f1": {"고열": 0.6601036269430052, "구토": 0.607741935483871, "두통": 0.5237651444547996, "복통": 0.7940133910988578, "어지러움": 0.6682847896440129, "열상": 0.8862526168876483, "오심": 0.3679619349722443, "전신쇠약": 0.588404408241495, "호흡곤란": 0.7025673137132122}, "empty_predictions": 179, "train_loss": 0.9102001355290006, "train_bce": 0.286153617906381, "train_soft_f1_loss": 0.573789090753335, "train_soft_f1": 0.42621090924666505, "epoch_seconds": 1485.0053842569996, "ece": 0.04329689215056019, "per_symptom_ece": {"고열": 0.04958445389719053, "구토": 0.03563792570185389, "두통": 0.03097424118905662, "복통": 0.04544493985858885, "어지러움": 0.053081800759826575, "열상": 0.012965066894214824, "오심": 0.07029167757348997, "전신쇠약": 0.05392397509422154, "호흡곤란": 0.03776794838659897}, "brier": 0.08060751110315323, "per_symptom_brier": {"고열": 0.08861882984638214, "구토": 0.08796197175979614, "두통": 0.07015644758939743, "복통": 0.07360773533582687, "어지러움": 0.10644159466028214, "열상": 0.02169700711965561, "오심": 0.1007610559463501, "전신쇠약": 0.10896029323339462, "호흡곤란": 0.06726289540529251}, "probability_minus_prevalence": 0.023643672466278076, "per_symptom_probability_minus_prevalence": {"고열": 0.014173433184623718, "구토": 0.011916860938072205, "두통": 0.025107428431510925, "복통": -0.008512675762176514, "어지러움": 0.025171950459480286, "열상": 0.009743548929691315, "오심": 0.07029183954000473, "전신쇠약": 0.031112492084503174, "호흡곤란": 0.03378908336162567}, "aux_holdout_macro_f1": 0.0005964214711729622, "train_aux_bce": 0.10051486189894109, "training_collapse": false}
+seed=42 epoch=3 step=0 loss=0.7039
+seed=42 epoch=3 step=200 loss=0.9934
+seed=42 epoch=3 step=400 loss=0.7958
+seed=42 epoch=3 step=600 loss=0.5846
+seed=42 epoch=3 step=800 loss=0.6447
+seed=42 epoch=3 step=1000 loss=1.1205
+seed=42 epoch=3 step=1200 loss=0.9344
+seed=42 epoch=3 step=1400 loss=0.7866
+{"seed": 42, "epoch": 3, "macro_f1": 0.6474453521788496, "micro_f1": 0.6601797334986055, "per_symptom_f1": {"고열": 0.6684266103484688, "구토": 0.6156739811912225, "두통": 0.5131810193321616, "복통": 0.7992141453831041, "어지러움": 0.6623534169025476, "열상": 0.8910751932536893, "오심": 0.3817663817663818, "전신쇠약": 0.5934065934065934, "호흡곤란": 0.7019108280254777}, "empty_predictions": 140, "train_loss": 0.8537169198976016, "train_bce": 0.2594771860161018, "train_soft_f1_loss": 0.546255857852413, "train_soft_f1": 0.45374414214758696, "epoch_seconds": 1504.4983652379997, "ece": 0.04945059901698068, "per_symptom_ece": {"고열": 0.04854098620479772, "구토": 0.043689415990812344, "두통": 0.0432341803651231, "복통": 0.04695680154068138, "어지러움": 0.06305774470832384, "열상": 0.011664352127211296, "오심": 0.0762285423151202, "전신쇠약": 0.0712400228550493, "호흡곤란": 0.04044334504570688}, "brier": 0.08237895369529724, "per_symptom_brier": {"고열": 0.0884135365486145, "구토": 0.08936050534248352, "두통": 0.07436729967594147, "복통": 0.07377736270427704, "어지러움": 0.10858714580535889, "열상": 0.021723182871937752, "오심": 0.10580373555421829, "전신쇠약": 0.11320559680461884, "호흡곤란": 0.06617181748151779}, "probability_minus_prevalence": 0.022478744387626648, "per_symptom_probability_minus_prevalence": {"고열": 0.007026895880699158, "구토": 0.025973334908485413, "두통": 0.035046592354774475, "복통": -0.006412938237190247, "어지러움": 0.01622188091278076, "열상": 0.011178247630596161, "오심": 0.07622876018285751, "전신쇠약": 0.02103191614151001, "호흡곤란": 0.016015663743019104}, "aux_holdout_macro_f1": 0.00168236301369863, "train_aux_bce": 0.09596775617941919, "training_collapse": false}
