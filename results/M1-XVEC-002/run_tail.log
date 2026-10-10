@@ -45,3 +45,15 @@ Completed feature chunk 22000:24000
 Completed feature chunk 24000:26000
 
 [runner] budget_hours 초과로 중단
+
+===== attempt 1 2026-10-10T09:49:36+00:00 colab-b commit=bb9921b0a2f12e7d8d2cc0f2053f53221cf41a91 =====
+
+Loading weights:   0%|          | 0/266 [00:00<?, ?it/s]
+Loading weights:  25%|██▍       | 66/266 [00:00<00:00, 625.98it/s]
+Loading weights:  56%|█████▌    | 148/266 [00:00<00:00, 721.73it/s]
+Loading weights:  88%|████████▊ | 235/266 [00:00<00:00, 779.29it/s]
+Loading weights: 100%|██████████| 266/266 [00:00<00:00, 752.97it/s]
+/usr/local/lib/python3.13/dist-packages/torch/nn/functional.py:6409: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  key_padding_mask = _canonical_mask(
+Completed feature chunk 26000:28000
+Completed feature chunk 28000:29200

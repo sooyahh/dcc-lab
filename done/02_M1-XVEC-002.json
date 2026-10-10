@@ -26,5 +26,144 @@
   "max_attempts": 3,
   "worker": "colab-b",
   "claimed_at": "2026-10-10T09:49:31+00:00",
-  "started_at": "2026-10-10T09:49:32+00:00"
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-10T10:23:39+00:00",
+  "elapsed_min": 34.0,
+  "metrics": {
+    "exp_id": "M1-XVEC-002",
+    "primary_metric": {
+      "name": "accuracy",
+      "value": 0.9772260273972603,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "heads": {
+        "a_acoustic_52d": {
+          "accuracy": 0.9501712328767123,
+          "confusion_matrix_labels": [
+            "F",
+            "M"
+          ],
+          "confusion_matrix": [
+            [
+              2978,
+              130
+            ],
+            [
+              161,
+              2571
+            ]
+          ],
+          "recall_F": 0.9581724581724582,
+          "recall_M": 0.9410688140556369,
+          "n_samples": 5840,
+          "n_F": 3108,
+          "n_M": 2732
+        },
+        "b_first_combined_564d": {
+          "accuracy": 0.9738013698630137,
+          "confusion_matrix_labels": [
+            "F",
+            "M"
+          ],
+          "confusion_matrix": [
+            [
+              3038,
+              70
+            ],
+            [
+              83,
+              2649
+            ]
+          ],
+          "recall_F": 0.9774774774774775,
+          "recall_M": 0.969619326500732,
+          "n_samples": 5840,
+          "n_F": 3108,
+          "n_M": 2732
+        },
+        "c_mean_combined_564d": {
+          "accuracy": 0.9772260273972603,
+          "confusion_matrix_labels": [
+            "F",
+            "M"
+          ],
+          "confusion_matrix": [
+            [
+              3047,
+              61
+            ],
+            [
+              72,
+              2660
+            ]
+          ],
+          "recall_F": 0.9803732303732303,
+          "recall_M": 0.9736456808199122,
+          "n_samples": 5840,
+          "n_F": 3108,
+          "n_M": 2732
+        }
+      },
+      "paired_mcnemar": {
+        "table_rows": "b wrong/right",
+        "table_columns": "c wrong/right",
+        "table": [
+          [
+            108,
+            45
+          ],
+          [
+            25,
+            5662
+          ]
+        ],
+        "exact_two_sided_p": 0.022462895492509273
+      },
+      "accuracy_gain": 0.003424657534246589,
+      "success": false,
+      "baseline_reproduction": {
+        "reference_accuracy": 0.9738,
+        "tolerance": 0.002,
+        "passed": true
+      },
+      "duration_bin_accuracy": {
+        "le_20s": {
+          "rows": 903,
+          "b_accuracy": 0.9745293466223699,
+          "c_accuracy": 0.9767441860465116
+        },
+        "gt_20_le_40s": {
+          "rows": 3349,
+          "b_accuracy": 0.9764108689160944,
+          "c_accuracy": 0.9773066587040907
+        },
+        "gt_40s": {
+          "rows": 1588,
+          "b_accuracy": 0.9678841309823678,
+          "c_accuracy": 0.9773299748110831
+        }
+      },
+      "windows_per_call": {
+        "1": 7480,
+        "2": 15285,
+        "3": 4981,
+        "4": 1454
+      },
+      "xvector_extraction_seconds_per_call": {
+        "mean": 0.393613182193385,
+        "p50": 0.35575758350023534,
+        "p95": 0.733957598098459,
+        "total": 11493.504920046842,
+        "includes": "resampling, padding, processor, model, CPU transfer; excludes audio I/O and 52D"
+      }
+    },
+    "seed": 42,
+    "train_rows": 23360,
+    "eval_rows": 5840,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Fixed (c) head; no official Validation. 52D recomputed from full caller audio. LR interrupted fit restarts only that atomic head. Baseline reproduced."
+  }
 }
