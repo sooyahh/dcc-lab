@@ -1,0 +1,123 @@
+{
+  "exp_id": "M3-KCELECTRA-001",
+  "primary_metric": {
+    "name": "macro_f1",
+    "value": 0.6380043625226076,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "seed": 42,
+    "epoch": 3,
+    "macro_f1": 0.6380043625226076,
+    "micro_f1": 0.6514879663428819,
+    "per_symptom_f1": {
+      "고열": 0.6498422712933754,
+      "구토": 0.6053412462908012,
+      "두통": 0.5167118337850045,
+      "복통": 0.79765625,
+      "어지러움": 0.6634264884568651,
+      "열상": 0.8811475409836066,
+      "오심": 0.369901547116737,
+      "전신쇠약": 0.565455450472872,
+      "호흡곤란": 0.6925566343042071
+    },
+    "empty_predictions": 130,
+    "train_loss": 0.8414967295879872,
+    "train_bce": 0.2743647130586905,
+    "train_soft_f1_loss": 0.5671320172384514,
+    "train_soft_f1": 0.4328679827615486,
+    "epoch_seconds": 493.68676048099996,
+    "training_collapse": false,
+    "history": [
+      {
+        "seed": 42,
+        "epoch": 1,
+        "macro_f1": 0.6285852401279654,
+        "micro_f1": 0.640953276889307,
+        "per_symptom_f1": {
+          "고열": 0.6180555555555556,
+          "구토": 0.5967252880533657,
+          "두통": 0.4946004319654428,
+          "복통": 0.7919966652771988,
+          "어지러움": 0.6587436332767402,
+          "열상": 0.8769544527532291,
+          "오심": 0.3822341857335128,
+          "전신쇠약": 0.5609973285841496,
+          "호흡곤란": 0.6769596199524941
+        },
+        "empty_predictions": 173,
+        "train_loss": 1.0573010219137553,
+        "train_bce": 0.37632760085975236,
+        "train_soft_f1_loss": 0.6809734220750838,
+        "train_soft_f1": 0.3190265779249162,
+        "epoch_seconds": 473.896759737,
+        "training_collapse": false
+      },
+      {
+        "seed": 42,
+        "epoch": 2,
+        "macro_f1": 0.6365987888438402,
+        "micro_f1": 0.651891959957187,
+        "per_symptom_f1": {
+          "고열": 0.6486766995329528,
+          "구토": 0.6017699115044248,
+          "두통": 0.5135895032802249,
+          "복통": 0.7975855130784708,
+          "어지러움": 0.6638969671790611,
+          "열상": 0.8779822767552828,
+          "오심": 0.360333080999243,
+          "전신쇠약": 0.5697896749521989,
+          "호흡곤란": 0.6957654723127036
+        },
+        "empty_predictions": 163,
+        "train_loss": 0.887302233312363,
+        "train_bce": 0.29584912261629626,
+        "train_soft_f1_loss": 0.5914531119946984,
+        "train_soft_f1": 0.4085468880053016,
+        "epoch_seconds": 481.92940170400016,
+        "training_collapse": false
+      },
+      {
+        "seed": 42,
+        "epoch": 3,
+        "macro_f1": 0.6380043625226076,
+        "micro_f1": 0.6514879663428819,
+        "per_symptom_f1": {
+          "고열": 0.6498422712933754,
+          "구토": 0.6053412462908012,
+          "두통": 0.5167118337850045,
+          "복통": 0.79765625,
+          "어지러움": 0.6634264884568651,
+          "열상": 0.8811475409836066,
+          "오심": 0.369901547116737,
+          "전신쇠약": 0.565455450472872,
+          "호흡곤란": 0.6925566343042071
+        },
+        "empty_predictions": 130,
+        "train_loss": 0.8414967295879872,
+        "train_bce": 0.2743647130586905,
+        "train_soft_f1_loss": 0.5671320172384514,
+        "train_soft_f1": 0.4328679827615486,
+        "epoch_seconds": 493.68676048099996,
+        "training_collapse": false
+      }
+    ],
+    "calibration": {
+      "ece": 0.04293188870114951,
+      "brier": 0.08392848819494247,
+      "ece_bins": 15
+    },
+    "collapse_epochs": [],
+    "success_criteria_met": false,
+    "training_seconds": 1449.5129219220003
+  },
+  "model_revision": "8728557",
+  "model": "beomi/KcELECTRA-base-v2022",
+  "split_sha256": "3568163751bc2959e7038f40dc9f8ca1a0d57a423850a23da99642a9331917f9",
+  "seed": 42,
+  "train_rows": 23408,
+  "eval_rows": 5792,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "notes": "Final epoch 3; fixed threshold >=0.5; no postprocessing. Training-only pos weights; fp32 soft-F1 microbatch 8, effective batch 16. ECE: 15 equal-width bins of flattened label probabilities; Brier: mean squared label error."
+}
