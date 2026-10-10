@@ -28,7 +28,8 @@
   "done/02_M3-ROBERTA-003.json@2026-10-09T23:17:44+00:00",
   "done/02_M1-XVEC-001.json@2026-10-10T02:18:47+00:00",
   "done/01_M3-KCBERT-016.json@2026-10-10T04:17:19+00:00",
-  "done/02_M3-ENS-001.json@2026-10-10T05:14:53+00:00"
+  "done/02_M3-ENS-001.json@2026-10-10T05:14:53+00:00",
+  "done/01_M3-ROBERTA-004.json@2026-10-10T05:39:43+00:00"
  ],
  "implemented_issues": [
   1,
@@ -125,7 +126,8 @@
   121,
   120,
   122,
-  123
+  123,
+  124
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -167,6 +169,7 @@
   "PR #112 (M1-XVEC-001 code, lab-adopted) merged (merge-gate success)",
   "M3-ROBERTA-004 PR #119 0eaac55 review PASS; submitted",
   "PR #121 (log ROBERTA-003) and #120 (symptom lift heatmap docs) merged (merge-gate success)",
-  "M3-ENS-001 judged 기각 (3-seed 평균 Macro F1 0.6455, +0.0028 vs ROBERTA-003 0.6427 < +0.01); team log PR #124, code PR #115 closed, issue #23 closed. PR #123 (docs, ROBERTA-002 vs 003 calibration) merged (merge-gate success). No new proposal: open proposals #24, #26 at max_workers=2"
+  "M3-ENS-001 judged 기각 (3-seed 평균 Macro F1 0.6455, +0.0028 vs ROBERTA-003 0.6427 < +0.01); team log PR #124, code PR #115 closed, issue #23 closed. PR #123 (docs, ROBERTA-002 vs 003 calibration) merged (merge-gate success). No new proposal: open proposals #24, #26 at max_workers=2",
+  "M3-ROBERTA-004 judged 기각 (seed 42 Macro F1 0.6474, +0.0033 vs ROBERTA-003 0.6441 < +0.01); team log PR #125, code PR #119 closed, issue #26 closed. PR #124 (log ENS-001) merged (merge-gate success). No new proposal: TAPT·보조 출력·loss·앙상블 축 모두 기각, 새 축 후보 없음, 세부 기법 변경은 우선순위 낮음"
  ]
 }
