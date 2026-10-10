@@ -34,7 +34,8 @@
   "done/00_M1-XVEC-001-OFFVAL.json@2026-10-10T09:11:58+00:00",
   "failed/02_M1-XVEC-002.json@2026-10-10T09:48:24+00:00",
   "done/02_M1-XVEC-002.json@2026-10-10T10:23:39+00:00",
-  "done/01_M3-ROBERTA-005.json@2026-10-10T10:30:13+00:00"
+  "done/01_M3-ROBERTA-005.json@2026-10-10T10:30:13+00:00",
+  "failed/02_M1-ECAPA-001.json@2026-10-10T10:35:50+00:00"
  ],
  "implemented_issues": [
   1,
