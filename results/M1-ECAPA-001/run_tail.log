@@ -1,0 +1,25 @@
+
+===== attempt 1 2026-10-10T10:35:38+00:00 colab-a commit=1a8841718e3aa9a86cb884801d75cca975253f14 =====
+Traceback (most recent call last):
+  File "/content/lab_code/1a8841718e3a/scripts/lab/m1-ecapa-001.py", line 339, in <module>
+    main()
+    ~~~~^^
+  File "/content/lab_code/1a8841718e3a/scripts/lab/m1-ecapa-001.py", line 233, in main
+    model = prepare_model(torch)
+  File "/content/lab_code/1a8841718e3a/scripts/lab/m1-ecapa-001.py", line 38, in prepare_model
+    from speechbrain.inference.classifiers import EncoderClassifier
+  File "/usr/local/lib/python3.13/dist-packages/speechbrain/__init__.py", line 6, in <module>
+    from .core import Brain, Stage, create_experiment_directory, parse_arguments
+  File "/usr/local/lib/python3.13/dist-packages/speechbrain/core.py", line 39, in <module>
+    from speechbrain.dataio.dataloader import LoopedLoader, SaveableDataLoader
+  File "/usr/local/lib/python3.13/dist-packages/speechbrain/dataio/dataloader.py", line 46, in <module>
+    from speechbrain.dataio.dataset import DynamicItemDataset
+  File "/usr/local/lib/python3.13/dist-packages/speechbrain/dataio/dataset.py", line 15, in <module>
+    from speechbrain.dataio.dataio import load_data_csv, load_data_json
+  File "/usr/local/lib/python3.13/dist-packages/speechbrain/dataio/dataio.py", line 36, in <module>
+    check_torchaudio_backend()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/speechbrain/utils/torch_audio_backend.py", line 57, in check_torchaudio_backend
+    available_backends = torchaudio.list_audio_backends()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'torchaudio' has no attribute 'list_audio_backends'

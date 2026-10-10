@@ -26,5 +26,10 @@
   "max_attempts": 3,
   "worker": "colab-a",
   "claimed_at": "2026-10-10T10:35:26+00:00",
-  "started_at": "2026-10-10T10:35:27+00:00"
+  "status": "failed",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-10T10:35:50+00:00",
+  "reason": "exit 1, metrics.json 없음",
+  "elapsed_min": 0.2,
+  "log_tail": "\n===== attempt 1 2026-10-10T10:35:38+00:00 colab-a commit=1a8841718e3aa9a86cb884801d75cca975253f14 =====\nTraceback (most recent call last):\n  File \"/content/lab_code/1a8841718e3a/scripts/lab/m1-ecapa-001.py\", line 339, in <module>\n    main()\n    ~~~~^^\n  File \"/content/lab_code/1a8841718e3a/scripts/lab/m1-ecapa-001.py\", line 233, in main\n    model = prepare_model(torch)\n  File \"/content/lab_code/1a8841718e3a/scripts/lab/m1-ecapa-001.py\", line 38, in prepare_model\n    from speechbrain.inference.classifiers import EncoderClassifier\n  File \"/usr/local/lib/python3.13/dist-packages/speechbrain/__init__.py\", line 6, in <module>\n    from .core import Brain, Stage, create_experiment_directory, parse_arguments\n  File \"/usr/local/lib/python3.13/dist-packages/speechbrain/core.py\", line 39, in <module>\n    from speechbrain.dataio.dataloader import LoopedLoader, SaveableDataLoader\n  File \"/usr/local/lib/python3.13/dist-packages/speechbrain/dataio/dataloader.py\", line 46, in <module>\n    from speechbrain.dataio.dataset import DynamicItemDataset\n  File \"/usr/local/lib/python3.13/dist-packages/speechbrain/dataio/dataset.py\", line 15, in <module>\n    from speechbrain.dataio.dataio import load_data_csv, load_data_json\n  File \"/usr/local/lib/python3.13/dist-packages/speechbrain/dataio/dataio.py\", line 36, in <module>\n    check_torchaudio_backend()\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/usr/local/lib/python3.13/dist-packages/speechbrain/utils/torch_audio_backend.py\", line 57, in check_torchaudio_backend\n    available_backends = torchaudio.list_audio_backends()\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: module 'torchaudio' has no attribute 'list_audio_backends'\n"
 }
