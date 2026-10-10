@@ -10,7 +10,7 @@
     "value": 0.9747252747252747
   },
   "branch": "sooyah/lab-m1-xvec-002-offval",
-  "commit": "",
+  "commit": "0c7b5af5d57ffa0d58685a788b46675075795bee",
   "command": "python scripts/lab/m1-xvec-002-offval.py --out \"$LAB_OUT\"",
   "uses_official_val": true,
   "success_criteria": "공식 Validation 3,640건 모두 평가. 정확도가 0.9777 이상(M1-XVEC-001 공식 Val 대비 +0.3%p, 약 11통화)이면 M1 제출 후보를 이 모델로 교체, 미달이면 M1-XVEC-001 유지(사전 고정, 사후 완화 금지). M1-XVEC-001-OFFVAL 출력 CSV가 LAB_OUT에서 읽히면 같은 3,640건으로 paired McNemar 정확검정 2×2·p값을 기록(판정 보조). metrics.json에 accuracy, 성별 recall·혼동행렬, 신고자 구간 길이별(≤20초, 20~40초, 40초 초과) 정확도, 통화당 창 수 분포와 x-vector 추출 시간, ckpt·모델 revision·입력 SHA256, 3640건, fitting_performed=false 기록. 출력 CSV는 F/M 값과 3,640행 확인",
