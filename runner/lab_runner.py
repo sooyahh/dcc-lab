@@ -25,6 +25,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import threading
 import time
 import unicodedata
 from pathlib import Path
@@ -351,20 +352,32 @@ def run_job(job: dict) -> None:
         lf.write(f"\n===== attempt {attempts} {now()} {WORKER} commit={job['commit']} =====\n")
         proc = subprocess.Popen(cmd, shell=True, cwd=repo, env=env, stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT, text=True, bufsize=1, start_new_session=True)
-        last_hb = 0.0
+        state = {"over": False}
+
+        def watch() -> None:
+            # heartbeat + budget on a timer: a job may print nothing (or only \r progress bars) for a long time
+            while proc.poll() is None:
+                try:
+                    status("running", exp_id, attempt=attempts)
+                except Exception as exc:                     # never let the heartbeat kill the job
+                    log(f"heartbeat 실패: {redact(str(exc))}")
+                if time.time() - t0 > budget_s:
+                    state["over"] = True
+                    os.killpg(proc.pid, 9)                   # shell=True: kill the whole process group
+                    return
+                time.sleep(60)
+
+        watcher = threading.Thread(target=watch, daemon=True)
+        watcher.start()
         for line in proc.stdout:
             lf.write(line)
+            lf.flush()
             sys.stdout.write(line)
-            if time.time() - last_hb > 60:
-                lf.flush()
-                status("running", exp_id, attempt=attempts)
-                last_hb = time.time()
-            if time.time() - t0 > budget_s:
-                os.killpg(proc.pid, 9)                       # shell=True: kill the whole process group
-                lf.write("\n[runner] budget_hours 초과로 중단\n")
-                over = True
-                break
         rc = proc.wait()
+        watcher.join(timeout=5)
+        over = state["over"]
+        if over:
+            lf.write("\n[runner] budget_hours 초과로 중단\n")
     elapsed = round((time.time() - t0) / 60, 1)
     metrics_p = out / "metrics.json"
     if rc == 0 and metrics_p.exists():
