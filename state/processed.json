@@ -35,7 +35,8 @@
   "failed/02_M1-XVEC-002.json@2026-10-10T09:48:24+00:00",
   "done/02_M1-XVEC-002.json@2026-10-10T10:23:39+00:00",
   "done/01_M3-ROBERTA-005.json@2026-10-10T10:30:13+00:00",
-  "failed/02_M1-ECAPA-001.json@2026-10-10T10:35:50+00:00"
+  "failed/02_M1-ECAPA-001.json@2026-10-10T10:35:50+00:00",
+  "failed/02_M1-ECAPA-001.json@2026-10-10T10:39:13+00:00"
  ],
  "implemented_issues": [
   1,
@@ -145,7 +146,8 @@
   129,
   130,
   131,
-  133
+  133,
+  134
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -193,6 +195,7 @@
   "PR #128 (log M3-QWEN-001) merged (merge-gate success)",
   "M1-XVEC-002 judged 기각 (2차 완료: (c) 0.9772 vs (b) 0.9738, +0.34%p < +0.4%p, McNemar p=0.022); team log PR #131, code PR #126 closed, issue #27 closed. No new proposal: #28 open, M3 새 축 후보 없음, M1 후속 아이디어(입력 길이) 기각",
   "M3-ROBERTA-005 judged 기각 (seed 42 Macro F1 0.6426, -0.0015 vs ROBERTA-003 < +0.01; 보조 헤드 F1 0.285 학습은 됐으나 이득 없음); team log PR #133, code PR #127 closed, issue #28 closed. M1-ECAPA-001 PR #132 1a88417 review PASS; submitted. No new proposal: #29 open, M3 새 축 후보 없음(보조 출력·loss·TAPT·앙상블·LLM 모두 기각)",
-  "PR #133 (log M3-ROBERTA-005) merged (merge-gate success). No new proposal: #29 M1-ECAPA-001 실행 중, M3 새 축 후보 없음·colab_cu 추정 40 미만(01:26 기록 48.3 이후 약 9시간 이상 T4 사용)이라 세부 기법 변경 불가, M2는 팀 결정(2026-10-04)으로 마무리"
+  "PR #133 (log M3-ROBERTA-005) merged (merge-gate success). No new proposal: #29 M1-ECAPA-001 실행 중, M3 새 축 후보 없음·colab_cu 추정 40 미만(01:26 기록 48.3 이후 약 9시간 이상 T4 사용)이라 세부 기법 변경 불가, M2는 팀 결정(2026-10-04)으로 마무리",
+  "PR #134 (log M1-ECAPA-001 1차) merged (merge-gate success). M1-ECAPA-001 2차 실패 judged 보류 (Drive symlink OSError, 재시도 1회 소진); team log PR #135, code PR #132 lab-fix + 수정 지시. Issue #29 kept open (실험 계속). No new proposal: #29 open, M3 새 축 후보 없음"
  ]
 }
