@@ -32,7 +32,8 @@
   "done/01_M3-ROBERTA-004.json@2026-10-10T05:39:43+00:00",
   "done/02_M3-QWEN-001.json@2026-10-10T08:48:26+00:00",
   "done/00_M1-XVEC-001-OFFVAL.json@2026-10-10T09:11:58+00:00",
-  "failed/02_M1-XVEC-002.json@2026-10-10T09:48:24+00:00"
+  "failed/02_M1-XVEC-002.json@2026-10-10T09:48:24+00:00",
+  "done/02_M1-XVEC-002.json@2026-10-10T10:23:39+00:00"
  ],
  "implemented_issues": [
   1,
@@ -183,6 +184,7 @@
   "M3-ENS-001 judged 기각 (3-seed 평균 Macro F1 0.6455, +0.0028 vs ROBERTA-003 0.6427 < +0.01); team log PR #124, code PR #115 closed, issue #23 closed. PR #123 (docs, ROBERTA-002 vs 003 calibration) merged (merge-gate success). No new proposal: open proposals #24, #26 at max_workers=2",
   "M3-ROBERTA-004 judged 기각 (seed 42 Macro F1 0.6474, +0.0033 vs ROBERTA-003 0.6441 < +0.01); team log PR #125, code PR #119 closed, issue #26 closed. PR #124 (log ENS-001) merged (merge-gate success). No new proposal: TAPT·보조 출력·loss·앙상블 축 모두 기각, 새 축 후보 없음, 세부 기법 변경은 우선순위 낮음",
   "PR #125 (log ROBERTA-004) merged (merge-gate success). Proposal #27 M1-XVEC-002 (x-vector 신고자 구간 전체 20초 창 평균): M3는 #24 QWEN-001 실행 중이고 새 축 후보 없음 → M1 우선",
-  "PR #128 (log M3-QWEN-001) merged (merge-gate success)"
+  "PR #128 (log M3-QWEN-001) merged (merge-gate success)",
+  "M1-XVEC-002 judged 기각 (2차 완료: (c) 0.9772 vs (b) 0.9738, +0.34%p < +0.4%p, McNemar p=0.022); team log PR #131, code PR #126 closed, issue #27 closed. No new proposal: #28 open, M3 새 축 후보 없음, M1 후속 아이디어(입력 길이) 기각"
  ]
 }
