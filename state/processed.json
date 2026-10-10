@@ -66,7 +66,8 @@
   27,
   28,
   29,
-  31
+  31,
+  30
  ],
  "reviewed_shas": [
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
@@ -104,7 +105,8 @@
   "bb9921b0a2f12e7d8d2cc0f2053f53221cf41a91",
   "909040e24521312f6dadea8e25de9dcc36dd1e5f",
   "1a8841718e3aa9a86cb884801d75cca975253f14",
-  "60cfe2f006e48fa558ee7c9599d1c3abea32662e"
+  "60cfe2f006e48fa558ee7c9599d1c3abea32662e",
+  "1aef54a5a9e1c6abd4769345f151db9199870d6a"
  ],
  "merged_prs": [
   67,

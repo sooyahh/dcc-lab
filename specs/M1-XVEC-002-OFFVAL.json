@@ -1,0 +1,21 @@
+{
+  "exp_id": "M1-XVEC-002-OFFVAL",
+  "mission": 1,
+  "title": "고정 M1-XVEC-002 (c) 다중 창 평균 x-vector 결합 LR 공식 Validation 평가",
+  "hypothesis": "내부 holdout에서 (b) 대비 +0.34%p(McNemar p=0.022, 40초 초과 통화 +0.9%p)였던 다중 창 평균 x-vector 결합 LR이 공식 Validation에서도 M1-XVEC-001 결합 LR(0.9747)보다 높다",
+  "change_vs_baseline": "M1-XVEC-002에서 학습·저장한 (c) 헤드($DCC_RUN_ROOT/lab/M1-XVEC-002/best.ckpt)를 재학습 없이 평가만 한다. x-vector는 M1-XVEC-002와 같은 방식(신고자 구간을 겹치지 않는 20초 창 최대 4개, 마지막 창 3초 이상만 포함, 창별 L2 정규화 → 길이 가중 평균 → L2 정규화, microsoft/wavlm-base-plus-sv 같은 고정 revision). 모델 선택·창 수·임계값 튜닝 없음",
+  "baseline": {
+    "exp_id": "M1-XVEC-001-OFFVAL",
+    "metric": "official Validation accuracy",
+    "value": 0.9747252747252747
+  },
+  "branch": "sooyah/lab-m1-xvec-002-offval",
+  "commit": "",
+  "command": "python scripts/lab/m1-xvec-002-offval.py --out \"$LAB_OUT\"",
+  "uses_official_val": true,
+  "success_criteria": "공식 Validation 3,640건 모두 평가. 정확도가 0.9777 이상(M1-XVEC-001 공식 Val 대비 +0.3%p, 약 11통화)이면 M1 제출 후보를 이 모델로 교체, 미달이면 M1-XVEC-001 유지(사전 고정, 사후 완화 금지). M1-XVEC-001-OFFVAL 출력 CSV가 LAB_OUT에서 읽히면 같은 3,640건으로 paired McNemar 정확검정 2×2·p값을 기록(판정 보조). metrics.json에 accuracy, 성별 recall·혼동행렬, 신고자 구간 길이별(≤20초, 20~40초, 40초 초과) 정확도, 통화당 창 수 분포와 x-vector 추출 시간, ckpt·모델 revision·입력 SHA256, 3640건, fitting_performed=false 기록. 출력 CSV는 F/M 값과 3,640행 확인",
+  "gpu": "T4",
+  "budget_hours": 1.5,
+  "priority": 0,
+  "notes": "공식 Val 사용 실험이라 자동 승인 대상 아님(사람 승인). M1-XVEC-001-OFFVAL(scripts/evaluate_mission1_xvector.py, sooyah 브랜치 final/model-selection 3db888e)의 평가 경로·입력 규칙을 재사용하고 x-vector 추출만 M1-XVEC-002 방식으로 바꾼다. 입력은 음성+startAt/endAt/Speaker, gender는 최종 채점에만 사용. Validation 원본 ZIP(Validation/VS_서울_구급.zip, VL_서울_구급.zip)은 LAB_WORK에만 복사. 특징을 LAB_OUT에 청크 캐시해 재개 가능. 외부 업로드 없음. sklearn은 M1-XVEC-002 학습 때와 같은 버전으로 LAB_WORK 전용 경로에 설치"
+}
