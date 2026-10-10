@@ -41,7 +41,8 @@
   "done/03_M1-HEAD-001.json@2026-10-10T11:30:26+00:00",
   "done/00_M1-XVEC-002-OFFVAL.json@2026-10-10T11:31:18+00:00",
   "failed/01_M3-ROBERTA-006.json@2026-10-10T18:27:39+00:00",
-  "done/01_M3-KCELECTRA-001.json@2026-10-10T19:41:52+00:00"
+  "done/01_M3-KCELECTRA-001.json@2026-10-10T19:41:52+00:00",
+  "done/01_M3-ROBERTA-006.json@2026-10-10T20:42:10+00:00"
  ],
  "implemented_issues": [
   1,
@@ -229,6 +230,7 @@
   "Merge run 2026-10-10T17:54Z: PR #141·#138 (lab-log) merge-gate success, behind 0 -> 병합(merged_prs 기록). PR #137 (code M1-XVEC-002-OFFVAL) #141·#138 병합 후 merge-gate pending, behind 8 -> update-branch 성공, 건너뜀(state 미기록). No new proposal: open proposals 0이나 units_left 28.3(<40), M3 새 축 소진, M2 팀 결정(2026-10-04)으로 마무리, M1 헤드·임베딩·입력 길이 축 소진",
   "Propose run 2026-10-10T~19Z: No new proposal. open proposals 1 (#32 M3-ROBERTA-006, max_workers 2). colab units_left 128.3(>=40, +100 CU 구매)이나 M3 새 축(손실·보조목표·TAPT·LLM·앙상블·헤드#32) 소진, 세부 기법 변경은 KCBERT-004·006~010/KLUEBERT-001 ±0.01 이내라 seed 편차 초과 근거 없음, 단순 seed 앙상블은 KCBERT-007 기각으로 재제안 금지, 화자 구분 입력은 speaker 필드 금지. M2는 팀 결정(2026-10-04)으로 마무리, M1은 공식 Val 0.9813에서 헤드·임베딩·입력 길이 축 소진(ECAPA 단독은 holdout 0.9789로 (c) 0.9772 대비 +0.4%p 기준 도달 불가)",
   "Propose run 2026-10-10: No new proposal. open proposals 4 (#32 M3-ROBERTA-006 queued, #33 KCELECTRA-001, #34 XLMR-001, #35 E5-001) >= max_workers 2",
-  "M3-ROBERTA-006 failed 2026-10-10 18:27: 러너가 LAB_AUX_LABELS 등 환경 변수를 설정하지 않아 인자 누락(실험 결과 아님), verdict 재시도; command에 Drive 경로(005 aux_labels.json, KCBERT-002 split.json, sha 3568…)를 직접 지정해 재제출(재시도 1회 소진). 로그 PR 없음. PR #143·#144·#145 (E5·XLMR·KCELECTRA-001) review PASS; submitted. No new proposal: open proposals 4 >= max_workers 2"
+  "M3-ROBERTA-006 failed 2026-10-10 18:27: 러너가 LAB_AUX_LABELS 등 환경 변수를 설정하지 않아 인자 누락(실험 결과 아님), verdict 재시도; command에 Drive 경로(005 aux_labels.json, KCBERT-002 split.json, sha 3568…)를 직접 지정해 재제출(재시도 1회 소진). 로그 PR 없음. PR #143·#144·#145 (E5·XLMR·KCELECTRA-001) review PASS; submitted. No new proposal: open proposals 4 >= max_workers 2",
+  "M3-ROBERTA-006 judged 기각 (seed 42 Macro F1 0.6446, +0.0005 vs ROBERTA-003 < +0.01); team log PR #147, code PR #142 closed, issue #32 closed. No new proposal: open proposals #34, #35 at max_workers 2"
  ]
 }

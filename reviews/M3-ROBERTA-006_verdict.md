@@ -1,4 +1,6 @@
-VERDICT: 재시도
-실행 문제: exit 2, 0.1분 만에 종료. 코드 argparse가 --aux-labels·--split·--split-sha256(또는 LAB_* 환경 변수)을 요구하나 러너는 해당 환경 변수를 설정하지 않아 학습 전에 실패. 실험 결과 아님.
-조치: command에 Drive 경로 지정 — 005 aux_labels.json(`$DCC_RUN_ROOT/lab/M3-ROBERTA-005/`), P0 split.json(`$DCC_RUN_ROOT/lab/M3-KCBERT-002/`, sha256 3568163751bc…1f9, 기존 metrics의 split_sha256). 코드·커밋은 그대로.
-위험: 두 파일의 Drive 실재와 KCBERT-002 split 형식이 코드의 rows_sha256 검사와 맞는지는 이곳에서 확인 못 함. 같은 실험 재시도 1회 소진, 또 실패하면 코드 PR 수정 필요.
+VERDICT: 기각
+- seed 42 Macro F1 0.6446 (ROBERTA-003 0.6441 대비 +0.0005, ROBERTA-005 0.6426 대비 +0.0020). 성공 기준(0.6541 이상, +0.01) 미달
+- Micro F1 0.6581, 빈 예측 180건. 오심 0.367, 두통 0.520이 여전히 약함
+- ECE 0.0432, Brier 0.0816 (005: ECE 0.0445, Brier 0.0820). 보정은 사실상 변화 없음
+- 보조 헤드 holdout macro F1 0.288. 9개 헤드 가중치 평균 절대값 h 0.0164 vs p_aux 0.0145로 중간 출력을 쓰긴 하나 F1 이득으로 이어지지 않음. 계층형 헤드도 보조 출력 축의 한계를 못 넘음
+- 학습 붕괴 없음. 소요 75분, 1 seed이며 차이가 seed 편차 이내 → 기각
