@@ -10,7 +10,7 @@
     "value": 0.951098901098901
   },
   "branch": "final/model-selection",
-  "commit": "1d728f22ce2a74035b74697002ba4fb33bed6cec",
+  "commit": "3db888ec38b1694893b42176a45afc64a8aa4541",
   "command": "python -m pip install --quiet --no-deps --target \"$LAB_WORK/eval_deps\" scikit-learn==1.6.1 && USE_TF=0 USE_FLAX=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=\"$LAB_WORK/eval_deps:src\" python scripts/evaluate_mission1_xvector.py --from-lab --device cuda --threads 2 --out \"$LAB_OUT\"",
   "uses_official_val": true,
   "success_criteria": "공식 Validation 3640건 모두 평가. 기존 LR 대비 정확도 +0.5%p 이상이면 후보 채택(0.956098901098901 이상); 미달이면 기존 후보 유지. metrics.json에 accuracy, 성별 recall 및 혼동행렬, 가중치/인코더/입력 전체 SHA256, 고정 revision, 3640건 및 fitting_performed=false 기록. 출력 CSV F/M 허용값과 3640행 확인.",

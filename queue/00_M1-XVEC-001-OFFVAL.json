@@ -11,7 +11,7 @@
       "value": 0.951098901098901
     },
     "branch": "final/model-selection",
-    "commit": "1d728f22ce2a74035b74697002ba4fb33bed6cec",
+    "commit": "3db888ec38b1694893b42176a45afc64a8aa4541",
     "command": "python -m pip install --quiet --no-deps --target \"$LAB_WORK/eval_deps\" scikit-learn==1.6.1 && USE_TF=0 USE_FLAX=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=\"$LAB_WORK/eval_deps:src\" python scripts/evaluate_mission1_xvector.py --from-lab --device cuda --threads 2 --out \"$LAB_OUT\"",
     "uses_official_val": true,
     "success_criteria": "공식 Validation 3640건 모두 평가. 기존 LR 대비 정확도 +0.5%p 이상이면 후보 채택(0.956098901098901 이상); 미달이면 기존 후보 유지. metrics.json에 accuracy, 성별 recall 및 혼동행렬, 가중치/인코더/입력 전체 SHA256, 고정 revision, 3640건 및 fitting_performed=false 기록. 출력 CSV F/M 허용값과 3640행 확인.",
@@ -20,7 +20,7 @@
     "priority": 0,
     "notes": "사용자 2026-10-10 명시 승인. 실행 중 M1-XVEC-002 및 M3-QWEN-001 유지, GPU 해제 후 실행. 공식 Val 최초 고정 후보 평가; 로컬 CPU 동일 평가가 병행 중이므로 결과는 같은 후보에 대한 실행 재현으로 집계. 기존 $DCC_RUN_ROOT/lab/M1-XVEC-001/best.ckpt (SHA256 4fffb8aa97c2f3083b05820ca45b84ecddbc60c5162e02961546f37d133dd9d5), models/wavlm-base-plus-sv 고정 revision 1bfd64eca136543feb28c5ffaf05381c6af33121 사용. Validation 원본 ZIP은 LAB_WORK에만 복사. 입력은 음성+startAt/endAt/Speaker; gender는 최종 scoring에만 사용. 데이터·가중치 외부 업로드 없음. 특징 40건 청크를 LAB_OUT에 캐시, identity 일치 시 재개. sklearn1.6.1은 LAB_WORK 전용 경로에 설치하여 다른 실험 환경을 변경하지 않음."
   },
-  "commit": "1d728f22ce2a74035b74697002ba4fb33bed6cec",
+  "commit": "3db888ec38b1694893b42176a45afc64a8aa4541",
   "submitted_at": "2026-10-10T16:25:39+09:00",
   "attempts": 0,
   "max_attempts": 3
