@@ -1,0 +1,21 @@
+{
+  "exp_id": "M3-KCBERT-016",
+  "mission": 3,
+  "title": "KcBERT soft-F1 가중치 λ 비교 (0.1·0.3 신규, 0·1은 기존 ckpt 재평가) + ECE·Brier (80:20 재평가)",
+  "hypothesis": "soft-F1 가중치를 작게(λ=0.1~0.3) 섞으면 λ=1(KCBERT-012)과 비슷한 Macro F1을 유지하면서 확률 쏠림이 줄어 ECE·Brier가 개선되고 seed 간 편차도 작아진다",
+  "change_vs_baseline": "M3-KCBERT-012 대비 soft-F1 항의 가중치만 변경: loss = BCEWithLogits(pos_weight scale 0.5/max 6.0, Training 분할에서만 계산) + λ*(1 - mean_j softF1_j), λ ∈ {0.1, 0.3} 각각 3 seed(42/43/44) 학습. λ는 전 학습 구간 고정(스케줄 없음). softF1은 미니배치 fp32 계산. 인코더 beomi/kcbert-base(revision 0f2f3f8)·[CLS] 헤드·앞 256토큰·lr 2e-5·batch 16·3 epochs·80:20 분할·threshold >= 0.5는 동일. 추가로 학습 없이 M3-KCBERT-005(λ=0)와 M3-KCBERT-012(λ=1)의 seed별 best.ckpt(DCC_RUN_ROOT/lab/<EXP>/seed_<s>/best.ckpt)를 불러 같은 holdout에서 추론해 같은 지표를 계산",
+  "baseline": {
+    "exp_id": "M3-KCBERT-012",
+    "metric": "macro_f1 (80:20 split, thr 0.5)",
+    "value": 0.6265
+  },
+  "branch": "sooyah/lab-m3-kcbert-016",
+  "commit": "",
+  "command": "python scripts/lab/m3-kcbert-016.py --out \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "λ=0.1·0.3 각각 3-seed 평균으로 판단. 채택 조건(둘 중 하나): (a) Macro F1이 0.6265보다 +0.01 이상 높고 최소 2개 seed가 0.6265 초과, 또는 (b) Macro F1이 0.6265와 0.005 이내이면서 3-seed 평균 ECE와 Brier가 모두 KCBERT-012(같은 스크립트로 재계산한 값)보다 낮음. threshold >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). λ ∈ {0, 0.1, 0.3, 1}의 seed별·평균 Macro/Micro/증상별 F1, ECE(증상별 15구간 평균), Brier, 평균 예측 확률 − 실제 양성 비율, 0.5 이상 예측 비율, 빈 예측 수, epoch별 holdout Macro F1, seed 표준편차를 한 표로 기록",
+  "gpu": "T4",
+  "budget_hours": 3,
+  "priority": 1,
+  "notes": "m3-kcbert-012.py 재사용(λ만 인자화). λ=0과 1은 기존 ckpt 추론만, 재학습 금지(ckpt가 없으면 그 사실을 metrics에 적고 해당 λ 생략). 모든 λ·seed의 holdout 확률을 lambda_<λ>/seed_<s>/holdout_probs.npy(행 순서 = val_files.txt)로 저장. 새 λ의 seed 42 best.ckpt는 005와 같은 형식({config, seed, epoch, model})으로 저장해 scripts/mission3_export_bert_ckpt.py로 내보낼 수 있게. 공식 Val 미사용"
+}
