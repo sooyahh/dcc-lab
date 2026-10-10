@@ -92,3 +92,32 @@ Traceback (most recent call last):
     os.symlink(target, self, target_is_directory)
     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 OSError: [Errno 95] Operation not supported: '/content/drive/MyDrive/dcc_runs/models/spkrec-ecapa-voxceleb/label_encoder.txt' -> '/content/drive/MyDrive/dcc_runs/models/spkrec-ecapa-voxceleb/label_encoder.ckpt'
+
+===== attempt 1 2026-10-10T10:45:32+00:00 colab-a commit=60cfe2f006e48fa558ee7c9599d1c3abea32662e =====
+SpeechBrain could not find any working torchaudio backend. Audio files may fail to load. Follow this link for instructions and troubleshooting: https://speechbrain.readthedocs.io/en/latest/audioloading.html
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 109.71it/s]
+SpeechBrain could not find any working torchaudio backend. Audio files may fail to load. Follow this link for instructions and troubleshooting: https://speechbrain.readthedocs.io/en/latest/audioloading.html
+/usr/local/lib/python3.13/dist-packages/speechbrain/utils/autocast.py:188: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  wrapped_fwd = torch.cuda.amp.custom_fwd(fwd, cast_inputs=cast_inputs)
+Completed ECAPA chunk 0:2000
+Completed ECAPA chunk 2000:4000
+Completed ECAPA chunk 4000:6000
+Completed ECAPA chunk 6000:8000
+Completed ECAPA chunk 8000:10000
+Completed ECAPA chunk 10000:12000
+Completed ECAPA chunk 12000:14000
+Completed ECAPA chunk 14000:16000
+Completed ECAPA chunk 16000:18000
+Completed ECAPA chunk 18000:20000
+Completed ECAPA chunk 20000:22000
+Completed ECAPA chunk 22000:24000
+Completed ECAPA chunk 24000:26000
+Completed ECAPA chunk 26000:28000
+Completed ECAPA chunk 28000:29200
+Completed LR head a
+Completed LR head b
+Completed LR head c
+Completed LR head d
+Completed LR head xvector_diagnostic

@@ -1,0 +1,183 @@
+{
+  "exp_id": "M1-ECAPA-001",
+  "primary_metric": {
+    "name": "accuracy",
+    "value": 0.9765410958904109,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "heads": {
+      "a": {
+        "accuracy": 0.9501712328767123,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            2978,
+            130
+          ],
+          [
+            161,
+            2571
+          ]
+        ],
+        "recall_F": 0.9581724581724582,
+        "recall_M": 0.9410688140556369,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732
+      },
+      "b": {
+        "accuracy": 0.9789383561643835,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3051,
+            57
+          ],
+          [
+            66,
+            2666
+          ]
+        ],
+        "recall_F": 0.9816602316602316,
+        "recall_M": 0.9758418740849195,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732
+      },
+      "c": {
+        "accuracy": 0.9738013698630137,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3038,
+            70
+          ],
+          [
+            83,
+            2649
+          ]
+        ],
+        "recall_F": 0.9774774774774775,
+        "recall_M": 0.969619326500732,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732
+      },
+      "d": {
+        "accuracy": 0.9765410958904109,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3049,
+            59
+          ],
+          [
+            78,
+            2654
+          ]
+        ],
+        "recall_F": 0.981016731016731,
+        "recall_M": 0.9714494875549048,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732
+      },
+      "xvector_diagnostic": {
+        "accuracy": 0.9707191780821918,
+        "confusion_matrix_labels": [
+          "F",
+          "M"
+        ],
+        "confusion_matrix": [
+          [
+            3031,
+            77
+          ],
+          [
+            94,
+            2638
+          ]
+        ],
+        "recall_F": 0.9752252252252253,
+        "recall_M": 0.9655929721815519,
+        "n_samples": 5840,
+        "n_F": 3108,
+        "n_M": 2732
+      }
+    },
+    "head_features": {
+      "a": "52D",
+      "b": "ECAPA 192D",
+      "c": "52D+x-vector",
+      "d": "52D+x-vector+ECAPA"
+    },
+    "paired_mcnemar": {
+      "table": [
+        [
+          5664,
+          23
+        ],
+        [
+          39,
+          114
+        ]
+      ],
+      "rows": "c correct/incorrect",
+      "columns": "d correct/incorrect",
+      "exact_two_sided_p": 0.05589722669971112
+    },
+    "embedding_error_overlap": {
+      "both_wrong": 97,
+      "xvector_only_wrong": 74,
+      "ecapa_only_wrong": 26,
+      "both_correct": 5643
+    },
+    "caller_duration_bins": {
+      "le_20s": {
+        "rows": 903,
+        "c_accuracy": 0.9745293466223699,
+        "d_accuracy": 0.973421926910299
+      },
+      "gt_20_le_40s": {
+        "rows": 3349,
+        "c_accuracy": 0.9764108689160944,
+        "d_accuracy": 0.9782024484920872
+      },
+      "gt_40s": {
+        "rows": 1588,
+        "c_accuracy": 0.9678841309823678,
+        "d_accuracy": 0.9748110831234257
+      }
+    },
+    "accuracy_gain": 0.002739726027397249,
+    "baseline_reference": 0.9738,
+    "baseline_reproduced": true,
+    "reproduction_failed": false,
+    "success_criteria_met": false,
+    "ecapa_seconds_per_call": 0.03994765826344021,
+    "ecapa_seconds_p50": 0.03969081549803377,
+    "ecapa_seconds_p95": 0.047478463397783346,
+    "ecapa_extraction_seconds": 1168.514540979988,
+    "timing_scope": "local waveform read, concatenation, resampling, ECAPA encode and CPU transfer; excludes initial model load",
+    "baseline_feature_source": "M1-XVEC-001"
+  },
+  "seed": 42,
+  "train_rows": 23360,
+  "eval_rows": 5840,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "notes": "Pre-fixed head d; Training only. LR interrupted fit restarts only that head; no epoch/optimizer API. Baseline reproduced."
+}
