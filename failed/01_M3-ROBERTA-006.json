@@ -26,5 +26,10 @@
   "max_attempts": 3,
   "worker": "colab-a",
   "claimed_at": "2026-10-10T18:27:21+00:00",
-  "started_at": "2026-10-10T18:27:22+00:00"
+  "status": "failed",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-10T18:27:39+00:00",
+  "reason": "exit 2, metrics.json 없음",
+  "elapsed_min": 0.1,
+  "log_tail": "\n===== attempt 1 2026-10-10T18:27:34+00:00 colab-a commit=635842d419b0f1912968553f869e2387c6a50a6e =====\nusage: m3-roberta-006.py [-h] [--out OUT] [--smoke] [--aux-labels AUX_LABELS]\n                         [--split SPLIT] [--split-sha256 SPLIT_SHA256]\nm3-roberta-006.py: error: --aux-labels, --split, --split-sha256 (or LAB_AUX_LABELS/LAB_P0_SPLIT/LAB_P0_SPLIT_SHA256) required\n"
 }

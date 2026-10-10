@@ -1,0 +1,5 @@
+
+===== attempt 1 2026-10-10T18:27:34+00:00 colab-a commit=635842d419b0f1912968553f869e2387c6a50a6e =====
+usage: m3-roberta-006.py [-h] [--out OUT] [--smoke] [--aux-labels AUX_LABELS]
+                         [--split SPLIT] [--split-sha256 SPLIT_SHA256]
+m3-roberta-006.py: error: --aux-labels, --split, --split-sha256 (or LAB_AUX_LABELS/LAB_P0_SPLIT/LAB_P0_SPLIT_SHA256) required
