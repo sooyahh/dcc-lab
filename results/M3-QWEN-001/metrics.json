@@ -1,0 +1,123 @@
+{
+  "exp_id": "M3-QWEN-001",
+  "primary_metric": {
+    "name": "macro_f1",
+    "value": 0.6126869278516947,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "epoch": 2,
+    "seed": 42,
+    "train_loss": 1.085584856198002,
+    "train_bce": 0.27856172116617983,
+    "train_soft_f1_loss": 0.8070231351545635,
+    "epoch_train_seconds": 5765.968758856001,
+    "macro_f1": 0.6126869278516947,
+    "micro_f1": 0.6394844140470867,
+    "per_symptom_f1": {
+      "고열": 0.6508810572687225,
+      "구토": 0.5719895287958116,
+      "두통": 0.48333333333333334,
+      "복통": 0.7861736334405145,
+      "어지러움": 0.6503378378378378,
+      "열상": 0.8600823045267489,
+      "오심": 0.27431906614785995,
+      "전신쇠약": 0.5590551181102362,
+      "호흡곤란": 0.6780104712041884
+    },
+    "empty_predictions": 377,
+    "predicted_positive_counts": [
+      779,
+      635,
+      379,
+      1134,
+      1101,
+      765,
+      360,
+      970,
+      743
+    ],
+    "training_collapse": false,
+    "history": [
+      {
+        "epoch": 1,
+        "seed": 42,
+        "train_loss": 1.195307092462308,
+        "train_bce": 0.36090811225446384,
+        "train_soft_f1_loss": 0.8343989802288911,
+        "epoch_train_seconds": 5736.090479282,
+        "macro_f1": 0.6078979979050717,
+        "micro_f1": 0.6277991254803234,
+        "per_symptom_f1": {
+          "고열": 0.63662960795787,
+          "구토": 0.5492577597840755,
+          "두통": 0.45485714285714285,
+          "복통": 0.7746058798466127,
+          "어지러움": 0.6426986240568131,
+          "열상": 0.8577263444520081,
+          "오심": 0.3239775461106656,
+          "전신쇠약": 0.5534069981583793,
+          "호흡곤란": 0.6779220779220779
+        },
+        "empty_predictions": 516,
+        "predicted_positive_counts": [
+          672,
+          589,
+          294,
+          993,
+          986,
+          776,
+          579,
+          1110,
+          755
+        ],
+        "training_collapse": false
+      },
+      {
+        "epoch": 2,
+        "seed": 42,
+        "train_loss": 1.085584856198002,
+        "train_bce": 0.27856172116617983,
+        "train_soft_f1_loss": 0.8070231351545635,
+        "epoch_train_seconds": 5765.968758856001,
+        "macro_f1": 0.6126869278516947,
+        "micro_f1": 0.6394844140470867,
+        "per_symptom_f1": {
+          "고열": 0.6508810572687225,
+          "구토": 0.5719895287958116,
+          "두통": 0.48333333333333334,
+          "복통": 0.7861736334405145,
+          "어지러움": 0.6503378378378378,
+          "열상": 0.8600823045267489,
+          "오심": 0.27431906614785995,
+          "전신쇠약": 0.5590551181102362,
+          "호흡곤란": 0.6780104712041884
+        },
+        "empty_predictions": 377,
+        "predicted_positive_counts": [
+          779,
+          635,
+          379,
+          1134,
+          1101,
+          765,
+          360,
+          970,
+          743
+        ],
+        "training_collapse": false
+      }
+    ],
+    "success_criteria_met": false,
+    "baseline_macro_f1": 0.6441,
+    "baseline_seed_variation": 0.002,
+    "collapse_epochs": []
+  },
+  "seed": 42,
+  "train_rows": 23408,
+  "eval_rows": 5792,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "completed": true,
+  "notes": "Fixed last completed epoch; threshold >=0.5, empty predictions unchanged. Training-only weights and call-disjoint split; official Validation unused. Soft F1 computed fp32 per microbatch of 2, effective batch 16. Collapse flag: macro F1 <0.3 or all predictions empty. Single seed; ROBERTA-003 seed variation ±0.002 is reference only."
+}

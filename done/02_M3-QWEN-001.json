@@ -1,0 +1,156 @@
+{
+  "spec": {
+    "exp_id": "M3-QWEN-001",
+    "mission": 3,
+    "title": "Qwen2.5-1.5B LoRA 다중라벨 분류 + 강화 가중 BCE + soft macro-F1 (80:20 재평가, seed 42)",
+    "hypothesis": "사전학습 지식이 큰 LLM(1.5B)은 통화에 직접 근거가 없는 증상(오심·전신쇠약·두통 등)을 상황 맥락으로 더 잘 추론해, 같은 손실에서 roberta-large(ROBERTA-003 seed 42 0.6441)보다 Macro F1이 오른다",
+    "change_vs_baseline": "M3-ROBERTA-003 대비 인코더와 그에 따른 최적화만 변경: Qwen/Qwen2.5-1.5B(고정 revision, safetensors)를 AutoModelForSequenceClassification(num_labels=9, 마지막 비패딩 토큰 풀링, pad_token=eos)로 불러 LoRA(r=16, alpha=32, dropout 0.05, target q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj; 분류 헤드 score는 전체 학습)로 미세조정. lr 1e-4(LoRA)·linear warmup 5%·weight decay 0.0·fp16 autocast(T4)·gradient checkpointing·실효 batch 16(micro-batch에 맞춰 accumulation)·2 epochs. 손실은 ROBERTA-003과 동일: BCEWithLogits(pos_weight scale 0.5/max 6.0, Training 분할에서만 계산) + 1.0*(1 - mean_j softF1_j), softF1은 fp32로 계산. 입력은 같은 transcript 규칙, 앞 256 토큰(Qwen 토크나이저). 80:20 분할·threshold >= 0.5·seed 42",
+    "baseline": {
+      "exp_id": "M3-ROBERTA-003",
+      "metric": "macro_f1 seed 42 (80:20 split, thr 0.5)",
+      "value": 0.6441
+    },
+    "branch": "sooyah/lab-m3-qwen-001",
+    "commit": "889f00d8916632f442e97b8e82ba7acfe4cce0dd",
+    "command": "python scripts/lab/m3-qwen-001.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 seed 42 Macro F1이 0.6441(ROBERTA-003 seed 42)보다 +0.01 이상 높을 것(0.6541 이상). seed 1개라 seed 편차(ROBERTA-003 ±0.002)를 참고로 함께 적음. threshold >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). Macro/Micro/증상별 F1, 빈 예측 수, epoch별 holdout Macro F1, epoch당 학습 시간, 학습 붕괴 여부를 기록",
+    "gpu": "T4",
+    "budget_hours": 5,
+    "priority": 1,
+    "notes": "peft는 Colab에서 고정 버전으로 pip install(예: peft==0.13.2). 모델은 DCC_RUN_ROOT/models/qwen2.5-1.5b에 고정 revision으로 캐시. epoch마다 ckpt_last 저장해 재개 가능하게(LoRA 어댑터+score+optimizer). 학습 후 LoRA를 병합(merge_and_unload)한 모델과 토크나이저를 LAB_OUT/merged에 save_pretrained(fp16)로 저장해, 이후 오프라인 제출 내보내기에 씀. seed_42/holdout_probs.npy(행 순서 = val_files.txt, sigmoid 확률 fp32)를 저장. 시간이 부족하면 epoch 1 결과까지 metrics에 남기고 epoch 2 진행. 공식 Val 미사용"
+  },
+  "commit": "889f00d8916632f442e97b8e82ba7acfe4cce0dd",
+  "submitted_at": "2026-10-10T10:30:14+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-a",
+  "claimed_at": "2026-10-10T05:15:01+00:00",
+  "status": "done",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-10T08:48:26+00:00",
+  "elapsed_min": 213.2,
+  "metrics": {
+    "exp_id": "M3-QWEN-001",
+    "primary_metric": {
+      "name": "macro_f1",
+      "value": 0.6126869278516947,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "epoch": 2,
+      "seed": 42,
+      "train_loss": 1.085584856198002,
+      "train_bce": 0.27856172116617983,
+      "train_soft_f1_loss": 0.8070231351545635,
+      "epoch_train_seconds": 5765.968758856001,
+      "macro_f1": 0.6126869278516947,
+      "micro_f1": 0.6394844140470867,
+      "per_symptom_f1": {
+        "고열": 0.6508810572687225,
+        "구토": 0.5719895287958116,
+        "두통": 0.48333333333333334,
+        "복통": 0.7861736334405145,
+        "어지러움": 0.6503378378378378,
+        "열상": 0.8600823045267489,
+        "오심": 0.27431906614785995,
+        "전신쇠약": 0.5590551181102362,
+        "호흡곤란": 0.6780104712041884
+      },
+      "empty_predictions": 377,
+      "predicted_positive_counts": [
+        779,
+        635,
+        379,
+        1134,
+        1101,
+        765,
+        360,
+        970,
+        743
+      ],
+      "training_collapse": false,
+      "history": [
+        {
+          "epoch": 1,
+          "seed": 42,
+          "train_loss": 1.195307092462308,
+          "train_bce": 0.36090811225446384,
+          "train_soft_f1_loss": 0.8343989802288911,
+          "epoch_train_seconds": 5736.090479282,
+          "macro_f1": 0.6078979979050717,
+          "micro_f1": 0.6277991254803234,
+          "per_symptom_f1": {
+            "고열": 0.63662960795787,
+            "구토": 0.5492577597840755,
+            "두통": 0.45485714285714285,
+            "복통": 0.7746058798466127,
+            "어지러움": 0.6426986240568131,
+            "열상": 0.8577263444520081,
+            "오심": 0.3239775461106656,
+            "전신쇠약": 0.5534069981583793,
+            "호흡곤란": 0.6779220779220779
+          },
+          "empty_predictions": 516,
+          "predicted_positive_counts": [
+            672,
+            589,
+            294,
+            993,
+            986,
+            776,
+            579,
+            1110,
+            755
+          ],
+          "training_collapse": false
+        },
+        {
+          "epoch": 2,
+          "seed": 42,
+          "train_loss": 1.085584856198002,
+          "train_bce": 0.27856172116617983,
+          "train_soft_f1_loss": 0.8070231351545635,
+          "epoch_train_seconds": 5765.968758856001,
+          "macro_f1": 0.6126869278516947,
+          "micro_f1": 0.6394844140470867,
+          "per_symptom_f1": {
+            "고열": 0.6508810572687225,
+            "구토": 0.5719895287958116,
+            "두통": 0.48333333333333334,
+            "복통": 0.7861736334405145,
+            "어지러움": 0.6503378378378378,
+            "열상": 0.8600823045267489,
+            "오심": 0.27431906614785995,
+            "전신쇠약": 0.5590551181102362,
+            "호흡곤란": 0.6780104712041884
+          },
+          "empty_predictions": 377,
+          "predicted_positive_counts": [
+            779,
+            635,
+            379,
+            1134,
+            1101,
+            765,
+            360,
+            970,
+            743
+          ],
+          "training_collapse": false
+        }
+      ],
+      "success_criteria_met": false,
+      "baseline_macro_f1": 0.6441,
+      "baseline_seed_variation": 0.002,
+      "collapse_epochs": []
+    },
+    "seed": 42,
+    "train_rows": 23408,
+    "eval_rows": 5792,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "completed": true,
+    "notes": "Fixed last completed epoch; threshold >=0.5, empty predictions unchanged. Training-only weights and call-disjoint split; official Validation unused. Soft F1 computed fp32 per microbatch of 2, effective batch 16. Collapse flag: macro F1 <0.3 or all predictions empty. Single seed; ROBERTA-003 seed variation ±0.002 is reference only."
+  }
+}

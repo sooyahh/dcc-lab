@@ -1,0 +1,97 @@
+
+===== attempt 1 2026-10-10T05:15:15+00:00 colab-a commit=889f00d8916632f442e97b8e82ba7acfe4cce0dd =====
+
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:02,  2.75it/s]
+Fetching 7 files:  57%|█████▋    | 4/7 [00:00<00:00,  8.41it/s]
+Fetching 7 files:  86%|████████▌ | 6/7 [00:20<00:00,  8.41it/s]
+Fetching 7 files: 100%|██████████| 7/7 [00:24<00:00,  4.26s/it]
+Fetching 7 files: 100%|██████████| 7/7 [00:24<00:00,  3.44s/it]
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/338 [00:03<17:42,  3.15s/it]
+Loading weights:  19%|█▉        | 65/338 [00:03<00:09, 27.60it/s]
+Loading weights:  28%|██▊       | 93/338 [00:03<00:06, 36.52it/s]
+Loading weights:  33%|███▎      | 112/338 [00:03<00:05, 41.37it/s]
+Loading weights:  37%|███▋      | 126/338 [00:04<00:05, 38.40it/s]
+Loading weights:  40%|████      | 136/338 [00:04<00:05, 39.85it/s]
+Loading weights:  43%|████▎     | 147/338 [00:04<00:04, 40.34it/s]
+Loading weights:  46%|████▌     | 154/338 [00:05<00:04, 38.17it/s]
+Loading weights:  47%|████▋     | 160/338 [00:05<00:04, 36.22it/s]
+Loading weights:  49%|████▉     | 165/338 [00:05<00:04, 37.06it/s]
+Loading weights:  51%|█████     | 171/338 [00:05<00:04, 36.10it/s]
+Loading weights:  52%|█████▏    | 176/338 [00:05<00:05, 32.11it/s]
+Loading weights:  54%|█████▍    | 183/338 [00:05<00:04, 36.89it/s]
+Loading weights:  56%|█████▌    | 188/338 [00:06<00:04, 32.42it/s]
+Loading weights:  58%|█████▊    | 195/338 [00:06<00:04, 34.12it/s]
+Loading weights:  59%|█████▉    | 199/338 [00:06<00:04, 29.10it/s]
+Loading weights:  61%|██████    | 207/338 [00:06<00:03, 36.26it/s]
+Loading weights:  63%|██████▎   | 212/338 [00:06<00:03, 31.61it/s]
+Loading weights:  65%|██████▍   | 219/338 [00:07<00:03, 33.77it/s]
+Loading weights:  66%|██████▌   | 223/338 [00:07<00:04, 28.52it/s]
+Loading weights:  68%|██████▊   | 231/338 [00:07<00:02, 36.09it/s]
+Loading weights:  70%|██████▉   | 236/338 [00:07<00:03, 31.79it/s]
+Loading weights:  72%|███████▏  | 243/338 [00:07<00:02, 33.29it/s]
+Loading weights:  73%|███████▎  | 247/338 [00:08<00:03, 28.08it/s]
+Loading weights:  75%|███████▌  | 255/338 [00:08<00:02, 36.46it/s]
+Loading weights:  77%|███████▋  | 260/338 [00:08<00:02, 31.72it/s]
+Loading weights:  79%|███████▉  | 267/338 [00:08<00:02, 33.11it/s]
+Loading weights:  80%|████████  | 271/338 [00:08<00:02, 28.26it/s]
+Loading weights:  83%|████████▎ | 279/338 [00:08<00:01, 36.33it/s]
+Loading weights:  84%|████████▍ | 284/338 [00:09<00:01, 31.38it/s]
+Loading weights:  86%|████████▌ | 291/338 [00:09<00:01, 33.28it/s]
+Loading weights:  87%|████████▋ | 295/338 [00:09<00:01, 28.34it/s]
+Loading weights:  90%|████████▉ | 303/338 [00:09<00:00, 36.26it/s]
+Loading weights:  91%|█████████ | 308/338 [00:09<00:00, 31.54it/s]
+Loading weights:  93%|█████████▎| 315/338 [00:10<00:00, 33.33it/s]
+Loading weights:  94%|█████████▍| 319/338 [00:10<00:00, 28.49it/s]
+Loading weights:  97%|█████████▋| 327/338 [00:10<00:00, 35.81it/s]
+Loading weights:  98%|█████████▊| 332/338 [00:10<00:00, 32.38it/s]
+Loading weights: 100%|██████████| 338/338 [00:10<00:00, 31.81it/s]
+[transformers] [1mQwen2ForSequenceClassification LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/qwen2.5-1.5b
+Key          | Status  | 
+-------------+---------+-
+score.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+trainable params: 18,478,592 || all params: 1,562,206,720 || trainable%: 1.1829
+[transformers] `use_return_dict` is deprecated! Use `return_dict` instead!
+epoch=1 step=0 loss=2.2538
+epoch=1 step=100 loss=1.5338
+epoch=1 step=200 loss=1.4152
+epoch=1 step=300 loss=1.1727
+epoch=1 step=400 loss=1.1327
+epoch=1 step=500 loss=1.5126
+epoch=1 step=600 loss=0.8424
+epoch=1 step=700 loss=0.8986
+epoch=1 step=800 loss=1.1085
+epoch=1 step=900 loss=1.2584
+epoch=1 step=1000 loss=0.9939
+epoch=1 step=1100 loss=1.5620
+epoch=1 step=1200 loss=1.3354
+epoch=1 step=1300 loss=1.3908
+epoch=1 step=1400 loss=1.1964
+{"epoch": 1, "seed": 42, "train_loss": 1.195307092462308, "train_bce": 0.36090811225446384, "train_soft_f1_loss": 0.8343989802288911, "epoch_train_seconds": 5736.090479282, "macro_f1": 0.6078979979050717, "micro_f1": 0.6277991254803234, "per_symptom_f1": {"고열": 0.63662960795787, "구토": 0.5492577597840755, "두통": 0.45485714285714285, "복통": 0.7746058798466127, "어지러움": 0.6426986240568131, "열상": 0.8577263444520081, "오심": 0.3239775461106656, "전신쇠약": 0.5534069981583793, "호흡곤란": 0.6779220779220779}, "empty_predictions": 516, "predicted_positive_counts": [672, 589, 294, 993, 986, 776, 579, 1110, 755], "training_collapse": false}
+epoch=2 step=0 loss=0.9498
+epoch=2 step=100 loss=1.1549
+epoch=2 step=200 loss=0.9605
+epoch=2 step=300 loss=1.7031
+epoch=2 step=400 loss=1.1346
+epoch=2 step=500 loss=1.3648
+epoch=2 step=600 loss=1.1863
+epoch=2 step=700 loss=1.5296
+epoch=2 step=800 loss=0.8246
+epoch=2 step=900 loss=1.2103
+epoch=2 step=1000 loss=1.3714
+epoch=2 step=1100 loss=1.4623
+epoch=2 step=1200 loss=0.9804
+epoch=2 step=1300 loss=0.9396
+epoch=2 step=1400 loss=0.8462
+{"epoch": 2, "seed": 42, "train_loss": 1.085584856198002, "train_bce": 0.27856172116617983, "train_soft_f1_loss": 0.8070231351545635, "epoch_train_seconds": 5765.968758856001, "macro_f1": 0.6126869278516947, "micro_f1": 0.6394844140470867, "per_symptom_f1": {"고열": 0.6508810572687225, "구토": 0.5719895287958116, "두통": 0.48333333333333334, "복통": 0.7861736334405145, "어지러움": 0.6503378378378378, "열상": 0.8600823045267489, "오심": 0.27431906614785995, "전신쇠약": 0.5590551181102362, "호흡곤란": 0.6780104712041884}, "empty_predictions": 377, "predicted_positive_counts": [779, 635, 379, 1134, 1101, 765, 360, 970, 743], "training_collapse": false}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:28<00:00, 28.88s/it]
+Writing model shards: 100%|██████████| 1/1 [00:28<00:00, 28.88s/it]
