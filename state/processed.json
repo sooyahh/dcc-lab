@@ -50,7 +50,8 @@
   "failed/03_M3-E5-001.json@2026-10-11T08:23:04+00:00",
   "done/03_M3-E5-001.json@2026-10-11T09:35:04+00:00",
   "failed/01_M3-TEACHER-001.json@2026-10-11T10:27:17+00:00",
-  "done/01_M3-ROBERTA-007.json@2026-10-11T11:00:44+00:00"
+  "done/01_M3-ROBERTA-007.json@2026-10-11T11:00:44+00:00",
+  "done/02_M3-ROB5F-001.json@2026-10-11T11:38:48+00:00"
  ],
  "implemented_issues": [
   1,
@@ -255,6 +256,7 @@
   "Merge run 2026-10-11T04:32Z: PR #149 (log M3-XLMR-001) merged (merge-gate success). No new proposal: open proposals 0 < max_workers 2이나 M3 새 축 소진(E5·XLMR 보류 포함), 세부 기법은 seed 편차 초과 근거 없음. M1 포화(공식 Val 98.13%). M2 남은 축(WavLM 미세조정)은 전체 데이터 학습·CPU 추론 비용상 동결(2026-10-12 23:59 KST) 전 제출 반영 불가",
   "Propose run 2026-10-11T07:2xZ: No new proposal. open proposals 0 < max_workers 2, M3-E5-001 사용자 재큐로 colab-a 실행 중. units_left 79.06(>=40)이나 M3 새 축(손실·보조목표·TAPT·LLM·앙상블·헤드·인코더 교체 KCELECTRA 기각/E5·XLMR 보류) 소진, 세부 기법 변경은 KCBERT-004·006~010/KLUEBERT-001·ROBERTA-004~006 ±0.01 이내라 seed 편차 초과 근거 없음, 기존 ckpt 추론 앙상블은 ENS-001(+0.0028, 오류 겹침 8.2%)로 이득 근거 없음. M1 포화(공식 Val 98.13%), M2 팀 결정(2026-10-04)으로 마무리·WavLM 미세조정은 동결(2026-10-12 23:59 KST) 전 반영 불가",
   "Merge run 2026-10-11: PR #152 (log M3-E5-001) merged (merge-gate success, behind 0)",
-  "Judge M3-ROBERTA-007 2026-10-11: 기각 (0.6515 vs 0.6541). 로그 PR #153, 코드 PR #151 닫음, 이슈 #36 닫음. No new proposal: M3 새 축 소진, 입력 길이 계열 +0.0074로 기준 미달·비용 4배, 최종 학습(FINAL-001) 큐 진행 중"
+  "Judge M3-ROBERTA-007 2026-10-11: 기각 (0.6515 vs 0.6541). 로그 PR #153, 코드 PR #151 닫음, 이슈 #36 닫음. No new proposal: M3 새 축 소진, 입력 길이 계열 +0.0074로 기준 미달·비용 4배, 최종 학습(FINAL-001) 큐 진행 중",
+  "Judge M3-ROB5F-001 2026-10-11: 채택 (OOF Macro F1 0.6412, fold 평균 ≥0.635; 003 0.6427 대비 편차 이내). 팀 로그 PR #154. 코드 PR·proposal 이슈 없음. No new proposal: M3 새 축 소진, TEACHER-001·FINAL-001 실행 중"
  ]
 }
