@@ -1,47 +1,4 @@
-
-===== attempt 1 2026-10-10T20:42:31+00:00 colab-a commit=e9dc0b898816dd05122c9cc2ead6392fe025ef6e =====
-
-Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-
-Fetching 6 files:  17%|█▋        | 1/6 [00:00<00:03,  1.35it/s]
-Fetching 6 files:  67%|██████▋   | 4/6 [00:01<00:00,  2.94it/s]
-Fetching 6 files:  83%|████████▎ | 5/6 [00:07<00:01,  1.79s/it]
-Fetching 6 files: 100%|██████████| 6/6 [00:27<00:00,  7.17s/it]
-Fetching 6 files: 100%|██████████| 6/6 [00:27<00:00,  4.62s/it]
-
-Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
-Loading weights:  41%|████      | 159/391 [00:00<00:00, 1541.83it/s]
-Loading weights:  80%|████████  | 314/391 [00:00<00:00, 526.89it/s] 
-Loading weights: 100%|██████████| 391/391 [00:00<00:00, 673.70it/s]
-
-Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
-Loading weights:  50%|████▉     | 194/391 [00:00<00:00, 1939.80it/s]
-Loading weights:  99%|█████████▉| 388/391 [00:00<00:00, 1528.27it/s]
-Loading weights: 100%|██████████| 391/391 [00:00<00:00, 1585.39it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-seed=42 epoch=1 step=0 loss=1.6162
-seed=42 epoch=1 step=200 loss=1.3577
-seed=42 epoch=1 step=400 loss=1.0557
-seed=42 epoch=1 step=600 loss=0.7915
-seed=42 epoch=1 step=800 loss=1.2768
-
-===== attempt 2 2026-10-10T21:49:44+00:00 colab-a commit=e9dc0b898816dd05122c9cc2ead6392fe025ef6e =====
-
-Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
-Loading weights:   4%|▎         | 14/391 [00:00<00:25, 15.00it/s]
-Loading weights:   5%|▍         | 18/391 [00:02<00:56,  6.59it/s]
-Loading weights:   7%|▋         | 26/391 [00:03<00:54,  6.71it/s]
-Loading weights:   7%|▋         | 27/391 [00:04<01:05,  5.58it/s]
-Loading weights:   7%|▋         | 28/391 [00:05<01:31,  3.95it/s]
-Loading weights:   8%|▊         | 33/391 [00:06<01:42,  3.48it/s]
-Loading weights:   9%|▊         | 34/391 [00:07<01:49,  3.27it/s]
-Loading weights:  10%|█         | 41/391 [00:09<01:58,  2.96it/s]
-Loading weights:  12%|█▏        | 48/391 [00:10<01:30,  3.77it/s]
-Loading weights:  13%|█▎        | 49/391 [00:11<01:35,  3.56it/s]
-Loading weights:  13%|█▎        | 50/391 [00:11<01:45,  3.24it/s]
-Loading weights:  13%|█▎        | 52/391 [00:12<01:28,  3.82it/s]
-Loading weights:  14%|█▎        | 53/391 [00:13<02:23,  2.35it/s]
-Loading weights:  17%|█▋        | 66/391 [00:13<00:42,  7.57it/s]
+57it/s]
 Loading weights:  19%|█▉        | 74/391 [00:14<00:33,  9.46it/s]
 Loading weights:  19%|█▉        | 76/391 [00:14<00:31, 10.01it/s]
 Loading weights:  20%|█▉        | 78/391 [00:15<00:52,  6.01it/s]
@@ -174,3 +131,181 @@ seed=42 epoch=2 step=800 loss=0.6515
 seed=42 epoch=2 step=1000 loss=1.2436
 seed=42 epoch=2 step=1200 loss=0.8336
 seed=42 epoch=2 step=1400 loss=0.6370
+
+===== attempt 1 2026-10-11T00:13:03+00:00 colab-a commit=e9dc0b898816dd05122c9cc2ead6392fe025ef6e =====
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:   3%|▎         | 13/391 [00:00<00:09, 38.34it/s]
+Loading weights:   4%|▍         | 17/391 [00:01<00:47,  7.91it/s]
+Loading weights:   5%|▍         | 19/391 [00:03<01:24,  4.40it/s]
+Loading weights:   6%|▌         | 23/391 [00:03<01:04,  5.70it/s]
+Loading weights:   8%|▊         | 31/391 [00:05<01:24,  4.25it/s]
+Loading weights:  10%|█         | 40/391 [00:06<00:50,  6.98it/s]
+Loading weights:  11%|█         | 42/391 [00:06<00:49,  7.10it/s]
+Loading weights:  11%|█▏        | 44/391 [00:09<01:56,  2.97it/s]
+Loading weights:  15%|█▍        | 57/391 [00:09<00:57,  5.85it/s]
+Loading weights:  15%|█▌        | 59/391 [00:09<00:52,  6.31it/s]
+Loading weights:  16%|█▌        | 61/391 [00:10<00:52,  6.26it/s]
+Loading weights:  20%|██        | 80/391 [00:10<00:21, 14.33it/s]
+Loading weights:  24%|██▎       | 92/391 [00:11<00:17, 17.56it/s]
+Loading weights:  25%|██▍       | 97/391 [00:11<00:16, 18.00it/s]
+Loading weights:  26%|██▌       | 102/391 [00:11<00:14, 19.88it/s]
+Loading weights:  28%|██▊       | 110/391 [00:12<00:15, 18.02it/s]
+Loading weights:  29%|██▉       | 113/391 [00:12<00:17, 15.57it/s]
+Loading weights:  30%|██▉       | 116/391 [00:12<00:20, 13.55it/s]
+Loading weights:  31%|███       | 120/391 [00:12<00:18, 14.84it/s]
+Loading weights:  36%|███▌      | 139/391 [00:13<00:08, 31.49it/s]
+Loading weights:  37%|███▋      | 144/391 [00:15<00:29,  8.35it/s]
+Loading weights:  40%|███▉      | 156/391 [00:15<00:18, 12.49it/s]
+Loading weights:  49%|████▉     | 192/391 [00:17<00:10, 18.35it/s]
+Loading weights:  53%|█████▎    | 208/391 [00:17<00:07, 23.60it/s]
+Loading weights:  54%|█████▍    | 213/391 [00:18<00:10, 16.25it/s]
+Loading weights:  57%|█████▋    | 224/391 [00:19<00:09, 17.86it/s]
+Loading weights:  60%|█████▉    | 234/391 [00:19<00:09, 15.76it/s]
+Loading weights:  65%|██████▍   | 254/391 [00:20<00:07, 19.29it/s]
+Loading weights:  67%|██████▋   | 262/391 [00:20<00:06, 20.77it/s]
+Loading weights:  69%|██████▉   | 270/391 [00:22<00:09, 12.60it/s]
+Loading weights:  73%|███████▎  | 287/391 [00:22<00:06, 17.27it/s]
+Loading weights:  76%|███████▌  | 298/391 [00:23<00:05, 18.41it/s]
+Loading weights:  81%|████████▏ | 318/391 [00:23<00:02, 27.01it/s]
+Loading weights:  87%|████████▋ | 342/391 [00:24<00:02, 22.62it/s]
+Loading weights:  92%|█████████▏| 358/391 [00:25<00:01, 26.72it/s]
+Loading weights:  93%|█████████▎| 365/391 [00:25<00:00, 28.94it/s]
+Loading weights:  95%|█████████▍| 370/391 [00:26<00:01, 16.36it/s]
+Loading weights:  98%|█████████▊| 382/391 [00:26<00:00, 20.92it/s]
+Loading weights: 100%|██████████| 391/391 [00:26<00:00, 14.65it/s]
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 6200.32it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=2 step=0 loss=0.7482
+seed=42 epoch=2 step=200 loss=1.0346
+seed=42 epoch=2 step=400 loss=0.7601
+seed=42 epoch=2 step=600 loss=0.9474
+seed=42 epoch=2 step=800 loss=0.6705
+seed=42 epoch=2 step=1000 loss=1.2694
+seed=42 epoch=2 step=1200 loss=0.8564
+seed=42 epoch=2 step=1400 loss=0.6327
+{"seed": 42, "epoch": 2, "macro_f1": 0.6327683265427707, "micro_f1": 0.6483032446181525, "per_symptom_f1": {"고열": 0.6586387434554973, "구토": 0.5921375921375921, "두통": 0.5157699443413729, "복통": 0.7915672235481305, "어지러움": 0.6639577407557903, "열상": 0.8776779543883898, "오심": 0.3345780433159074, "전신쇠약": 0.5796562935438923, "호흡곤란": 0.6809314033983638}, "empty_predictions": 231, "ece": 0.04634308406945933, "brier": 0.0836583037871078, "train_loss": 0.8871208249972605, "train_bce": 0.3014392269137414, "train_soft_f1_loss": 0.5856815992319169, "train_soft_f1": 0.41431840076808313, "epoch_seconds": 1527.444043026, "training_collapse": false}
+seed=42 epoch=3 step=0 loss=0.6321
+seed=42 epoch=3 step=200 loss=0.9506
+
+===== attempt 2 2026-10-11T01:49:09+00:00 colab-a commit=e9dc0b898816dd05122c9cc2ead6392fe025ef6e =====
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:   1%|          | 3/391 [00:00<01:42,  3.80it/s]
+Loading weights:   3%|▎         | 13/391 [00:01<00:45,  8.25it/s]
+Loading weights:   7%|▋         | 27/391 [00:02<00:30, 11.95it/s]
+Loading weights:   7%|▋         | 29/391 [00:03<00:42,  8.50it/s]
+Loading weights:   8%|▊         | 30/391 [00:04<00:58,  6.16it/s]
+Loading weights:   9%|▉         | 35/391 [00:04<00:40,  8.80it/s]
+Loading weights:   9%|▉         | 37/391 [00:05<01:22,  4.32it/s]
+Loading weights:  14%|█▍        | 55/391 [00:05<00:26, 12.70it/s]
+Loading weights:  16%|█▌        | 61/391 [00:06<00:25, 13.05it/s]
+Loading weights:  17%|█▋        | 66/391 [00:06<00:24, 13.51it/s]
+Loading weights:  19%|█▉        | 74/391 [00:06<00:16, 18.73it/s]
+Loading weights:  20%|██        | 79/391 [00:06<00:15, 20.48it/s]
+Loading weights:  21%|██▏       | 84/391 [00:07<00:19, 16.13it/s]
+Loading weights:  23%|██▎       | 88/391 [00:07<00:16, 18.21it/s]
+Loading weights:  24%|██▎       | 92/391 [00:07<00:15, 19.34it/s]
+Loading weights:  28%|██▊       | 108/391 [00:08<00:09, 28.88it/s]
+Loading weights:  31%|███       | 122/391 [00:08<00:06, 40.88it/s]
+Loading weights:  33%|███▎      | 128/391 [00:08<00:08, 30.29it/s]
+Loading weights:  36%|███▌      | 140/391 [00:09<00:13, 18.24it/s]
+Loading weights:  37%|███▋      | 144/391 [00:10<00:14, 16.67it/s]
+Loading weights:  38%|███▊      | 147/391 [00:10<00:14, 16.37it/s]
+Loading weights:  38%|███▊      | 150/391 [00:10<00:13, 17.64it/s]
+Loading weights:  40%|████      | 157/391 [00:10<00:09, 23.84it/s]
+Loading weights:  41%|████      | 161/391 [00:10<00:10, 22.57it/s]
+Loading weights:  44%|████▎     | 171/391 [00:11<00:12, 17.52it/s]
+Loading weights:  45%|████▍     | 174/391 [00:11<00:11, 18.33it/s]
+Loading weights:  45%|████▌     | 177/391 [00:11<00:14, 14.79it/s]
+Loading weights:  50%|████▉     | 194/391 [00:12<00:07, 25.35it/s]
+Loading weights:  51%|█████     | 200/391 [00:12<00:06, 28.56it/s]
+Loading weights:  52%|█████▏    | 204/391 [00:12<00:09, 20.02it/s]
+Loading weights:  54%|█████▎    | 210/391 [00:13<00:08, 21.18it/s]
+Loading weights:  54%|█████▍    | 213/391 [00:13<00:09, 18.03it/s]
+Loading weights:  57%|█████▋    | 224/391 [00:13<00:06, 25.91it/s]
+Loading weights:  60%|█████▉    | 233/391 [00:13<00:04, 34.53it/s]
+Loading weights:  61%|██████    | 238/391 [00:14<00:06, 24.86it/s]
+Loading weights:  63%|██████▎   | 248/391 [00:14<00:04, 28.99it/s]
+Loading weights:  65%|██████▌   | 256/391 [00:14<00:03, 34.14it/s]
+Loading weights:  69%|██████▊   | 268/391 [00:15<00:06, 20.38it/s]
+Loading weights:  70%|██████▉   | 272/391 [00:16<00:10, 10.99it/s]
+Loading weights:  71%|███████   | 278/391 [00:16<00:08, 13.23it/s]
+Loading weights:  73%|███████▎  | 285/391 [00:17<00:08, 12.54it/s]
+Loading weights:  77%|███████▋  | 300/391 [00:17<00:04, 22.05it/s]
+Loading weights:  78%|███████▊  | 306/391 [00:18<00:04, 18.49it/s]
+Loading weights:  80%|████████  | 314/391 [00:18<00:03, 22.42it/s]
+Loading weights:  82%|████████▏ | 319/391 [00:18<00:03, 22.07it/s]
+Loading weights:  88%|████████▊ | 343/391 [00:19<00:01, 25.02it/s]
+Loading weights:  89%|████████▊ | 347/391 [00:19<00:01, 25.08it/s]
+Loading weights:  90%|████████▉ | 351/391 [00:20<00:02, 19.50it/s]
+Loading weights:  92%|█████████▏| 358/391 [00:20<00:02, 15.81it/s]
+Loading weights:  96%|█████████▌| 374/391 [00:20<00:00, 26.75it/s]
+Loading weights:  97%|█████████▋| 380/391 [00:21<00:00, 27.95it/s]
+Loading weights: 100%|██████████| 391/391 [00:21<00:00, 18.56it/s]
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:  72%|███████▏  | 282/391 [00:00<00:00, 2816.89it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 2819.95it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=2 step=0 loss=0.7482
+seed=42 epoch=2 step=200 loss=1.0352
+seed=42 epoch=2 step=400 loss=0.7434
+seed=42 epoch=2 step=600 loss=0.9362
+seed=42 epoch=2 step=800 loss=0.6721
+seed=42 epoch=2 step=1000 loss=1.2411
+seed=42 epoch=2 step=1200 loss=0.8649
+
+===== attempt 3 2026-10-11T03:10:49+00:00 colab-a commit=e9dc0b898816dd05122c9cc2ead6392fe025ef6e =====
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:   3%|▎         | 13/391 [00:01<00:31, 12.19it/s]
+Loading weights:   7%|▋         | 28/391 [00:02<00:26, 13.79it/s]
+Loading weights:   8%|▊         | 30/391 [00:03<00:46,  7.77it/s]
+Loading weights:   8%|▊         | 33/391 [00:04<01:05,  5.49it/s]
+Loading weights:   9%|▊         | 34/391 [00:04<01:05,  5.48it/s]
+Loading weights:  10%|▉         | 38/391 [00:04<00:50,  6.94it/s]
+Loading weights:  11%|█         | 42/391 [00:06<01:10,  4.92it/s]
+Loading weights:  11%|█         | 43/391 [00:07<01:37,  3.58it/s]
+Loading weights:  15%|█▍        | 58/391 [00:07<00:31, 10.58it/s]
+Loading weights:  16%|█▌        | 63/391 [00:07<00:26, 12.39it/s]
+Loading weights:  19%|█▉        | 76/391 [00:07<00:15, 20.02it/s]
+Loading weights:  21%|██        | 81/391 [00:07<00:13, 22.34it/s]
+Loading weights:  23%|██▎       | 90/391 [00:08<00:11, 25.80it/s]
+Loading weights:  27%|██▋       | 106/391 [00:08<00:06, 42.43it/s]
+Loading weights:  29%|██▉       | 114/391 [00:08<00:06, 40.89it/s]
+Loading weights:  31%|███       | 122/391 [00:08<00:07, 38.02it/s]
+Loading weights:  33%|███▎      | 128/391 [00:08<00:07, 36.43it/s]
+Loading weights:  36%|███▌      | 139/391 [00:10<00:18, 13.33it/s]
+Loading weights:  40%|████      | 158/391 [00:10<00:10, 22.55it/s]
+Loading weights:  48%|████▊     | 189/391 [00:11<00:07, 26.10it/s]
+Loading weights:  51%|█████     | 200/391 [00:12<00:07, 26.52it/s]
+Loading weights:  57%|█████▋    | 221/391 [00:12<00:05, 30.84it/s]
+Loading weights:  58%|█████▊    | 226/391 [00:12<00:05, 31.89it/s]
+Loading weights:  61%|██████▏   | 240/391 [00:13<00:04, 36.60it/s]
+Loading weights:  63%|██████▎   | 245/391 [00:13<00:04, 35.37it/s]
+Loading weights:  64%|██████▍   | 252/391 [00:13<00:05, 26.78it/s]
+Loading weights:  66%|██████▌   | 259/391 [00:13<00:04, 29.92it/s]
+Loading weights:  67%|██████▋   | 263/391 [00:14<00:05, 24.74it/s]
+Loading weights:  69%|██████▉   | 270/391 [00:14<00:04, 29.31it/s]
+Loading weights:  71%|███████   | 276/391 [00:14<00:04, 26.69it/s]
+Loading weights:  73%|███████▎  | 286/391 [00:16<00:10,  9.59it/s]
+Loading weights:  74%|███████▍  | 289/391 [00:18<00:17,  6.00it/s]
+Loading weights:  77%|███████▋  | 301/391 [00:18<00:08, 10.08it/s]
+Loading weights:  79%|███████▉  | 310/391 [00:19<00:07, 10.39it/s]
+Loading weights: 100%|██████████| 391/391 [00:19<00:00, 20.10it/s]
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:  63%|██████▎   | 247/391 [00:00<00:00, 2457.42it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 2463.24it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=2 step=0 loss=0.7482
+seed=42 epoch=2 step=200 loss=1.0352
+seed=42 epoch=2 step=400 loss=0.7434
+seed=42 epoch=2 step=600 loss=0.9498
+seed=42 epoch=2 step=800 loss=0.6874
+seed=42 epoch=2 step=1000 loss=1.2362
+seed=42 epoch=2 step=1200 loss=0.8436
+seed=42 epoch=2 step=1400 loss=0.6319
