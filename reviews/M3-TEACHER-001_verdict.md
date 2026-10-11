@@ -1,5 +1,5 @@
-VERDICT: 재시도
-- 실패 원인은 실험 설계가 아닌 환경: `get_peft_model`에서 ImportError (Colab torchao 0.10.0, peft는 0.16.0 이상 요구). 학습 전 1.6분 만에 종료, metrics 없음
-- 모델 로드까지는 정상 통과(lm_head UNEXPECTED는 무시 가능한 경고)이므로 가설 검증은 아직 이루어지지 않음
-- 조치: 명세 command 앞에 `pip uninstall -y torchao`를 추가(torchao 미사용). 그 외 설정·예산(A100, 5h)은 그대로
-- 재시도 1회 사용. 다시 실패하면 중단하고 보고
+VERDICT: 기각
+- 재시도(torchao 제거) 후 정상 완료. fold 0 epoch 1 Macro F1 0.6212로 게이트(0.635) 미달, 스크립트가 gate_fail로 중단. 환경 문제가 아닌 실험 결과.
+- 같은 fold 기준 ROB5F-001 fold 0은 0.6403이라 -0.019 열세. 교사 가설(+0.01 이상)과 반대 방향이다. 앞서 Qwen2.5-1.5B(M3-QWEN-001, -0.031)와 같은 양상.
+- 약한 증상 오심 0.275(ROB5F OOF 0.353 대비 낮음), 두통 0.504. 빈 예측 6.47%(RoBERTa 2.63%)로 근거 없는 라벨 추론이 개선되지 않음.
+- 비용: A100 62.6분(1 epoch). fold 1~4 확장·증류 후속은 진행하지 않는다. 공식 Val 미사용, threshold 0.5 고정, 후처리 없음.
