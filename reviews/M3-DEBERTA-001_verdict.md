@@ -1,5 +1,6 @@
-VERDICT: 보류
-- 1차 실행이 학습 전, 토크나이저 로딩에서 실패했다(0.6분). `AutoTokenizer.from_pretrained`(deberta_v2 `Unigram(self._vocab, ...)`)가 `TypeError: 'dict' object is not an instance of 'Sequence'`를 냈다. Colab의 최신 transformers와 team-lucid/deberta-v3-xlarge-korean(revision 016360a) tokenizer 파일 형식이 맞지 않는 코드/환경 문제다.
-- OOM·시간 초과가 아니라 명세 조정(배치·epoch)으로 풀리지 않는다. 같은 commit 66908f1을 재제출하면 똑같이 실패하므로 `재시도`로 보지 않고 재제출하지 않는다.
-- 성능 결과는 없다(metrics.json 없음). 기준 ROBERTA-003 seed 42 0.6441, 성공 기준 0.6541 비교는 불가. 채택·기각 근거로 쓰지 않는다.
-- 조치: 코드 PR #161에 `lab-fix` 라벨과 수정 지시(토크나이저를 모델 파일로 직접 로드하는 폴백, 예: slow `DebertaV2Tokenizer`/`sentencepiece`, 또는 `tokenizer.json`이 있으면 `PreTrainedTokenizerFast`, 모델 로드 전에 로컬 `tokenizer(...)` 시험 호출)를 남겼다. 고친 commit은 검토 후 재제출한다(실패 1회, 재시도 횟수 소진 아님). proposal 이슈 #39는 실험이 계속되므로 열어 둔다.
+VERDICT: 기각
+- seed 42 Macro F1 0.0490 (epoch 1 0.0093, 2 0.0392, 3 0.0490). 기준 ROBERTA-003 0.6441, 성공 기준 0.6541에 크게 미달. Micro F1 0.0781, 빈 예측 5,065/5,792건. 3 epoch 모두 학습 붕괴(Macro F1 < 0.3).
+- 학습 손실이 1.36 → 1.30으로 거의 줄지 않았고 soft-F1도 0.17 수준에 머물렀다. 복통(0.295)만 약하게 학습되어 인코더가 신호를 거의 못 배운 상태다. 같은 손실·하이퍼파라미터의 ROBERTA-003은 정상 학습되어 손실 설계 문제가 아니다.
+- ECE 0.0563, Brier 0.1307은 양성 비율 기준선 수준의 확률 출력이라 의미 있는 비교 대상이 아니다.
+- 실행은 정상 종료(47.8분, A100, OOM·시간 초과 아님)이므로 `재시도` 조건(실행 문제)이 아니다. 원인은 확인하지 못했다: 후보는 lr 1e-5 + bf16에서의 DeBERTa-v3 xlarge 불안정, 이번에 추가된 `tokenizer.json` 직접 로딩 폴백(PreTrainedTokenizerFast)의 토큰화 불일치 가능성이다(probe는 통과). 어느 쪽이든 같은 설정 재실행은 가치가 낮아 재제안하지 않는다.
+- 조치: 코드 PR #161 닫기, 로그 PR 작성. 공식 Val 미사용.
