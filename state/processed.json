@@ -61,7 +61,8 @@
   "done/01_M3-DEBERTA-001.json@2026-10-11T17:37:12+00:00",
   "done/02_M2-SSL-002.json@2026-10-11T18:02:56+00:00",
   "done/03_M3-ROB5F-002.json@2026-10-11T18:49:41+00:00",
-  "failed/03_M2-MIX-001.json@2026-10-11T19:10:17+00:00"
+  "failed/03_M2-MIX-001.json@2026-10-11T19:10:17+00:00",
+  "done/03_M3-ROB5F-003.json@2026-10-11T19:14:59+00:00"
  ],
  "implemented_issues": [
   1,
@@ -300,6 +301,7 @@
   "Judge M3-ROB5F-002 2026-10-11: 채택 (OOF Macro F1 0.6420, fold 평균 ≥0.635; ROB5F-001 0.6412 대비 편차 이내). 팀 로그 PR #167. 코드 PR·proposal 이슈 없음. No new proposal: M3 새 축 소진, 세부 기법은 seed 편차 초과 근거 없음, ROB5F-003 실행 중",
   "Merge PR #167 (log M3-ROB5F-002) 2026-10-11: merge-gate success. Propose: M2-MIX-001 이슈 #41 (M2 SpeakerCNNLarge + Mixup, T4 5h, 공식 Val 미사용)",
   "Review PR #168 (M2-MIX-001) 2026-10-11: PASS (MINOR 3), 큐 등록 03_M2-MIX-001 @0f2e70e",
-  "Review PR #168 (M2-MIX-001) 2026-10-11 재검토: PASS (MINOR 2, 분할 ID를 JSON _id로 통일), 큐 재등록 03_M2-MIX-001 @d9b9020"
+  "Review PR #168 (M2-MIX-001) 2026-10-11 재검토: PASS (MINOR 2, 분할 ID를 JSON _id로 통일), 큐 재등록 03_M2-MIX-001 @d9b9020",
+  "Judge M3-ROB5F-003 2026-10-11: 채택 (OOF Macro F1 0.6414, fold 평균 ≥0.635; 001·002·ROBERTA-003 대비 편차 이내). 팀 로그 PR #170. 코드 PR·proposal 이슈 없음. Review PR #168 d9b9020: 다른 실행이 이미 PASS·큐 등록(claimed colab-b)해 중복 처리 안 함. No new proposal: open proposals 1 (#41) < 2이나 M3 새 축 소진, 세부 기법은 seed 편차 초과 근거 없음, M1 포화, M2 대형 재학습뿐"
  ]
 }
