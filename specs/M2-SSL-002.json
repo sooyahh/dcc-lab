@@ -10,7 +10,7 @@
     "value": null
   },
   "branch": "sooyah/lab-m2-ssl-002",
-  "commit": "",
+  "commit": "e7842113bc5c111dfd957eaf7aa7a1fba15bdcf5",
   "command": "PYTHONPATH=src python scripts/lab/m2-ssl-002.py --output \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "주 지표 = H 발화 accuracy (B) − (A), 결과 보기 전 고정(층·crop·epoch을 H로 고르지 않음, epoch 선택은 D만). 채택 조건 모두 충족: (1) (B) − (A) ≥ +1.0%p (2) H 1,500통화를 call_id 기준 5개 묶음(seed 42)으로 나눴을 때 5개 중 4개 이상에서 (B) > (A) (3) 발화 단위 paired McNemar 정확검정 p < 0.05 (4) (B)의 T4 추론 처리량과 CPU 2코어 batch 1 추론 시간(H에서 무작위 500발화)으로 추정한 공식 Val 111,947발화 CPU 추론 시간이 기록됨(L2 앙상블 85.3분과 비교, 판정 참고용). metrics.json에 (A)(B)의 H accuracy, 클래스별 recall(대원/신고자), 혼동행렬, 묶음별 accuracy, McNemar 2×2 칸과 p값, 발화 길이 구간별(<1초, 1~3초, 3~6초, >6초) accuracy, (B)의 층 가중합 softmax 13개 값, epoch별 D accuracy·train loss, (A)의 epoch별 D accuracy, (A)(B) 확률 평균 soft-vote의 H accuracy(진단용, 판정에 쓰지 않음), 학습 통화·발화 수, seed 기록. 학습 붕괴(D accuracy가 다수 클래스 비율 이하) 시 실패로 기록",

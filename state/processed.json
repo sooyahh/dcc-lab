@@ -91,7 +91,9 @@
   33,
   37,
   36,
-  38
+  38,
+  40,
+  39
  ],
  "reviewed_shas": [
   "df5cb395fe255e936d0f8d444bfc0c987bdb4222",
@@ -140,7 +142,8 @@
   "a1fd634438d2060fd9c82820eabc5cbecb5af401",
   "fd44b3ac1ef5f67d923bc98d49541a96a8d12a7e",
   "f7bade86268d8aec2f1b956ad50c13b8d010c88c",
-  "7fe2d841c08f721ed736df4168b9c65131ded7a8"
+  "7fe2d841c08f721ed736df4168b9c65131ded7a8",
+  "e7842113bc5c111dfd957eaf7aa7a1fba15bdcf5"
  ],
  "merged_prs": [
   67,
