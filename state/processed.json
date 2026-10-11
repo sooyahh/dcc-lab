@@ -53,7 +53,8 @@
   "done/01_M3-ROBERTA-007.json@2026-10-11T11:00:44+00:00",
   "done/02_M3-ROB5F-001.json@2026-10-11T11:38:48+00:00",
   "done/01_M3-TEACHER-001.json@2026-10-11T12:41:39+00:00",
-  "done/02_M1-ECAPA-002.json@2026-10-11T13:53:51+00:00"
+  "done/02_M1-ECAPA-002.json@2026-10-11T13:53:51+00:00",
+  "failed/00_M3-FINAL-001.json@2026-10-11T16:09:57+00:00"
  ],
  "implemented_issues": [
   1,
