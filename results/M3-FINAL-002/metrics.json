@@ -1,0 +1,109 @@
+{
+ "exp_id": "M3-FINAL-001",
+ "primary_metric": {
+  "name": "macro_f1",
+  "value": 0.6534114163311,
+  "split": "official_validation"
+ },
+ "metrics": {
+  "official_val": {
+   "seed_42": {
+    "rows": 3640,
+    "macro_f1": 0.6478623455186052,
+    "micro_f1": 0.6636869288835916,
+    "per_symptom_f1": {
+     "고열": 0.6855,
+     "구토": 0.5986,
+     "두통": 0.5333,
+     "복통": 0.8199,
+     "어지러움": 0.6548,
+     "열상": 0.8851,
+     "오심": 0.3766,
+     "전신쇠약": 0.6012,
+     "호흡곤란": 0.6756
+    },
+    "empty_predictions": 111,
+    "inference_seconds": 39.4,
+    "batch_size": 32
+   },
+   "seed_43": {
+    "rows": 3640,
+    "macro_f1": 0.6440696448692846,
+    "micro_f1": 0.6593515223408462,
+    "per_symptom_f1": {
+     "고열": 0.677,
+     "구토": 0.6012,
+     "두통": 0.5307,
+     "복통": 0.8258,
+     "어지러움": 0.6564,
+     "열상": 0.8787,
+     "오심": 0.3849,
+     "전신쇠약": 0.5686,
+     "호흡곤란": 0.6733
+    },
+    "empty_predictions": 90,
+    "inference_seconds": 37.0,
+    "batch_size": 32
+   },
+   "seed_44": {
+    "rows": 3640,
+    "macro_f1": 0.644471514006905,
+    "micro_f1": 0.6607339266073393,
+    "per_symptom_f1": {
+     "고열": 0.6899,
+     "구토": 0.6033,
+     "두통": 0.5175,
+     "복통": 0.8165,
+     "어지러움": 0.6562,
+     "열상": 0.8742,
+     "오심": 0.3923,
+     "전신쇠약": 0.5871,
+     "호흡곤란": 0.6633
+    },
+    "empty_predictions": 120,
+    "inference_seconds": 36.7,
+    "batch_size": 32
+   },
+   "ensemble": {
+    "rows": 3640,
+    "macro_f1": 0.6534114163311,
+    "micro_f1": 0.668986083499006,
+    "per_symptom_f1": {
+     "고열": 0.7001,
+     "구토": 0.6088,
+     "두통": 0.5315,
+     "복통": 0.8271,
+     "어지러움": 0.657,
+     "열상": 0.8828,
+     "오심": 0.4,
+     "전신쇠약": 0.5939,
+     "호흡곤란": 0.6795
+    },
+    "empty_predictions": 149,
+    "inference_seconds": 109.3,
+    "batch_size": 32
+   }
+  }
+ },
+ "notes": "Final training on 100% Training (ROBERTA-003 settings, seeds 42/43/44) + TF-IDF; ensemble 0.55 x seed mean + 0.45 x TF-IDF fixed in advance on the 80:20 holdout; official Validation used for scoring only; threshold >= 0.5, no post-processing.",
+ "official_val": true,
+ "deliverables": [
+  "config.json",
+  "ensemble",
+  "m3_ensemble_full.pt",
+  "m3_ensemble_full.pt.json",
+  "m3_final_train.executed.ipynb",
+  "m3_roberta003_full_seed42.pt",
+  "m3_roberta003_full_seed42.pt.json",
+  "m3_roberta003_full_seed43.pt",
+  "m3_roberta003_full_seed43.pt.json",
+  "m3_roberta003_full_seed44.pt",
+  "m3_roberta003_full_seed44.pt.json",
+  "mission3_tfidf_logreg_full.joblib",
+  "progress.log",
+  "run.log",
+  "seed_42",
+  "seed_43",
+  "seed_44"
+ ]
+}

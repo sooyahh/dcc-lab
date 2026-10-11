@@ -1,0 +1,143 @@
+{
+  "spec": {
+    "exp_id": "M3-FINAL-002",
+    "mission": 3,
+    "title": "M3 최종 학습 (재개 가능판): ROBERTA-003 설정 Training 100% seed 42·43·44 + TF-IDF 앙상블",
+    "hypothesis": "최종 제출용 학습(가설 검증 아님). 80:20 분석에서 정한 구성(ROBERTA-003 seed 평균 0.55 + TF-IDF 0.45, 80% 모델 공식 Val 0.6529)을 Training 전체로 다시 학습한다",
+    "change_vs_baseline": "M3-ROBERTA-003 설정 그대로(klue/roberta-large rev 28d9112, 앞 256토큰, BCE pos_weight + 1.0 soft-F1, lr 1e-5, warmup 10%, 실효 batch 16, fp16, 3 epochs), 학습 데이터만 Training 전체 29,200건. TF-IDF는 P0 설정으로 전체 학습. 앙상블 가중치 0.55/0.45는 80:20 홀드아웃에서 미리 고정(공식 Val로 선택하지 않음)",
+    "baseline": {
+      "exp_id": "M3-ENSTF-002",
+      "metric": "official Val macro_f1 (80% models, same ensemble rule)",
+      "value": 0.6529
+    },
+    "branch": "m3/final-train-kit",
+    "commit": "",
+    "command": "python scripts/m3_final/colab_lab_run.py --out \"$LAB_OUT\" --work \"$LAB_WORK\"",
+    "uses_official_val": true,
+    "success_criteria": "실행 완료(학습 붕괴 없음, 세 seed 모두 3 epoch, .pt·앙상블 .pt·실행된 노트북이 LAB_OUT에 있음). 공식 Val은 채점 전용: 앙상블 Macro F1을 기록하고 80% 모델 앙상블(0.6529)과 비교만 한다. 판정 0.5 고정, 후처리 없음",
+    "gpu": "L4",
+    "budget_hours": 6,
+    "priority": 0,
+    "notes": "사용자 요청(2026-10-11)으로 직접 큐에 넣는 최종 학습 작업. 코드는 PR #140(scripts/m3_final). 대용량 파일은 로컬 작업 디스크에 쓰고 산출물만 Drive로 복사. seed별 best.ckpt는 .pt 내보낸 직후 삭제(M3_DROP_LAB_CKPT=1). 공식 Val은 학습·가중치·선택에 쓰지 않음 | FINAL-001 1차 시도가 2시간 뒤 Colab 세션 끊김으로 처음부터 재시작돼, seed마다 .pt를 LAB_OUT(Drive)에 저장하고 다음 시도에서 끝난 seed를 재사용하도록 고친 판. 진행 로그는 LAB_OUT/progress.log. FINAL-001과 같은 결과물을 만들며 먼저 끝나는 쪽을 쓴다"
+  },
+  "commit": "7a55d9f0cd4ab8e2e9ab39cf3be157da4f8718ca",
+  "submitted_at": "2026-10-11T22:57:58+09:00",
+  "attempts": 2,
+  "max_attempts": 3,
+  "worker": "colab-a",
+  "claimed_at": "2026-10-11T14:10:01+00:00",
+  "started_at": "2026-10-11T14:10:03+00:00",
+  "status": "done",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "finished_at": "2026-10-11T16:33:40+00:00",
+  "elapsed_min": 66.6,
+  "metrics": {
+    "exp_id": "M3-FINAL-001",
+    "primary_metric": {
+      "name": "macro_f1",
+      "value": 0.6534114163311,
+      "split": "official_validation"
+    },
+    "metrics": {
+      "official_val": {
+        "seed_42": {
+          "rows": 3640,
+          "macro_f1": 0.6478623455186052,
+          "micro_f1": 0.6636869288835916,
+          "per_symptom_f1": {
+            "고열": 0.6855,
+            "구토": 0.5986,
+            "두통": 0.5333,
+            "복통": 0.8199,
+            "어지러움": 0.6548,
+            "열상": 0.8851,
+            "오심": 0.3766,
+            "전신쇠약": 0.6012,
+            "호흡곤란": 0.6756
+          },
+          "empty_predictions": 111,
+          "inference_seconds": 39.4,
+          "batch_size": 32
+        },
+        "seed_43": {
+          "rows": 3640,
+          "macro_f1": 0.6440696448692846,
+          "micro_f1": 0.6593515223408462,
+          "per_symptom_f1": {
+            "고열": 0.677,
+            "구토": 0.6012,
+            "두통": 0.5307,
+            "복통": 0.8258,
+            "어지러움": 0.6564,
+            "열상": 0.8787,
+            "오심": 0.3849,
+            "전신쇠약": 0.5686,
+            "호흡곤란": 0.6733
+          },
+          "empty_predictions": 90,
+          "inference_seconds": 37.0,
+          "batch_size": 32
+        },
+        "seed_44": {
+          "rows": 3640,
+          "macro_f1": 0.644471514006905,
+          "micro_f1": 0.6607339266073393,
+          "per_symptom_f1": {
+            "고열": 0.6899,
+            "구토": 0.6033,
+            "두통": 0.5175,
+            "복통": 0.8165,
+            "어지러움": 0.6562,
+            "열상": 0.8742,
+            "오심": 0.3923,
+            "전신쇠약": 0.5871,
+            "호흡곤란": 0.6633
+          },
+          "empty_predictions": 120,
+          "inference_seconds": 36.7,
+          "batch_size": 32
+        },
+        "ensemble": {
+          "rows": 3640,
+          "macro_f1": 0.6534114163311,
+          "micro_f1": 0.668986083499006,
+          "per_symptom_f1": {
+            "고열": 0.7001,
+            "구토": 0.6088,
+            "두통": 0.5315,
+            "복통": 0.8271,
+            "어지러움": 0.657,
+            "열상": 0.8828,
+            "오심": 0.4,
+            "전신쇠약": 0.5939,
+            "호흡곤란": 0.6795
+          },
+          "empty_predictions": 149,
+          "inference_seconds": 109.3,
+          "batch_size": 32
+        }
+      }
+    },
+    "notes": "Final training on 100% Training (ROBERTA-003 settings, seeds 42/43/44) + TF-IDF; ensemble 0.55 x seed mean + 0.45 x TF-IDF fixed in advance on the 80:20 holdout; official Validation used for scoring only; threshold >= 0.5, no post-processing.",
+    "official_val": true,
+    "deliverables": [
+      "config.json",
+      "ensemble",
+      "m3_ensemble_full.pt",
+      "m3_ensemble_full.pt.json",
+      "m3_final_train.executed.ipynb",
+      "m3_roberta003_full_seed42.pt",
+      "m3_roberta003_full_seed42.pt.json",
+      "m3_roberta003_full_seed43.pt",
+      "m3_roberta003_full_seed43.pt.json",
+      "m3_roberta003_full_seed44.pt",
+      "m3_roberta003_full_seed44.pt.json",
+      "mission3_tfidf_logreg_full.joblib",
+      "progress.log",
+      "run.log",
+      "seed_42",
+      "seed_43",
+      "seed_44"
+    ]
+  }
+}

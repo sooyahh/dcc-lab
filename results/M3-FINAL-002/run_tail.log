@@ -1,0 +1,54 @@
+
+===== attempt 1 2026-10-11T14:10:18+00:00 colab-a commit=7a55d9f0cd4ab8e2e9ab39cf3be157da4f8718ca =====
+[14:10:18] data root /content/drive/MyDrive/대학부 데이터 압축해제/대학부 데이터
+[14:10:27] extracted TL_서울_구급.zip: 29200 JSON
+[14:10:31] extracted VL_서울_구급.zip: 3640 JSON
+[14:10:31] running notebook: /usr/bin/python3 -m jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.kernel_name=python3 /content/lab_code/7a55d9f0cd4a/scripts/m3_final/m3_final_train.executed.ipynb
+[NbConvertApp] Converting notebook /content/lab_code/7a55d9f0cd4a/scripts/m3_final/m3_final_train.executed.ipynb to notebook
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+
+===== attempt 2 2026-10-11T15:27:05+00:00 colab-a commit=7a55d9f0cd4ab8e2e9ab39cf3be157da4f8718ca =====
+[15:27:05] data root /content/drive/MyDrive/대학부 데이터 압축해제/대학부 데이터
+[15:27:15] extracted TL_서울_구급.zip: 29200 JSON
+[15:27:18] extracted VL_서울_구급.zip: 3640 JSON
+[15:27:18] running notebook: /usr/bin/python3 -m jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.kernel_name=python3 /content/lab_code/7a55d9f0cd4a/scripts/m3_final/m3_final_train.executed.ipynb
+[NbConvertApp] Converting notebook /content/lab_code/7a55d9f0cd4a/scripts/m3_final/m3_final_train.executed.ipynb to notebook
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[NbConvertApp] Writing 53338 bytes to /content/lab_code/7a55d9f0cd4a/scripts/m3_final/m3_final_train.executed.ipynb
+[16:33:22] copied m3_final_train.executed.ipynb (54,557 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002
+[16:33:34] copied m3_ensemble_full.pt (4,048,675,965 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002
+[16:33:34] m3_roberta003_full_seed42.pt already on Drive (resume copy), skipped
+[16:33:34] m3_roberta003_full_seed43.pt already on Drive (resume copy), skipped
+[16:33:34] m3_roberta003_full_seed44.pt already on Drive (resume copy), skipped
+[16:33:35] copied m3_ensemble_full.pt.json (899 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002
+[16:33:35] copied m3_roberta003_full_seed42.pt.json (1,175 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002
+[16:33:35] copied m3_roberta003_full_seed43.pt.json (1,178 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002
+[16:33:35] copied m3_roberta003_full_seed44.pt.json (1,179 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002
+[16:33:35] copied mission3_tfidf_logreg_full.joblib (5,895,046 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002
+[16:33:35] copied config.json (965 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002
+[16:33:35] copied history.json (511 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_42
+[16:33:35] copied val_score.json (379 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_42
+[16:33:35] copied val_probs.npy (131,168 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_42
+[16:33:35] copied history.json (514 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_43
+[16:33:35] copied val_score.json (377 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_43
+[16:33:35] copied val_probs.npy (131,168 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_43
+[16:33:35] copied history.json (515 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_44
+[16:33:35] copied val_score.json (378 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_44
+[16:33:35] copied val_probs.npy (131,168 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/seed_44
+[16:33:35] copied val_score.json (372 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/ensemble
+[16:33:35] copied val_probs.npy (131,168 bytes) -> /content/drive/MyDrive/dcc_runs/lab/M3-FINAL-002/ensemble
+[16:33:35] metrics.json written: ensemble official Val Macro F1 0.6534114163311
