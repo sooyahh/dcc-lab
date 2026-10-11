@@ -27,5 +27,10 @@
   "worker": "colab-b",
   "claimed_at": "2026-10-11T19:04:43+00:00",
   "interruptions": 0,
-  "started_at": "2026-10-11T19:04:44+00:00"
+  "status": "failed",
+  "gpu": "Tesla T4",
+  "finished_at": "2026-10-11T19:10:17+00:00",
+  "reason": "exit 1, metrics.json 없음",
+  "elapsed_min": 5.4,
+  "log_tail": "\n===== attempt 1 2026-10-11T19:04:54+00:00 colab-b commit=0f2e70e6f5bf47827dd91fe9e2a826face108468 =====\nTraceback (most recent call last):\n  File \"/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py\", line 494, in <module>\n    main()\n    ~~~~^^\n  File \"/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py\", line 463, in main\n    df, split = prepare(out, work, Path(os.environ['DCC_RUN_ROOT']))\n                ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py\", line 161, in prepare\n    split = make_split(lm, out, run_root, work)\n  File \"/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py\", line 132, in make_split\n    raise ValueError(f'invalid {k} split')\nValueError: invalid H split\n"
 }

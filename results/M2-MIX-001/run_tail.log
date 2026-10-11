@@ -1,0 +1,14 @@
+
+===== attempt 1 2026-10-11T19:04:54+00:00 colab-b commit=0f2e70e6f5bf47827dd91fe9e2a826face108468 =====
+Traceback (most recent call last):
+  File "/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py", line 494, in <module>
+    main()
+    ~~~~^^
+  File "/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py", line 463, in main
+    df, split = prepare(out, work, Path(os.environ['DCC_RUN_ROOT']))
+                ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py", line 161, in prepare
+    split = make_split(lm, out, run_root, work)
+  File "/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py", line 132, in make_split
+    raise ValueError(f'invalid {k} split')
+ValueError: invalid H split
