@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M3-E5-001",
+    "mission": 3,
+    "title": "intfloat/multilingual-e5-large 앞 256 + 강화 가중 BCE + soft-F1 (ROBERTA-003 설정, 모델만 교체)",
+    "hypothesis": "문장 표현 학습(대조 학습)으로 다듬어진 다국어 large 인코더가 통화 전체 상황 표현에 유리하다. 입력 앞에 'query: ' 접두어를 붙이는 모델 규약을 따른다",
+    "change_vs_baseline": "M3-ROBERTA-003 대비 인코더만 intfloat/multilingual-e5-large(Hugging Face 공개, 구현 시 고정 revision 커밋 해시를 명세·metrics에 기록)로 교체, lr 1e-05. 손실은 ROBERTA-003과 동일: BCEWithLogits(pos_weight scale 0.5/max 6.0, Training 분할에서만 계산) + 1.0*(1 - mean_j softF1_j)(미니배치 fp32). 앞 256토큰, warmup 10%, weight decay 0.01, fp16, 실효 batch 16, 3 epochs, P0와 같은 80:20 split(split_sha256 동일), threshold >= 0.5 고정(튜닝·후처리 금지), seed 42. [CLS](또는 모델의 첫 토큰) 표현 + Linear 9 헤드. 하이퍼파라미터 탐색 없음",
+    "baseline": {
+      "exp_id": "M3-ROBERTA-003",
+      "metric": "macro_f1 seed 42 (80:20 split, thr 0.5)",
+      "value": 0.6441
+    },
+    "branch": "sooyah/lab-m3-e5-001",
+    "commit": "e9dc0b898816dd05122c9cc2ead6392fe025ef6e",
+    "command": "python scripts/lab/m3-e5-001.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "seed 42 holdout Macro F1 0.6541 이상(ROBERTA-003 seed 42 대비 +0.01)이면 seed 43/44 후속 제안. 미달이어도 앙상블 후보 판단을 위해 holdout 5,792건의 9개 증상 예측 확률을 LAB_OUT/holdout_probs.npy(행 순서는 split의 holdout 순서, 같은 순서의 샘플 id를 holdout_ids.json)로 저장. metrics.json에 증상별 F1·Macro/Micro F1, 빈 예측 수, ECE·Brier, epoch별 holdout Macro F1, 학습 시간, 모델 revision 기록",
+    "gpu": "T4",
+    "budget_hours": 3,
+    "priority": 3,
+    "notes": "사용자 요청(2026-10-11): 지금까지 쓴 4종(klue/roberta-large, beomi/kcbert-base, klue/bert-base, Qwen2.5-1.5B) 외 모델 탐색. large 크기(약 80분 예상). 모델은 DCC_RUN_ROOT/models/<이름>에 고정 revision으로 1회 다운로드 후 local_files_only 로드(규정: HF 공개 모델 로컬 fine-tuning 허용). 데이터는 Training/TL_서울_구급.zip을 LAB_WORK로 복사. epoch마다 체크포인트 저장해 재개. 공식 Validation 미사용"
+  },
+  "commit": "e9dc0b898816dd05122c9cc2ead6392fe025ef6e",
+  "submitted_at": "2026-10-11T09:12:39+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
