@@ -137,7 +137,8 @@
   "35270891956c250093b0c9d9ee3833d42354dd34",
   "a1fd634438d2060fd9c82820eabc5cbecb5af401",
   "fd44b3ac1ef5f67d923bc98d49541a96a8d12a7e",
-  "f7bade86268d8aec2f1b956ad50c13b8d010c88c"
+  "f7bade86268d8aec2f1b956ad50c13b8d010c88c",
+  "7fe2d841c08f721ed736df4168b9c65131ded7a8"
  ],
  "merged_prs": [
   67,
@@ -262,6 +263,7 @@
   "Merge run 2026-10-11: PR #152 (log M3-E5-001) merged (merge-gate success, behind 0)",
   "Judge M3-ROBERTA-007 2026-10-11: 기각 (0.6515 vs 0.6541). 로그 PR #153, 코드 PR #151 닫음, 이슈 #36 닫음. No new proposal: M3 새 축 소진, 입력 길이 계열 +0.0074로 기준 미달·비용 4배, 최종 학습(FINAL-001) 큐 진행 중",
   "Judge M3-ROB5F-001 2026-10-11: 채택 (OOF Macro F1 0.6412, fold 평균 ≥0.635; 003 0.6427 대비 편차 이내). 팀 로그 PR #154. 코드 PR·proposal 이슈 없음. No new proposal: M3 새 축 소진, TEACHER-001·FINAL-001 실행 중",
-  "Judge M3-TEACHER-001 2026-10-11: 기각 (재시도 후 fold0 ep1 0.6212 < 게이트 0.635, ROB5F fold0 0.6403 대비 -0.019). 팀 로그 PR #156. 코드 PR·proposal 이슈 없음. PR #155 (팀원 M3-KCBERT-CORR-001) review PASS but not submitted: spec/proposal 없음, 작성자가 승인·제출 사용 금지 명시. No new proposal: M3 새 축 소진(LLM 교사 포함), open proposals 1 (#37 M1-ECAPA-002)"
+  "Judge M3-TEACHER-001 2026-10-11: 기각 (재시도 후 fold0 ep1 0.6212 < 게이트 0.635, ROB5F fold0 0.6403 대비 -0.019). 팀 로그 PR #156. 코드 PR·proposal 이슈 없음. PR #155 (팀원 M3-KCBERT-CORR-001) review PASS but not submitted: spec/proposal 없음, 작성자가 승인·제출 사용 금지 명시. No new proposal: M3 새 축 소진(LLM 교사 포함), open proposals 1 (#37 M1-ECAPA-002)",
+  "2026-10-11 Codex direct fix (user authorization: Claude unavailable): M1-ECAPA-002 PR #150 7fe2d84 PASS; ECAPA-001 successful local staging/COPY/pretrained_path loader ported, smoke and 5 isolated loader regression cases passed. Real SpeechBrain/GPU model load is checked at job startup; no local full-model run. Queue submitted at fixed commit; experiment criteria unchanged."
  ]
 }
