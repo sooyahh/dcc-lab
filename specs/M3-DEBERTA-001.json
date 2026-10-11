@@ -10,7 +10,7 @@
     "value": 0.6441
   },
   "branch": "sooyah/lab-m3-deberta-001",
-  "commit": "",
+  "commit": "c080f1775808644af66138781348959aa5ad24d9",
   "command": "python scripts/lab/m3-deberta-001.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 seed 42 Macro F1이 0.6441보다 +0.01 이상(0.6541 이상). 참고로 앙상블 후보 판단을 위해 holdout 확률을 저장(채택 기준과 별개). threshold >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). Macro/Micro/증상별 F1, ECE(15구간), Brier, 빈 예측 수, epoch별 holdout Macro F1과 시간, 학습 붕괴(epoch 1 이후 Macro F1 < 0.3) 여부 기록",
