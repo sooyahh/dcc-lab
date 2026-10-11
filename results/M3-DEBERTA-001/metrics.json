@@ -1,0 +1,126 @@
+{
+  "exp_id": "M3-DEBERTA-001",
+  "primary_metric": {
+    "name": "macro_f1",
+    "value": 0.04900441817759564,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "seed": 42,
+    "epoch": 3,
+    "macro_f1": 0.04900441817759564,
+    "micro_f1": 0.07808536450865777,
+    "per_symptom_f1": {
+      "고열": 0.05185185185185185,
+      "구토": 0.0,
+      "두통": 0.0,
+      "복통": 0.2953156822810591,
+      "어지러움": 0.0,
+      "열상": 0.0938722294654498,
+      "오심": 0.0,
+      "전신쇠약": 0.0,
+      "호흡곤란": 0.0
+    },
+    "empty_predictions": 5065,
+    "train_loss": 1.3023737553692971,
+    "train_bce": 0.4776408707777768,
+    "train_soft_f1_loss": 0.8247328846118911,
+    "train_soft_f1": 0.1752671153881089,
+    "epoch_seconds": 843.3086131189998,
+    "ece_15": 0.056285717032270643,
+    "brier": 0.13074451684951782,
+    "training_collapse": true,
+    "history": [
+      {
+        "seed": 42,
+        "epoch": 1,
+        "macro_f1": 0.009322940547149626,
+        "micro_f1": 0.014454976303317536,
+        "per_symptom_f1": {
+          "고열": 0.0,
+          "구토": 0.0,
+          "두통": 0.0,
+          "복통": 0.08390646492434663,
+          "어지러움": 0.0,
+          "열상": 0.0,
+          "오심": 0.0,
+          "전신쇠약": 0.0,
+          "호흡곤란": 0.0
+        },
+        "empty_predictions": 5692,
+        "train_loss": 1.356001290122858,
+        "train_bce": 0.5229298581285828,
+        "train_soft_f1_loss": 0.8330714326155814,
+        "train_soft_f1": 0.16692856738441864,
+        "epoch_seconds": 834.0810062900002,
+        "ece_15": 0.05671401481124692,
+        "brier": 0.13322395086288452,
+        "training_collapse": true
+      },
+      {
+        "seed": 42,
+        "epoch": 2,
+        "macro_f1": 0.03921983669244982,
+        "micro_f1": 0.0663231010531033,
+        "per_symptom_f1": {
+          "고열": 0.02838221381267739,
+          "구토": 0.0,
+          "두통": 0.0,
+          "복통": 0.28027498677948176,
+          "어지러움": 0.0,
+          "열상": 0.0443213296398892,
+          "오심": 0.0,
+          "전신쇠약": 0.0,
+          "호흡곤란": 0.0
+        },
+        "empty_predictions": 5206,
+        "train_loss": 1.3127013047672018,
+        "train_bce": 0.48275778099884337,
+        "train_soft_f1_loss": 0.8299435227192679,
+        "train_soft_f1": 0.17005647728073214,
+        "epoch_seconds": 845.2793596280003,
+        "ece_15": 0.05472211211549171,
+        "brier": 0.1307973861694336,
+        "training_collapse": true
+      },
+      {
+        "seed": 42,
+        "epoch": 3,
+        "macro_f1": 0.04900441817759564,
+        "micro_f1": 0.07808536450865777,
+        "per_symptom_f1": {
+          "고열": 0.05185185185185185,
+          "구토": 0.0,
+          "두통": 0.0,
+          "복통": 0.2953156822810591,
+          "어지러움": 0.0,
+          "열상": 0.0938722294654498,
+          "오심": 0.0,
+          "전신쇠약": 0.0,
+          "호흡곤란": 0.0
+        },
+        "empty_predictions": 5065,
+        "train_loss": 1.3023737553692971,
+        "train_bce": 0.4776408707777768,
+        "train_soft_f1_loss": 0.8247328846118911,
+        "train_soft_f1": 0.1752671153881089,
+        "epoch_seconds": 843.3086131189998,
+        "ece_15": 0.056285717032270643,
+        "brier": 0.13074451684951782,
+        "training_collapse": true
+      }
+    ],
+    "collapse_epochs": [
+      1,
+      2,
+      3
+    ],
+    "success_criteria_met": false
+  },
+  "seed": 42,
+  "train_rows": 23408,
+  "eval_rows": 5792,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "notes": "Final epoch 3; fixed threshold >=0.5; no empty-label correction. bf16 encoder, fp32 weighted BCE + soft macro-F1; Training-only statistics. ECE uses 15 equal-width binary probability bins over all labels; official Validation unused."
+}

@@ -1,0 +1,160 @@
+{
+  "spec": {
+    "exp_id": "M3-DEBERTA-001",
+    "mission": 3,
+    "title": "team-lucid/deberta-v3-xlarge-korean 앞 256 + 강화 가중 BCE + soft-F1 (80:20 재평가, seed 42)",
+    "hypothesis": "한국어로 사전학습한 DeBERTa-v3(disentangled attention, ELECTRA식 RTD 사전학습)가 같은 손실에서 klue/roberta-large보다 문맥 표현이 좋아 Macro F1이 ROBERTA-003 seed 42(0.6441)보다 오른다",
+    "change_vs_baseline": "M3-ROBERTA-003 대비 인코더만 변경: team-lucid/deberta-v3-xlarge-korean(고정 revision 016360a, model.safetensors). 분류 헤드는 같은 구조(인코더 last_hidden_state[:,0] + dropout 0.1 + Linear(9)), 속성 이름도 같게(bert/dropout/classifier) 둬서 기존 내보내기와 호환. DeBERTa는 fp16에서 overflow가 알려져 있어 autocast는 bf16(GradScaler 불필요). 손실은 ROBERTA-003과 동일(BCE pos_weight scale 0.5/max 6.0 Training 분할 계산 + 1.0*(1-soft macro-F1), fp32 계산), lr 1e-5·linear warmup 10%·weight decay 0.01·실효 batch 16(micro 8×2)·gradient checkpointing·앞 256토큰(이 모델 토크나이저)·3 epochs·80:20 분할·threshold >= 0.5·seed 42",
+    "baseline": {
+      "exp_id": "M3-ROBERTA-003",
+      "metric": "macro_f1 seed 42 (80:20 split, thr 0.5)",
+      "value": 0.6441
+    },
+    "branch": "sooyah/lab-m3-deberta-001",
+    "commit": "c080f1775808644af66138781348959aa5ad24d9",
+    "command": "python scripts/lab/m3-deberta-001.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 seed 42 Macro F1이 0.6441보다 +0.01 이상(0.6541 이상). 참고로 앙상블 후보 판단을 위해 holdout 확률을 저장(채택 기준과 별개). threshold >= 0.5 고정(튜닝·후처리 금지, 라벨 0개는 그대로 0). Macro/Micro/증상별 F1, ECE(15구간), Brier, 빈 예측 수, epoch별 holdout Macro F1과 시간, 학습 붕괴(epoch 1 이후 Macro F1 < 0.3) 여부 기록",
+    "gpu": "L4",
+    "budget_hours": 4,
+    "priority": 1,
+    "notes": "m3-roberta-003.py 재사용, 모델 ID·revision·autocast dtype(bf16)만 변경. 모델 캐시 DCC_RUN_ROOT/models/deberta-v3-xlarge-korean(고정 revision 016360a, allow_patterns config.json/tokenizer*/special_tokens_map.json/model.safetensors). best.ckpt는 005 형식({config, seed, epoch, model}, bert/dropout/classifier state_dict)으로 저장해 내보내기 가능하게. seed_42/holdout_probs.npy(행 순서 = val_files.txt) 저장. **대용량 파일(ckpt_last.pt 등)은 LAB_WORK(로컬 디스크)에 쓰고 best.ckpt·metrics만 LAB_OUT으로 복사**(XLMR-001이 Drive 임시 파일 오류로 실패한 문제 회피). 공식 Val 미사용"
+  },
+  "commit": "c080f1775808644af66138781348959aa5ad24d9",
+  "submitted_at": "2026-10-12T01:41:24+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-b",
+  "claimed_at": "2026-10-11T16:48:53+00:00",
+  "interruptions": 0,
+  "status": "done",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "finished_at": "2026-10-11T17:37:12+00:00",
+  "elapsed_min": 47.8,
+  "metrics": {
+    "exp_id": "M3-DEBERTA-001",
+    "primary_metric": {
+      "name": "macro_f1",
+      "value": 0.04900441817759564,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "seed": 42,
+      "epoch": 3,
+      "macro_f1": 0.04900441817759564,
+      "micro_f1": 0.07808536450865777,
+      "per_symptom_f1": {
+        "고열": 0.05185185185185185,
+        "구토": 0.0,
+        "두통": 0.0,
+        "복통": 0.2953156822810591,
+        "어지러움": 0.0,
+        "열상": 0.0938722294654498,
+        "오심": 0.0,
+        "전신쇠약": 0.0,
+        "호흡곤란": 0.0
+      },
+      "empty_predictions": 5065,
+      "train_loss": 1.3023737553692971,
+      "train_bce": 0.4776408707777768,
+      "train_soft_f1_loss": 0.8247328846118911,
+      "train_soft_f1": 0.1752671153881089,
+      "epoch_seconds": 843.3086131189998,
+      "ece_15": 0.056285717032270643,
+      "brier": 0.13074451684951782,
+      "training_collapse": true,
+      "history": [
+        {
+          "seed": 42,
+          "epoch": 1,
+          "macro_f1": 0.009322940547149626,
+          "micro_f1": 0.014454976303317536,
+          "per_symptom_f1": {
+            "고열": 0.0,
+            "구토": 0.0,
+            "두통": 0.0,
+            "복통": 0.08390646492434663,
+            "어지러움": 0.0,
+            "열상": 0.0,
+            "오심": 0.0,
+            "전신쇠약": 0.0,
+            "호흡곤란": 0.0
+          },
+          "empty_predictions": 5692,
+          "train_loss": 1.356001290122858,
+          "train_bce": 0.5229298581285828,
+          "train_soft_f1_loss": 0.8330714326155814,
+          "train_soft_f1": 0.16692856738441864,
+          "epoch_seconds": 834.0810062900002,
+          "ece_15": 0.05671401481124692,
+          "brier": 0.13322395086288452,
+          "training_collapse": true
+        },
+        {
+          "seed": 42,
+          "epoch": 2,
+          "macro_f1": 0.03921983669244982,
+          "micro_f1": 0.0663231010531033,
+          "per_symptom_f1": {
+            "고열": 0.02838221381267739,
+            "구토": 0.0,
+            "두통": 0.0,
+            "복통": 0.28027498677948176,
+            "어지러움": 0.0,
+            "열상": 0.0443213296398892,
+            "오심": 0.0,
+            "전신쇠약": 0.0,
+            "호흡곤란": 0.0
+          },
+          "empty_predictions": 5206,
+          "train_loss": 1.3127013047672018,
+          "train_bce": 0.48275778099884337,
+          "train_soft_f1_loss": 0.8299435227192679,
+          "train_soft_f1": 0.17005647728073214,
+          "epoch_seconds": 845.2793596280003,
+          "ece_15": 0.05472211211549171,
+          "brier": 0.1307973861694336,
+          "training_collapse": true
+        },
+        {
+          "seed": 42,
+          "epoch": 3,
+          "macro_f1": 0.04900441817759564,
+          "micro_f1": 0.07808536450865777,
+          "per_symptom_f1": {
+            "고열": 0.05185185185185185,
+            "구토": 0.0,
+            "두통": 0.0,
+            "복통": 0.2953156822810591,
+            "어지러움": 0.0,
+            "열상": 0.0938722294654498,
+            "오심": 0.0,
+            "전신쇠약": 0.0,
+            "호흡곤란": 0.0
+          },
+          "empty_predictions": 5065,
+          "train_loss": 1.3023737553692971,
+          "train_bce": 0.4776408707777768,
+          "train_soft_f1_loss": 0.8247328846118911,
+          "train_soft_f1": 0.1752671153881089,
+          "epoch_seconds": 843.3086131189998,
+          "ece_15": 0.056285717032270643,
+          "brier": 0.13074451684951782,
+          "training_collapse": true
+        }
+      ],
+      "collapse_epochs": [
+        1,
+        2,
+        3
+      ],
+      "success_criteria_met": false
+    },
+    "seed": 42,
+    "train_rows": 23408,
+    "eval_rows": 5792,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Final epoch 3; fixed threshold >=0.5; no empty-label correction. bf16 encoder, fp32 weighted BCE + soft macro-F1; Training-only statistics. ECE uses 15 equal-width binary probability bins over all labels; official Validation unused."
+  }
+}
