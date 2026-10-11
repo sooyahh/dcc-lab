@@ -10,7 +10,7 @@
     "value": 0.6441
   },
   "branch": "sooyah/lab-m3-roberta-007",
-  "commit": "",
+  "commit": "35270891956c250093b0c9d9ee3833d42354dd34",
   "command": "python scripts/lab/m3-roberta-007.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "seed 42 holdout Macro F1 0.6541 이상(ROBERTA-003 seed 42 대비 +0.01)이면 seed 43/44 후속 제안. metrics.json에 증상별 F1·Macro/Micro F1, 빈 예측 수, ECE·Brier, epoch별 holdout Macro F1, 학습 시간, 토큰 길이 분포(256 초과·512 초과 비율), 256 초과 샘플만의 Macro F1(ROBERTA-003과 같은 부분집합 비교가 가능하면 함께)을 기록. holdout 9개 증상 확률을 LAB_OUT/holdout_probs.npy와 holdout_ids.json으로 저장",
