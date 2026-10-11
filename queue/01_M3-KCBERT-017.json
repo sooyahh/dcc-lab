@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M3-KCBERT-017",
+    "mission": 3,
+    "title": "KcBERT soft-F1 + 9개 외 증상 보조 출력(ROBERTA-005와 같은 보조 손실) (80:20 재평가, 3 seed)",
+    "hypothesis": "base 크기 인코더(KcBERT)는 상황 맥락을 스스로 덜 학습하므로, 9개 외 증상 보조 목표가 roberta-large보다 큰 이득을 준다. Macro F1이 KCBERT-012(0.6265)보다 오른다",
+    "change_vs_baseline": "M3-KCBERT-012 대비 보조 출력만 추가(구조·손실은 M3-ROBERTA-005와 동일): [CLS] 표현에 aux_classifier = Linear(hidden, K), 보조 라벨은 Training 분할에서 80건 이상인 9개 외 증상(ROBERTA-005의 aux_labels.json과 같은 20개), aux_loss = BCEWithLogits(pos_weight_aux = clip(0.5*sqrt(neg/pos),1,6), Training 분할 계산) + 1.0*(1 - mean softF1_aux), 전체 loss = [KCBERT-012의 9개 손실] + 0.5*aux_loss. beomi/kcbert-base(revision 0f2f3f8)·앞 256토큰·lr 2e-5·batch 16·3 epochs·80:20 분할·threshold >= 0.5·seed 42/43/44 동일",
+    "baseline": {
+      "exp_id": "M3-KCBERT-012",
+      "metric": "macro_f1 (80:20 split, thr 0.5)",
+      "value": 0.6265
+    },
+    "branch": "sooyah/lab-m3-kcbert-017",
+    "commit": "935057c25d8e5208888f52998d719474438e3364",
+    "command": "python scripts/lab/m3-kcbert-017.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6265보다 +0.01 이상 높고 최소 2개 seed가 0.6265 초과. 평가는 9개 증상만, threshold >= 0.5 고정(튜닝·후처리 금지). seed별 Macro/Micro/증상별 F1, ECE, Brier, 빈 예측 수, 보조 헤드 holdout macro F1(진단용, 0.05 미만이면 보조 학습 실패로 명시) 기록",
+    "gpu": "T4",
+    "budget_hours": 3,
+    "priority": 1,
+    "notes": "m3-kcbert-012.py 재사용, ROBERTA-005의 보조 헤드·손실 코드를 그대로 이식. best.ckpt의 model state_dict에는 9개 분류기만, aux_classifier는 별도 키(내보내기 호환). 입력은 utterances[].text만, symptom 외 필드는 읽지 않음. seed별 holdout_probs.npy 저장. 대용량 파일은 LAB_WORK에 쓰고 결과만 LAB_OUT으로. 공식 Val 미사용"
+  },
+  "commit": "935057c25d8e5208888f52998d719474438e3364",
+  "submitted_at": "2026-10-11T23:16:34+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
