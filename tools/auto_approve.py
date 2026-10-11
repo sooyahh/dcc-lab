@@ -49,15 +49,18 @@ def problems(issue: dict, cu: dict) -> list[str]:
         out.append(f"{exp}는 이미 실행된 ID (재제안 금지)")
     if spec.get("uses_official_val"):
         out.append("공식 Validation 사용 실험 (예산 관리상 사람 승인)")
-    if spec.get("gpu") not in ("T4", "none"):
-        out.append(f"gpu={spec.get('gpu')} (자동 승인은 T4/none만)")
+    rates = CFG.get("gpu_cu_per_hour", {"none": 0, "T4": 1.1})
+    gpu = str(spec.get("gpu", "T4"))
+    gpu = "none" if gpu.lower() == "none" else gpu.upper()
+    if gpu not in rates:
+        out.append(f"gpu={spec.get('gpu')} (자동 승인은 {'/'.join(rates)}만, A100 등은 사람 승인)")
     hours = float(spec.get("budget_hours") or 0)
     if not 0 < hours <= CFG["default_budget_hours"]:
         out.append(f"budget_hours={hours} (0 초과 {CFG['default_budget_hours']} 이하만)")
     if "units_left" not in cu:
         out.append("status 브랜치 colab_cu.json 없음 (Colab 잔량 확인 불가)")
     else:
-        after = cu["units_left"] - hours * float(cu.get("rate_per_hour") or 1.1)
+        after = cu["units_left"] - hours * float(rates.get(gpu, 11))      # this job's GPU rate, not the current total
         if after < CFG["colab_cu_floor"]:
             out.append(f"실행 후 Colab 잔량 예상 {after:.1f} < 하한 {CFG['colab_cu_floor']}")
     return out
@@ -88,7 +91,7 @@ def main() -> None:
         else:
             gh("issue", "edit", n, "-R", REPO, "--add-label", "approved")
             gh("issue", "comment", n, "-R", REPO, "--body",
-               f"**자동 승인** (T4/none, 예산 ≤ {CFG['default_budget_hours']}h, 공식 Val 미사용, "
+               f"**자동 승인** ({'/'.join(CFG.get('gpu_cu_per_hour', {}) or ['T4', 'none'])}, 예산 ≤ {CFG['default_budget_hours']}h, 공식 Val 미사용, "
                f"Colab 잔량 {cu['units_left']:.1f} CU, 신규 ID). Codex 구현을 시작합니다.")
             print(f"#{n}: approved")
             approved = True

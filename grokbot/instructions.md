@@ -23,11 +23,12 @@
 
 ## 작업 B — 웹훅 (이벤트 `job_queued`)
 - 본문의 `workers`(예: `["colab-b"]`)와 `notebooks`에 나온 노트북만 **작업 C**로 켠다. 이미 살아 있는 워커(`live_workers`)는 건드리지 않는다
+- 본문의 `gpus`(예: `{"colab-b": "L4"}`)가 워커별 GPU다. 작업 C 2단계에서 그 GPU를 고른다(`gpus`가 없으면 `gpu` 값)
 - `workers`가 없으면(구형 웹훅) colab-a 상태만 보고 기존처럼 처리한다
 
 ## 작업 C — 러너 기동 (노트북 하나당)
 1. Colab에서 지정된 노트북(`lab_worker.ipynb` 또는 `lab_worker_2.ipynb`)을 연다
-2. 런타임 → 런타임 유형 변경 → **GPU: T4** (L4는 `queue_pending.json`의 `gpu`가 `L4`일 때만, A100은 선택하지 않음)
+2. 런타임 → 런타임 유형 변경 → **GPU: 웹훅 `gpus`의 그 워커 값**(없으면 T4). 예약 점검에서 켤 때는 `queue_pending.json`의 `gpu`(`T4` 또는 `L4`). A100은 선택하지 않음. 이미 다른 GPU로 연결된 런타임이면 해제 후 바꿔서 연결
 3. 런타임 → **모두 실행**. 노트북 코드는 수정하지 않는다
 4. 2분 뒤 마지막 셀 출력에 `[runner ...] worker=` 줄이 보이는지 확인
 5. GPU를 배정받지 못하거나("사용 가능한 GPU 없음", 사용량 한도, 동시 세션 한도) 오류가 나면: 화면 메시지를 그대로 Drive `dcc_lab/status/runner_issue.json`에 `{"at": ISO시각, "worker": "...", "issue": "...", "message": "..."}`로 기록하고 총괄에게 1:1로 알린다

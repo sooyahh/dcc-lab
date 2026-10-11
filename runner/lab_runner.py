@@ -140,7 +140,7 @@ def status(state: str, exp_id: str | None = None, force_git: bool = False, **ext
         (DRIVE_LAB / "status" / fname).write_text(json.dumps(hb, ensure_ascii=False), encoding="utf-8")
     pending = len(list((LAB / "queue").glob("*.json"))) + len(list((LAB / "running").glob("*.json")))
     (DRIVE_LAB / "status" / "queue_pending.json").write_text(
-        json.dumps({"at": hb["at"], "count": pending, "gpu": "T4"}), encoding="utf-8")
+        json.dumps({"at": hb["at"], "count": pending, "gpu": wanted_gpu()}), encoding="utf-8")
     if not force_git and time.time() - _last_git_status < GIT_STATUS_EVERY_S:
         return
     hb_text = json.dumps(hb, ensure_ascii=False, indent=2)
@@ -191,6 +191,25 @@ def gpu() -> str:
     return _gpu
 
 
+GPU_RANK = {"none": 0, "T4": 1, "L4": 2, "A100": 3}
+
+
+def gpu_rank(name: str) -> int:
+    n = str(name).upper()
+    return next((r for k, r in sorted(GPU_RANK.items(), key=lambda kv: -kv[1]) if k.upper() in n), 0)
+
+
+def gpu_ok(want: str) -> bool:
+    """T4 jobs run on T4/L4/A100; L4 jobs need L4 or A100 (more GPU memory and system RAM)."""
+    return gpu_rank(gpu()) >= GPU_RANK.get(str(want).upper() if str(want).lower() != "none" else "none", 1)
+
+
+def wanted_gpu() -> str:
+    """Biggest GPU any queued job asks for (grokbot picks the runtime type from this)."""
+    wants = [json.loads(p.read_text(encoding="utf-8"))["spec"].get("gpu", "T4") for p in (LAB / "queue").glob("*.json")]
+    return max(wants, key=lambda w: GPU_RANK.get(str(w).upper(), 1), default="T4")
+
+
 def find_data_root() -> Path | None:
     """Official data folder (has Training/ and Validation/) on the mounted Drive, via shortcut or MyDrive."""
     drive = DRIVE_LAB.parent.parent                          # /content/drive
@@ -232,11 +251,8 @@ def claim_next() -> dict | None:
         # ours; or a legacy hostname-named worker's job, adopted by colab-a
         if w == WORKER or (w not in KNOWN_WORKERS and WORKER == "colab-a"):
             return {"_name": p.name, **json.loads(p.read_text(encoding="utf-8"))}
-    has_gpu = gpu() != "none"
-
-    def runnable(p: Path) -> bool:                           # GPU jobs only on GPU workers
-        want = json.loads(p.read_text(encoding="utf-8"))["spec"].get("gpu", "T4")
-        return has_gpu or str(want).lower() == "none"
+    def runnable(p: Path) -> bool:                           # a job runs only on a GPU at least as big as it asks
+        return gpu_ok(json.loads(p.read_text(encoding="utf-8"))["spec"].get("gpu", "T4"))
 
     queued = [p for p in sorted((LAB / "queue").glob("*.json")) if runnable(p)]
     if not queued:

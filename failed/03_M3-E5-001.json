@@ -15,8 +15,8 @@
     "command": "python scripts/lab/m3-e5-001.py --out \"$LAB_OUT\"",
     "uses_official_val": false,
     "success_criteria": "seed 42 holdout Macro F1 0.6541 이상(ROBERTA-003 seed 42 대비 +0.01)이면 seed 43/44 후속 제안. 미달이어도 앙상블 후보 판단을 위해 holdout 5,792건의 9개 증상 예측 확률을 LAB_OUT/holdout_probs.npy(행 순서는 split의 holdout 순서, 같은 순서의 샘플 id를 holdout_ids.json)로 저장. metrics.json에 증상별 F1·Macro/Micro F1, 빈 예측 수, ECE·Brier, epoch별 holdout Macro F1, 학습 시간, 모델 revision 기록",
-    "gpu": "T4",
-    "budget_hours": 3,
+    "gpu": "L4",
+    "budget_hours": 2,
     "priority": 3,
     "notes": "사용자 요청(2026-10-11): 지금까지 쓴 4종(klue/roberta-large, beomi/kcbert-base, klue/bert-base, Qwen2.5-1.5B) 외 모델 탐색. large 크기(약 80분 예상). 모델은 DCC_RUN_ROOT/models/<이름>에 고정 revision으로 1회 다운로드 후 local_files_only 로드(규정: HF 공개 모델 로컬 fine-tuning 허용). 데이터는 Training/TL_서울_구급.zip을 LAB_WORK로 복사. epoch마다 체크포인트 저장해 재개. 공식 Validation 미사용"
   },

@@ -56,23 +56,40 @@ def main() -> None:
     max_workers = int(json.loads((LAB / "config.json").read_text(encoding="utf-8")).get("max_workers", 1))
     hbs = read_heartbeats()
     live = {w for w, hb in hbs.items() if is_live(hb)}
-    # 1) a running job whose worker is down must be resumed by that worker's notebook (legacy names -> colab-a)
-    need: list[str] = []
+    rank = {"none": 0, "T4": 1, "L4": 2, "A100": 3}
+
+    def want(job: dict) -> str:
+        g = str(job["spec"].get("gpu", "T4"))
+        return "none" if g.lower() == "none" else g.upper()
+
+    def hb_rank(w: str) -> int:
+        g = str(hbs.get(w, {}).get("gpu", "")).upper()
+        return max((r for k, r in rank.items() if k != "none" and k in g), default=0)
+
+    # 1) a running job whose worker is down must be resumed by that worker's notebook (legacy names -> colab-a),
+    #    on the GPU the job asks for (a job moved to L4 restarts its worker on L4)
+    need: dict[str, str] = {}
     for job in running.values():
         w = job.get("worker")
         w = w if w in WORKERS else WORKERS[0]
         if w not in live and w not in need:
-            need.append(w)
-    # 2) queued jobs beyond what idle live workers can take -> start more workers, up to max_workers
+            need[w] = want(job)
+    # 2) queued jobs that idle live workers cannot take (busy, or GPU too small) -> start more workers, up to max_workers
     busy = {job.get("worker") for job in running.values()}
     idle_live = [w for w in live if w not in busy]
-    extra = len(queued) - len(idle_live)
+    leftover = []
+    for job in sorted((json.loads((LAB / "queue" / n).read_text(encoding="utf-8")) for n in queued),
+                      key=lambda j: -rank.get(want(j), 1)):
+        fit = next((w for w in idle_live if hb_rank(w) >= rank.get(want(job), 1)), None)
+        if fit:
+            idle_live.remove(fit)
+        else:
+            leftover.append(want(job))
     for w in WORKERS[:max_workers]:
-        if extra <= 0:
+        if not leftover:
             break
         if w not in live and w not in need and w not in busy:
-            need.append(w)
-            extra -= 1
+            need[w] = leftover.pop(0)
     print(f"queued={len(queued)} running={len(running)} live={sorted(live)} need={need}")
     if not need:
         return
@@ -80,13 +97,10 @@ def main() -> None:
     if not hook:
         print("::warning::runner down with pending jobs, but GROKBOT_WEBHOOK_URL is not set")
         return
-    gpu = "T4"
-    for p in (LAB / "queue").glob("*.json"):
-        if json.loads(p.read_text(encoding="utf-8"))["spec"].get("gpu") == "L4":
-            gpu = "L4"
+    gpu = max(need.values(), key=lambda g: rank.get(g, 1))
     body = {"event": "job_queued", "reason": "runner_stale" if running else "pending_jobs",
-            "pending": len(queued) + len(running), "gpu": gpu, "workers": need,
-            "notebooks": [NOTEBOOKS[w] for w in need], "live_workers": sorted(live)}
+            "pending": len(queued) + len(running), "gpu": gpu, "workers": list(need),
+            "gpus": need, "notebooks": [NOTEBOOKS[w] for w in need], "live_workers": sorted(live)}
     headers = {"Content-Type": "application/json"}
     auth = os.environ.get("GROKBOT_WEBHOOK_AUTH", "").lstrip("﻿").strip()
     if auth.lower().startswith("authorization:"):
