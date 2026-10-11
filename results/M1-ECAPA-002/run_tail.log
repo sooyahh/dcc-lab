@@ -1,0 +1,26 @@
+
+===== attempt 1 2026-10-11T13:09:41+00:00 colab-a commit=7fe2d841c08f721ed736df4168b9c65131ded7a8 =====
+SpeechBrain could not find any working torchaudio backend. Audio files may fail to load. Follow this link for instructions and troubleshooting: https://speechbrain.readthedocs.io/en/latest/audioloading.html
+SpeechBrain could not find any working torchaudio backend. Audio files may fail to load. Follow this link for instructions and troubleshooting: https://speechbrain.readthedocs.io/en/latest/audioloading.html
+/usr/local/lib/python3.13/dist-packages/speechbrain/utils/autocast.py:188: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  wrapped_fwd = torch.cuda.amp.custom_fwd(fwd, cast_inputs=cast_inputs)
+ECAPA chunk complete 0:2000
+ECAPA chunk complete 2000:4000
+ECAPA chunk complete 4000:6000
+ECAPA chunk complete 6000:8000
+ECAPA chunk complete 8000:10000
+ECAPA chunk complete 10000:12000
+ECAPA chunk complete 12000:14000
+ECAPA chunk complete 14000:16000
+ECAPA chunk complete 16000:18000
+ECAPA chunk complete 18000:20000
+ECAPA chunk complete 20000:22000
+ECAPA chunk complete 22000:24000
+ECAPA chunk complete 24000:26000
+ECAPA chunk complete 26000:28000
+ECAPA chunk complete 28000:29200
+CV fold 0 complete
+CV fold 1 complete
+CV fold 2 complete
+CV fold 3 complete
+CV fold 4 complete
