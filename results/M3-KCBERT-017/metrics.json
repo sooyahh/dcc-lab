@@ -1,0 +1,117 @@
+{
+  "exp_id": "M3-KCBERT-017",
+  "primary_metric": {
+    "name": "macro_f1",
+    "value": 0.6309619839195489,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "seeds": [
+      {
+        "seed": 42,
+        "epoch": 3,
+        "macro_f1": 0.6338871332643674,
+        "micro_f1": 0.6436896854242387,
+        "per_symptom_f1": {
+          "고열": 0.647887323943662,
+          "구토": 0.6114249843063403,
+          "두통": 0.5058717253839206,
+          "복통": 0.7951046190288196,
+          "어지러움": 0.6505068312031732,
+          "열상": 0.8712727272727273,
+          "오심": 0.3829508196721311,
+          "전신쇠약": 0.5673624288425048,
+          "호흡곤란": 0.6726027397260274
+        },
+        "empty_predictions": 275,
+        "train_loss": 1.2528966496598615,
+        "train_bce": 0.2711201183146511,
+        "train_soft_f1_loss": 0.4462113597991119,
+        "train_soft_f1": 0.553788640200888,
+        "ece": 0.053689128080236584,
+        "brier": 0.08585642278194427,
+        "ece_definition": "pooled multilabel probabilities, 15 equal-width bins",
+        "aux_macro_f1": 0.3068738190678556,
+        "aux_learning_failed": false
+      },
+      {
+        "seed": 43,
+        "epoch": 3,
+        "macro_f1": 0.6292485695499117,
+        "micro_f1": 0.640683932612522,
+        "per_symptom_f1": {
+          "고열": 0.6273809523809524,
+          "구토": 0.5989430416911333,
+          "두통": 0.4965034965034965,
+          "복통": 0.7949024293110315,
+          "어지러움": 0.6586974443528442,
+          "열상": 0.8692476260043828,
+          "오심": 0.37544107268877913,
+          "전신쇠약": 0.5677655677655677,
+          "호흡곤란": 0.6743554952510177
+        },
+        "empty_predictions": 258,
+        "train_loss": 1.2471239682915922,
+        "train_bce": 0.2684142479821989,
+        "train_soft_f1_loss": 0.4435274098233988,
+        "train_soft_f1": 0.5564725901766012,
+        "ece": 0.05362880755791314,
+        "brier": 0.08604420721530914,
+        "ece_definition": "pooled multilabel probabilities, 15 equal-width bins",
+        "aux_macro_f1": 0.3005232872528428,
+        "aux_learning_failed": false
+      },
+      {
+        "seed": 44,
+        "epoch": 3,
+        "macro_f1": 0.6297502489443677,
+        "micro_f1": 0.6428706089360899,
+        "per_symptom_f1": {
+          "고열": 0.6615384615384615,
+          "구토": 0.5912596401028277,
+          "두통": 0.48050579557428874,
+          "복통": 0.7943595769682726,
+          "어지러움": 0.6608771168041685,
+          "열상": 0.8821349147516679,
+          "오심": 0.36845683208701563,
+          "전신쇠약": 0.5458653411658382,
+          "호흡곤란": 0.6827545615067687
+        },
+        "empty_predictions": 237,
+        "train_loss": 1.2504699637607932,
+        "train_bce": 0.26868907435047895,
+        "train_soft_f1_loss": 0.4464996041130384,
+        "train_soft_f1": 0.5535003958869615,
+        "ece": 0.05713191814806389,
+        "brier": 0.08605850487947464,
+        "ece_definition": "pooled multilabel probabilities, 15 equal-width bins",
+        "aux_macro_f1": 0.3028914560928168,
+        "aux_learning_failed": false
+      }
+    ],
+    "aux_learning_failed_seeds": [],
+    "mean_micro_f1": 0.6424147423242835,
+    "mean_per_symptom_f1": {
+      "고열": 0.6456022459543586,
+      "구토": 0.6005425553667672,
+      "두통": 0.49429367248723527,
+      "복통": 0.7947888751027078,
+      "어지러움": 0.6566937974533953,
+      "열상": 0.8742184226762593,
+      "오심": 0.375616241482642,
+      "전신쇠약": 0.5603311125913035,
+      "호흡곤란": 0.6765709321612713
+    }
+  },
+  "seed": 42,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "train_rows": 23408,
+  "eval_rows": 5792,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "notes": "Final epoch 3; threshold >=0.5 fixed; empty predictions unchanged; seed42 representative checkpoint. KCBERT-012 settings and split reused; auxiliary weight 0.5; aux F1 below .05 means auxiliary learning failed; ROBERTA-005 reference absent, Training-derived 20 labels verified; BCE + 1.0 * soft macro-F1 loss; pos_weight scale 0.5, cap 6.0; weights computed from Training partition only; official Validation unused."
+}
