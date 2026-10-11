@@ -1,0 +1,65 @@
+
+===== attempt 1 2026-10-11T10:25:41+00:00 colab-a commit=ff925d38c75042fa5e2700241cb47a91cdb8c1e1 =====
+saved /content/lab_work/M3-TEACHER-001/train.csv: 29200 rows (rows.json 순서)
+saved /content/lab_work/M3-TEACHER-001/holdout42.npz: train 23408 / val 5792  (기존 기준: 23,408 / 5,792)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+token len p50 271 p90 470 p99 697 | truncated 0.00%
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files:  25%|██▌       | 1/4 [00:19<00:57, 19.10s/it]
+Fetching 4 files:  50%|█████     | 2/4 [00:47<00:48, 24.35s/it]
+Fetching 4 files: 100%|██████████| 4/4 [00:47<00:00, 11.78s/it]
+
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 290/290 [00:00<00:00, 4349.35it/s]
+[transformers] [1mLlamaModel LOAD REPORT[0m from: kakaocorp/kanana-1.5-8b-base
+Key            | Status     |  | 
+---------------+------------+--+-
+lm_head.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Traceback (most recent call last):
+  File "/content/lab_code/ff925d38c750/scripts/lab/m3_structured/train_llm_teacher.py", line 233, in <module>
+    main()
+    ~~~~^^
+  File "/content/lab_code/ff925d38c750/scripts/lab/m3_structured/train_llm_teacher.py", line 214, in main
+    f1 = run_fold(args, ids, lengths, Y, tr, va, k, "cuda", pred_ids)
+  File "/content/lab_code/ff925d38c750/scripts/lab/m3_structured/train_llm_teacher.py", line 122, in run_fold
+    model = build_model(args, device)
+  File "/content/lab_code/ff925d38c750/scripts/lab/m3_structured/train_llm_teacher.py", line 99, in build_model
+    backbone = get_peft_model(backbone, LoraConfig(
+        r=args.lora_r, lora_alpha=args.lora_alpha, lora_dropout=args.lora_dropout, bias="none",
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]))
+  File "/usr/local/lib/python3.13/dist-packages/peft/mapping_func.py", line 190, in get_peft_model
+    return PeftModel(
+        model,
+    ...<3 lines>...
+        low_cpu_mem_usage=low_cpu_mem_usage,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/peft/peft_model.py", line 177, in __init__
+    self.base_model = cls(model, {adapter_name: peft_config}, adapter_name)
+                      ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/peft/tuners/tuners_utils.py", line 344, in __init__
+    self.inject_adapter(self.model, adapter_name, low_cpu_mem_usage=low_cpu_mem_usage, state_dict=state_dict)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/peft/tuners/tuners_utils.py", line 978, in inject_adapter
+    self._create_and_replace(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        peft_config, adapter_name, target, target_name, parent, current_key=key
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/peft/tuners/lora/model.py", line 389, in _create_and_replace
+    new_module = self._create_new_module(lora_config, adapter_name, target, device_map=device_map, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/peft/tuners/lora/model.py", line 552, in _create_new_module
+    new_module = dispatcher(target, adapter_name, config=lora_config, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/peft/tuners/lora/torchao.py", line 160, in dispatch_torchao
+    if not is_torchao_available():
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/peft/import_utils.py", line 162, in is_torchao_available
+    raise ImportError(
+    ...<2 lines>...
+    )
+ImportError: Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported
