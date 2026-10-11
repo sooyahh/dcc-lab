@@ -1,0 +1,21 @@
+{
+  "exp_id": "M3-ROBERTA-007",
+  "mission": 3,
+  "title": "klue/roberta-large 앞 512토큰 + 강화 가중 BCE + soft-F1 (ROBERTA-003 설정, 입력 길이만 2배, L4)",
+  "hypothesis": "앞 256토큰에서 잘린 통화 뒷부분에도 증상 언급이 있다. large 인코더로 512토큰까지 보면 놓친 증상(특히 두통·오심·전신쇠약)을 더 잡아 Macro F1이 오른다. KCBERT-004(base, 앞128+뒤128)는 입력 총량이 같아 이 가설을 시험하지 못했다",
+  "change_vs_baseline": "M3-ROBERTA-003 대비 max_length만 256→512(앞에서부터, 512 초과분만 자름). 손실 BCEWithLogits(pos_weight scale 0.5/max 6.0, Training 분할 계산) + 1.0*(1 - mean softF1), klue/roberta-large 같은 고정 revision, lr 1e-5, warmup 10%, weight decay 0.01, fp16, 실효 batch 16(L4 24GB에 맞춰 micro batch + gradient accumulation, 실효 16 유지), 3 epochs, P0와 같은 80:20 split(split_sha256 3568163751bc2959e7038f40dc9f8ca1a0d57a423850a23da99642a9331917f9), threshold >= 0.5 고정, seed 42. 하이퍼파라미터 탐색 없음",
+  "baseline": {
+    "exp_id": "M3-ROBERTA-003",
+    "metric": "macro_f1 seed 42 (80:20 split, thr 0.5)",
+    "value": 0.6441
+  },
+  "branch": "sooyah/lab-m3-roberta-007",
+  "commit": "",
+  "command": "python scripts/lab/m3-roberta-007.py --out \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "seed 42 holdout Macro F1 0.6541 이상(ROBERTA-003 seed 42 대비 +0.01)이면 seed 43/44 후속 제안. metrics.json에 증상별 F1·Macro/Micro F1, 빈 예측 수, ECE·Brier, epoch별 holdout Macro F1, 학습 시간, 토큰 길이 분포(256 초과·512 초과 비율), 256 초과 샘플만의 Macro F1(ROBERTA-003과 같은 부분집합 비교가 가능하면 함께)을 기록. holdout 9개 증상 확률을 LAB_OUT/holdout_probs.npy와 holdout_ids.json으로 저장",
+  "gpu": "L4",
+  "budget_hours": 3,
+  "priority": 1,
+  "notes": "사용자 요청(2026-10-11): T4보다 큰 GPU로 해 볼 실험. L4(24GB) 사용, 처리량을 위해 micro batch는 메모리에 맞게 정하되 실효 batch 16 고정. docs/implementer.md 최신 규칙 준수: 큰 체크포인트는 LAB_WORK에 쓰고 Drive로 복사, epoch이 20분 넘으면 15분마다 ckpt_last 저장. 모델은 DCC_RUN_ROOT/models 캐시 재사용. 데이터는 Training/TL_서울_구급.zip을 LAB_WORK로 복사. 공식 Validation 미사용"
+}

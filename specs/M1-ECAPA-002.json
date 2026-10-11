@@ -1,0 +1,21 @@
+{
+  "exp_id": "M1-ECAPA-002",
+  "mission": 1,
+  "title": "x-vector → ECAPA 교체: 52D + 다중 창 평균 ECAPA 결합 LR (Training 5-fold CV, 사전 고정)",
+  "hypothesis": "M1-ECAPA-001에서 ECAPA 단독(앞 20초, 192D) holdout 정확도가 0.9789로 x-vector 단독(0.9707)과 52D+x-vector 결합(0.9738)보다 높았다. ECAPA 오답이 x-vector보다 적으므로(ECAPA만 틀림 26 vs x-vector만 틀림 74), 현재 제출 후보(52D + 다중 창 평균 x-vector LR)에서 x-vector를 같은 창 규칙의 다중 창 평균 ECAPA로 바꾸면 정확도가 오르고 추론 비용은 줄어든다. 이 신호는 seed 42 holdout 진단값이라 같은 holdout으로 다시 판정하지 않고, Training 전체의 새 5-fold CV에서 사전 고정한 기준으로 확인한다",
+  "change_vs_baseline": "임베딩만 교체. M1-XVEC-002와 같은 신고자 파형(src/dcc_data/mission1.py extract_caller_segments·concatenate_caller_waveforms, 16kHz mono)과 같은 창 규칙(앞에서부터 겹치지 않는 20초 창, 최대 4개, 마지막 창은 3초 이상일 때만 포함, 창이 하나뿐이면 포함, 0.5초 미만은 zero-pad)으로 창마다 speechbrain/spkrec-ecapa-voxceleb(revision 0f99f2d0ebe89ac095bcc5903c4dd8f72b367286, M1-ECAPA-001과 동일) 192D 임베딩을 얻어 L2 정규화 → 창 길이 가중 평균 → 다시 L2 정규화. 비교 헤드는 모두 StandardScaler+LogisticRegression(mission1_train._build_lr_pipeline 설정 그대로, 하이퍼파라미터 탐색 없음): (c) 52D + 다중 창 평균 x-vector(현재 제출 후보 재현, 564D) (h) 52D + 다중 창 평균 ECAPA(244D, 주 지표) / 진단용: (i) 다중 창 평균 ECAPA 단독 (j) 52D + 첫 창 ECAPA. 주 평가 = Training 29,200통화 전체의 성별 층화 StratifiedKFold(n_splits=5, shuffle=True, random_state=2026) out-of-fold 예측. 보조 평가 = 기존 seed 42 8:2 분할 holdout 5,840통화(연속성 기록용, 판정에 쓰지 않음)",
+  "baseline": {
+    "exp_id": "M1-XVEC-002",
+    "metric": "accuracy (Training 8:2 stratified holdout, seed 42, 52D + 다중 창 평균 x-vector 결합 LR = (c))",
+    "value": 0.9772
+  },
+  "branch": "sooyah/lab-m1-ecapa-002",
+  "commit": "",
+  "command": "python scripts/lab/m1-ecapa-002.py --out \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "주 지표 (h)로 사전 고정(CV에서 헤드·창 수·조합을 고르지 않음, (i)(j)는 진단용). 채택 조건 3개 모두 충족: (1) 5-fold OOF 정확도(29,200통화) (h) − (c) ≥ +0.3%p (2) 5개 fold 중 4개 이상에서 (h) > (c) (3) OOF 예측 29,200통화의 (c)·(h) paired McNemar 정확검정 p < 0.05. seed 42 holdout의 (c)가 0.9772에서 ±0.2%p 밖이면 재현 실패로 기록하고 판정 보류. metrics.json에 (c)(h)(i)(j)의 CV fold별·OOF 정확도, 성별 recall, 혼동행렬, (c)·(h) McNemar 2×2 칸과 p값, (c)·(h) 오답 겹침(둘 다 틀림/한쪽만 틀림), 신고자 구간 길이 구간별(≤20초, 20~40초, 40초 초과) (c)(h) OOF 정확도, seed 42 holdout의 (c)(h)(i)(j) 정확도, 통화당 창 수 분포, 통화당 ECAPA 추출 시간(평균·p50·p95, 제출 추론 비용, x-vector 통화당 0.394초와 비교), seed 기록",
+  "gpu": "T4",
+  "budget_hours": 3,
+  "priority": 2,
+  "notes": "Training(서울) TL_/TS_ zip만 LAB_WORK로 복사해 사용, Validation 폴더는 읽지 않음. 입력은 음성+startAt/endAt/Speaker만(성별 라벨은 정답으로만). 52D·다중 창 x-vector는 $DCC_RUN_ROOT/lab/M1-XVEC-002/features/chunk_*.npz의 acoustic·window_xvectors·window_lengths·durations·window_counts와 split.json을 재사용한다. main() 시작 직후 캐시를 검사해 행 수 29,200, 같은 manifest 순서, split.json의 train/holdout(23,360/5,840)이 일치하지 않으면 바로 실패한다(x-vector를 다시 추출하지 않음). ECAPA 추출 중 다시 계산한 신고자 길이·창 수가 캐시의 durations(1e-3초 이내)·window_counts와 다르면 실패. ECAPA 모델은 main() 시작 직후 $DCC_RUN_ROOT/models/spkrec-ecapa-voxceleb(M1-ECAPA-001이 받은 고정 revision, dcc_revision.json 확인)에서 로컬 로드, 없으면 같은 revision으로 snapshot_download. EncoderClassifier.from_hparams(source=로컬 경로, savedir=같은 경로). speechbrain 1.0.3이 Colab 신버전 torchaudio에서 torchaudio.list_audio_backends 부재로 import 실패한 이력(M1-ECAPA-001 1·2차)이 있으므로, speechbrain import 전에 해당 속성이 없을 때만 빈 목록을 돌려주는 호환 함수를 스크립트 안에서 넣는다. 새 패키지 speechbrain==1.0.3 1줄만 requirements.txt에 추가(기존 패키지는 건드리지 않음). ECAPA 창별 임베딩(window_ecapa 4×192, window_lengths, durations, window_counts, ecapa_seconds)을 LAB_OUT/features/에 2,000통화 청크 단위 .npz로 저장해 재개 시 완료 청크 건너뜀. StandardScaler는 각 fold의 train에서만 추정. 재개: fold×헤드 결과를 LAB_OUT에 단계별 json으로 저장하고 끝난 단계는 건너뜀. seed 42 고정(random, numpy, torch, cuda), CV 분할 random_state=2026은 고정값으로 metrics에 기록. 확률 저장: seed 42 holdout 확률을 seed_42/holdout_probs.npy((c)(h)(i)(j) 4열, 행 순서 = seed_42/val_files.txt, 열 이름은 seed_42/holdout_probs_columns.json), CV OOF 확률을 oof_probs.npy(같은 4열, 행 순서 = manifest 순서, fold 번호는 oof_folds.npy). 최종 ckpt는 Training 29,200통화 전체로 다시 학습한 (h) 파이프라인 joblib.dump → best.ckpt(창 규칙·ECAPA revision을 함께 저장). 승인 시 Codex가 scripts/lab/m1-ecapa-002.py로 구현(M1-XVEC-002·M1-ECAPA-001 브랜치 스크립트의 특징 로드·창 분할·ECAPA 로드·평가 코드 재사용 가능)"
+}
