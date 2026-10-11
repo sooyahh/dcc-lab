@@ -1,0 +1,196 @@
+{
+  "spec": {
+    "exp_id": "M3-ROBERTA-007",
+    "mission": 3,
+    "title": "klue/roberta-large 앞 512토큰 + 강화 가중 BCE + soft-F1 (ROBERTA-003 설정, 입력 길이만 2배, L4)",
+    "hypothesis": "앞 256토큰에서 잘린 통화 뒷부분에도 증상 언급이 있다. large 인코더로 512토큰까지 보면 놓친 증상(특히 두통·오심·전신쇠약)을 더 잡아 Macro F1이 오른다. KCBERT-004(base, 앞128+뒤128)는 입력 총량이 같아 이 가설을 시험하지 못했다",
+    "change_vs_baseline": "M3-ROBERTA-003 대비 max_length만 256→512(앞에서부터, 512 초과분만 자름). 손실 BCEWithLogits(pos_weight scale 0.5/max 6.0, Training 분할 계산) + 1.0*(1 - mean softF1), klue/roberta-large 같은 고정 revision, lr 1e-5, warmup 10%, weight decay 0.01, fp16, 실효 batch 16(L4 24GB에 맞춰 micro batch + gradient accumulation, 실효 16 유지), 3 epochs, P0와 같은 80:20 split(split_sha256 3568163751bc2959e7038f40dc9f8ca1a0d57a423850a23da99642a9331917f9), threshold >= 0.5 고정, seed 42. 하이퍼파라미터 탐색 없음",
+    "baseline": {
+      "exp_id": "M3-ROBERTA-003",
+      "metric": "macro_f1 seed 42 (80:20 split, thr 0.5)",
+      "value": 0.6441
+    },
+    "branch": "sooyah/lab-m3-roberta-007",
+    "commit": "35270891956c250093b0c9d9ee3833d42354dd34",
+    "command": "python scripts/lab/m3-roberta-007.py --out \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "seed 42 holdout Macro F1 0.6541 이상(ROBERTA-003 seed 42 대비 +0.01)이면 seed 43/44 후속 제안. metrics.json에 증상별 F1·Macro/Micro F1, 빈 예측 수, ECE·Brier, epoch별 holdout Macro F1, 학습 시간, 토큰 길이 분포(256 초과·512 초과 비율), 256 초과 샘플만의 Macro F1(ROBERTA-003과 같은 부분집합 비교가 가능하면 함께)을 기록. holdout 9개 증상 확률을 LAB_OUT/holdout_probs.npy와 holdout_ids.json으로 저장",
+    "gpu": "L4",
+    "budget_hours": 3,
+    "priority": 1,
+    "notes": "사용자 요청(2026-10-11): T4보다 큰 GPU로 해 볼 실험. L4(24GB) 사용, 처리량을 위해 micro batch는 메모리에 맞게 정하되 실효 batch 16 고정. docs/implementer.md 최신 규칙 준수: 큰 체크포인트는 LAB_WORK에 쓰고 Drive로 복사, epoch이 20분 넘으면 15분마다 ckpt_last 저장. 모델은 DCC_RUN_ROOT/models 캐시 재사용. 데이터는 Training/TL_서울_구급.zip을 LAB_WORK로 복사. 공식 Validation 미사용"
+  },
+  "commit": "35270891956c250093b0c9d9ee3833d42354dd34",
+  "submitted_at": "2026-10-11T18:02:57+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-b",
+  "claimed_at": "2026-10-11T09:43:00+00:00",
+  "status": "done",
+  "gpu": "NVIDIA L4",
+  "finished_at": "2026-10-11T11:00:44+00:00",
+  "elapsed_min": 77.5,
+  "metrics": {
+    "exp_id": "M3-ROBERTA-007",
+    "primary_metric": {
+      "name": "macro_f1",
+      "value": 0.6515187973169398,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "seed": 42,
+      "epoch": 3,
+      "macro_f1": 0.6515187973169398,
+      "micro_f1": 0.664765329530659,
+      "per_symptom_f1": {
+        "고열": 0.6677181913774973,
+        "구토": 0.6198398028342575,
+        "두통": 0.5328659070990359,
+        "복통": 0.7996876220226474,
+        "어지러움": 0.6774585188182922,
+        "열상": 0.8911845730027548,
+        "오심": 0.3864455659697188,
+        "전신쇠약": 0.5873715124816447,
+        "호흡곤란": 0.7010974822466107
+      },
+      "empty_predictions": 132,
+      "train_loss": 0.7957411947127327,
+      "train_bce": 0.2555694793715757,
+      "train_soft_f1_loss": 0.5401717170777585,
+      "train_soft_f1": 0.45982828292224154,
+      "epoch_seconds": 1454.0201217929998,
+      "training_collapse": false,
+      "history": [
+        {
+          "seed": 42,
+          "epoch": 1,
+          "macro_f1": 0.6439314621167884,
+          "micro_f1": 0.656507776588376,
+          "per_symptom_f1": {
+            "고열": 0.6557562076749436,
+            "구토": 0.6033254156769596,
+            "두통": 0.5317693059628543,
+            "복통": 0.7980295566502463,
+            "어지러움": 0.6649767638360794,
+            "열상": 0.8705416116248349,
+            "오심": 0.3863481228668942,
+            "전신쇠약": 0.5851962245404868,
+            "호흡곤란": 0.6994399502177971
+          },
+          "empty_predictions": 263,
+          "train_loss": 0.9751206584687275,
+          "train_bce": 0.34114043366466984,
+          "train_soft_f1_loss": 0.6339802264515374,
+          "train_soft_f1": 0.3660197735484626,
+          "epoch_seconds": 1448.259785021,
+          "training_collapse": false
+        },
+        {
+          "seed": 42,
+          "epoch": 2,
+          "macro_f1": 0.65035744224843,
+          "micro_f1": 0.6652887385694601,
+          "per_symptom_f1": {
+            "고열": 0.6680391147709728,
+            "구토": 0.6144040790312301,
+            "두통": 0.5428313796212805,
+            "복통": 0.7960707269155206,
+            "어지러움": 0.6793349168646081,
+            "열상": 0.8908296943231441,
+            "오심": 0.37037037037037035,
+            "전신쇠약": 0.5889101338432122,
+            "호흡곤란": 0.70242656449553
+          },
+          "empty_predictions": 181,
+          "train_loss": 0.8487974899889098,
+          "train_bce": 0.28229978428014074,
+          "train_soft_f1_loss": 0.5664977064217432,
+          "train_soft_f1": 0.43350229357825676,
+          "epoch_seconds": 1452.222099215,
+          "training_collapse": false
+        },
+        {
+          "seed": 42,
+          "epoch": 3,
+          "macro_f1": 0.6515187973169398,
+          "micro_f1": 0.664765329530659,
+          "per_symptom_f1": {
+            "고열": 0.6677181913774973,
+            "구토": 0.6198398028342575,
+            "두통": 0.5328659070990359,
+            "복통": 0.7996876220226474,
+            "어지러움": 0.6774585188182922,
+            "열상": 0.8911845730027548,
+            "오심": 0.3864455659697188,
+            "전신쇠약": 0.5873715124816447,
+            "호흡곤란": 0.7010974822466107
+          },
+          "empty_predictions": 132,
+          "train_loss": 0.7957411947127327,
+          "train_bce": 0.2555694793715757,
+          "train_soft_f1_loss": 0.5401717170777585,
+          "train_soft_f1": 0.45982828292224154,
+          "epoch_seconds": 1454.0201217929998,
+          "training_collapse": false
+        }
+      ],
+      "collapse_epochs": [],
+      "ece": 0.047532582247809575,
+      "brier": 0.08159849792718887,
+      "over_256_rows": 2359,
+      "over_256_macro_f1": 0.6606922448214595,
+      "token_lengths": {
+        "all": {
+          "rows": 29200,
+          "quantiles": {
+            "min": 22.0,
+            "p50": 230.0,
+            "p90": 397.0,
+            "p95": 460.0,
+            "p99": 589.0,
+            "max": 873.0
+          },
+          "over_256_ratio": 0.3986986301369863,
+          "over_512_ratio": 0.026986301369863012
+        },
+        "train": {
+          "rows": 23408,
+          "quantiles": {
+            "min": 22.0,
+            "p50": 230.0,
+            "p90": 396.0,
+            "p95": 457.0,
+            "p99": 591.0,
+            "max": 822.0
+          },
+          "over_256_ratio": 0.3965738209159262,
+          "over_512_ratio": 0.02648667122351333
+        },
+        "holdout": {
+          "rows": 5792,
+          "quantiles": {
+            "min": 29.0,
+            "p50": 231.0,
+            "p90": 403.0,
+            "p95": 469.0,
+            "p99": 584.0,
+            "max": 873.0
+          },
+          "over_256_ratio": 0.40728591160220995,
+          "over_512_ratio": 0.029005524861878452
+        }
+      },
+      "training_seconds": 4354.502006029,
+      "baseline_macro_f1": 0.6441,
+      "success_criteria_met": false,
+      "baseline_subset_comparison": null,
+      "split_sha256": "3568163751bc2959e7038f40dc9f8ca1a0d57a423850a23da99642a9331917f9"
+    },
+    "seed": 42,
+    "train_rows": 23408,
+    "eval_rows": 5792,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Final epoch 3; threshold >=0.5; Training only; ROBERTA-003 subset probabilities unavailable. ECE: 15 equal-width bins over flattened nine-label probabilities; Brier: mean squared error."
+  }
+}

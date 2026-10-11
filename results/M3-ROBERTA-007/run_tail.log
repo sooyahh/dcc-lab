@@ -1,0 +1,131 @@
+
+===== attempt 1 2026-10-11T09:43:12+00:00 colab-b commit=35270891956c250093b0c9d9ee3833d42354dd34 =====
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:   3%|▎         | 12/389 [00:00<00:26, 14.49it/s]
+Loading weights:   7%|▋         | 28/389 [00:01<00:25, 14.24it/s]
+Loading weights:   8%|▊         | 30/389 [00:03<00:43,  8.16it/s]
+Loading weights:  10%|▉         | 37/389 [00:03<00:30, 11.67it/s]
+Loading weights:  11%|█         | 42/389 [00:03<00:24, 14.30it/s]
+Loading weights:  12%|█▏        | 46/389 [00:04<00:36,  9.48it/s]
+Loading weights:  13%|█▎        | 49/389 [00:05<00:53,  6.30it/s]
+Loading weights:  13%|█▎        | 52/389 [00:05<00:44,  7.51it/s]
+Loading weights:  14%|█▍        | 54/389 [00:05<00:40,  8.19it/s]
+Loading weights:  15%|█▍        | 57/389 [00:05<00:35,  9.28it/s]
+Loading weights:  15%|█▌        | 60/389 [00:06<00:52,  6.22it/s]
+Loading weights:  19%|█▉        | 75/389 [00:07<00:33,  9.34it/s]
+Loading weights:  25%|██▌       | 99/389 [00:08<00:13, 22.14it/s]
+Loading weights:  28%|██▊       | 107/389 [00:08<00:12, 22.99it/s]
+Loading weights:  29%|██▉       | 114/389 [00:08<00:11, 23.53it/s]
+Loading weights:  31%|███       | 120/389 [00:08<00:10, 25.51it/s]
+Loading weights:  32%|███▏      | 125/389 [00:09<00:12, 21.52it/s]
+Loading weights:  33%|███▎      | 129/389 [00:09<00:11, 22.86it/s]
+Loading weights:  36%|███▌      | 139/389 [00:10<00:17, 14.54it/s]
+Loading weights:  37%|███▋      | 142/389 [00:10<00:22, 11.16it/s]
+Loading weights:  37%|███▋      | 145/389 [00:11<00:23, 10.31it/s]
+Loading weights:  38%|███▊      | 148/389 [00:11<00:20, 11.66it/s]
+Loading weights:  39%|███▉      | 152/389 [00:12<00:26,  9.05it/s]
+Loading weights:  43%|████▎     | 167/389 [00:13<00:20, 11.09it/s]
+Loading weights:  43%|████▎     | 169/389 [00:13<00:22,  9.76it/s]
+Loading weights:  45%|████▍     | 174/389 [00:13<00:18, 11.65it/s]
+Loading weights:  46%|████▋     | 180/389 [00:14<00:14, 14.86it/s]
+Loading weights:  48%|████▊     | 185/389 [00:14<00:13, 14.83it/s]
+Loading weights:  48%|████▊     | 188/389 [00:14<00:14, 14.15it/s]
+Loading weights:  50%|█████     | 196/389 [00:14<00:09, 19.89it/s]
+Loading weights:  51%|█████▏    | 200/389 [00:15<00:09, 20.12it/s]
+Loading weights:  52%|█████▏    | 204/389 [00:15<00:10, 18.23it/s]
+Loading weights:  53%|█████▎    | 207/389 [00:15<00:10, 16.57it/s]
+Loading weights:  54%|█████▍    | 212/389 [00:15<00:09, 18.57it/s]
+Loading weights:  57%|█████▋    | 222/389 [00:16<00:07, 23.62it/s]
+Loading weights:  58%|█████▊    | 225/389 [00:16<00:09, 18.19it/s]
+Loading weights:  60%|█████▉    | 233/389 [00:16<00:06, 25.93it/s]
+Loading weights:  61%|██████    | 237/389 [00:16<00:06, 24.11it/s]
+Loading weights:  62%|██████▏   | 241/389 [00:17<00:07, 19.46it/s]
+Loading weights:  64%|██████▍   | 248/389 [00:17<00:05, 24.67it/s]
+Loading weights:  65%|██████▌   | 253/389 [00:17<00:05, 25.31it/s]
+Loading weights:  66%|██████▌   | 257/389 [00:18<00:14,  9.08it/s]
+Loading weights:  67%|██████▋   | 260/389 [00:19<00:18,  6.80it/s]
+Loading weights:  68%|██████▊   | 265/389 [00:21<00:28,  4.35it/s]
+Loading weights:  69%|██████▉   | 269/389 [00:22<00:27,  4.30it/s]
+Loading weights:  70%|██████▉   | 272/389 [00:22<00:22,  5.15it/s]
+Loading weights:  71%|███████   | 276/389 [00:23<00:17,  6.58it/s]
+Loading weights:  72%|███████▏  | 279/389 [00:24<00:27,  4.01it/s]
+Loading weights:  74%|███████▍  | 289/389 [00:24<00:13,  7.58it/s]
+Loading weights:  75%|███████▌  | 293/389 [00:25<00:10,  9.06it/s]
+Loading weights:  76%|███████▌  | 295/389 [00:25<00:12,  7.64it/s]
+Loading weights:  77%|███████▋  | 299/389 [00:25<00:09,  9.58it/s]
+Loading weights:  77%|███████▋  | 301/389 [00:27<00:18,  4.65it/s]
+Loading weights:  79%|███████▉  | 307/389 [00:27<00:11,  7.20it/s]
+Loading weights:  80%|███████▉  | 310/389 [00:27<00:10,  7.61it/s]
+Loading weights:  80%|████████  | 312/389 [00:28<00:16,  4.76it/s]
+Loading weights:  84%|████████▍ | 327/389 [00:29<00:07,  8.57it/s]
+Loading weights:  85%|████████▌ | 332/389 [00:31<00:08,  7.05it/s]
+Loading weights:  87%|████████▋ | 338/389 [00:31<00:05,  9.16it/s]
+Loading weights:  88%|████████▊ | 341/389 [00:31<00:04, 10.18it/s]
+Loading weights:  88%|████████▊ | 343/389 [00:31<00:04,  9.32it/s]
+Loading weights:  89%|████████▊ | 345/389 [00:32<00:07,  6.07it/s]
+Loading weights:  92%|█████████▏| 357/389 [00:32<00:02, 13.34it/s]
+Loading weights:  95%|█████████▌| 371/389 [00:32<00:00, 23.97it/s]
+Loading weights:  98%|█████████▊| 381/389 [00:33<00:00, 29.03it/s]
+Loading weights: 100%|██████████| 389/389 [00:33<00:00, 11.75it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (590 > 512). Running this sequence through the model will result in indexing errors
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  56%|█████▌    | 216/389 [00:00<00:00, 2144.60it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2976.65it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=1 step=0 loss=1.4525
+seed=42 epoch=1 step=200 loss=1.0565
+seed=42 epoch=1 step=400 loss=0.8020
+seed=42 epoch=1 step=600 loss=0.6951
+seed=42 epoch=1 step=800 loss=1.2751
+seed=42 epoch=1 step=1000 loss=1.2175
+seed=42 epoch=1 step=1200 loss=0.9023
+seed=42 epoch=1 step=1400 loss=1.0123
+{"seed": 42, "epoch": 1, "macro_f1": 0.6439314621167884, "micro_f1": 0.656507776588376, "per_symptom_f1": {"고열": 0.6557562076749436, "구토": 0.6033254156769596, "두통": 0.5317693059628543, "복통": 0.7980295566502463, "어지러움": 0.6649767638360794, "열상": 0.8705416116248349, "오심": 0.3863481228668942, "전신쇠약": 0.5851962245404868, "호흡곤란": 0.6994399502177971}, "empty_predictions": 263, "train_loss": 0.9751206584687275, "train_bce": 0.34114043366466984, "train_soft_f1_loss": 0.6339802264515374, "train_soft_f1": 0.3660197735484626, "epoch_seconds": 1448.259785021, "training_collapse": false}
+seed=42 epoch=2 step=0 loss=0.7498
+seed=42 epoch=2 step=200 loss=0.8974
+seed=42 epoch=2 step=400 loss=0.7550
+seed=42 epoch=2 step=600 loss=0.9917
+seed=42 epoch=2 step=800 loss=0.6475
+seed=42 epoch=2 step=1000 loss=1.1555
+seed=42 epoch=2 step=1200 loss=0.8223
+seed=42 epoch=2 step=1400 loss=0.5788
+{"seed": 42, "epoch": 2, "macro_f1": 0.65035744224843, "micro_f1": 0.6652887385694601, "per_symptom_f1": {"고열": 0.6680391147709728, "구토": 0.6144040790312301, "두통": 0.5428313796212805, "복통": 0.7960707269155206, "어지러움": 0.6793349168646081, "열상": 0.8908296943231441, "오심": 0.37037037037037035, "전신쇠약": 0.5889101338432122, "호흡곤란": 0.70242656449553}, "empty_predictions": 181, "train_loss": 0.8487974899889098, "train_bce": 0.28229978428014074, "train_soft_f1_loss": 0.5664977064217432, "train_soft_f1": 0.43350229357825676, "epoch_seconds": 1452.222099215, "training_collapse": false}
+seed=42 epoch=3 step=0 loss=0.6089
+seed=42 epoch=3 step=200 loss=0.9661
+seed=42 epoch=3 step=400 loss=0.6931
+seed=42 epoch=3 step=600 loss=0.5227
+seed=42 epoch=3 step=800 loss=0.5576
+seed=42 epoch=3 step=1000 loss=1.0007
+seed=42 epoch=3 step=1200 loss=0.6531
+seed=42 epoch=3 step=1400 loss=0.7916
+{"seed": 42, "epoch": 3, "macro_f1": 0.6515187973169398, "micro_f1": 0.664765329530659, "per_symptom_f1": {"고열": 0.6677181913774973, "구토": 0.6198398028342575, "두통": 0.5328659070990359, "복통": 0.7996876220226474, "어지러움": 0.6774585188182922, "열상": 0.8911845730027548, "오심": 0.3864455659697188, "전신쇠약": 0.5873715124816447, "호흡곤란": 0.7010974822466107}, "empty_predictions": 132, "train_loss": 0.7957411947127327, "train_bce": 0.2555694793715757, "train_soft_f1_loss": 0.5401717170777585, "train_soft_f1": 0.45982828292224154, "epoch_seconds": 1454.0201217929998, "training_collapse": false}
