@@ -130,6 +130,7 @@ def commit_push(message: str, mutate) -> None:
 
 # ------------------------------------------------------------------ status
 _last_git_status = 0.0
+_last_sync = 0.0
 
 
 def status(state: str, exp_id: str | None = None, force_git: bool = False, **extra) -> None:
@@ -138,6 +139,13 @@ def status(state: str, exp_id: str | None = None, force_git: bool = False, **ext
     (DRIVE_LAB / "status").mkdir(parents=True, exist_ok=True)
     for fname in (f"heartbeat_{WORKER}.json", "heartbeat.json"):      # heartbeat.json = last writer (legacy readers)
         (DRIVE_LAB / "status" / fname).write_text(json.dumps(hb, ensure_ascii=False), encoding="utf-8")
+    global _last_sync
+    if time.time() - _last_sync > 300:                    # a busy worker never claims, so refresh the queue view here
+        _last_sync = time.time()
+        try:
+            sync()
+        except Exception as exc:
+            log(f"큐 갱신 실패: {redact(str(exc))}")
     pending = len(list((LAB / "queue").glob("*.json"))) + len(list((LAB / "running").glob("*.json")))
     (DRIVE_LAB / "status" / "queue_pending.json").write_text(
         json.dumps({"at": hb["at"], "count": pending, "gpu": wanted_gpu()}), encoding="utf-8")
