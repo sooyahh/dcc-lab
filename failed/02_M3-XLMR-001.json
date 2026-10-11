@@ -21,14 +21,14 @@
     "notes": "사용자 요청(2026-10-11): 지금까지 쓴 4종(klue/roberta-large, beomi/kcbert-base, klue/bert-base, Qwen2.5-1.5B) 외 모델 탐색. large 크기(약 80분 예상). 모델은 DCC_RUN_ROOT/models/<이름>에 고정 revision으로 1회 다운로드 후 local_files_only 로드(규정: HF 공개 모델 로컬 fine-tuning 허용). 데이터는 Training/TL_서울_구급.zip을 LAB_WORK로 복사. epoch마다 체크포인트 저장해 재개. 공식 Validation 미사용"
   },
   "commit": "f666e1f1f809de8c500aa3c304f18418fd7f5fb5",
-  "submitted_at": "2026-10-11T03:34:48+09:00",
+  "submitted_at": "2026-10-11T09:18:26+09:00",
   "attempts": 3,
   "max_attempts": 3,
   "worker": "colab-b",
-  "claimed_at": "2026-10-10T19:41:59+00:00",
-  "started_at": "2026-10-10T19:42:00+00:00",
+  "claimed_at": "2026-10-11T00:18:30+00:00",
+  "started_at": "2026-10-11T00:18:32+00:00",
   "status": "failed",
   "gpu": "Tesla T4",
-  "finished_at": "2026-10-11T00:17:20+00:00",
+  "finished_at": "2026-10-11T04:29:26+00:00",
   "reason": "max_attempts 초과 (반복 중단/오류)"
 }

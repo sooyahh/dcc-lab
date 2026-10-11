@@ -1,159 +1,4 @@
-
-===== attempt 1 2026-10-10T19:42:12+00:00 colab-b commit=f666e1f1f809de8c500aa3c304f18418fd7f5fb5 =====
-
-Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-
-Fetching 5 files:  20%|██        | 1/5 [00:00<00:01,  3.10it/s]
-Fetching 5 files:  40%|████      | 2/5 [00:00<00:00,  4.40it/s]
-Fetching 5 files: 100%|██████████| 5/5 [00:24<00:00,  5.73s/it]
-Fetching 5 files: 100%|██████████| 5/5 [00:24<00:00,  4.84s/it]
-
-Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
-Loading weights:  55%|█████▌    | 217/391 [00:00<00:00, 2168.51it/s]
-Loading weights: 100%|██████████| 391/391 [00:00<00:00, 2719.76it/s]
-[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
-Key                       | Status     |  | 
---------------------------+------------+--+-
-lm_head.bias              | UNEXPECTED |  | 
-lm_head.dense.bias        | UNEXPECTED |  | 
-lm_head.layer_norm.bias   | UNEXPECTED |  | 
-lm_head.dense.weight      | UNEXPECTED |  | 
-lm_head.layer_norm.weight | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-
-Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
-Loading weights:  56%|█████▌    | 218/391 [00:00<00:00, 2166.24it/s]
-Loading weights: 100%|██████████| 391/391 [00:00<00:00, 2256.57it/s]
-[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
-Key                       | Status     |  | 
---------------------------+------------+--+-
-lm_head.bias              | UNEXPECTED |  | 
-lm_head.dense.bias        | UNEXPECTED |  | 
-lm_head.layer_norm.bias   | UNEXPECTED |  | 
-lm_head.dense.weight      | UNEXPECTED |  | 
-lm_head.layer_norm.weight | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-seed=42 epoch=1 step=0 loss=1.5299
-seed=42 epoch=1 step=200 loss=1.3379
-seed=42 epoch=1 step=400 loss=0.9650
-seed=42 epoch=1 step=600 loss=0.8678
-seed=42 epoch=1 step=800 loss=1.2621
-seed=42 epoch=1 step=1000 loss=1.2651
-seed=42 epoch=1 step=1200 loss=0.9043
-seed=42 epoch=1 step=1400 loss=0.9684
-{"seed": 42, "epoch": 1, "macro_f1": 0.6237478312943288, "micro_f1": 0.6359880505942922, "per_symptom_f1": {"고열": 0.6469248291571754, "구토": 0.5762491888384166, "두통": 0.5033492822966508, "복통": 0.7817805383022775, "어지러움": 0.6475063398140322, "열상": 0.8586666666666667, "오심": 0.37283621837549935, "전신쇠약": 0.5514485514485514, "호흡곤란": 0.6749688667496887}, "empty_predictions": 388, "train_loss": 1.0257717016129484, "train_bce": 0.36597756497811473, "train_soft_f1_loss": 0.6597941365253412, "train_soft_f1": 0.34020586347465875, "epoch_seconds": 1606.809080784, "ece": 0.04262059199380213, "ece_bins": 15, "ece_definition": "flattened binary probabilities", "brier": 0.08455388993024826, "per_symptom_brier": {"고열": 0.08740892261266708, "구토": 0.09055732935667038, "두통": 0.07139549404382706, "복통": 0.07680463045835495, "어지러움": 0.10914149135351181, "열상": 0.02680749073624611, "오심": 0.10966339707374573, "전신쇠약": 0.11474709212779999, "호흡곤란": 0.07445859163999557}, "training_collapse": false}
-seed=42 epoch=2 step=0 loss=0.7821
-seed=42 epoch=2 step=200 loss=1.1653
-seed=42 epoch=2 step=400 loss=0.7284
-seed=42 epoch=2 step=600 loss=1.0543
-seed=42 epoch=2 step=800 loss=0.6609
-seed=42 epoch=2 step=1000 loss=1.2849
-seed=42 epoch=2 step=1200 loss=0.8594
-seed=42 epoch=2 step=1400 loss=0.6277
-{"seed": 42, "epoch": 2, "macro_f1": 0.6342407754293796, "micro_f1": 0.649164979757085, "per_symptom_f1": {"고열": 0.6593175853018373, "구토": 0.5891373801916933, "두통": 0.5118829981718465, "복통": 0.7891979040709391, "어지러움": 0.6561163387510693, "열상": 0.8791055206149546, "오심": 0.361198738170347, "전신쇠약": 0.5736648250460405, "호흡곤란": 0.6885456885456885}, "empty_predictions": 254, "train_loss": 0.8817054188300385, "train_bce": 0.2990857217796987, "train_soft_f1_loss": 0.5826196982000107, "train_soft_f1": 0.4173803017999893, "epoch_seconds": 1606.2938796600001, "ece": 0.04227960054711779, "ece_bins": 15, "ece_definition": "flattened binary probabilities", "brier": 0.08235926181077957, "per_symptom_brier": {"고열": 0.08934735506772995, "구토": 0.09015495330095291, "두통": 0.07351300865411758, "복통": 0.07354334741830826, "어지러움": 0.10433608293533325, "열상": 0.023124445229768753, "오심": 0.10229460895061493, "전신쇠약": 0.11601869761943817, "호흡곤란": 0.06889991462230682}, "training_collapse": false}
-seed=42 epoch=3 step=0 loss=0.6872
-seed=42 epoch=3 step=200 loss=0.9848
-seed=42 epoch=3 step=400 loss=0.8164
-seed=42 epoch=3 step=600 loss=0.5317
-seed=42 epoch=3 step=800 loss=0.6591
-seed=42 epoch=3 step=1000 loss=1.1192
-seed=42 epoch=3 step=1200 loss=0.8287
-
-===== attempt 2 2026-10-10T21:44:19+00:00 colab-b commit=f666e1f1f809de8c500aa3c304f18418fd7f5fb5 =====
-
-Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
-Loading weights:   6%|▌         | 22/391 [00:01<00:25, 14.72it/s]
-Loading weights:   8%|▊         | 30/391 [00:01<00:21, 16.57it/s]
-Loading weights:  11%|█▏        | 44/391 [00:02<00:14, 24.04it/s]
-Loading weights:  12%|█▏        | 48/391 [00:04<00:43,  7.92it/s]
-Loading weights:  14%|█▍        | 56/391 [00:04<00:32, 10.42it/s]
-Loading weights:  15%|█▌        | 59/391 [00:04<00:29, 11.37it/s]
-Loading weights:  16%|█▌        | 62/391 [00:05<00:30, 10.72it/s]
-Loading weights:  19%|█▉        | 74/391 [00:05<00:21, 14.51it/s]
-Loading weights:  20%|█▉        | 77/391 [00:06<00:24, 12.92it/s]
-Loading weights:  21%|██        | 82/391 [00:06<00:22, 14.00it/s]
-Loading weights:  24%|██▎       | 92/391 [00:06<00:14, 19.97it/s]
-Loading weights:  28%|██▊       | 110/391 [00:06<00:07, 37.20it/s]
-Loading weights:  30%|███       | 118/391 [00:07<00:09, 27.93it/s]
-Loading weights:  32%|███▏      | 124/391 [00:07<00:12, 20.76it/s]
-Loading weights:  36%|███▋      | 142/391 [00:09<00:17, 13.90it/s]
-Loading weights:  37%|███▋      | 146/391 [00:09<00:17, 14.07it/s]
-Loading weights:  40%|███▉      | 156/391 [00:11<00:22, 10.65it/s]
-Loading weights:  41%|████▏     | 162/391 [00:11<00:19, 11.46it/s]
-Loading weights:  43%|████▎     | 170/391 [00:11<00:14, 14.78it/s]
-Loading weights:  45%|████▌     | 176/391 [00:11<00:12, 16.90it/s]
-Loading weights:  48%|████▊     | 186/391 [00:12<00:10, 19.22it/s]
-Loading weights:  48%|████▊     | 189/391 [00:12<00:11, 17.03it/s]
-Loading weights:  49%|████▉     | 192/391 [00:13<00:18, 10.84it/s]
-Loading weights:  57%|█████▋    | 222/391 [00:14<00:07, 23.59it/s]
-Loading weights:  60%|██████    | 236/391 [00:14<00:05, 28.86it/s]
-Loading weights:  61%|██████▏   | 240/391 [00:17<00:18,  8.14it/s]
-Loading weights:  63%|██████▎   | 245/391 [00:17<00:17,  8.47it/s]
-Loading weights:  63%|██████▎   | 248/391 [00:18<00:15,  9.04it/s]
-Loading weights:  69%|██████▉   | 269/391 [00:18<00:07, 16.53it/s]
-Loading weights:  70%|███████   | 275/391 [00:18<00:06, 17.34it/s]
-Loading weights:  71%|███████   | 278/391 [00:19<00:07, 15.64it/s]
-Loading weights:  73%|███████▎  | 286/391 [00:19<00:07, 13.72it/s]
-Loading weights:  74%|███████▎  | 288/391 [00:20<00:07, 13.10it/s]
-Loading weights:  75%|███████▌  | 294/391 [00:20<00:08, 11.66it/s]
-Loading weights:  80%|███████▉  | 312/391 [00:20<00:03, 23.37it/s]
-Loading weights:  81%|████████  | 317/391 [00:21<00:03, 22.95it/s]
-Loading weights:  86%|████████▌ | 336/391 [00:23<00:04, 12.57it/s]
-Loading weights:  88%|████████▊ | 346/391 [00:23<00:03, 14.51it/s]
-Loading weights:  89%|████████▉ | 349/391 [00:24<00:04, 10.02it/s]
-Loading weights:  95%|█████████▍| 370/391 [00:25<00:01, 17.42it/s]
-Loading weights: 100%|██████████| 391/391 [00:25<00:00, 15.48it/s]
-[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
-Key                       | Status     |  | 
---------------------------+------------+--+-
-lm_head.bias              | UNEXPECTED |  | 
-lm_head.dense.weight      | UNEXPECTED |  | 
-lm_head.layer_norm.weight | UNEXPECTED |  | 
-lm_head.layer_norm.bias   | UNEXPECTED |  | 
-lm_head.dense.bias        | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-
-Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
-Loading weights:  55%|█████▌    | 217/391 [00:00<00:00, 2154.31it/s]
-Loading weights: 100%|██████████| 391/391 [00:00<00:00, 2250.28it/s]
-[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
-Key                       | Status     |  | 
---------------------------+------------+--+-
-lm_head.bias              | UNEXPECTED |  | 
-lm_head.dense.weight      | UNEXPECTED |  | 
-lm_head.layer_norm.weight | UNEXPECTED |  | 
-lm_head.layer_norm.bias   | UNEXPECTED |  | 
-lm_head.dense.bias        | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-seed=42 epoch=3 step=0 loss=0.6872
-seed=42 epoch=3 step=200 loss=0.9796
-seed=42 epoch=3 step=400 loss=0.8221
-seed=42 epoch=3 step=600 loss=0.5287
-seed=42 epoch=3 step=800 loss=0.6541
-seed=42 epoch=3 step=1000 loss=1.1210
-seed=42 epoch=3 step=1200 loss=0.8187
-
-===== attempt 3 2026-10-10T22:45:56+00:00 colab-b commit=f666e1f1f809de8c500aa3c304f18418fd7f5fb5 =====
-
-Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
-Loading weights:   6%|▌         | 23/391 [00:00<00:12, 30.51it/s]
-Loading weights:   7%|▋         | 27/391 [00:01<00:28, 12.71it/s]
-Loading weights:   7%|▋         | 29/391 [00:04<01:25,  4.23it/s]
-Loading weights:  10%|█         | 40/391 [00:05<01:00,  5.79it/s]
-Loading weights:  12%|█▏        | 48/391 [00:08<01:15,  4.53it/s]
-Loading weights:  13%|█▎        | 50/391 [00:08<01:17,  4.39it/s]
-Loading weights:  16%|█▌        | 62/391 [00:10<01:01,  5.39it/s]
-Loading weights:  16%|█▌        | 63/391 [00:10<00:59,  5.47it/s]
+7it/s]
 Loading weights:  18%|█▊        | 72/391 [00:11<00:49,  6.51it/s]
 Loading weights:  22%|██▏       | 87/391 [00:13<00:38,  7.99it/s]
 Loading weights:  23%|██▎       | 88/391 [00:13<00:46,  6.55it/s]
@@ -231,3 +76,268 @@ seed=42 epoch=3 step=600 loss=0.5309
 seed=42 epoch=3 step=800 loss=0.6509
 seed=42 epoch=3 step=1000 loss=1.1094
 seed=42 epoch=3 step=1200 loss=0.8206
+
+===== attempt 1 2026-10-11T00:18:49+00:00 colab-b commit=f666e1f1f809de8c500aa3c304f18418fd7f5fb5 =====
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:   1%|          | 3/391 [00:01<03:31,  1.84it/s]
+Loading weights:  10%|▉         | 38/391 [00:01<00:13, 25.65it/s]
+Loading weights:  12%|█▏        | 45/391 [00:05<00:51,  6.71it/s]
+Loading weights:  33%|███▎      | 128/391 [00:07<00:11, 22.74it/s]
+Loading weights:  34%|███▍      | 133/391 [00:07<00:12, 21.45it/s]
+Loading weights:  35%|███▌      | 137/391 [00:07<00:12, 19.75it/s]
+Loading weights:  36%|███▌      | 140/391 [00:08<00:13, 18.51it/s]
+Loading weights:  39%|███▉      | 152/391 [00:08<00:11, 21.10it/s]
+Loading weights:  44%|████▍     | 173/391 [00:10<00:13, 15.89it/s]
+Loading weights:  51%|█████     | 199/391 [00:10<00:07, 25.61it/s]
+Loading weights:  53%|█████▎    | 206/391 [00:10<00:07, 26.40it/s]
+Loading weights:  57%|█████▋    | 222/391 [00:11<00:05, 31.53it/s]
+Loading weights:  58%|█████▊    | 228/391 [00:11<00:05, 31.94it/s]
+Loading weights:  60%|█████▉    | 233/391 [00:11<00:04, 33.51it/s]
+Loading weights:  62%|██████▏   | 242/391 [00:11<00:03, 40.17it/s]
+Loading weights:  63%|██████▎   | 248/391 [00:11<00:03, 39.11it/s]
+Loading weights:  65%|██████▍   | 254/391 [00:12<00:05, 24.97it/s]
+Loading weights:  67%|██████▋   | 262/391 [00:12<00:04, 26.34it/s]
+Loading weights:  68%|██████▊   | 266/391 [00:12<00:04, 27.13it/s]
+Loading weights:  69%|██████▉   | 270/391 [00:13<00:10, 11.51it/s]
+Loading weights:  73%|███████▎  | 286/391 [00:14<00:05, 18.76it/s]
+Loading weights:  77%|███████▋  | 302/391 [00:14<00:03, 24.31it/s]
+Loading weights:  81%|████████▏ | 318/391 [00:14<00:02, 34.23it/s]
+Loading weights:  87%|████████▋ | 342/391 [00:16<00:02, 21.25it/s]
+Loading weights:  97%|█████████▋| 380/391 [00:16<00:00, 38.23it/s]
+Loading weights: 100%|██████████| 391/391 [00:16<00:00, 23.73it/s]
+[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
+Key                       | Status     |  | 
+--------------------------+------------+--+-
+lm_head.dense.weight      | UNEXPECTED |  | 
+lm_head.layer_norm.bias   | UNEXPECTED |  | 
+lm_head.dense.bias        | UNEXPECTED |  | 
+lm_head.bias              | UNEXPECTED |  | 
+lm_head.layer_norm.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 5237.24it/s]
+[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
+Key                       | Status     |  | 
+--------------------------+------------+--+-
+lm_head.dense.weight      | UNEXPECTED |  | 
+lm_head.layer_norm.bias   | UNEXPECTED |  | 
+lm_head.dense.bias        | UNEXPECTED |  | 
+lm_head.bias              | UNEXPECTED |  | 
+lm_head.layer_norm.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=3 step=0 loss=0.6872
+seed=42 epoch=3 step=200 loss=0.9848
+seed=42 epoch=3 step=400 loss=0.8245
+seed=42 epoch=3 step=600 loss=0.5323
+seed=42 epoch=3 step=800 loss=0.6598
+seed=42 epoch=3 step=1000 loss=1.1146
+seed=42 epoch=3 step=1200 loss=0.8230
+seed=42 epoch=3 step=1400 loss=0.7939
+Traceback (most recent call last):
+  File "/content/lab_code/f666e1f1f809/scripts/lab/m3-xlmr-001.py", line 424, in <module>
+    main()
+    ~~~~^^
+  File "/content/lab_code/f666e1f1f809/scripts/lab/m3-xlmr-001.py", line 407, in main
+    results = [run_seed(seed, out, model_path, tokens, targets, train, holdout, pos_weight) for seed in SEEDS]
+               ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/lab_code/f666e1f1f809/scripts/lab/m3-xlmr-001.py", line 286, in run_seed
+    atomic_write(last, lambda p: torch.save(state, p))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/lab_code/f666e1f1f809/scripts/lab/m3-xlmr-001.py", line 45, in atomic_write
+    with open(name, "rb") as handle:
+         ~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/content/drive/MyDrive/dcc_runs/lab/M3-XLMR-001/ckpt_last.pt.9u357_d1.tmp'
+
+===== attempt 2 2026-10-11T01:47:22+00:00 colab-b commit=f666e1f1f809de8c500aa3c304f18418fd7f5fb5 =====
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:   2%|▏         | 9/391 [00:01<00:52,  7.32it/s]
+Loading weights:   6%|▌         | 22/391 [00:02<00:31, 11.61it/s]
+Loading weights:   6%|▌         | 24/391 [00:02<00:49,  7.38it/s]
+Loading weights:  11%|█         | 42/391 [00:04<00:42,  8.24it/s]
+Loading weights:  13%|█▎        | 52/391 [00:05<00:30, 11.14it/s]
+Loading weights:  16%|█▌        | 61/391 [00:05<00:26, 12.57it/s]
+Loading weights:  19%|█▉        | 74/391 [00:05<00:16, 18.99it/s]
+Loading weights:  20%|██        | 79/391 [00:06<00:18, 16.75it/s]
+Loading weights:  23%|██▎       | 91/391 [00:06<00:12, 24.61it/s]
+Loading weights:  25%|██▌       | 98/391 [00:06<00:12, 22.77it/s]
+Loading weights:  26%|██▋       | 103/391 [00:07<00:13, 22.13it/s]
+Loading weights:  29%|██▊       | 112/391 [00:07<00:10, 27.38it/s]
+Loading weights:  30%|██▉       | 117/391 [00:07<00:14, 19.14it/s]
+Loading weights:  36%|███▌      | 141/391 [00:08<00:11, 21.82it/s]
+Loading weights:  37%|███▋      | 145/391 [00:09<00:13, 18.05it/s]
+Loading weights:  40%|███▉      | 156/391 [00:09<00:10, 22.80it/s]
+Loading weights:  44%|████▍     | 172/391 [00:10<00:11, 18.72it/s]
+Loading weights:  47%|████▋     | 182/391 [00:10<00:09, 21.74it/s]
+Loading weights:  48%|████▊     | 188/391 [00:11<00:08, 23.48it/s]
+Loading weights:  49%|████▉     | 192/391 [00:11<00:11, 17.60it/s]
+Loading weights:  52%|█████▏    | 204/391 [00:11<00:07, 24.62it/s]
+Loading weights:  53%|█████▎    | 208/391 [00:12<00:08, 22.54it/s]
+Loading weights:  55%|█████▍    | 214/391 [00:12<00:06, 26.57it/s]
+Loading weights:  56%|█████▋    | 220/391 [00:12<00:07, 23.86it/s]
+Loading weights:  61%|██████    | 237/391 [00:12<00:04, 36.36it/s]
+Loading weights:  62%|██████▏   | 242/391 [00:12<00:04, 35.87it/s]
+Loading weights:  64%|██████▍   | 252/391 [00:13<00:03, 38.35it/s]
+Loading weights:  66%|██████▌   | 257/391 [00:13<00:03, 36.05it/s]
+Loading weights:  69%|██████▉   | 269/391 [00:14<00:08, 15.13it/s]
+Loading weights:  72%|███████▏  | 280/391 [00:14<00:05, 21.00it/s]
+Loading weights:  74%|███████▎  | 288/391 [00:15<00:04, 22.92it/s]
+Loading weights:  77%|███████▋  | 300/391 [00:15<00:03, 25.84it/s]
+Loading weights:  81%|████████▏ | 318/391 [00:15<00:01, 37.69it/s]
+Loading weights:  84%|████████▍ | 330/391 [00:17<00:03, 17.08it/s]
+Loading weights:  86%|████████▌ | 335/391 [00:17<00:03, 17.80it/s]
+Loading weights:  90%|█████████ | 353/391 [00:17<00:01, 23.56it/s]
+Loading weights:  92%|█████████▏| 361/391 [00:18<00:01, 24.37it/s]
+Loading weights:  97%|█████████▋| 379/391 [00:18<00:00, 36.65it/s]
+Loading weights: 100%|██████████| 391/391 [00:18<00:00, 21.21it/s]
+[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
+Key                       | Status     |  | 
+--------------------------+------------+--+-
+lm_head.layer_norm.bias   | UNEXPECTED |  | 
+lm_head.bias              | UNEXPECTED |  | 
+lm_head.layer_norm.weight | UNEXPECTED |  | 
+lm_head.dense.bias        | UNEXPECTED |  | 
+lm_head.dense.weight      | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:  77%|███████▋  | 300/391 [00:00<00:00, 2666.44it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 3138.01it/s]
+[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
+Key                       | Status     |  | 
+--------------------------+------------+--+-
+lm_head.layer_norm.bias   | UNEXPECTED |  | 
+lm_head.bias              | UNEXPECTED |  | 
+lm_head.layer_norm.weight | UNEXPECTED |  | 
+lm_head.dense.bias        | UNEXPECTED |  | 
+lm_head.dense.weight      | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=3 step=0 loss=0.6872
+seed=42 epoch=3 step=200 loss=0.9803
+seed=42 epoch=3 step=400 loss=0.8140
+seed=42 epoch=3 step=600 loss=0.5296
+seed=42 epoch=3 step=800 loss=0.6542
+seed=42 epoch=3 step=1000 loss=1.1172
+seed=42 epoch=3 step=1200 loss=0.8223
+
+===== attempt 3 2026-10-11T03:11:42+00:00 colab-b commit=f666e1f1f809de8c500aa3c304f18418fd7f5fb5 =====
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:   1%|          | 3/391 [00:01<02:12,  2.92it/s]
+Loading weights:   3%|▎         | 10/391 [00:02<01:19,  4.77it/s]
+Loading weights:   3%|▎         | 12/391 [00:04<02:24,  2.61it/s]
+Loading weights:   3%|▎         | 13/391 [00:06<04:16,  1.47it/s]
+Loading weights:   5%|▍         | 18/391 [00:09<04:06,  1.51it/s]
+Loading weights:   7%|▋         | 27/391 [00:10<02:07,  2.87it/s]
+Loading weights:   8%|▊         | 31/391 [00:11<01:56,  3.09it/s]
+Loading weights:   9%|▉         | 35/391 [00:13<01:56,  3.05it/s]
+Loading weights:   9%|▉         | 36/391 [00:14<02:15,  2.62it/s]
+Loading weights:  11%|█▏        | 44/391 [00:14<01:10,  4.95it/s]
+Loading weights:  12%|█▏        | 46/391 [00:15<01:32,  3.71it/s]
+Loading weights:  12%|█▏        | 48/391 [00:17<02:04,  2.76it/s]
+Loading weights:  13%|█▎        | 49/391 [00:17<02:22,  2.39it/s]
+Loading weights:  16%|█▌        | 62/391 [00:19<01:03,  5.18it/s]
+Loading weights:  18%|█▊        | 70/391 [00:19<00:44,  7.24it/s]
+Loading weights:  20%|█▉        | 78/391 [00:20<00:41,  7.60it/s]
+Loading weights:  21%|██        | 83/391 [00:20<00:33,  9.24it/s]
+Loading weights:  22%|██▏       | 85/391 [00:20<00:31,  9.72it/s]
+Loading weights:  23%|██▎       | 91/391 [00:20<00:22, 13.34it/s]
+Loading weights:  24%|██▍       | 94/391 [00:22<00:46,  6.36it/s]
+Loading weights:  28%|██▊       | 108/391 [00:23<00:34,  8.19it/s]
+Loading weights:  30%|███       | 118/391 [00:24<00:25, 10.74it/s]
+Loading weights:  31%|███       | 120/391 [00:26<00:56,  4.78it/s]
+Loading weights:  36%|███▋      | 142/391 [00:28<00:31,  7.81it/s]
+Loading weights:  37%|███▋      | 144/391 [00:33<01:15,  3.26it/s]
+Loading weights:  37%|███▋      | 146/391 [00:33<01:10,  3.48it/s]
+Loading weights:  39%|███▊      | 151/391 [00:34<01:02,  3.87it/s]
+Loading weights:  46%|████▌     | 180/391 [00:35<00:22,  9.52it/s]
+Loading weights:  47%|████▋     | 182/391 [00:36<00:24,  8.48it/s]
+Loading weights:  47%|████▋     | 184/391 [00:36<00:23,  8.82it/s]
+Loading weights:  48%|████▊     | 186/391 [00:37<00:35,  5.86it/s]
+Loading weights:  52%|█████▏    | 202/391 [00:37<00:16, 11.39it/s]
+Loading weights:  52%|█████▏    | 205/391 [00:39<00:24,  7.71it/s]
+Loading weights:  53%|█████▎    | 207/391 [00:39<00:23,  7.74it/s]
+Loading weights:  53%|█████▎    | 209/391 [00:40<00:36,  5.01it/s]
+Loading weights:  60%|██████    | 236/391 [00:42<00:15, 10.22it/s]
+Loading weights:  63%|██████▎   | 246/391 [00:43<00:16,  9.03it/s]
+Loading weights:  65%|██████▌   | 256/391 [00:43<00:11, 11.97it/s]
+Loading weights:  69%|██████▊   | 268/391 [00:46<00:15,  7.98it/s]
+Loading weights:  69%|██████▉   | 271/391 [00:47<00:17,  6.82it/s]
+Loading weights:  73%|███████▎  | 287/391 [00:50<00:16,  6.42it/s]
+Loading weights:  78%|███████▊  | 306/391 [00:51<00:09,  8.72it/s]
+Loading weights:  80%|███████▉  | 311/391 [00:51<00:08,  8.97it/s]
+Loading weights:  80%|████████  | 313/391 [00:51<00:08,  9.27it/s]
+Loading weights:  81%|████████  | 315/391 [00:52<00:08,  8.58it/s]
+Loading weights:  82%|████████▏ | 320/391 [00:52<00:09,  7.78it/s]
+Loading weights:  82%|████████▏ | 321/391 [00:54<00:17,  4.07it/s]
+Loading weights:  82%|████████▏ | 322/391 [00:56<00:22,  3.03it/s]
+Loading weights:  84%|████████▍ | 330/391 [00:56<00:12,  4.78it/s]
+Loading weights:  86%|████████▌ | 336/391 [00:58<00:12,  4.25it/s]
+Loading weights:  87%|████████▋ | 342/391 [00:58<00:08,  5.79it/s]
+Loading weights:  89%|████████▉ | 349/391 [00:58<00:05,  8.31it/s]
+Loading weights:  92%|█████████▏| 358/391 [00:59<00:02, 11.45it/s]
+Loading weights:  92%|█████████▏| 361/391 [00:59<00:02, 12.21it/s]
+Loading weights:  94%|█████████▎| 366/391 [01:00<00:02,  9.15it/s]
+Loading weights:  94%|█████████▍| 368/391 [01:01<00:03,  6.18it/s]
+Loading weights: 100%|██████████| 391/391 [01:01<00:00,  6.38it/s]
+[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
+Key                       | Status     |  | 
+--------------------------+------------+--+-
+lm_head.bias              | UNEXPECTED |  | 
+lm_head.layer_norm.weight | UNEXPECTED |  | 
+lm_head.dense.bias        | UNEXPECTED |  | 
+lm_head.layer_norm.bias   | UNEXPECTED |  | 
+lm_head.dense.weight      | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:  65%|██████▍   | 254/391 [00:00<00:00, 2518.63it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 2466.10it/s]
+[transformers] [1mXLMRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/xlm-roberta-large
+Key                       | Status     |  | 
+--------------------------+------------+--+-
+lm_head.bias              | UNEXPECTED |  | 
+lm_head.layer_norm.weight | UNEXPECTED |  | 
+lm_head.dense.bias        | UNEXPECTED |  | 
+lm_head.layer_norm.bias   | UNEXPECTED |  | 
+lm_head.dense.weight      | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+seed=42 epoch=3 step=0 loss=0.6872
+seed=42 epoch=3 step=200 loss=0.9852
+seed=42 epoch=3 step=400 loss=0.8202
+seed=42 epoch=3 step=600 loss=0.5327
+seed=42 epoch=3 step=800 loss=0.6564
+seed=42 epoch=3 step=1000 loss=1.1172
+seed=42 epoch=3 step=1200 loss=0.8279
+seed=42 epoch=3 step=1400 loss=0.7950
+Traceback (most recent call last):
+  File "/content/lab_code/f666e1f1f809/scripts/lab/m3-xlmr-001.py", line 424, in <module>
+    main()
+    ~~~~^^
+  File "/content/lab_code/f666e1f1f809/scripts/lab/m3-xlmr-001.py", line 407, in main
+    results = [run_seed(seed, out, model_path, tokens, targets, train, holdout, pos_weight) for seed in SEEDS]
+               ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/lab_code/f666e1f1f809/scripts/lab/m3-xlmr-001.py", line 286, in run_seed
+    atomic_write(last, lambda p: torch.save(state, p))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/lab_code/f666e1f1f809/scripts/lab/m3-xlmr-001.py", line 45, in atomic_write
+    with open(name, "rb") as handle:
+         ~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/content/drive/MyDrive/dcc_runs/lab/M3-XLMR-001/ckpt_last.pt.r14x0ox3.tmp'
