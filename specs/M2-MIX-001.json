@@ -1,0 +1,21 @@
+{
+  "exp_id": "M2-MIX-001",
+  "mission": 2,
+  "title": "SpeakerCNNLarge 학습에 Mixup만 추가 (같은 6,000통화 학습·1,500통화 holdout, torch seed 1·2)",
+  "hypothesis": "L2 SpeakerCNNLarge는 단일 모델 개선(입력 해상도·주파수 스케일·구조·SpecAugment/SWA·L1 결합)이 모두 사전 기준에 못 미쳤고 seed 앙상블만 효과가 있었다(M2-ENS-003 +0.5%p). seed 앙상블 이득은 개별 모델의 결정 경계가 과적합으로 흔들린다는 뜻이므로, 학습 손실에 Mixup(배치 안 두 발화의 log-mel과 라벨을 Beta(0.2,0.2) 비율로 섞음)을 더하면 단일 모델의 일반화가 좋아져 추론 비용 변화 없이 holdout 발화 정확도가 오른다. 특히 대원 recall과 1초 미만 발화(M2-SSL-002 (A) 86.2%)가 개선될 것으로 본다",
+  "change_vs_baseline": "M2-SSL-002의 (A) 갈래와 데이터·분할·모델·학습 설정을 모두 같게 두고 학습 손실에 Mixup만 추가. (A) 기준: SpeakerCNNLarge(dcc_data.mission2_cnn) + 40 mel log-mel(dcc_data.mission2_spectrogram.mel_spectrogram 기본값), 배치 64, Adam 1e-3, ReduceLROnPlateau, AMP, 조기 종료 patience 5·최대 30 epoch(D 정확도 기준), 300프레임 패딩 규칙은 scripts/train_mission2_cnn.py·mission2_inference.py와 동일. (B) 제안: (A)와 같고 학습 배치마다 lam~Beta(0.2,0.2), 배치 안 무작위 순열 perm으로 x_mix = lam*x + (1-lam)*x[perm](패딩 후 log-mel 텐서), loss = lam*CE(logits,y) + (1-lam)*CE(logits,y[perm]). α=0.2는 결과 보기 전 고정(탐색 없음). 평가·D 검증·추론 입력은 섞지 않는다. 두 갈래 모두 torch seed 1과 2로 학습(총 4개 모델). 분할: M2-SSL-002와 같은 H 1,500통화 / S 6,000통화 / D 300통화(S 안, epoch 선택 전용) — $DCC_RUN_ROOT/lab/M2-SSL-002/split.json이 있으면 그대로 읽고, 없으면 같은 규칙(Training 29,200통화, call_id 단위, seed 42)으로 다시 만들어 통화 목록 sha256이 같은지 기록",
+  "baseline": {
+    "exp_id": "M2-SSL-002",
+    "metric": "H 1,500통화(45,471발화) 발화 accuracy, 같은 실험 안의 (A) SpeakerCNNLarge. 참고: M2-SSL-002 (A) torch seed 1 = 0.9003",
+    "value": 0.9003
+  },
+  "branch": "sooyah/lab-m2-mix-001",
+  "commit": "",
+  "command": "PYTHONPATH=src python scripts/lab/m2-mix-001.py --output \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "주 지표 = H 발화 accuracy의 seed 평균 (B) − (A), 결과 보기 전 고정(α·epoch을 H로 고르지 않음, epoch 선택은 D만). 채택 조건 모두 충족: (1) seed 1·2 평균 (B) − (A) ≥ +0.3%p (2) seed 1·2 각각 (B) > (A) (3) 두 seed 확률 평균 기준 (B) vs (A) 발화 단위 paired McNemar 정확검정 p < 0.05 (4) H를 call_id 기준 5개 묶음(seed 42)으로 나눴을 때 두 seed 확률 평균 기준 5개 중 4개 이상에서 (B) > (A). metrics.json에 seed·갈래별 H accuracy, 클래스별 recall(대원/신고자), 혼동행렬, 묶음별 accuracy, McNemar 2×2 칸과 p값, 발화 길이 구간별(<1초, 1~3초, 3~6초, >6초) accuracy, epoch별 D accuracy·train loss, 멈춘 epoch·최고 epoch, H 확률의 ECE(15구간)·Brier, 두 seed 확률 평균 accuracy(진단용: (A) seed 앙상블 vs (B) seed 앙상블), 학습 통화·발화 수, split sha256 기록. 학습 붕괴(D accuracy가 다수 클래스 비율 이하) 시 실패로 기록. 추론 경로·모델 구조는 바뀌지 않으므로 추론 시간 측정은 하지 않는다",
+  "gpu": "T4",
+  "budget_hours": 5,
+  "priority": 3,
+  "notes": "Training(서울) TL_/TS_ zip만 LAB_WORK로 복사해 사용, Validation 폴더는 읽지 않음. 입력은 음성 + startAt/endAt만(speaker는 정답으로만). M2 규정: 각 샘플의 입력은 대상 발화 구간 log-mel뿐이고 같은 통화의 다른 발화로 만든 값(통화 단위 정규화·길이 비율·발화 순서)은 쓰지 않는다. Mixup 짝은 셔플된 학습 배치 안의 무작위 순열이라 통화 정보를 쓰지 않으며, 학습 시 정규화 기법이고 추론 입력은 대상 발화 하나 그대로다. 라벨은 제공된 JSON의 speaker 그대로(교정 금지, label_source=provided_json 기록). 발화 log-mel은 S∪H 통화만 만들어 float16 배열 하나 + 오프셋 인덱스로 LAB_WORK에 묶고(통화 단위 청크로 재개 가능, M2-SSL-002 코드의 추출부 재사용), 묶음 파일은 LAB_OUT에도 복사해 재개 시 재사용. 재개: 모델 4개(A1, A2, B1, B2) 각각 ckpt_last.pt(모델·옵티마이저·스케줄러·GradScaler·epoch·RNG)를 LAB_WORK에 저장 후 LAB_OUT으로 .tmp 복사→크기 확인→os.replace(OSError 시 2·4·8·16·32초 재시도), 끝난 모델은 <arm><seed>_done.json으로 건너뜀. 확률 저장: seed별 holdout 확률을 seed_<s>/holdout_probs.npy(열 = (A) 신고자 확률, (B) 신고자 확률, 열 이름은 seed_<s>/holdout_probs_columns.json, 행 순서 = seed_<s>/val_files.txt의 '<call_id>\\t<utt_idx>')로 저장. best.ckpt는 (B) seed 1의 D 기준 최고 epoch 가중치만. 새 패키지 없음. 공식 Val 미사용. 예상 소요: 데이터 준비 약 40분 + 모델당 약 1.4분/epoch × 최대 30 epoch(T4, 전체 데이터 7분/epoch의 약 1/5) × 4개 ≈ 3~3.5시간"
+}
