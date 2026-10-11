@@ -21,6 +21,10 @@
    - `state`가 `stopped` 또는 파일 없음 → 그 워커를 켜야 하는지는 웹훅(`workers`)이 알려준다. 예약 점검에서는 `queue_pending.json`의 `count` > 0 이면 colab-a만 **작업 C** (colab-b는 웹훅 요청이 있을 때만)
 3. Colab을 열 때마다 **작업 D**도 수행
 
+- 실행 중인(heartbeat `running`) 워커 탭은 점검 때마다 한 번 클릭하거나 스크롤해 활동 상태를 유지한다(유휴 시간 초과 방지)
+- 워커가 끊긴 것을 처음 발견하면, 재기동 전에 그 탭에 뜬 문구(예: "사용 가능한 RAM을 모두 사용한 후 세션이 다운되었습니다", "유휴", "연결 안 됨")를 그대로 Drive `dcc_lab/status/runner_issue.json`에 `{"at", "worker", "issue": "disconnect", "message"}`로 기록한다
+- heartbeat가 멈춰 있어도 탭 출력이 아직 갱신되고 있으면 재기동하지 않고 총괄에게 한 번만 알린다(살아 있는 학습을 끊지 않기 위해)
+
 ## 작업 B — 웹훅 (이벤트 `job_queued`)
 - 본문의 `workers`(예: `["colab-b"]`)와 `notebooks`에 나온 노트북만 **작업 C**로 켠다. 이미 살아 있는 워커(`live_workers`)는 건드리지 않는다
 - 본문의 `gpus`(예: `{"colab-b": "L4"}`)가 워커별 GPU다. 작업 C 2단계에서 그 GPU를 고른다(`gpus`가 없으면 `gpu` 값)
@@ -28,7 +32,7 @@
 
 ## 작업 C — 러너 기동 (노트북 하나당)
 1. Colab에서 지정된 노트북(`lab_worker.ipynb` 또는 `lab_worker_2.ipynb`)을 연다
-2. 런타임 → 런타임 유형 변경 → **GPU: 웹훅 `gpus`의 그 워커 값**(없으면 T4). 예약 점검에서 켤 때는 `queue_pending.json`의 `gpu`(`T4` 또는 `L4`). A100은 선택하지 않음. 이미 다른 GPU로 연결된 런타임이면 해제 후 바꿔서 연결
+2. 런타임 → 런타임 유형 변경 → **GPU: 웹훅 `gpus`의 그 워커 값**(없으면 T4). 예약 점검에서 켤 때는 `queue_pending.json`의 `gpu`(`T4` 또는 `L4`). A100은 선택하지 않음. 이미 다른 GPU로 연결된 런타임이면 해제 후 바꿔서 연결. T4일 때는 **높은 RAM**도 켠다(기본 RAM 약 13GB에서 학습이 같은 지점에서 조용히 끊긴 사례, 2026-10-11)
 3. 런타임 → **모두 실행**. 노트북 코드는 수정하지 않는다
 4. 2분 뒤 마지막 셀 출력에 `[runner ...] worker=` 줄이 보이는지 확인
 5. GPU를 배정받지 못하거나("사용 가능한 GPU 없음", 사용량 한도, 동시 세션 한도) 오류가 나면: 화면 메시지를 그대로 Drive `dcc_lab/status/runner_issue.json`에 `{"at": ISO시각, "worker": "...", "issue": "...", "message": "..."}`로 기록하고 총괄에게 1:1로 알린다
