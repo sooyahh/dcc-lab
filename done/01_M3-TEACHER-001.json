@@ -26,5 +26,45 @@
   "max_attempts": 3,
   "worker": "colab-a",
   "claimed_at": "2026-10-11T11:38:58+00:00",
-  "started_at": "2026-10-11T11:38:59+00:00"
+  "status": "done",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "finished_at": "2026-10-11T12:41:39+00:00",
+  "elapsed_min": 62.6,
+  "metrics": {
+    "exp_id": "M3-TEACHER-001",
+    "primary_metric": {
+      "name": "fold0_ep1_macro_f1",
+      "value": 0.6212446032563749
+    },
+    "metrics": {
+      "gate": 0.635,
+      "gate_fail": true,
+      "fold_macro_f1": {},
+      "epoch_logs": {
+        "0": [
+          {
+            "epoch": 1,
+            "loss": 0.8428958328531638,
+            "macro_f1": 0.6212446032563749,
+            "per_class": [
+              0.6243059839605182,
+              0.5854956753160346,
+              0.504424778761062,
+              0.8043831168831169,
+              0.6825335892514396,
+              0.8854314002828855,
+              0.27459016393442626,
+              0.5352877307274702,
+              0.6947489901904212
+            ],
+            "pred_allzero_rate": 0.06467661691542288,
+            "min": 62.02710772752762
+          }
+        ]
+      }
+    },
+    "seed": 42,
+    "official_val": null,
+    "notes": "threshold >=0.5 fixed; OOF = last epoch"
+  }
 }

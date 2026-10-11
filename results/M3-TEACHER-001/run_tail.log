@@ -63,3 +63,56 @@ Traceback (most recent call last):
     ...<2 lines>...
     )
 ImportError: Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported
+
+===== attempt 1 2026-10-11T11:39:04+00:00 colab-a commit=ff925d38c75042fa5e2700241cb47a91cdb8c1e1 =====
+Found existing installation: torchao 0.10.0
+Uninstalling torchao-0.10.0:
+  Successfully uninstalled torchao-0.10.0
+saved /content/lab_work/M3-TEACHER-001/train.csv: 29200 rows (rows.json 순서)
+saved /content/lab_work/M3-TEACHER-001/holdout42.npz: train 23408 / val 5792  (기존 기준: 23,408 / 5,792)
+token len p50 271 p90 470 p99 697 | truncated 0.00%
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 290/290 [00:00<00:00, 4480.42it/s]
+[transformers] [1mLlamaModel LOAD REPORT[0m from: kakaocorp/kanana-1.5-8b-base
+Key            | Status     |  | 
+---------------+------------+--+-
+lm_head.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+trainable params: 83,886,080 || all params: 7,588,810,752 || trainable%: 1.1054
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+  fold0 ep1 0/5843 loss 1.8833 0min
+  fold0 ep1 200/5843 loss 1.4491 2min
+  fold0 ep1 400/5843 loss 1.2261 4min
+  fold0 ep1 600/5843 loss 1.1309 6min
+  fold0 ep1 800/5843 loss 1.0681 8min
+  fold0 ep1 1000/5843 loss 1.0275 10min
+  fold0 ep1 1200/5843 loss 0.9957 12min
+  fold0 ep1 1400/5843 loss 0.9759 14min
+  fold0 ep1 1600/5843 loss 0.9634 16min
+  fold0 ep1 1800/5843 loss 0.9475 18min
+  fold0 ep1 2000/5843 loss 0.9348 19min
+  fold0 ep1 2200/5843 loss 0.9256 21min
+  fold0 ep1 2400/5843 loss 0.9159 23min
+  fold0 ep1 2600/5843 loss 0.9080 25min
+  fold0 ep1 2800/5843 loss 0.9015 27min
+  fold0 ep1 3000/5843 loss 0.8956 29min
+  fold0 ep1 3200/5843 loss 0.8879 31min
+  fold0 ep1 3400/5843 loss 0.8826 33min
+  fold0 ep1 3600/5843 loss 0.8785 35min
+  fold0 ep1 3800/5843 loss 0.8735 37min
+  fold0 ep1 4000/5843 loss 0.8697 39min
+  fold0 ep1 4200/5843 loss 0.8673 41min
+  fold0 ep1 4400/5843 loss 0.8610 43min
+  fold0 ep1 4600/5843 loss 0.8577 45min
+  fold0 ep1 4800/5843 loss 0.8542 47min
+  fold0 ep1 5000/5843 loss 0.8515 49min
+  fold0 ep1 5200/5843 loss 0.8497 51min
+  fold0 ep1 5400/5843 loss 0.8478 53min
+  fold0 ep1 5600/5843 loss 0.8453 54min
+  fold0 ep1 5800/5843 loss 0.8436 56min
+[fold0] ep1 F1 0.6212 allzero 6.47% (62min) | 고열:0.624 구토:0.585 두통:0.504 복통:0.804 어지러움:0.683 열상:0.885 오심:0.275 전신쇠약:0.535 호흡곤란:0.695
+GATE FAIL: fold0 ep1 F1 0.6212 < 0.635. 교사 포기.
