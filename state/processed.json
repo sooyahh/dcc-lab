@@ -55,7 +55,8 @@
   "done/01_M3-TEACHER-001.json@2026-10-11T12:41:39+00:00",
   "done/02_M1-ECAPA-002.json@2026-10-11T13:53:51+00:00",
   "failed/00_M3-FINAL-001.json@2026-10-11T16:09:57+00:00",
-  "done/00_M3-FINAL-002.json@2026-10-11T16:33:40+00:00"
+  "done/00_M3-FINAL-002.json@2026-10-11T16:33:40+00:00",
+  "failed/01_M3-DEBERTA-001.json@2026-10-11T16:34:38+00:00"
  ],
  "implemented_issues": [
   1,
@@ -207,7 +208,8 @@
   153,
   154,
   156,
-  158
+  158,
+  162
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -278,6 +280,7 @@
   "2026-10-11 Codex direct fix (user authorization: Claude unavailable): M1-ECAPA-002 PR #150 7fe2d84 PASS; ECAPA-001 successful local staging/COPY/pretrained_path loader ported, smoke and 5 isolated loader regression cases passed. Real SpeechBrain/GPU model load is checked at job startup; no local full-model run. Queue submitted at fixed commit; experiment criteria unchanged.",
   "Judge M1-ECAPA-002 2026-10-11: 기각 (OOF (h) 98.25% vs (c) 97.97% = +0.28%p, 기준 +0.3%p 0.02%p 미달; fold 5/5, McNemar p=5.8e-5 충족). 팀 로그 PR #158, 코드 PR #150 닫음, proposal #37 닫음. No new proposal: M1 포화(~98%), M3 새 축 소진, M2는 대형 재학습뿐",
   "Review 2026-10-11: M3-DEBERTA-001 PR #161 66908f1 PASS -> submitted (L4). M3-KCBERT-017 PR #160 31445fb FAIL (MAJOR: holdout_probs 행 순서 != val_files.txt), lab-fix 라벨",
-  "Judge M3-FINAL-002 2026-10-11: 채택 (공식 Val 채점 앙상블 Macro F1 0.6534 vs 80% 모델 0.6529, 3 seed 완료). 팀 로그 PR #162. 코드 PR #140은 exp(<EXP>) 형식이 아니고 사용자 관리라 라벨·닫기 안 함. No new proposal: open proposals 3 (#38·#39·#40) >= max_workers 2"
+  "Judge M3-FINAL-002 2026-10-11: 채택 (공식 Val 채점 앙상블 Macro F1 0.6534 vs 80% 모델 0.6529, 3 seed 완료). 팀 로그 PR #162. 코드 PR #140은 exp(<EXP>) 형식이 아니고 사용자 관리라 라벨·닫기 안 함. No new proposal: open proposals 3 (#38·#39·#40) >= max_workers 2",
+  "Judge M3-DEBERTA-001 2026-10-11: 보류 (학습 전 AutoTokenizer TypeError, 코드/환경 문제; 재시도 횟수 소진 아님). 팀 로그 PR #163, 코드 PR #161 lab-fix + 수정 지시, 이슈 #39 유지. PR #162 (log M3-FINAL-002) merged (merge-gate success, behind 0). No new proposal: open proposals 3 (#38·#39·#40) >= max_workers 2"
  ]
 }
