@@ -10,7 +10,7 @@
     "value": 0.6265
   },
   "branch": "sooyah/lab-m3-kcbert-017",
-  "commit": "",
+  "commit": "935057c25d8e5208888f52998d719474438e3364",
   "command": "python scripts/lab/m3-kcbert-017.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "동일 80:20 split에서 3-seed 평균 Macro F1이 0.6265보다 +0.01 이상 높고 최소 2개 seed가 0.6265 초과. 평가는 9개 증상만, threshold >= 0.5 고정(튜닝·후처리 금지). seed별 Macro/Micro/증상별 F1, ECE, Brier, 빈 예측 수, 보조 헤드 holdout macro F1(진단용, 0.05 미만이면 보조 학습 실패로 명시) 기록",
