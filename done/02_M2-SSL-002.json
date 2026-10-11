@@ -1,0 +1,1231 @@
+{
+  "spec": {
+    "exp_id": "M2-SSL-002",
+    "mission": 2,
+    "title": "WavLM-base-plus 미세조정 발화 분류 vs SpeakerCNNLarge, 같은 6,000통화 학습·1,500통화 holdout 비교",
+    "hypothesis": "M2-SSL-001에서 WavLM-base-plus 고정 임베딩은 얕은 층(4층) LR이 86.18%로 L1 LGBM(84.36%)보다 높았지만 깊은 층은 80%대로 떨어졌다. 상위 층이 화자 역할(대원 헤드셋 vs 신고자 휴대폰, 발화 방식) 정보를 버린 상태로 고정돼 있었기 때문이며, 전체 층을 학습 가능한 가중합으로 묶고 인코더를 미세조정하면 L2 CNN(처음부터 학습)보다 같은 학습 데이터에서 더 높은 발화 정확도를 얻는다",
+    "change_vs_baseline": "같은 학습 통화·같은 holdout에서 두 갈래를 학습해 비교. (A) 기준: SpeakerCNNLarge(dcc_data.mission2_cnn) + 40 mel log-mel(dcc_data.mission2_spectrogram.mel_spectrogram 기본값 그대로), 학습 설정은 M2-RERUN-001과 같게(배치 64, Adam 1e-3, ReduceLROnPlateau, AMP, 조기 종료 patience 5·최대 30 epoch, 300프레임 패딩 규칙은 scripts/train_mission2_cnn.py·mission2_inference.py와 동일), torch seed 1. (B) 제안: microsoft/wavlm-base-plus(고정 revision, M2-SSL-001이 받은 것) 미세조정. CNN 특징 추출부(feature_encoder)는 고정, Transformer 12층 + 임베딩 출력 13개 hidden state의 softmax 학습 가중합 → 마스크 평균 풀링 → Linear(768→2). 입력 16kHz 대상 발화 파형(startAt~endAt만), 학습 시 최대 6초 무작위 crop·평가 시 최대 6초 중앙 crop, 0.5초 미만 zero-pad, 발화 단위 정규화만(WavLM feature extractor 기본). AdamW(인코더 3e-5, 가중합·헤드 1e-3, weight decay 0.01), 선형 warmup 10% 후 선형 감쇠, 배치 32(길이 정렬 버킷, grad accumulation 없음), fp16, 2 epochs, seed 42. 데이터: Training 29,200통화에서 call_id 단위로 seed 42 무작위 추출 holdout 1,500통화(H), 나머지에서 seed 42로 학습 6,000통화(S), S 안에서 call_id 단위 dev 300통화(D, 두 갈래 모두 epoch 선택에만 사용). H는 두 갈래 모두 학습·선택에 쓰지 않는다",
+    "baseline": {
+      "exp_id": "M2-RERUN-001",
+      "metric": "발화 accuracy (같은 실험 안의 (A) SpeakerCNNLarge, Training 6,000통화 학습 / holdout 1,500통화). 참고: M2-RERUN-001 전체 데이터 단일 seed 내부 val_acc 0.914~0.915, 공식 Val 앙상블 0.9149",
+      "value": null
+    },
+    "branch": "sooyah/lab-m2-ssl-002",
+    "commit": "e7842113bc5c111dfd957eaf7aa7a1fba15bdcf5",
+    "command": "PYTHONPATH=src python scripts/lab/m2-ssl-002.py --output \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "주 지표 = H 발화 accuracy (B) − (A), 결과 보기 전 고정(층·crop·epoch을 H로 고르지 않음, epoch 선택은 D만). 채택 조건 모두 충족: (1) (B) − (A) ≥ +1.0%p (2) H 1,500통화를 call_id 기준 5개 묶음(seed 42)으로 나눴을 때 5개 중 4개 이상에서 (B) > (A) (3) 발화 단위 paired McNemar 정확검정 p < 0.05 (4) (B)의 T4 추론 처리량과 CPU 2코어 batch 1 추론 시간(H에서 무작위 500발화)으로 추정한 공식 Val 111,947발화 CPU 추론 시간이 기록됨(L2 앙상블 85.3분과 비교, 판정 참고용). metrics.json에 (A)(B)의 H accuracy, 클래스별 recall(대원/신고자), 혼동행렬, 묶음별 accuracy, McNemar 2×2 칸과 p값, 발화 길이 구간별(<1초, 1~3초, 3~6초, >6초) accuracy, (B)의 층 가중합 softmax 13개 값, epoch별 D accuracy·train loss, (A)의 epoch별 D accuracy, (A)(B) 확률 평균 soft-vote의 H accuracy(진단용, 판정에 쓰지 않음), 학습 통화·발화 수, seed 기록. 학습 붕괴(D accuracy가 다수 클래스 비율 이하) 시 실패로 기록",
+    "gpu": "T4",
+    "budget_hours": 5,
+    "priority": 2,
+    "notes": "Training(서울) TL_/TS_ zip만 LAB_WORK로 복사해 사용, Validation 폴더는 읽지 않음. 입력은 음성 + startAt/endAt만(speaker는 정답으로만). M2 규정: 대상 발화 구간 파형만 사용하고 같은 통화의 다른 발화로 만든 값(통화 단위 정규화·길이 비율·발화 순서)은 쓰지 않는다. 라벨은 제공된 JSON의 speaker 그대로(교정 금지, label_source=provided_json 기록). 분할(H/S/D 통화 목록)은 split.json으로 LAB_OUT에 저장하고 재개 시 같은 파일을 읽는다. WavLM 모델은 main() 시작 직후 $DCC_RUN_ROOT/models/wavlm-base-plus에서 local_files_only로 로드, 없으면 고정 revision으로 snapshot_download(revision 해시를 metrics에 기록). 발화 파형은 S∪H 통화만 디코딩해 16kHz float16 배열 하나 + 오프셋 인덱스로 LAB_WORK에 묶고(통화 단위 청크로 재개 가능), (A)의 log-mel도 같은 파형에서 만든다. 재개: (A)(B) 각각 ckpt_last.pt(모델·옵티마이저·스케줄러·GradScaler·epoch·step·샘플 순서·RNG)를 LAB_WORK에 저장 후 LAB_OUT으로 .tmp 복사→크기 확인→os.replace(OSError 시 2·4·8·16·32초 재시도), epoch 안에서도 약 15분마다 저장해 그 step부터 이어 감. (A)가 끝나면 a_done.json, (B)가 끝나면 b_done.json을 남겨 건너뜀. 확률 저장: seed별 holdout 확률을 seed_42/holdout_probs.npy(열 = (A) 신고자 확률, (B) 신고자 확률, 열 이름은 seed_42/holdout_probs_columns.json, 행 순서 = seed_42/val_files.txt의 '<call_id>\\t<utt_idx>'). best.ckpt는 (B)의 D 기준 최고 epoch 가중치만(fp16), 층 가중합·crop 규칙·revision 포함. 새 패키지 없음(transformers·torchaudio는 기존 requirements 사용, 없을 때만 1줄 추가). 승인 시 Codex가 scripts/lab/m2-ssl-002.py로 구현(M2-SSL-001 PR #66 브랜치의 WavLM 로드·발화 파형 추출, scripts/train_mission2_cnn.py의 CNN 학습 루프 재사용 가능)"
+  },
+  "commit": "e7842113bc5c111dfd957eaf7aa7a1fba15bdcf5",
+  "submitted_at": "2026-10-11T23:12:08+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-a",
+  "claimed_at": "2026-10-11T16:34:47+00:00",
+  "interruptions": 0,
+  "status": "done",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "finished_at": "2026-10-11T18:02:56+00:00",
+  "elapsed_min": 87.9,
+  "metrics": {
+    "exp_id": "M2-SSL-002",
+    "primary_metric": {
+      "name": "accuracy_delta_B_minus_A",
+      "value": -0.04383013349167597,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "a": {
+        "accuracy": 0.9002880957093532,
+        "confusion_matrix": [
+          [
+            18935,
+            2886
+          ],
+          [
+            1648,
+            22002
+          ]
+        ],
+        "recall": {
+          "대원": 0.8677420833142386,
+          "신고자": 0.9303171247357294
+        },
+        "rows": 45471
+      },
+      "b": {
+        "accuracy": 0.8564579622176772,
+        "confusion_matrix": [
+          [
+            16009,
+            5812
+          ],
+          [
+            715,
+            22935
+          ]
+        ],
+        "recall": {
+          "대원": 0.733651070070116,
+          "신고자": 0.9697674418604652
+        },
+        "rows": 45471
+      },
+      "delta_accuracy": -0.04383013349167597,
+      "groups": [
+        {
+          "a": {
+            "accuracy": 0.9031436794332521,
+            "confusion_matrix": [
+              [
+                3759,
+                540
+              ],
+              [
+                335,
+                4400
+              ]
+            ],
+            "recall": {
+              "대원": 0.8743893928820656,
+              "신고자": 0.9292502639915523
+            },
+            "rows": 9034
+          },
+          "b": {
+            "accuracy": 0.8575381890635377,
+            "confusion_matrix": [
+              [
+                3141,
+                1158
+              ],
+              [
+                129,
+                4606
+              ]
+            ],
+            "recall": {
+              "대원": 0.7306350314026517,
+              "신고자": 0.9727560718057022
+            },
+            "rows": 9034
+          }
+        },
+        {
+          "a": {
+            "accuracy": 0.898781424964321,
+            "confusion_matrix": [
+              [
+                3778,
+                569
+              ],
+              [
+                353,
+                4409
+              ]
+            ],
+            "recall": {
+              "대원": 0.8691051299746952,
+              "신고자": 0.9258714825703486
+            },
+            "rows": 9109
+          },
+          "b": {
+            "accuracy": 0.8632122077066637,
+            "confusion_matrix": [
+              [
+                3239,
+                1108
+              ],
+              [
+                138,
+                4624
+              ]
+            ],
+            "recall": {
+              "대원": 0.7451115711985277,
+              "신고자": 0.9710205795884083
+            },
+            "rows": 9109
+          }
+        },
+        {
+          "a": {
+            "accuracy": 0.8944629014396456,
+            "confusion_matrix": [
+              [
+                3732,
+                618
+              ],
+              [
+                335,
+                4345
+              ]
+            ],
+            "recall": {
+              "대원": 0.8579310344827586,
+              "신고자": 0.9284188034188035
+            },
+            "rows": 9030
+          },
+          "b": {
+            "accuracy": 0.8489479512735326,
+            "confusion_matrix": [
+              [
+                3147,
+                1203
+              ],
+              [
+                161,
+                4519
+              ]
+            ],
+            "recall": {
+              "대원": 0.723448275862069,
+              "신고자": 0.9655982905982906
+            },
+            "rows": 9030
+          }
+        },
+        {
+          "a": {
+            "accuracy": 0.9017778753292361,
+            "confusion_matrix": [
+              [
+                3779,
+                586
+              ],
+              [
+                309,
+                4438
+              ]
+            ],
+            "recall": {
+              "대원": 0.8657502863688431,
+              "신고자": 0.9349062565831051
+            },
+            "rows": 9112
+          },
+          "b": {
+            "accuracy": 0.8573309920983319,
+            "confusion_matrix": [
+              [
+                3195,
+                1170
+              ],
+              [
+                130,
+                4617
+              ]
+            ],
+            "recall": {
+              "대원": 0.7319587628865979,
+              "신고자": 0.9726142827048663
+            },
+            "rows": 9112
+          }
+        },
+        {
+          "a": {
+            "accuracy": 0.9032222947964293,
+            "confusion_matrix": [
+              [
+                3887,
+                573
+              ],
+              [
+                316,
+                4410
+              ]
+            ],
+            "recall": {
+              "대원": 0.87152466367713,
+              "신고자": 0.9331358442657639
+            },
+            "rows": 9186
+          },
+          "b": {
+            "accuracy": 0.8552144567820597,
+            "confusion_matrix": [
+              [
+                3287,
+                1173
+              ],
+              [
+                157,
+                4569
+              ]
+            ],
+            "recall": {
+              "대원": 0.7369955156950673,
+              "신고자": 0.9667795175624206
+            },
+            "rows": 9186
+          }
+        }
+      ],
+      "group_wins": 0,
+      "duration_buckets": {
+        "<1s": {
+          "a": {
+            "accuracy": 0.8621684760203381,
+            "confusion_matrix": [
+              [
+                5681,
+                1167
+              ],
+              [
+                839,
+                6867
+              ]
+            ],
+            "recall": {
+              "대원": 0.8295852803738317,
+              "신고자": 0.8911237996366468
+            },
+            "rows": 14554
+          },
+          "b": {
+            "accuracy": 0.7417891988456782,
+            "confusion_matrix": [
+              [
+                3474,
+                3374
+              ],
+              [
+                384,
+                7322
+              ]
+            ],
+            "recall": {
+              "대원": 0.5073014018691588,
+              "신고자": 0.9501686997145081
+            },
+            "rows": 14554
+          }
+        },
+        "1-3s": {
+          "a": {
+            "accuracy": 0.8992503199853721,
+            "confusion_matrix": [
+              [
+                9977,
+                1537
+              ],
+              [
+                667,
+                9695
+              ]
+            ],
+            "recall": {
+              "대원": 0.8665103352440507,
+              "신고자": 0.9356301872225439
+            },
+            "rows": 21876
+          },
+          "b": {
+            "accuracy": 0.8821539586761749,
+            "confusion_matrix": [
+              [
+                9222,
+                2292
+              ],
+              [
+                286,
+                10076
+              ]
+            ],
+            "recall": {
+              "대원": 0.8009379885356956,
+              "신고자": 0.9723991507430998
+            },
+            "rows": 21876
+          }
+        },
+        "3-6s": {
+          "a": {
+            "accuracy": 0.961038961038961,
+            "confusion_matrix": [
+              [
+                2790,
+                160
+              ],
+              [
+                122,
+                4166
+              ]
+            ],
+            "recall": {
+              "대원": 0.9457627118644067,
+              "신고자": 0.9715485074626866
+            },
+            "rows": 7238
+          },
+          "b": {
+            "accuracy": 0.976098369715391,
+            "confusion_matrix": [
+              [
+                2819,
+                131
+              ],
+              [
+                42,
+                4246
+              ]
+            ],
+            "recall": {
+              "대원": 0.9555932203389831,
+              "신고자": 0.9902052238805971
+            },
+            "rows": 7238
+          }
+        },
+        ">6s": {
+          "a": {
+            "accuracy": 0.9767054908485857,
+            "confusion_matrix": [
+              [
+                487,
+                22
+              ],
+              [
+                20,
+                1274
+              ]
+            ],
+            "recall": {
+              "대원": 0.9567779960707269,
+              "신고자": 0.9845440494590417
+            },
+            "rows": 1803
+          },
+          "b": {
+            "accuracy": 0.9900166389351082,
+            "confusion_matrix": [
+              [
+                494,
+                15
+              ],
+              [
+                3,
+                1291
+              ]
+            ],
+            "recall": {
+              "대원": 0.9705304518664047,
+              "신고자": 0.9976816074188563
+            },
+            "rows": 1803
+          }
+        }
+      },
+      "mcnemar": {
+        "table": [
+          [
+            37260,
+            3677
+          ],
+          [
+            1684,
+            2850
+          ]
+        ],
+        "axes": [
+          "A correct/incorrect",
+          "B correct/incorrect"
+        ],
+        "p_value": 6.622986972816727e-167,
+        "method": "two-sided exact binomial"
+      },
+      "soft_vote": {
+        "accuracy": 0.9086230784456026,
+        "confusion_matrix": [
+          [
+            18428,
+            3393
+          ],
+          [
+            762,
+            22888
+          ]
+        ],
+        "recall": {
+          "대원": 0.8445075844370102,
+          "신고자": 0.9677801268498943
+        },
+        "rows": 45471
+      },
+      "statistical_criteria_met": false,
+      "a_training": {
+        "history": [
+          {
+            "epoch": 1,
+            "dev_accuracy": 0.8003224073078989,
+            "train_loss": 0.3752849592672588,
+            "collapsed": false
+          },
+          {
+            "epoch": 2,
+            "dev_accuracy": 0.6984416980118217,
+            "train_loss": 0.3168999598612834,
+            "collapsed": false
+          },
+          {
+            "epoch": 3,
+            "dev_accuracy": 0.876303062869425,
+            "train_loss": 0.2915560201037292,
+            "collapsed": false
+          },
+          {
+            "epoch": 4,
+            "dev_accuracy": 0.8595378828586782,
+            "train_loss": 0.2781925696201849,
+            "collapsed": false
+          },
+          {
+            "epoch": 5,
+            "dev_accuracy": 0.6507254164427727,
+            "train_loss": 0.26758533534161777,
+            "collapsed": false
+          },
+          {
+            "epoch": 6,
+            "dev_accuracy": 0.8279419666845782,
+            "train_loss": 0.25823838130126986,
+            "collapsed": false
+          },
+          {
+            "epoch": 7,
+            "dev_accuracy": 0.8886620096722192,
+            "train_loss": 0.23787446793340222,
+            "collapsed": false
+          },
+          {
+            "epoch": 8,
+            "dev_accuracy": 0.8855454056958625,
+            "train_loss": 0.23158929963325797,
+            "collapsed": false
+          },
+          {
+            "epoch": 9,
+            "dev_accuracy": 0.8837184309511016,
+            "train_loss": 0.2270803640734097,
+            "collapsed": false
+          },
+          {
+            "epoch": 10,
+            "dev_accuracy": 0.8932831810854379,
+            "train_loss": 0.22394373133446477,
+            "collapsed": false
+          },
+          {
+            "epoch": 11,
+            "dev_accuracy": 0.8516926383664697,
+            "train_loss": 0.21913884673053036,
+            "collapsed": false
+          },
+          {
+            "epoch": 12,
+            "dev_accuracy": 0.8950026867275658,
+            "train_loss": 0.214520462900012,
+            "collapsed": false
+          },
+          {
+            "epoch": 13,
+            "dev_accuracy": 0.8900591080064482,
+            "train_loss": 0.21082973713295158,
+            "collapsed": false
+          },
+          {
+            "epoch": 14,
+            "dev_accuracy": 0.8900591080064482,
+            "train_loss": 0.20940946890855835,
+            "collapsed": false
+          },
+          {
+            "epoch": 15,
+            "dev_accuracy": 0.8689951638903816,
+            "train_loss": 0.20581605673181338,
+            "collapsed": false
+          },
+          {
+            "epoch": 16,
+            "dev_accuracy": 0.8891993551853842,
+            "train_loss": 0.19266523544833214,
+            "collapsed": false
+          },
+          {
+            "epoch": 17,
+            "dev_accuracy": 0.9000537345513165,
+            "train_loss": 0.18922049541618302,
+            "collapsed": false
+          },
+          {
+            "epoch": 18,
+            "dev_accuracy": 0.8980118216012897,
+            "train_loss": 0.18650858587086977,
+            "collapsed": false
+          },
+          {
+            "epoch": 19,
+            "dev_accuracy": 0.9008060182697475,
+            "train_loss": 0.18417402357941254,
+            "collapsed": false
+          },
+          {
+            "epoch": 20,
+            "dev_accuracy": 0.8989790435249866,
+            "train_loss": 0.18244027927159917,
+            "collapsed": false
+          },
+          {
+            "epoch": 21,
+            "dev_accuracy": 0.8885545405695863,
+            "train_loss": 0.17970421779785417,
+            "collapsed": false
+          },
+          {
+            "epoch": 22,
+            "dev_accuracy": 0.8907039226222461,
+            "train_loss": 0.1783318755257492,
+            "collapsed": false
+          },
+          {
+            "epoch": 23,
+            "dev_accuracy": 0.8971520687802257,
+            "train_loss": 0.16949546231633503,
+            "collapsed": false
+          },
+          {
+            "epoch": 24,
+            "dev_accuracy": 0.9017732401934444,
+            "train_loss": 0.1683885956279362,
+            "collapsed": false
+          },
+          {
+            "epoch": 25,
+            "dev_accuracy": 0.8995163890381516,
+            "train_loss": 0.16674897075838013,
+            "collapsed": false
+          },
+          {
+            "epoch": 26,
+            "dev_accuracy": 0.8988715744223535,
+            "train_loss": 0.16445056655006712,
+            "collapsed": false
+          },
+          {
+            "epoch": 27,
+            "dev_accuracy": 0.9006985491671144,
+            "train_loss": 0.16287453783610795,
+            "collapsed": false
+          },
+          {
+            "epoch": 28,
+            "dev_accuracy": 0.9002686727565825,
+            "train_loss": 0.15787395466529858,
+            "collapsed": false
+          },
+          {
+            "epoch": 29,
+            "dev_accuracy": 0.9020956475013434,
+            "train_loss": 0.15711191572742766,
+            "collapsed": false
+          },
+          {
+            "epoch": 30,
+            "dev_accuracy": 0.9017732401934444,
+            "train_loss": 0.15598661451617474,
+            "collapsed": false
+          }
+        ],
+        "best_dev_accuracy": 0.9020956475013434,
+        "best_epoch": 29,
+        "dev_majority": 0.5155292853304675,
+        "failed": false,
+        "train_rows": 172750,
+        "dev_rows": 9305,
+        "train_calls": 5700
+      },
+      "b_training": {
+        "history": [
+          {
+            "epoch": 1,
+            "dev_accuracy": 0.8249328318108544,
+            "train_loss": 0.26040795184958687,
+            "collapsed": false
+          },
+          {
+            "epoch": 2,
+            "dev_accuracy": 0.8507254164427727,
+            "train_loss": 0.18865172293146076,
+            "collapsed": false
+          }
+        ],
+        "best_dev_accuracy": 0.8507254164427727,
+        "best_epoch": 2,
+        "dev_majority": 0.5155292853304675,
+        "failed": false,
+        "train_rows": 172750,
+        "dev_rows": 9305,
+        "train_calls": 5700
+      },
+      "layer_weights": [
+        0.0696706622838974,
+        0.06762611120939255,
+        0.06601925194263458,
+        0.06631001085042953,
+        0.07237311452627182,
+        0.09054657816886902,
+        0.10954046249389648,
+        0.10252758115530014,
+        0.09530991315841675,
+        0.08277637511491776,
+        0.0678369477391243,
+        0.057921409606933594,
+        0.0515415258705616
+      ],
+      "benchmark": {
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "rows": 500,
+        "gpu_batch_size": 32,
+        "gpu_seconds": 1.2920144430008804,
+        "gpu_utterances_per_second": 386.9925779147496,
+        "cpu_threads": 2,
+        "cpu_interop_threads": 1,
+        "cpu_dtype": "float32",
+        "cpu_batch_size": 1,
+        "cpu_seconds": 111.25024396499975,
+        "cpu_seconds_per_utterance": 0.22250048792999952,
+        "estimated_official_val_cpu_minutes": 415.13770203832763,
+        "reference_l2_ensemble_minutes": 85.3,
+        "sample_ids": [
+          "651e5500835c8a556d7e297d\t17",
+          "651e4a554767d37510dadb37\t9",
+          "651e496f5d60e22224166fb1\t13",
+          "651e4e712e98ee7120968f07\t8",
+          "651e4c8ad24efd3f59d01718\t20",
+          "651e4c5b48bae9075037986d\t28",
+          "651e4aaacb7c8f4a6a1ff943\t38",
+          "651e4a3786dc055ca8bf45ab\t32",
+          "651e5550bfd63782eb386432\t14",
+          "651e53b5e498f89fe5678100\t9",
+          "651e4a1fb7503416e5f162e8\t35",
+          "651e54776f6c84c1ff30cd85\t35",
+          "651e5029d029fc04ba3a6f2f\t23",
+          "651e498789e4964417c980f1\t12",
+          "651e498789e4964417c98019\t0",
+          "651e4a1fb7503416e5f16690\t0",
+          "651e4c3e8c3bda5f9fa38a85\t14",
+          "651e4c754428de718c773bfe\t7",
+          "651e51ef7838b79d6d2aebcd\t25",
+          "651e5494386c2a48273e4c11\t10",
+          "651e496f5d60e22224167050\t21",
+          "651e53ef4fa9386629280e9b\t34",
+          "651e4bfaf12d88de38d4960c\t45",
+          "651e551aaa666596ee75f925\t27",
+          "651e53b5e498f89fe56780ed\t19",
+          "651e5029d029fc04ba3a6e70\t39",
+          "651e4c3e8c3bda5f9fa38b44\t1",
+          "651e50ebf615d4163143bab7\t5",
+          "651e54776f6c84c1ff30cd58\t14",
+          "651e4e89429d02dab45a2949\t8",
+          "651e464d69a4f266f0626bf1\t17",
+          "651e4b6d304f68a2e7021df3\t7",
+          "651e5029d029fc04ba3a6f97\t2",
+          "651e4f531e44dfea6eb05ba2\t15",
+          "651e4e89429d02dab45a2912\t22",
+          "651e4b6d304f68a2e7021bf8\t21",
+          "651e4c3e8c3bda5f9fa388f7\t5",
+          "651e4f531e44dfea6eb05aaf\t23",
+          "651e4a3786dc055ca8bf45ab\t13",
+          "651e4a1fb7503416e5f1657b\t44",
+          "651e4f9dddc447a0099457a7\t37",
+          "651e4a1fb7503416e5f167cf\t26",
+          "651e4f853f2c336d2bb09d6a\t6",
+          "651e4f531e44dfea6eb05e5a\t13",
+          "651e5494386c2a48273e4c72\t47",
+          "651e4dfb2795332cde28ef5b\t4",
+          "651e49aac10cdef4499a98b4\t18",
+          "651e51057f04b45fc969e52d\t21",
+          "651e537c201879a4721c61e5\t11",
+          "651e4a6ede6495f4e9d36c5e\t7",
+          "651e4f9dddc447a009945732\t17",
+          "651e4a0693f80b92304ff2b7\t1",
+          "651e53b5e498f89fe567826f\t25",
+          "651e4eec06e0639ca45eb02b\t42",
+          "651e54cf6032e904f5dcebf3\t13",
+          "651e54b0918cf05edbac4a1e\t60",
+          "651e4f853f2c336d2bb09e86\t20",
+          "651e545d85c12f9c1b91f3cb\t26",
+          "651e4be244870884abc4779f\t14",
+          "651e49ec1d10874a0f4ecd20\t13",
+          "651e49c0c74dffea21f0f5ef\t21",
+          "651e553ba8f14bddba4c1060\t47",
+          "651e4c5b48bae90750379bed\t10",
+          "651e4eec06e0639ca45eadb8\t59",
+          "651e4a0693f80b92304ff2e9\t5",
+          "651e4c754428de718c773bfe\t16",
+          "651e4a3786dc055ca8bf4546\t8",
+          "651e4f9dddc447a0099457a7\t50",
+          "651e4e89429d02dab45a2912\t29",
+          "651e50ebf615d4163143bcc3\t13",
+          "651e54e7af7ab8d7995ab412\t45",
+          "651e4f853f2c336d2bb09f82\t26",
+          "651e4baacf5885969118c339\t15",
+          "651e4f9dddc447a009945378\t3",
+          "651e4f6d06957f3443ecfc3a\t22",
+          "651e4c3e8c3bda5f9fa386dd\t6",
+          "651e553ba8f14bddba4c13d6\t13",
+          "651e4dfb2795332cde28f04e\t23",
+          "651e5550bfd63782eb38671a\t18",
+          "651e5500835c8a556d7e2d60\t10",
+          "651e49ec1d10874a0f4ecd8e\t14",
+          "651e5494386c2a48273e4f55\t64",
+          "651e54e7af7ab8d7995ab389\t36",
+          "651e4bc5df6bf0d825aa525e\t6",
+          "651e537c201879a4721c60f5\t5",
+          "651e4c8ad24efd3f59d01718\t14",
+          "651e4baacf5885969118c3ca\t14",
+          "651e51057f04b45fc969e699\t22",
+          "651e4f9dddc447a0099457a7\t6",
+          "651e4dfb2795332cde28f21d\t12",
+          "651e5500835c8a556d7e29e3\t9",
+          "651e5564a4f19e4ec6c9ff96\t24",
+          "651e53da81ad054c479598bb\t9",
+          "651e4c3e8c3bda5f9fa38b1f\t13",
+          "651e5564a4f19e4ec6c9fe69\t0",
+          "651e4f3cbd89bfb121b46938\t31",
+          "651e49c0c74dffea21f0f903\t16",
+          "651e4c5b48bae90750379c21\t1",
+          "651e498789e4964417c980f1\t33",
+          "651e4f2166d8da7dcba97657\t32",
+          "651e4ffdc97a3f0ef3c6a0f4\t5",
+          "651e4dfb2795332cde28f061\t24",
+          "651e49d83f1c5e4f25eecbe1\t13",
+          "651e4c3e8c3bda5f9fa3872e\t33",
+          "651e53ef4fa938662928119e\t29",
+          "651e4f2166d8da7dcba97541\t14",
+          "651e4c3e8c3bda5f9fa387f1\t19",
+          "651e551aaa666596ee75fd74\t36",
+          "651e51ef7838b79d6d2aea0d\t12",
+          "651e4fcea6a4bdae3d84c866\t6",
+          "651e5500835c8a556d7e2b97\t42",
+          "651e51057f04b45fc969e4bf\t15",
+          "651e4b1829d82455557a1f54\t12",
+          "651e4dfb2795332cde28ef5b\t28",
+          "651e4aaacb7c8f4a6a1ff94a\t3",
+          "651e4c8ad24efd3f59d017fe\t15",
+          "651e53ef4fa9386629280e9b\t42",
+          "651e539031ce2800caf0295f\t19",
+          "651e4dfb2795332cde28eea8\t7",
+          "651e54776f6c84c1ff30cc4b\t20",
+          "651e5029d029fc04ba3a7256\t7",
+          "651e545d85c12f9c1b91f738\t6",
+          "651e4ffdc97a3f0ef3c69fcf\t27",
+          "651e4f853f2c336d2bb09eb6\t16",
+          "651e4c3e8c3bda5f9fa38b19\t14",
+          "651e4aaacb7c8f4a6a1ff8f2\t26",
+          "651e5258be98814e96ca2b2e\t1",
+          "651e51d797589376a420b398\t2",
+          "651e4a1fb7503416e5f16551\t3",
+          "651e49c0c74dffea21f0f661\t14",
+          "651e4a554767d37510dad95b\t30",
+          "651e4b1829d82455557a239a\t29",
+          "651e54cf6032e904f5dcebac\t4",
+          "651e4b6d304f68a2e7021df3\t28",
+          "651e5550bfd63782eb38658c\t3",
+          "651e5029d029fc04ba3a6f6a\t10",
+          "651e54776f6c84c1ff30d0b5\t44",
+          "651e49d83f1c5e4f25eecad5\t13",
+          "651e4fb51952d0ca070e6a81\t5",
+          "651e4fb51952d0ca070e683c\t20",
+          "651e54776f6c84c1ff30d0b5\t10",
+          "651e51a03d1ebd880beea105\t1",
+          "651e537c201879a4721c5f03\t18",
+          "651e4d9be84a30cdf982d0c7\t12",
+          "651e53b5e498f89fe56782ce\t20",
+          "651e4932d392f1f6bd521113\t29",
+          "651e5550bfd63782eb386575\t31",
+          "651e4a6ede6495f4e9d368a3\t0",
+          "651e5550bfd63782eb386636\t16",
+          "651e539031ce2800caf0284c\t22",
+          "651e4dfb2795332cde28f04e\t13",
+          "651e5500835c8a556d7e2b20\t7",
+          "651e4f531e44dfea6eb05ba2\t10",
+          "651e4a554767d37510dadb6e\t6",
+          "651e4eec06e0639ca45eb02b\t63",
+          "651e508f2acb389901367e81\t16",
+          "651e4b6d304f68a2e7021d55\t16",
+          "651e50ebf615d4163143bcf8\t3",
+          "651e464d69a4f266f062696c\t12",
+          "651e4dfb2795332cde28eec4\t6",
+          "651e51ef7838b79d6d2aea58\t17",
+          "651e4bc5df6bf0d825aa5609\t18",
+          "651e5258be98814e96ca2a6b\t9",
+          "651e4a3786dc055ca8bf4821\t46",
+          "651e54cf6032e904f5dceb35\t4",
+          "651e4f08d163a62ed3b439fb\t10",
+          "651e5500835c8a556d7e292d\t28",
+          "651e5258be98814e96ca2a6b\t8",
+          "651e5494386c2a48273e4f55\t53",
+          "651e4bfaf12d88de38d496dd\t1",
+          "651e4f9dddc447a0099454d4\t1",
+          "651e4baacf5885969118c24f\t38",
+          "651e539031ce2800caf02977\t6",
+          "651e537c201879a4721c5f6b\t20",
+          "651e464d69a4f266f0626888\t4",
+          "651e5494386c2a48273e4a29\t15",
+          "651e4f3cbd89bfb121b46938\t22",
+          "651e51d797589376a420aff8\t18",
+          "651e494aaf1b6ab3ae0e57c9\t26",
+          "651e4a554767d37510dadb6e\t27",
+          "651e4f853f2c336d2bb09ede\t8",
+          "651e4f2166d8da7dcba97224\t27",
+          "651e4c8ad24efd3f59d0140e\t2",
+          "651e49d83f1c5e4f25eec80d\t28",
+          "651e4c8ad24efd3f59d0147c\t19",
+          "651e53ef4fa938662928119e\t41",
+          "651e4a0693f80b92304ff260\t18",
+          "651e4a1fb7503416e5f162ba\t9",
+          "651e51d797589376a420af33\t12",
+          "651e49ec1d10874a0f4eccb7\t17",
+          "651e537c201879a4721c6021\t41",
+          "651e4a6ede6495f4e9d36cbd\t11",
+          "651e4a6ede6495f4e9d36d9d\t26",
+          "651e553ba8f14bddba4c0fe2\t9",
+          "651e51b884f721c55a6dc362\t26",
+          "651e53b5e498f89fe567825a\t3",
+          "651e4baacf5885969118c403\t49",
+          "651e4dfb2795332cde28ef88\t8",
+          "651e537c201879a4721c5e3a\t28",
+          "651e5494386c2a48273e4e4a\t22",
+          "651e5029d029fc04ba3a6f9d\t8",
+          "651e4c3e8c3bda5f9fa387ea\t4",
+          "651e539031ce2800caf02977\t1",
+          "651e5564a4f19e4ec6ca00e4\t6",
+          "651e4bfaf12d88de38d498fd\t4",
+          "651e4f2166d8da7dcba9737e\t32",
+          "651e4ffdc97a3f0ef3c69fcf\t0",
+          "651e553ba8f14bddba4c14ad\t5",
+          "651e4f9dddc447a0099454b7\t1",
+          "651e50c72f06ed4a6e31e063\t8",
+          "651e5272f98a6671a3fee1ef\t4",
+          "651e50ebf615d4163143bb23\t23",
+          "651e4a6ede6495f4e9d36b51\t14",
+          "651e4c8ad24efd3f59d0185d\t4",
+          "651e4c5b48bae907503799da\t10",
+          "651e49d83f1c5e4f25eecad5\t46",
+          "651e4f531e44dfea6eb05b2d\t4",
+          "651e496f5d60e22224166cf1\t36",
+          "651e54776f6c84c1ff30cd41\t4",
+          "651e53b5e498f89fe567834b\t2",
+          "651e4c754428de718c773a53\t25",
+          "651e54776f6c84c1ff30cd41\t13",
+          "651e4c3e8c3bda5f9fa38b40\t10",
+          "651e4932d392f1f6bd520e17\t5",
+          "651e49ec1d10874a0f4ecd8c\t17",
+          "651e54cf6032e904f5dced43\t29",
+          "651e49d83f1c5e4f25eec8ac\t27",
+          "651e4c5b48bae90750379c01\t20",
+          "651e49ec1d10874a0f4ecc53\t3",
+          "651e498789e4964417c980cc\t8",
+          "651e4f3cbd89bfb121b46be2\t9",
+          "651e49ec1d10874a0f4ecd8c\t8",
+          "651e5258be98814e96ca2ce3\t31",
+          "651e4c754428de718c773e7a\t6",
+          "651e4e89429d02dab45a2949\t27",
+          "651e553ba8f14bddba4c139c\t5",
+          "651e51b884f721c55a6dc83f\t15",
+          "651e4c3e8c3bda5f9fa38895\t48",
+          "651e539031ce2800caf0295f\t36",
+          "651e4a8805085d58eeeb16fa\t13",
+          "651e545d85c12f9c1b91f221\t7",
+          "651e545d85c12f9c1b91f36f\t12",
+          "651e51a03d1ebd880beea37c\t11",
+          "651e4c8ad24efd3f59d0159d\t27",
+          "651e51a03d1ebd880beea39d\t16",
+          "651e5013d7e77fe70c0afda8\t32",
+          "651e4be244870884abc476d8\t28",
+          "651e4a1fb7503416e5f1673e\t0",
+          "651e4a1fb7503416e5f167dc\t12",
+          "651e553ba8f14bddba4c0f97\t43",
+          "651e508f2acb389901367b9f\t14",
+          "651e4f6d06957f3443ecfc20\t3",
+          "651e5029d029fc04ba3a7018\t5",
+          "651e5013d7e77fe70c0aff7a\t19",
+          "651e51a03d1ebd880bee9fb1\t4",
+          "651e49c0c74dffea21f0f893\t21",
+          "651e5550bfd63782eb386237\t3",
+          "651e551aaa666596ee75fb8c\t39",
+          "651e5500835c8a556d7e2cc2\t14",
+          "651e4a3786dc055ca8bf447e\t12",
+          "651e49d83f1c5e4f25eec955\t9",
+          "651e4ffdc97a3f0ef3c6a205\t6",
+          "651e4f531e44dfea6eb05b4d\t52",
+          "651e4a554767d37510dad95b\t6",
+          "651e4c8ad24efd3f59d01899\t20",
+          "651e4be244870884abc47743\t6",
+          "651e4be244870884abc476d8\t15",
+          "651e537c201879a4721c61e5\t15",
+          "651e50ebf615d4163143ba6a\t13",
+          "651e4aaacb7c8f4a6a1ffa1b\t12",
+          "651e5029d029fc04ba3a6f2f\t20",
+          "651e4be244870884abc474cb\t1",
+          "651e4e89429d02dab45a29ae\t3",
+          "651e51057f04b45fc969e6a4\t8",
+          "651e4c8ad24efd3f59d018c4\t22",
+          "651e4a0693f80b92304ff17b\t45",
+          "651e50c72f06ed4a6e31e1d1\t2",
+          "651e53b5e498f89fe567825a\t38",
+          "651e4a3786dc055ca8bf4458\t33",
+          "651e49c0c74dffea21f0f6e3\t17",
+          "651e551aaa666596ee75fad3\t7",
+          "651e539031ce2800caf029f4\t28",
+          "651e494aaf1b6ab3ae0e5630\t18",
+          "651e4a1fb7503416e5f1659c\t16",
+          "651e4c754428de718c773d68\t25",
+          "651e4baacf5885969118c46f\t15",
+          "651e5013d7e77fe70c0afda2\t20",
+          "651e51b884f721c55a6dc84d\t4",
+          "651e51b884f721c55a6dc669\t1",
+          "651e4c3e8c3bda5f9fa38895\t16",
+          "651e4ffdc97a3f0ef3c6a090\t27",
+          "651e49d83f1c5e4f25eec8ac\t11",
+          "651e4baacf5885969118c403\t17",
+          "651e4f9dddc447a00994579e\t1",
+          "651e464d69a4f266f062690f\t16",
+          "651e4fcea6a4bdae3d84c52b\t0",
+          "651e4dfb2795332cde28ef88\t18",
+          "651e50ebf615d4163143bd6f\t1",
+          "651e4eec06e0639ca45eac74\t32",
+          "651e5029d029fc04ba3a6f9d\t0",
+          "651e53da81ad054c479596fb\t29",
+          "651e553ba8f14bddba4c10a5\t10",
+          "651e51d797589376a420af33\t57",
+          "651e4b6d304f68a2e7021b9f\t0",
+          "651e4be244870884abc47689\t39",
+          "651e4f08d163a62ed3b438d1\t9",
+          "651e4c3e8c3bda5f9fa38a56\t20",
+          "651e49d83f1c5e4f25eec8ac\t1",
+          "651e545d85c12f9c1b91f4af\t5",
+          "651e539031ce2800caf02a67\t23",
+          "651e49d83f1c5e4f25eec966\t3",
+          "651e4f2166d8da7dcba974c5\t17",
+          "651e49c0c74dffea21f0f961\t8",
+          "651e49c0c74dffea21f0f6d1\t22",
+          "651e545d85c12f9c1b91f738\t48",
+          "651e51b884f721c55a6dc3ec\t34",
+          "651e51ef7838b79d6d2aeb06\t11",
+          "651e537c201879a4721c5fbc\t0",
+          "651e4b6d304f68a2e7021d2b\t16",
+          "651e49c0c74dffea21f0f910\t42",
+          "651e5258be98814e96ca2a6b\t19",
+          "651e4a0693f80b92304ff2e9\t26",
+          "651e4be244870884abc475b5\t14",
+          "651e49ec1d10874a0f4eccad\t6",
+          "651e54776f6c84c1ff30cfde\t8",
+          "651e49ec1d10874a0f4ecc87\t2",
+          "651e5550bfd63782eb38630b\t7",
+          "651e4c754428de718c773d17\t9",
+          "651e4ffdc97a3f0ef3c6a298\t1",
+          "651e4a6ede6495f4e9d36acb\t33",
+          "651e53ef4fa938662928132a\t14",
+          "651e4c8ad24efd3f59d017df\t6",
+          "651e545d85c12f9c1b91f46e\t7",
+          "651e54776f6c84c1ff30cfcf\t25",
+          "651e49aac10cdef4499a9695\t1",
+          "651e54b0918cf05edbac4adb\t34",
+          "651e4a0693f80b92304ff344\t33",
+          "651e5029d029fc04ba3a6e70\t20",
+          "651e551aaa666596ee75fe0b\t5",
+          "651e545d85c12f9c1b91f738\t15",
+          "651e53ef4fa93866292810f8\t21",
+          "651e5272f98a6671a3fee4ea\t17",
+          "651e4f2166d8da7dcba9767e\t22",
+          "651e4dfb2795332cde28ed38\t9",
+          "651e4bfaf12d88de38d49a1e\t5",
+          "651e553ba8f14bddba4c13d1\t6",
+          "651e4f2166d8da7dcba97516\t21",
+          "651e4c754428de718c773e97\t5",
+          "651e4dfb2795332cde28efac\t13",
+          "651e4fcea6a4bdae3d84c866\t16",
+          "651e4a8805085d58eeeb16a5\t7",
+          "651e5500835c8a556d7e2cbc\t7",
+          "651e4f08d163a62ed3b43a6b\t3",
+          "651e50ebf615d4163143be94\t15",
+          "651e4f2166d8da7dcba9767e\t9",
+          "651e49ec1d10874a0f4ece0c\t14",
+          "651e4932d392f1f6bd520f41\t10",
+          "651e51057f04b45fc969e428\t13",
+          "651e54cf6032e904f5dce8f0\t15",
+          "651e53ef4fa9386629280f52\t24",
+          "651e4a3786dc055ca8bf451f\t15",
+          "651e4a0693f80b92304ff0ea\t34",
+          "651e539031ce2800caf028bb\t11",
+          "651e4c3e8c3bda5f9fa3884a\t23",
+          "651e5258be98814e96ca2932\t23",
+          "651e4a8805085d58eeeb16fa\t22",
+          "651e4f6d06957f3443ecf8fb\t14",
+          "651e49ec1d10874a0f4eccad\t24",
+          "651e4c8ad24efd3f59d016ca\t26",
+          "651e4f9dddc447a009945320\t28",
+          "651e4eec06e0639ca45eac74\t14",
+          "651e4b6d304f68a2e7021d53\t19",
+          "651e50c72f06ed4a6e31e063\t13",
+          "651e539031ce2800caf02b0f\t15",
+          "651e4f08d163a62ed3b43b8f\t17",
+          "651e54b0918cf05edbac4760\t8",
+          "651e551aaa666596ee75fc27\t28",
+          "651e537c201879a4721c5f03\t6",
+          "651e4932d392f1f6bd520e4c\t0",
+          "651e553ba8f14bddba4c135f\t19",
+          "651e53da81ad054c47959675\t2",
+          "651e4f08d163a62ed3b43a59\t0",
+          "651e553ba8f14bddba4c119c\t12",
+          "651e4a3786dc055ca8bf470f\t2",
+          "651e4a8805085d58eeeb1904\t13",
+          "651e4dfb2795332cde28ef5b\t1",
+          "651e4a6ede6495f4e9d3696a\t25",
+          "651e4a3786dc055ca8bf487a\t38",
+          "651e4b6d304f68a2e7021bf8\t19",
+          "651e4e712e98ee7120968ca7\t0",
+          "651e4e89429d02dab45a2d2e\t6",
+          "651e5494386c2a48273e4dae\t22",
+          "651e4c3e8c3bda5f9fa3872e\t10",
+          "651e4f531e44dfea6eb05e22\t11",
+          "651e4bfaf12d88de38d499af\t52",
+          "651e5564a4f19e4ec6c9ff92\t5",
+          "651e54e7af7ab8d7995ab34e\t4",
+          "651e4dfb2795332cde28ef01\t3",
+          "651e51ef7838b79d6d2aebcd\t29",
+          "651e51d797589376a420aff8\t13",
+          "651e4d9be84a30cdf982d022\t30",
+          "651e49c0c74dffea21f0f6e3\t31",
+          "651e4a1fb7503416e5f1657b\t14",
+          "651e54e7af7ab8d7995ab34e\t7",
+          "651e4e89429d02dab45a28da\t33",
+          "651e49aac10cdef4499a98f8\t12",
+          "651e464d69a4f266f0626a2f\t2",
+          "651e4f3cbd89bfb121b46cc7\t10",
+          "651e4a8805085d58eeeb16a5\t3",
+          "651e54e7af7ab8d7995ab4aa\t7",
+          "651e4dfb2795332cde28edc3\t7",
+          "651e4baacf5885969118c24f\t40",
+          "651e50c72f06ed4a6e31e15e\t16",
+          "651e53b5e498f89fe567826f\t1",
+          "651e5029d029fc04ba3a7196\t37",
+          "651e53ef4fa9386629280e9b\t12",
+          "651e4932d392f1f6bd520f7d\t12",
+          "651e4a0693f80b92304ff17b\t36",
+          "651e5564a4f19e4ec6ca016f\t24",
+          "651e4b1829d82455557a2163\t10",
+          "651e53b5e498f89fe5678100\t23",
+          "651e498789e4964417c9837e\t17",
+          "651e4f9dddc447a009945320\t7",
+          "651e545d85c12f9c1b91f65f\t36",
+          "651e53b5e498f89fe5678295\t14",
+          "651e4b1829d82455557a20c3\t5",
+          "651e508f2acb389901367a9b\t32",
+          "651e4a6ede6495f4e9d36d46\t49",
+          "651e49aac10cdef4499a979b\t4",
+          "651e4f2166d8da7dcba97229\t36",
+          "651e4f853f2c336d2bb09f82\t14",
+          "651e49aac10cdef4499a9695\t11",
+          "651e4f853f2c336d2bb09cdf\t20",
+          "651e4c3e8c3bda5f9fa386e1\t20",
+          "651e5550bfd63782eb386650\t1",
+          "651e4c8ad24efd3f59d018c4\t4",
+          "651e553ba8f14bddba4c1350\t4",
+          "651e4a3786dc055ca8bf45c3\t18",
+          "651e4f6d06957f3443ecfc0e\t10",
+          "651e53da81ad054c47959a02\t7",
+          "651e5013d7e77fe70c0afda2\t18",
+          "651e54cf6032e904f5dce8af\t11",
+          "651e4b6d304f68a2e7021aac\t12",
+          "651e4c754428de718c773da3\t22",
+          "651e4baacf5885969118c339\t5",
+          "651e4bc5df6bf0d825aa5578\t26",
+          "651e5013d7e77fe70c0b0046\t13",
+          "651e496f5d60e22224166f33\t49",
+          "651e4bc5df6bf0d825aa56af\t3",
+          "651e4f3cbd89bfb121b46bfc\t21",
+          "651e5013d7e77fe70c0aff92\t16",
+          "651e553ba8f14bddba4c13d1\t18",
+          "651e4c8ad24efd3f59d0185d\t21",
+          "651e4dfb2795332cde28f04e\t12",
+          "651e4b6d304f68a2e7021dc7\t0",
+          "651e4a554767d37510dad8bc\t7",
+          "651e4fb51952d0ca070e694f\t3",
+          "651e49aac10cdef4499a960b\t7",
+          "651e51a03d1ebd880beea306\t3",
+          "651e4c5b48bae90750379854\t53",
+          "651e4bfaf12d88de38d497cf\t4",
+          "651e51057f04b45fc969e5e6\t22",
+          "651e4f6d06957f3443ecf923\t4",
+          "651e4f08d163a62ed3b43c8c\t6",
+          "651e4c5b48bae90750379bad\t3",
+          "651e4c5b48bae9075037986d\t9",
+          "651e496f5d60e22224166ed6\t15",
+          "651e553ba8f14bddba4c0fed\t2",
+          "651e4be244870884abc477c7\t3",
+          "651e4ffdc97a3f0ef3c69f8c\t22",
+          "651e4f3cbd89bfb121b46a82\t6",
+          "651e4e89429d02dab45a29ae\t7",
+          "651e49ec1d10874a0f4ecd20\t4",
+          "651e4e89429d02dab45a29d9\t15",
+          "651e4f6d06957f3443ecfa1d\t7",
+          "651e5500835c8a556d7e2b20\t41",
+          "651e5258be98814e96ca2af6\t22",
+          "651e4ffdc97a3f0ef3c69fd1\t17",
+          "651e5550bfd63782eb386505\t18",
+          "651e537c201879a4721c61e5\t10",
+          "651e4f3cbd89bfb121b46be4\t27",
+          "651e496f5d60e22224167076\t35",
+          "651e4a6ede6495f4e9d3696a\t20",
+          "651e4dfb2795332cde28ed5e\t21",
+          "651e4bc5df6bf0d825aa5609\t12",
+          "651e545d85c12f9c1b91f569\t29",
+          "651e4dfb2795332cde28efac\t3",
+          "651e49aac10cdef4499a95f5\t6",
+          "651e4a554767d37510dad8bc\t27",
+          "651e54776f6c84c1ff30d0b5\t54",
+          "651e508f2acb389901367e81\t3",
+          "651e4f6d06957f3443ecf7d2\t11",
+          "651e4f2166d8da7dcba974f8\t2",
+          "651e50c72f06ed4a6e31e00c\t34",
+          "651e5494386c2a48273e4e2c\t63",
+          "651e5258be98814e96ca2ba0\t22",
+          "651e4a6ede6495f4e9d369ba\t2",
+          "651e4fb51952d0ca070e6a81\t33",
+          "651e545d85c12f9c1b91f3b7\t10",
+          "651e4be244870884abc476d8\t7"
+        ]
+      },
+      "seeds": {
+        "split": 42,
+        "a": 1,
+        "b": 42
+      },
+      "sampled_calls": 6000,
+      "dev_calls": 300,
+      "holdout_calls": 1500,
+      "sampled_rows": 182055,
+      "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+      "label_source": "provided_json",
+      "official_val_evaluated": false
+    },
+    "seed": 42,
+    "train_rows": 172750,
+    "eval_rows": 45471,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "status": "completed",
+    "success_criteria_met": false,
+    "notes": "label_source=provided_json; epoch selection on D only; collapse failure if any epoch D <= majority"
+  }
+}

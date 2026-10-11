@@ -1,0 +1,189 @@
+
+===== attempt 1 2026-10-11T16:34:59+00:00 colab-a commit=e7842113bc5c111dfd957eaf7aa7a1fba15bdcf5 =====
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 20439.11it/s]
+features: 50/7500 calls
+features: 100/7500 calls
+features: 150/7500 calls
+features: 200/7500 calls
+features: 250/7500 calls
+features: 300/7500 calls
+features: 350/7500 calls
+features: 400/7500 calls
+features: 450/7500 calls
+features: 500/7500 calls
+features: 550/7500 calls
+features: 600/7500 calls
+features: 650/7500 calls
+features: 700/7500 calls
+features: 750/7500 calls
+features: 800/7500 calls
+features: 850/7500 calls
+features: 900/7500 calls
+features: 950/7500 calls
+features: 1000/7500 calls
+features: 1050/7500 calls
+features: 1100/7500 calls
+features: 1150/7500 calls
+features: 1200/7500 calls
+features: 1250/7500 calls
+features: 1300/7500 calls
+features: 1350/7500 calls
+features: 1400/7500 calls
+features: 1450/7500 calls
+features: 1500/7500 calls
+features: 1550/7500 calls
+features: 1600/7500 calls
+features: 1650/7500 calls
+features: 1700/7500 calls
+features: 1750/7500 calls
+features: 1800/7500 calls
+features: 1850/7500 calls
+features: 1900/7500 calls
+features: 1950/7500 calls
+features: 2000/7500 calls
+features: 2050/7500 calls
+features: 2100/7500 calls
+features: 2150/7500 calls
+features: 2200/7500 calls
+features: 2250/7500 calls
+features: 2300/7500 calls
+features: 2350/7500 calls
+features: 2400/7500 calls
+features: 2450/7500 calls
+features: 2500/7500 calls
+features: 2550/7500 calls
+features: 2600/7500 calls
+features: 2650/7500 calls
+features: 2700/7500 calls
+features: 2750/7500 calls
+features: 2800/7500 calls
+features: 2850/7500 calls
+features: 2900/7500 calls
+features: 2950/7500 calls
+features: 3000/7500 calls
+features: 3050/7500 calls
+features: 3100/7500 calls
+features: 3150/7500 calls
+features: 3200/7500 calls
+features: 3250/7500 calls
+features: 3300/7500 calls
+features: 3350/7500 calls
+features: 3400/7500 calls
+features: 3450/7500 calls
+features: 3500/7500 calls
+features: 3550/7500 calls
+features: 3600/7500 calls
+features: 3650/7500 calls
+features: 3700/7500 calls
+features: 3750/7500 calls
+features: 3800/7500 calls
+features: 3850/7500 calls
+features: 3900/7500 calls
+features: 3950/7500 calls
+features: 4000/7500 calls
+features: 4050/7500 calls
+features: 4100/7500 calls
+features: 4150/7500 calls
+features: 4200/7500 calls
+features: 4250/7500 calls
+features: 4300/7500 calls
+features: 4350/7500 calls
+features: 4400/7500 calls
+features: 4450/7500 calls
+features: 4500/7500 calls
+features: 4550/7500 calls
+features: 4600/7500 calls
+features: 4650/7500 calls
+features: 4700/7500 calls
+features: 4750/7500 calls
+features: 4800/7500 calls
+features: 4850/7500 calls
+features: 4900/7500 calls
+features: 4950/7500 calls
+features: 5000/7500 calls
+features: 5050/7500 calls
+features: 5100/7500 calls
+features: 5150/7500 calls
+features: 5200/7500 calls
+features: 5250/7500 calls
+features: 5300/7500 calls
+features: 5350/7500 calls
+features: 5400/7500 calls
+features: 5450/7500 calls
+features: 5500/7500 calls
+features: 5550/7500 calls
+features: 5600/7500 calls
+features: 5650/7500 calls
+features: 5700/7500 calls
+features: 5750/7500 calls
+features: 5800/7500 calls
+features: 5850/7500 calls
+features: 5900/7500 calls
+features: 5950/7500 calls
+features: 6000/7500 calls
+features: 6050/7500 calls
+features: 6100/7500 calls
+features: 6150/7500 calls
+features: 6200/7500 calls
+features: 6250/7500 calls
+features: 6300/7500 calls
+features: 6350/7500 calls
+features: 6400/7500 calls
+features: 6450/7500 calls
+features: 6500/7500 calls
+features: 6550/7500 calls
+features: 6600/7500 calls
+features: 6650/7500 calls
+features: 6700/7500 calls
+features: 6750/7500 calls
+features: 6800/7500 calls
+features: 6850/7500 calls
+features: 6900/7500 calls
+features: 6950/7500 calls
+features: 7000/7500 calls
+features: 7050/7500 calls
+features: 7100/7500 calls
+features: 7150/7500 calls
+features: 7200/7500 calls
+features: 7250/7500 calls
+features: 7300/7500 calls
+features: 7350/7500 calls
+features: 7400/7500 calls
+features: 7450/7500 calls
+features: 7500/7500 calls
+a: {'epoch': 1, 'dev_accuracy': 0.8003224073078989, 'train_loss': 0.3752849592672588, 'collapsed': False}
+a: {'epoch': 2, 'dev_accuracy': 0.6984416980118217, 'train_loss': 0.3168999598612834, 'collapsed': False}
+a: {'epoch': 3, 'dev_accuracy': 0.876303062869425, 'train_loss': 0.2915560201037292, 'collapsed': False}
+a: {'epoch': 4, 'dev_accuracy': 0.8595378828586782, 'train_loss': 0.2781925696201849, 'collapsed': False}
+a: {'epoch': 5, 'dev_accuracy': 0.6507254164427727, 'train_loss': 0.26758533534161777, 'collapsed': False}
+a: {'epoch': 6, 'dev_accuracy': 0.8279419666845782, 'train_loss': 0.25823838130126986, 'collapsed': False}
+a: {'epoch': 7, 'dev_accuracy': 0.8886620096722192, 'train_loss': 0.23787446793340222, 'collapsed': False}
+a: {'epoch': 8, 'dev_accuracy': 0.8855454056958625, 'train_loss': 0.23158929963325797, 'collapsed': False}
+a: {'epoch': 9, 'dev_accuracy': 0.8837184309511016, 'train_loss': 0.2270803640734097, 'collapsed': False}
+a: {'epoch': 10, 'dev_accuracy': 0.8932831810854379, 'train_loss': 0.22394373133446477, 'collapsed': False}
+a: {'epoch': 11, 'dev_accuracy': 0.8516926383664697, 'train_loss': 0.21913884673053036, 'collapsed': False}
+a: {'epoch': 12, 'dev_accuracy': 0.8950026867275658, 'train_loss': 0.214520462900012, 'collapsed': False}
+a: {'epoch': 13, 'dev_accuracy': 0.8900591080064482, 'train_loss': 0.21082973713295158, 'collapsed': False}
+a: {'epoch': 14, 'dev_accuracy': 0.8900591080064482, 'train_loss': 0.20940946890855835, 'collapsed': False}
+a: {'epoch': 15, 'dev_accuracy': 0.8689951638903816, 'train_loss': 0.20581605673181338, 'collapsed': False}
+a: {'epoch': 16, 'dev_accuracy': 0.8891993551853842, 'train_loss': 0.19266523544833214, 'collapsed': False}
+a: {'epoch': 17, 'dev_accuracy': 0.9000537345513165, 'train_loss': 0.18922049541618302, 'collapsed': False}
+a: {'epoch': 18, 'dev_accuracy': 0.8980118216012897, 'train_loss': 0.18650858587086977, 'collapsed': False}
+a: {'epoch': 19, 'dev_accuracy': 0.9008060182697475, 'train_loss': 0.18417402357941254, 'collapsed': False}
+a: {'epoch': 20, 'dev_accuracy': 0.8989790435249866, 'train_loss': 0.18244027927159917, 'collapsed': False}
+a: {'epoch': 21, 'dev_accuracy': 0.8885545405695863, 'train_loss': 0.17970421779785417, 'collapsed': False}
+a: {'epoch': 22, 'dev_accuracy': 0.8907039226222461, 'train_loss': 0.1783318755257492, 'collapsed': False}
+a: {'epoch': 23, 'dev_accuracy': 0.8971520687802257, 'train_loss': 0.16949546231633503, 'collapsed': False}
+a: {'epoch': 24, 'dev_accuracy': 0.9017732401934444, 'train_loss': 0.1683885956279362, 'collapsed': False}
+a: {'epoch': 25, 'dev_accuracy': 0.8995163890381516, 'train_loss': 0.16674897075838013, 'collapsed': False}
+a: {'epoch': 26, 'dev_accuracy': 0.8988715744223535, 'train_loss': 0.16445056655006712, 'collapsed': False}
+a: {'epoch': 27, 'dev_accuracy': 0.9006985491671144, 'train_loss': 0.16287453783610795, 'collapsed': False}
+a: {'epoch': 28, 'dev_accuracy': 0.9002686727565825, 'train_loss': 0.15787395466529858, 'collapsed': False}
+a: {'epoch': 29, 'dev_accuracy': 0.9020956475013434, 'train_loss': 0.15711191572742766, 'collapsed': False}
+a: {'epoch': 30, 'dev_accuracy': 0.9017732401934444, 'train_loss': 0.15598661451617474, 'collapsed': False}
+/usr/local/lib/python3.13/dist-packages/torch/nn/functional.py:6409: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  key_padding_mask = _canonical_mask(
+b: {'epoch': 1, 'dev_accuracy': 0.8249328318108544, 'train_loss': 0.26040795184958687, 'collapsed': False}
+b: {'epoch': 2, 'dev_accuracy': 0.8507254164427727, 'train_loss': 0.18865172293146076, 'collapsed': False}
