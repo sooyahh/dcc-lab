@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M3-FINAL-001",
+    "mission": 3,
+    "title": "M3 최종 학습: ROBERTA-003 설정 Training 100% seed 42·43·44 + TF-IDF 앙상블 (학습 로그 ipynb, 제출용 .pt)",
+    "hypothesis": "최종 제출용 학습(가설 검증 아님). 80:20 분석에서 정한 구성(ROBERTA-003 seed 평균 0.55 + TF-IDF 0.45, 80% 모델 공식 Val 0.6529)을 Training 전체로 다시 학습한다",
+    "change_vs_baseline": "M3-ROBERTA-003 설정 그대로(klue/roberta-large rev 28d9112, 앞 256토큰, BCE pos_weight + 1.0 soft-F1, lr 1e-5, warmup 10%, 실효 batch 16, fp16, 3 epochs), 학습 데이터만 Training 전체 29,200건. TF-IDF는 P0 설정으로 전체 학습. 앙상블 가중치 0.55/0.45는 80:20 홀드아웃에서 미리 고정(공식 Val로 선택하지 않음)",
+    "baseline": {
+      "exp_id": "M3-ENSTF-002",
+      "metric": "official Val macro_f1 (80% models, same ensemble rule)",
+      "value": 0.6529
+    },
+    "branch": "m3/final-train-kit",
+    "commit": "",
+    "command": "python scripts/m3_final/colab_lab_run.py --out \"$LAB_OUT\" --work \"$LAB_WORK\"",
+    "uses_official_val": true,
+    "success_criteria": "실행 완료(학습 붕괴 없음, 세 seed 모두 3 epoch, .pt·앙상블 .pt·실행된 노트북이 LAB_OUT에 있음). 공식 Val은 채점 전용: 앙상블 Macro F1을 기록하고 80% 모델 앙상블(0.6529)과 비교만 한다. 판정 0.5 고정, 후처리 없음",
+    "gpu": "L4",
+    "budget_hours": 6,
+    "priority": 0,
+    "notes": "사용자 요청(2026-10-11)으로 직접 큐에 넣는 최종 학습 작업. 코드는 PR #140(scripts/m3_final). 대용량 파일은 로컬 작업 디스크에 쓰고 산출물만 Drive로 복사. seed별 best.ckpt는 .pt 내보낸 직후 삭제(M3_DROP_LAB_CKPT=1). 공식 Val은 학습·가중치·선택에 쓰지 않음"
+  },
+  "commit": "80836a114b4689583552a3db70dbdf7e3412bedd",
+  "submitted_at": "2026-10-11T19:33:42+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
