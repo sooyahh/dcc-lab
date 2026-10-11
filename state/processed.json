@@ -155,7 +155,8 @@
   "66908f139112b6b6cb959a0b867f8ef28a80ba40",
   "31445fb0e3f8d5b8b995efc3639802045270de8e",
   "935057c25d8e5208888f52998d719474438e3364",
-  "c080f1775808644af66138781348959aa5ad24d9"
+  "c080f1775808644af66138781348959aa5ad24d9",
+  "0f2e70e6f5bf47827dd91fe9e2a826face108468"
  ],
  "merged_prs": [
   67,
@@ -294,6 +295,7 @@
   "Judge M3-FINAL-002 2026-10-11: 채택 (공식 Val 채점 앙상블 Macro F1 0.6534 vs 80% 모델 0.6529, 3 seed 완료). 팀 로그 PR #162. 코드 PR #140은 exp(<EXP>) 형식이 아니고 사용자 관리라 라벨·닫기 안 함. No new proposal: open proposals 3 (#38·#39·#40) >= max_workers 2",
   "Judge M3-DEBERTA-001 2026-10-11: 보류 (학습 전 AutoTokenizer TypeError, 코드/환경 문제; 재시도 횟수 소진 아님). 팀 로그 PR #163, 코드 PR #161 lab-fix + 수정 지시, 이슈 #39 유지. PR #162 (log M3-FINAL-002) merged (merge-gate success, behind 0). No new proposal: open proposals 3 (#38·#39·#40) >= max_workers 2",
   "Judge M3-ROB5F-002 2026-10-11: 채택 (OOF Macro F1 0.6420, fold 평균 ≥0.635; ROB5F-001 0.6412 대비 편차 이내). 팀 로그 PR #167. 코드 PR·proposal 이슈 없음. No new proposal: M3 새 축 소진, 세부 기법은 seed 편차 초과 근거 없음, ROB5F-003 실행 중",
-  "Merge PR #167 (log M3-ROB5F-002) 2026-10-11: merge-gate success. Propose: M2-MIX-001 이슈 #41 (M2 SpeakerCNNLarge + Mixup, T4 5h, 공식 Val 미사용)"
+  "Merge PR #167 (log M3-ROB5F-002) 2026-10-11: merge-gate success. Propose: M2-MIX-001 이슈 #41 (M2 SpeakerCNNLarge + Mixup, T4 5h, 공식 Val 미사용)",
+  "Review PR #168 (M2-MIX-001) 2026-10-11: PASS (MINOR 3), 큐 등록 03_M2-MIX-001 @0f2e70e"
  ]
 }
