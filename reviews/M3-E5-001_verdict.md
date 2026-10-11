@@ -1,6 +1,6 @@
-VERDICT: 재시도
-- 실행 문제: attempt 3회 모두 러너 중단(max_attempts 초과)으로 종료됐고, metrics.json이 없다(결과 아님).
-- 진행: seed 42 epoch 1 완료(holdout Macro F1 0.6225, 빈 예측 232건, 학습 붕괴 없음), epoch 2 도중 중단. epoch당 약 25분.
-- 코드 오류·OOM 징후는 없다(리뷰 PASS, loss 정상 감소). ckpt_last에서 이어 가므로 남은 약 2 epoch만 필요하다.
-- 같은 실험의 첫 재시도이므로 명세 변경 없이 `--force`로 재제출한다(예산 3h로 충분).
-- 가설(E5가 ROBERTA-003 0.6441 대비 +0.01)은 아직 미판정이다.
+VERDICT: 보류
+- 실행 문제: 재시도(1회 허용분)까지 총 2차례 모두 러너 중단(max_attempts 초과)으로 종료됐고, metrics.json이 없다. 재시도 한도에 도달해 더 제출하지 않는다.
+- 진행: seed 42 epoch 1 holdout Macro F1 0.6225(빈 예측 232건, ECE 0.051, Brier 0.088), epoch 2 0.6328(빈 예측 231건, ECE 0.046, Brier 0.084). epoch 3 미완료. 학습 붕괴 없음, epoch당 약 25분.
+- 기준 비교: ROBERTA-003 0.6441, 성공 기준 0.6541. epoch 2까지 0.6328로 미달 추세이고 약한 증상(오심 0.335, 두통 0.516)도 개선 없음.
+- 미완료 결과(3 epoch 종료·holdout_probs 없음)라 채택·기각 근거로 쓰지 않는다. 같은 조건의 XLMR-001도 같은 구간에서 중단 반복 중이라 large 인코더 교체 계열은 우선순위를 낮춘다.
+- 필요하면 사용자가 재제출을 결정한다(ckpt_last에서 이어 가며 남은 약 1 epoch). 코드 PR #143은 열어 둔다.
