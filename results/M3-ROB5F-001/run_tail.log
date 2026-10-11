@@ -1,0 +1,106 @@
+
+===== attempt 1 2026-10-11T10:27:30+00:00 colab-a commit=ff925d38c75042fa5e2700241cb47a91cdb8c1e1 =====
+saved /content/lab_work/M3-ROB5F-001/train.csv: 29200 rows (rows.json 순서)
+saved /content/lab_work/M3-ROB5F-001/holdout42.npz: train 23408 / val 5792  (기존 기준: 23,408 / 5,792)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 5459.94it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: klue/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[fold0] ep1 loss 0.9785 F1 0.6175 allzero 5.20% (5min) | 고열:0.642 구토:0.583 두통:0.520 복통:0.802 어지러움:0.668 열상:0.845 오심:0.289 전신쇠약:0.526 호흡곤란:0.684
+[fold0] ep2 loss 0.8542 F1 0.6358 allzero 3.67% (5min) | 고열:0.647 구토:0.588 두통:0.529 복통:0.800 어지러움:0.681 열상:0.878 오심:0.342 전신쇠약:0.561 호흡곤란:0.696
+[fold0] ep3 loss 0.7990 F1 0.6403 allzero 2.80% (5min) | 고열:0.654 구토:0.590 두통:0.531 복통:0.804 어지러움:0.677 열상:0.882 오심:0.354 전신쇠약:0.566 호흡곤란:0.704
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 5522.41it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: klue/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[fold1] ep1 loss 0.9907 F1 0.6339 allzero 3.09% (5min) | 고열:0.680 구토:0.591 두통:0.492 복통:0.799 어지러움:0.661 열상:0.877 오심:0.353 전신쇠약:0.563 호흡곤란:0.690
+[fold1] ep2 loss 0.8538 F1 0.6376 allzero 4.73% (5min) | 고열:0.691 구토:0.590 두통:0.499 복통:0.801 어지러움:0.668 열상:0.889 오심:0.355 전신쇠약:0.562 호흡곤란:0.684
+[fold1] ep3 loss 0.7997 F1 0.6432 allzero 2.83% (5min) | 고열:0.690 구토:0.585 두통:0.501 복통:0.804 어지러움:0.672 열상:0.885 오심:0.360 전신쇠약:0.597 호흡곤란:0.695
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 4485.18it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: klue/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[fold2] ep1 loss 0.9893 F1 0.6259 allzero 5.31% (5min) | 고열:0.665 구토:0.564 두통:0.534 복통:0.797 어지러움:0.643 열상:0.859 오심:0.320 전신쇠약:0.573 호흡곤란:0.678
+[fold2] ep2 loss 0.8549 F1 0.6407 allzero 4.44% (5min) | 고열:0.684 구토:0.575 두통:0.550 복통:0.800 어지러움:0.659 열상:0.868 오심:0.377 전신쇠약:0.567 호흡곤란:0.686
+[fold2] ep3 loss 0.8020 F1 0.6382 allzero 2.58% (5min) | 고열:0.678 구토:0.567 두통:0.538 복통:0.815 어지러움:0.663 열상:0.873 오심:0.361 전신쇠약:0.575 호흡곤란:0.672
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 5116.82it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: klue/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[fold3] ep1 loss 0.9825 F1 0.6259 allzero 7.67% (5min) | 고열:0.677 구토:0.565 두통:0.511 복통:0.802 어지러움:0.654 열상:0.877 오심:0.335 전신쇠약:0.544 호흡곤란:0.668
+[fold3] ep2 loss 0.8578 F1 0.6396 allzero 4.43% (5min) | 고열:0.679 구토:0.578 두통:0.546 복통:0.805 어지러움:0.673 열상:0.897 오심:0.326 전신쇠약:0.565 호흡곤란:0.686
+[fold3] ep3 loss 0.8029 F1 0.6394 allzero 2.49% (5min) | 고열:0.680 구토:0.575 두통:0.529 복통:0.812 어지러움:0.675 열상:0.892 오심:0.337 전신쇠약:0.562 호흡곤란:0.693
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 3955.12it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: klue/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[fold4] ep1 loss 0.9865 F1 0.6369 allzero 3.62% (5min) | 고열:0.661 구토:0.578 두통:0.533 복통:0.804 어지러움:0.674 열상:0.870 오심:0.336 전신쇠약:0.583 호흡곤란:0.693
+[fold4] ep2 loss 0.8612 F1 0.6472 allzero 3.77% (5min) | 고열:0.672 구토:0.586 두통:0.520 복통:0.806 어지러움:0.689 열상:0.889 오심:0.364 전신쇠약:0.590 호흡곤란:0.708
+[fold4] ep3 loss 0.8068 F1 0.6446 allzero 2.45% (5min) | 고열:0.675 구토:0.587 두통:0.511 복통:0.814 어지러움:0.681 열상:0.881 오심:0.352 전신쇠약:0.591 호흡곤란:0.708
+fold F1: ['0.6403', '0.6432', '0.6382', '0.6394', '0.6446'] | OOF macro F1 = 0.6412
