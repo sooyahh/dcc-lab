@@ -21,6 +21,9 @@
   - 끝난 단계(특징 추출, 각 seed 학습 등)는 `LAB_OUT`의 산출물을 보고 건너뛰고
   - 학습 중이던 것은 `LAB_OUT/ckpt_last.pt`(모델·옵티마이저·스케줄러·epoch·RNG 상태)에서 이어 간다
   - epoch마다 `ckpt_last.pt`를 임시 파일에 쓴 뒤 `os.replace`로 교체
+  - **큰 파일(체크포인트 등 100MB 이상)은 Drive에 직접 쓰지 않는다**: `LAB_WORK`(로컬)에 `torch.save` → `shutil.copyfile`로 `LAB_OUT` 안의 임시 이름(`<이름>.tmp`)에 복사 → 크기 확인 → `os.replace`. 복사·교체는 `OSError` 시 최대 5회 재시도(2·4·8·16·32초). Drive FUSE에 수 GB를 바로 쓰면 임시 파일이 사라지는 오류가 난다(M3-XLMR-001, 2026-10-11)
+  - epoch이 20분보다 길면 epoch 안에서도 약 15분마다 `ckpt_last.pt`(step 위치·샘플 순서 포함)를 저장해 그 step부터 이어 간다. 런타임이 약 85분 간격으로 끊긴 사례가 있어(M3-E5-001, 2026-10-11) epoch 단위 저장만으로는 끝나지 않을 수 있다
+  - `ckpt_last.pt`에 옵티마이저 상태까지 담으면 large 모델은 수 GB가 된다. 재개에 필요한 것만 담고, `best.ckpt`는 모델 가중치만(fp16 허용) 저장한다
 - 종료 시 `LAB_OUT/metrics.json`을 반드시 쓴다:
   ```json
   {"exp_id": "...", "primary_metric": {"name": "accuracy", "value": 0.8731, "split": "internal_holdout"},
