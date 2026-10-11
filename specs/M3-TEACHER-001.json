@@ -12,10 +12,10 @@
     "metric": "fold 0 macro_f1 (같은 분할, thr 0.5)",
     "value": null
   },
-  "command": "cd scripts/lab/m3_structured && python make_split.py --rows_json \"$DCC_RUN_ROOT/lab/M3-ROBERTA-003/rows.json\" --split_json \"$DCC_RUN_ROOT/lab/M3-ROBERTA-003/split.json\" --data_csv \"$LAB_WORK/train.csv\" --out \"$LAB_WORK/holdout42.npz\" && python train_llm_teacher.py --data_csv \"$LAB_WORK/train.csv\" --folds 0 --gate 0.635 --revision 5a5aad571a4e651a916d0bc74a768bb9f9ef05f3 --out_dir \"$LAB_OUT\"",
+  "command": "python -m pip uninstall -y torchao ; cd scripts/lab/m3_structured && python make_split.py --rows_json \"$DCC_RUN_ROOT/lab/M3-ROBERTA-003/rows.json\" --split_json \"$DCC_RUN_ROOT/lab/M3-ROBERTA-003/split.json\" --data_csv \"$LAB_WORK/train.csv\" --out \"$LAB_WORK/holdout42.npz\" && python train_llm_teacher.py --data_csv \"$LAB_WORK/train.csv\" --folds 0 --gate 0.635 --revision 5a5aad571a4e651a916d0bc74a768bb9f9ef05f3 --out_dir \"$LAB_OUT\"",
   "success_criteria": "fold 0 epoch 2 Macro F1이 M3-ROB5F-001 fold 0보다 +0.01 이상이면 go(fold 1~4 후속 작업). epoch 1 < 0.635면 스크립트가 중단하고 gate_fail로 기록(기각). threshold >= 0.5 고정, 후처리 없음",
   "gpu": "A100",
   "budget_hours": 5,
   "priority": 1,
-  "notes": "제출물에 8B를 넣지 않음(교사 전용, OOF 확률을 RoBERTa 학생 증류에 사용). Qwen2.5-1.5B(M3-QWEN-001, -0.031) 실패와의 차이: 8B 한국어 특화, 1024토큰, head lr 분리. 메모리 부족 시 --load_in_4bit. 공식 Val 미사용"
+  "notes": "제출물에 8B를 넣지 않음(교사 전용, OOF 확률을 RoBERTa 학생 증류에 사용). Qwen2.5-1.5B(M3-QWEN-001, -0.031) 실패와의 차이: 8B 한국어 특화, 1024토큰, head lr 분리. 메모리 부족 시 --load_in_4bit. 공식 Val 미사용 | 재시도: Colab torchao 0.10.0이 peft(>=0.16.0 요구)와 충돌해 get_peft_model에서 ImportError. 명령 앞에서 torchao 제거(미사용)"
 }
