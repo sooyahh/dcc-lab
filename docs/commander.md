@@ -13,7 +13,7 @@
 - 팀 자동 판정 `merge-gate/verdict` = 병합-가능
 - `reviews/` 최신 검토 PASS
 - 판정 = 채택 (또는 로그 전용 PR)
-- 2026-10-12 23:59 KST 이후 자동 병합 금지
+- `config.json`의 `freeze_at`(현재 2026-10-14 09:00 KST, 제출 마감 10/14 17:00) 이후 자동 병합 금지
 
 ## 판정 원칙
 - 선별은 내부 hold-out/CV. 공식 Val은 최종 후보만 (미션당 예산 `config.json`)

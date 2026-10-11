@@ -1,6 +1,6 @@
 {
   "team_repo": "eigensinn-dcc2026/prelim",
-  "freeze_at": "2026-10-12T23:59:00+09:00",
+  "freeze_at": "2026-10-14T09:00:00+09:00",
   "official_val_budget_per_mission": 6,
   "default_budget_hours": 6,
   "max_attempts": 3,
