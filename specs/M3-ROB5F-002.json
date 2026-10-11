@@ -1,0 +1,21 @@
+{
+  "exp_id": "M3-ROB5F-002",
+  "mission": 3,
+  "branch": "sooyah/lab-m3-kfold-teacher",
+  "commit": "ff925d38c75042fa5e2700241cb47a91cdb8c1e1",
+  "uses_official_val": false,
+  "title": "klue/roberta-large ROBERTA-003 설정 5-fold OOF seed 43 (Training 100% 사용, fold 앙상블·교사 비교 기준)",
+  "hypothesis": "M3-ROB5F-001과 같은 설정에서 seed(=fold 분할·초기화)만 43로 바꿔 앙상블 멤버 5개와 OOF를 더한다. seed 앙상블 이득(+0.008, M3-ENS 실측)을 fold 앙상블에 더하기 위함",
+  "change_vs_baseline": "M3-ROB5F-001 대비 --seed 43만 변경 (KFold random_state도 43라 fold 분할이 다름. 샘플별 OOF는 여전히 유효)",
+  "baseline": {
+    "exp_id": "M3-ROB5F-001",
+    "metric": "oof_macro_f1 (5-fold, thr 0.5)",
+    "value": null
+  },
+  "command": "cd scripts/lab/m3_structured && python make_split.py --rows_json \"$DCC_RUN_ROOT/lab/M3-ROBERTA-003/rows.json\" --split_json \"$DCC_RUN_ROOT/lab/M3-ROBERTA-003/split.json\" --data_csv \"$LAB_WORK/train.csv\" --out \"$LAB_WORK/holdout42.npz\" && python train_structured.py --data_csv \"$LAB_WORK/train.csv\" --mode kfold --bf16 --batch 8 --accum 2 --seed 43 --no_pairwise --lambda_set 0 --lambda_bce 1 --head_lr 1e-5 --revision 28d9112 --out_dir \"$LAB_OUT\"",
+  "success_criteria": "실행 완료: 5개 fold 모두 3 epoch, fold{k}.pt·fold{k}_probs.npy·oof_probs.npy·metrics.json 생성, 학습 붕괴 없음. 참고 기준: fold 평균 Macro F1 ≥ 0.635 (ROBERTA-003 0.6427 근처). threshold >= 0.5 고정, 후처리 없음",
+  "gpu": "A100",
+  "budget_hours": 4,
+  "priority": 3,
+  "notes": "코드 scripts/lab/m3_structured (Claude Fable 제안 5의 재료, 검토는 reviews/). 러너 재시도 시 끝난 fold는 건너뜀. fold 모델 .pt 5개(각 약 1.4GB)가 LAB_OUT에 남음. 공식 Val 미사용"
+}
