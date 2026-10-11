@@ -56,7 +56,7 @@ def main() -> None:
     max_workers = int(json.loads((LAB / "config.json").read_text(encoding="utf-8")).get("max_workers", 1))
     hbs = read_heartbeats()
     live = {w for w, hb in hbs.items() if is_live(hb)}
-    rank = {"none": 0, "T4": 1, "L4": 2, "A100": 3}
+    rank = {"none": 0, "T4": 1, "L4": 2, "A100": 3, "H100": 4}
 
     def want(job: dict) -> str:
         g = str(job["spec"].get("gpu", "T4"))

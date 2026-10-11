@@ -191,7 +191,7 @@ def gpu() -> str:
     return _gpu
 
 
-GPU_RANK = {"none": 0, "T4": 1, "L4": 2, "A100": 3}
+GPU_RANK = {"none": 0, "T4": 1, "L4": 2, "A100": 3, "H100": 4}
 
 
 def gpu_rank(name: str) -> int:
@@ -200,7 +200,7 @@ def gpu_rank(name: str) -> int:
 
 
 def gpu_ok(want: str) -> bool:
-    """T4 jobs run on T4/L4/A100; L4 jobs need L4 or A100 (more GPU memory and system RAM)."""
+    """A job runs on its GPU or a bigger one (T4 < L4 < A100 < H100); spec gpu is the minimum."""
     return gpu_rank(gpu()) >= GPU_RANK.get(str(want).upper() if str(want).lower() != "none" else "none", 1)
 
 

@@ -87,7 +87,7 @@ def write_drive_pending() -> None:
     (drive / "status").mkdir(parents=True, exist_ok=True)
     (drive / "status" / "queue_pending.json").write_text(json.dumps(
         {"at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "count": len(pending),
-         "gpu": next((g for g in ("A100", "L4") if g in gpus), "T4")}, ensure_ascii=False), encoding="utf-8")
+         "gpu": next((g for g in ("H100", "A100", "L4") if g in gpus), "T4")}, ensure_ascii=False), encoding="utf-8")
 
 
 def ping_grokbot(event: str, **data) -> None:
