@@ -10,7 +10,7 @@
     "value": 0.9003
   },
   "branch": "sooyah/lab-m2-mix-001",
-  "commit": "",
+  "commit": "d9b902021717628c7601f60bf5caf20926d0d41b",
   "command": "PYTHONPATH=src python scripts/lab/m2-mix-001.py --output \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "주 지표 = H 발화 accuracy의 seed 평균 (B) − (A), 결과 보기 전 고정(α·epoch을 H로 고르지 않음, epoch 선택은 D만). 채택 조건 모두 충족: (1) seed 1·2 평균 (B) − (A) ≥ +0.3%p (2) seed 1·2 각각 (B) > (A) (3) 두 seed 확률 평균 기준 (B) vs (A) 발화 단위 paired McNemar 정확검정 p < 0.05 (4) H를 call_id 기준 5개 묶음(seed 42)으로 나눴을 때 두 seed 확률 평균 기준 5개 중 4개 이상에서 (B) > (A). metrics.json에 seed·갈래별 H accuracy, 클래스별 recall(대원/신고자), 혼동행렬, 묶음별 accuracy, McNemar 2×2 칸과 p값, 발화 길이 구간별(<1초, 1~3초, 3~6초, >6초) accuracy, epoch별 D accuracy·train loss, 멈춘 epoch·최고 epoch, H 확률의 ECE(15구간)·Brier, 두 seed 확률 평균 accuracy(진단용: (A) seed 앙상블 vs (B) seed 앙상블), 학습 통화·발화 수, split sha256 기록. 학습 붕괴(D accuracy가 다수 클래스 비율 이하) 시 실패로 기록. 추론 경로·모델 구조는 바뀌지 않으므로 추론 시간 측정은 하지 않는다",
