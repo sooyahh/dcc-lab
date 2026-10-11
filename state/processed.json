@@ -186,7 +186,8 @@
   146,
   147,
   148,
-  149
+  149,
+  152
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -249,6 +250,7 @@
   "M3-XLMR-001 failed 2026-10-11 00:17: 러너 중단 3회(max_attempts 초과, 실험 결과 아님; epoch 2 holdout Macro F1 0.6342), verdict 재시도; 명세 변경 없이 --force 재제출(재시도 1회 소진). 로그 PR 없음, 이슈 #34 유지. No new proposal: open proposals #34, #35 at max_workers 2",
   "Merge run 2026-10-11T04:3xZ: PR #148 (log M3-E5-001) merged (merge-gate success, behind 0). No new proposal: open proposals 1 (#34 XLMR-001 실행 중) < max_workers 2이나 M3 새 축(손실·보조목표·TAPT·LLM·앙상블·헤드·인코더 교체 KCELECTRA/E5/XLMR) 소진, units_left 79.89(>=40)이지만 세부 기법 변경은 KCBERT-004·006~010/KLUEBERT-001·ROBERTA-004~006 ±0.01 이내라 seed 편차 초과 근거 없음. M2 팀 결정(2026-10-04)으로 마무리, M1 헤드·임베딩·입력 길이 축 소진",
   "Merge run 2026-10-11T04:32Z: PR #149 (log M3-XLMR-001) merged (merge-gate success). No new proposal: open proposals 0 < max_workers 2이나 M3 새 축 소진(E5·XLMR 보류 포함), 세부 기법은 seed 편차 초과 근거 없음. M1 포화(공식 Val 98.13%). M2 남은 축(WavLM 미세조정)은 전체 데이터 학습·CPU 추론 비용상 동결(2026-10-12 23:59 KST) 전 제출 반영 불가",
-  "Propose run 2026-10-11T07:2xZ: No new proposal. open proposals 0 < max_workers 2, M3-E5-001 사용자 재큐로 colab-a 실행 중. units_left 79.06(>=40)이나 M3 새 축(손실·보조목표·TAPT·LLM·앙상블·헤드·인코더 교체 KCELECTRA 기각/E5·XLMR 보류) 소진, 세부 기법 변경은 KCBERT-004·006~010/KLUEBERT-001·ROBERTA-004~006 ±0.01 이내라 seed 편차 초과 근거 없음, 기존 ckpt 추론 앙상블은 ENS-001(+0.0028, 오류 겹침 8.2%)로 이득 근거 없음. M1 포화(공식 Val 98.13%), M2 팀 결정(2026-10-04)으로 마무리·WavLM 미세조정은 동결(2026-10-12 23:59 KST) 전 반영 불가"
+  "Propose run 2026-10-11T07:2xZ: No new proposal. open proposals 0 < max_workers 2, M3-E5-001 사용자 재큐로 colab-a 실행 중. units_left 79.06(>=40)이나 M3 새 축(손실·보조목표·TAPT·LLM·앙상블·헤드·인코더 교체 KCELECTRA 기각/E5·XLMR 보류) 소진, 세부 기법 변경은 KCBERT-004·006~010/KLUEBERT-001·ROBERTA-004~006 ±0.01 이내라 seed 편차 초과 근거 없음, 기존 ckpt 추론 앙상블은 ENS-001(+0.0028, 오류 겹침 8.2%)로 이득 근거 없음. M1 포화(공식 Val 98.13%), M2 팀 결정(2026-10-04)으로 마무리·WavLM 미세조정은 동결(2026-10-12 23:59 KST) 전 반영 불가",
+  "Merge run 2026-10-11: PR #152 (log M3-E5-001) merged (merge-gate success, behind 0)"
  ]
 }
