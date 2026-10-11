@@ -78,8 +78,9 @@ def main() -> None:
     busy = {job.get("worker") for job in running.values()}
     idle_live = [w for w in live if w not in busy]
     leftover = []
-    for job in sorted((json.loads((LAB / "queue" / n).read_text(encoding="utf-8")) for n in queued),
-                      key=lambda j: -rank.get(want(j), 1)):
+    # claim order (file name = priority prefix + id), not biggest-GPU-first: a new worker starts on the GPU of the
+    # job it will actually claim first, instead of an A100 for a later job that makes an earlier L4 job run on A100
+    for job in (json.loads((LAB / "queue" / n).read_text(encoding="utf-8")) for n in sorted(queued)):
         fit = next((w for w in idle_live if hb_rank(w) >= rank.get(want(job), 1)), None)
         if fit:
             idle_live.remove(fit)
