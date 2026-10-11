@@ -41,6 +41,7 @@ RUN_ROOT = Path(os.environ.get("LAB_RUN_ROOT", "/content/drive/MyDrive/dcc_runs/
 WORKER = os.environ.get("LAB_WORKER", "colab-" + socket.gethostname()[:8])
 KNOWN_WORKERS = ("colab-a", "colab-b")
 GIT_STATUS_EVERY_S = 15 * 60
+MAX_INTERRUPTIONS = 10                    # runtime-disconnect resumes allowed per job (separate from max_attempts)
 DATA_DIR = "대학부 데이터"
 
 
@@ -341,12 +342,23 @@ def finish(job: dict, state: str, **extra) -> None:
 def run_job(job: dict) -> None:
     spec = job["spec"]
     exp_id = spec["exp_id"]
-    attempts = job.get("attempts", 0) + 1
-    if attempts > job.get("max_attempts", 3):
-        finish(job, "failed", reason="max_attempts 초과 (반복 중단/오류)")
-        return
-    update_running(job["_name"], attempts=attempts, started_at=job.get("started_at") or now())
-    job["attempts"] = attempts
+    prev = job.get("attempts", 0)
+    if prev > 0:
+        # a job still in running/ with attempts>0 means the previous runner vanished (runtime disconnect);
+        # real failures go through finish() and leave running/. Count these separately, not as attempts.
+        interruptions = job.get("interruptions", 0) + 1
+        if interruptions > job.get("max_interruptions", MAX_INTERRUPTIONS):
+            finish(job, "failed", reason=f"연결 끊김 재개 {interruptions - 1}회 초과", interruptions=interruptions - 1)
+            return
+        attempts = prev
+    else:
+        interruptions, attempts = 0, 1
+        if attempts > job.get("max_attempts", 3):
+            finish(job, "failed", reason="max_attempts 초과 (반복 중단/오류)")
+            return
+    update_running(job["_name"], attempts=attempts, interruptions=interruptions,
+                   started_at=job.get("started_at") or now())
+    job["attempts"], job["interruptions"] = attempts, interruptions
 
     out = RUN_ROOT / exp_id
     out.mkdir(parents=True, exist_ok=True)
