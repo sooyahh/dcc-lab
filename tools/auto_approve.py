@@ -53,7 +53,7 @@ def problems(issue: dict, cu: dict) -> list[str]:
     gpu = str(spec.get("gpu", "T4"))
     gpu = "none" if gpu.lower() == "none" else gpu.upper()
     if gpu not in rates:
-        out.append(f"gpu={spec.get('gpu')} (자동 승인은 {'/'.join(rates)}만, A100 등은 사람 승인)")
+        out.append(f"gpu={spec.get('gpu')} (자동 승인은 {'/'.join(rates)}만, 그 밖은 사람 승인)")
     hours = float(spec.get("budget_hours") or 0)
     if not 0 < hours <= CFG["default_budget_hours"]:
         out.append(f"budget_hours={hours} (0 초과 {CFG['default_budget_hours']} 이하만)")
