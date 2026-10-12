@@ -11,7 +11,7 @@
       "value": 0.9133
     },
     "branch": "sooyah/lab-m2-ssl-003",
-    "commit": "9340ec698f6e3bcb1bee387b51ebc0edf0068309",
+    "commit": "52ee761bc79c9876babced80daf55782ca529c14",
     "command": "PYTHONPATH=src python scripts/lab/m2-ssl-003.py --output \"$LAB_OUT\"",
     "uses_official_val": false,
     "success_criteria": "주 지표 = H 1,500통화 전 발화의 accuracy(슬라이딩 창 추론, threshold 0.5), 결과 보기 전 고정(epoch 선택은 D만, H로 아무것도 고르지 않음). 채택(최종 앙상블 멤버로 진행) 조건: (1) H accuracy ≥ 0.918 (2) 학습 붕괴 없음(D accuracy가 다수 클래스 비율보다 높음). 진단(판정 참고): CNN 비교 — 현재 제출 CNN 3-seed 앙상블 $DCC_RUN_ROOT/lab/M2-SSL-003/cnn/m2_cnn_large_rerun_ensemble.pt(sha256 19ea482a80a2ceb2ea5b87981be0a381a11e01fd576b3ba6860ee5d7144e3246, 공식 Val 0.9149, metadata split_seed=42·test_size=0.2, 멤버 내부 검증 0.9143/0.9143/0.9150)를 submission/mission2의 단일 발화 추론 경로(자기 발화만 300프레임 패딩, 8kHz 40-mel, 멤버 softmax 평균)로 돌려 H 확률을 구해(멤버별 열도 저장). 분할 재현 확인: CNN 앙상블의 H accuracy가 0.93을 넘으면 H가 CNN 학습 통화와 겹쳤을 가능성이 있으니 cnn_split_suspect=true로 기록하고 CNN 비교 결과를 진단 무효로 표시. 그다음 CNN 단일·CNN 전체 평균·WavLM, 그리고 WavLM+CNN 확률 평균(가중치 1:1 고정)의 H accuracy, paired McNemar 2×2와 p값, call_id 기준 5개 묶음(seed 42)별 accuracy를 기록. 체크포인트가 없거나 split 재현 실패면 건너뛰고 사유 기록. metrics.json: H accuracy, 클래스별 recall(대원/신고자), 혼동행렬, 발화 길이 구간별(<0.5초, 0.5~1초, 1~3초, >3초) accuracy, 겹침 여부별 accuracy(겹침 = 같은 통화 이웃 발화와 시간이 겹침, 분석용 집계에만 쓰고 모델 입력에는 쓰지 않음), epoch별 D accuracy·train loss·소요 분, best epoch, 층 가중치 softmax 값, ECE(15구간)·Brier, 추론 시간(GPU 처리량 발화/초, CPU torch.set_num_threads(2) batch 1로 H에서 무작위 300발화 → 공식 Val 111,947발화 환산 분), 학습·D·H 통화/발화 수, split sha256, cnn_split_reproduced, revision",
@@ -20,7 +20,7 @@
     "priority": 0,
     "notes": "Training(서울) TL_/TS_ zip만 LAB_WORK로 복사·압축 해제해 사용, Validation 폴더는 읽지 않음. 입력은 음성 + startAt/endAt만(speaker는 정답으로만). M2 규정(2026-10-05): 모델 입력은 대상 발화 구간 파형뿐이고 같은 통화의 다른 발화로 만든 값(통화 단위 정규화·길이 비율·발화 순서·이웃 기반 트리밍)은 쓰지 않는다. 라벨은 제공된 JSON의 speaker 그대로(교정 금지, label_source=provided_json 기록). 파형 로드: 발화마다 wav에서 torchaudio.load(frame_offset, num_frames)로 구간만 읽고 16kHz로 resample. DataLoader num_workers는 os.cpu_count()에 맞춤. WavLM은 main() 시작 직후 로컬 경로 확인(없으면 고정 revision snapshot_download), 모델 준비 실패 시 데이터 준비 전에 실패. 재개: ckpt_last.pt(모델·옵티마이저·스케줄러·GradScaler·epoch·step·샘플러 epoch·RNG)를 LAB_WORK에 저장 후 LAB_OUT으로 .tmp 복사→크기 확인→os.replace(OSError 시 2·4·8·16·32초 재시도), epoch 안에서도 약 15분마다 저장해 그 step부터 이어 감. 학습 완료 시 train_done.json, H 평가 완료 시 h_eval_done.json으로 건너뜀. best.ckpt = D 최고 epoch 가중치(fp16) + emb_dim·win_sec·sr·revision·층 수·추론 규칙(stride 1.5초, 최대 8창, logit 평균)을 담아 제출 추론 코드가 그대로 쓸 수 있게 함. 확률 저장: H_probs.npy(열 = wavlm, 있으면 cnn_seed*, 열 이름은 H_probs_columns.json), 행 순서 = H_rows.txt의 '<call_id>\t<utt_idx>\t<startAt>\t<endAt>'. 이후 공식 Val 평가·앙상블은 별도 실험(M2-OFFVAL-ENS)에서 하므로 여기서는 하지 않는다. 시간: 15 epoch × (약 26,700통화/8 ≈ 3,340 step)이 예산 6시간을 넘을 것 같으면 첫 epoch 소요로 추정해 로그에 남기되 epoch 수는 바꾸지 말고 재개로 이어 간다(러너 시간 초과 시 같은 명령 재실행). 새 패키지 없음(transformers·torchaudio는 기존 requirements). 승인 시 Codex가 scripts/lab/m2-ssl-003.py로 구현(M2-SSL-002 PR #159의 WavLM 로드·zip 준비 코드 재사용 가능)"
   },
-  "commit": "9340ec698f6e3bcb1bee387b51ebc0edf0068309",
+  "commit": "52ee761bc79c9876babced80daf55782ca529c14",
   "submitted_at": "2026-10-12T17:39:37+09:00",
   "attempts": 0,
   "max_attempts": 3
