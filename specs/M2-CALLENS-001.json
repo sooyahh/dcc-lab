@@ -1,0 +1,21 @@
+{
+  "exp_id": "M2-CALLENS-001",
+  "mission": 2,
+  "title": "통화 구성이 다른 SpeakerCNNLarge 2모델 앙상블이 같은 통화 2-seed 앙상블보다 나은지",
+  "hypothesis": "같은 6,000통화를 보는 seed 앙상블은 초기값 다양성이 이미 포화됐다. 서로 다른 1,200통화를 뺀 4,800통화 모델 둘의 소프트보팅이 그 앙상블보다 holdout에서 0.3%p 이상 높고 McNemar p<0.05이면 통화 구성을 바꾼 3-fold로 확장한다.",
+  "change_vs_baseline": "모델·입력·패딩·threshold 0.5는 SpeakerCNNLarge 그대로. Arm A는 source 6,000통화를 seed 1·2로 학습하고, Arm B는 source에서 앞·뒤 1,200통화를 각각 뺀 4,800통화로 seed 1만 학습한다. holdout 1,500통화는 학습과 조기종료에 쓰지 않는다.",
+  "baseline": {
+    "exp_id": "M2-MIX-001",
+    "metric": "accuracy (same-split 2-seed soft vote)",
+    "value": 0.9051
+  },
+  "branch": "sooyah/lab-m2-callens-001",
+  "commit": "41c9b80",
+  "command": "python scripts/lab/m2-callens-001.py --out \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "내부 holdout 1,500통화에서 Arm B 정확도 - Arm A 정확도 >= 0.003 이고, 맞힌 여부가 갈린 발화의 양측 McNemar 정확검정 p < 0.05. 공식 Validation은 열지 않는다. 미달이면 91.49% 제출 모델을 유지한다.",
+  "gpu": "T4",
+  "budget_hours": 8,
+  "priority": 1,
+  "notes": "클라우드 스크립트 18bc703 위에 Colab 재개 드라이버를 추가했다. 캐시는 DCC_RUN_ROOT/m2_l2_spec 의 packed Training 스펙트로그램. 에폭 1회씩 저장하므로 런타임이 끊기면 같은 명령이 이어 간다. 큐에서 M2-SSL-005(priority 2)보다 앞선다. 현재 실행 중인 M2-SSL-004가 끝난 뒤 colab-a가 집는다."
+}
