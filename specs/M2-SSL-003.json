@@ -10,7 +10,7 @@
     "value": 0.9133
   },
   "branch": "sooyah/lab-m2-ssl-003",
-  "commit": "52ee761bc79c9876babced80daf55782ca529c14",
+  "commit": "",
   "command": "PYTHONPATH=src python scripts/lab/m2-ssl-003.py --output \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "주 지표 = H 1,500통화 전 발화의 accuracy(슬라이딩 창 추론, threshold 0.5), 결과 보기 전 고정(epoch 선택은 D만, H로 아무것도 고르지 않음). 채택(최종 앙상블 멤버로 진행) 조건: (1) H accuracy ≥ 0.918 (2) 학습 붕괴 없음(D accuracy가 다수 클래스 비율보다 높음). 진단(판정 참고): CNN 비교 — 현재 제출 CNN 3-seed 앙상블 $DCC_RUN_ROOT/lab/M2-SSL-003/cnn/m2_cnn_large_rerun_ensemble.pt(sha256 19ea482a80a2ceb2ea5b87981be0a381a11e01fd576b3ba6860ee5d7144e3246, 공식 Val 0.9149, metadata split_seed=42·test_size=0.2, 멤버 내부 검증 0.9143/0.9143/0.9150)를 submission/mission2의 단일 발화 추론 경로(자기 발화만 300프레임 패딩, 8kHz 40-mel, 멤버 softmax 평균)로 돌려 H 확률을 구해(멤버별 열도 저장). 분할 재현 확인: CNN 앙상블의 H accuracy가 0.93을 넘으면 H가 CNN 학습 통화와 겹쳤을 가능성이 있으니 cnn_split_suspect=true로 기록하고 CNN 비교 결과를 진단 무효로 표시. 그다음 CNN 단일·CNN 전체 평균·WavLM, 그리고 WavLM+CNN 확률 평균(가중치 1:1 고정)의 H accuracy, paired McNemar 2×2와 p값, call_id 기준 5개 묶음(seed 42)별 accuracy를 기록. 체크포인트가 없거나 split 재현 실패면 건너뛰고 사유 기록. metrics.json: H accuracy, 클래스별 recall(대원/신고자), 혼동행렬, 발화 길이 구간별(<0.5초, 0.5~1초, 1~3초, >3초) accuracy, 겹침 여부별 accuracy(겹침 = 같은 통화 이웃 발화와 시간이 겹침, 분석용 집계에만 쓰고 모델 입력에는 쓰지 않음), epoch별 D accuracy·train loss·소요 분, best epoch, 층 가중치 softmax 값, ECE(15구간)·Brier, 추론 시간(GPU 처리량 발화/초, CPU torch.set_num_threads(2) batch 1로 H에서 무작위 300발화 → 공식 Val 111,947발화 환산 분), 학습·D·H 통화/발화 수, split sha256, cnn_split_reproduced, revision",
