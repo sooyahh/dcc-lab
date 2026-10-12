@@ -1,0 +1,173 @@
+{
+  "exp_id": "M1-FUSE-001-OFFVAL",
+  "primary_metric": {
+    "name": "accuracy",
+    "value": 0.9829670329670329,
+    "split": "official_val"
+  },
+  "metrics": {
+    "accuracy": 0.9829670329670329,
+    "confusion_matrix_labels": [
+      "F",
+      "M"
+    ],
+    "confusion_matrix": [
+      [
+        1931,
+        28
+      ],
+      [
+        34,
+        1647
+      ]
+    ],
+    "recall_F": 0.9857069933639612,
+    "recall_M": 0.9797739440809042,
+    "n_samples": 3640,
+    "n_F": 1959,
+    "n_M": 1681,
+    "caller_duration_accuracy": {
+      "le20": {
+        "rows": 587,
+        "accuracy": 0.9744463373083475
+      },
+      "gt20_le40": {
+        "rows": 2060,
+        "accuracy": 0.9864077669902913
+      },
+      "gt40": {
+        "rows": 993,
+        "accuracy": 0.9808660624370594
+      }
+    },
+    "windows_per_call": {
+      "1": 898,
+      "2": 1937,
+      "3": 608,
+      "4": 197
+    },
+    "extraction_seconds": {
+      "xvector": 1355.365904150011,
+      "ecapa": 242.65090881802507
+    },
+    "extraction_seconds_per_call": {
+      "xvector": 0.3723532703708821,
+      "ecapa": 0.06666233758736953
+    },
+    "xvector_cache": {
+      "source": "reused",
+      "cache": "/content/drive/MyDrive/dcc_runs/lab/M1-XVEC-002-OFFVAL"
+    },
+    "paired_mcnemar": {
+      "table": [
+        [
+          3561,
+          11
+        ],
+        [
+          17,
+          51
+        ]
+      ],
+      "axes": [
+        "first correct/wrong",
+        "second correct/wrong"
+      ],
+      "exact_two_sided_p": 0.34492845088243484,
+      "csv_sha256": "e71b6703187b7298ed721e6f048ef01d867e0de71f6f627e956cf603e6cbd94e",
+      "csv": "/content/drive/MyDrive/dcc_runs/lab/M1-XVEC-002-OFFVAL/predictions.csv"
+    },
+    "diagnostic_c": {
+      "accuracy": 0.981043956043956,
+      "confusion_matrix_labels": [
+        "F",
+        "M"
+      ],
+      "confusion_matrix": [
+        [
+          1925,
+          34
+        ],
+        [
+          35,
+          1646
+        ]
+      ],
+      "recall_F": 0.9826442062276671,
+      "recall_M": 0.9791790600832838,
+      "n_samples": 3640,
+      "n_F": 1959,
+      "n_M": 1681
+    },
+    "diagnostic_h": {
+      "accuracy": 0.9813186813186813,
+      "confusion_matrix_labels": [
+        "F",
+        "M"
+      ],
+      "confusion_matrix": [
+        [
+          1929,
+          30
+        ],
+        [
+          38,
+          1643
+        ]
+      ],
+      "recall_F": 0.9846860643185299,
+      "recall_M": 0.9773944080904223,
+      "n_samples": 3640,
+      "n_F": 1959,
+      "n_M": 1681
+    },
+    "c_baseline_prediction_disagreements": 19,
+    "c_baseline_reproduced": false,
+    "fitting_performed": false,
+    "ckpt_sha256": "6e86e683539f3170aba78e581d31c6038dee24e6be11de3749c5ff9aeb61acef",
+    "model_revisions": {
+      "microsoft/wavlm-base-plus-sv": "1bfd64eca136543feb28c5ffaf05381c6af33121",
+      "speechbrain/spkrec-ecapa-voxceleb": "0f99f2d0ebe89ac095bcc5903c4dd8f72b367286"
+    },
+    "input_sha256": "a689272b1f4995b7e7a3e887180c9265bffeddc8687eefec7af2416c5f95a731",
+    "archive_sha256": {
+      "VL_서울_구급.zip": "51eed828136640209e5aeb37383b6d79c3aae53d3b9ea0d6d57bb17885295ec7",
+      "VS_서울_구급.zip": "ae069ef17a3a161edbdf443b684dff398eb744e64aad296d7393ce8fd146181e"
+    },
+    "sklearn_version": "1.6.1",
+    "baseline_accuracy": 0.9813186813186813,
+    "accuracy_gain": 0.0016483516483516425,
+    "fixed_success_threshold": 0.98434,
+    "fixed_success_correct_calls": 3583,
+    "correct_calls": 3578,
+    "success_criterion_met": false
+  },
+  "seed": 42,
+  "train_rows": 0,
+  "eval_rows": 3640,
+  "official_val": {
+    "accuracy": 0.9829670329670329,
+    "confusion_matrix_labels": [
+      "F",
+      "M"
+    ],
+    "confusion_matrix": [
+      [
+        1931,
+        28
+      ],
+      [
+        34,
+        1647
+      ]
+    ],
+    "recall_F": 0.9857069933639612,
+    "recall_M": 0.9797739440809042,
+    "n_samples": 3640,
+    "n_F": 1959,
+    "n_M": 1681
+  },
+  "fitting_performed": false,
+  "ckpt": "best.ckpt",
+  "notes": "Frozen equal probability fusion; no fitting, tuning or model selection. Cached XVEC timing is original extraction time. Candidate adoption is left to the commander."
+}
