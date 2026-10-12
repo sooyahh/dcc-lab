@@ -235,7 +235,9 @@
   167,
   169,
   170,
-  172
+  172,
+  176,
+  173
  ],
  "notes": [
   "M2-SSL-001 failures 2026-10-08 05:05~05:42: infra (data folder trashed), not an experiment result",
@@ -313,6 +315,7 @@
   "Review PR #168 (M2-MIX-001) 2026-10-11: PASS (MINOR 3), 큐 등록 03_M2-MIX-001 @0f2e70e",
   "Review PR #168 (M2-MIX-001) 2026-10-11 재검토: PASS (MINOR 2, 분할 ID를 JSON _id로 통일), 큐 재등록 03_M2-MIX-001 @d9b9020",
   "Judge M3-ROB5F-003 2026-10-11: 채택 (OOF Macro F1 0.6414, fold 평균 ≥0.635; 001·002·ROBERTA-003 대비 편차 이내). 팀 로그 PR #170. 코드 PR·proposal 이슈 없음. Review PR #168 d9b9020: 다른 실행이 이미 PASS·큐 등록(claimed colab-b)해 중복 처리 안 함. No new proposal: open proposals 1 (#41) < 2이나 M3 새 축 소진, 세부 기법은 seed 편차 초과 근거 없음, M1 포화, M2 대형 재학습뿐",
-  "Merge PR #170 (log M3-ROB5F-003) 2026-10-11: merge-gate success, behind 0. No new proposal: open proposals 1 (#41 M2-MIX-001 실행 중) < 2이나 M3 새 축 소진(ROB5F 15개 fold 모델 앙상블·분석은 사용자 브랜치 계획 재료라 중복 제안 안 함), 세부 기법은 seed 편차 초과 근거 없음, M1 포화, M2 SSL 계열 중단"
+  "Merge PR #170 (log M3-ROB5F-003) 2026-10-11: merge-gate success, behind 0. No new proposal: open proposals 1 (#41 M2-MIX-001 실행 중) < 2이나 M3 새 축 소진(ROB5F 15개 fold 모델 앙상블·분석은 사용자 브랜치 계획 재료라 중복 제안 안 함), 세부 기법은 seed 편차 초과 근거 없음, M1 포화, M2 SSL 계열 중단",
+  "Merge PR #176 (log M1-FUSE-001), #173 (code, lab-adopted) 2026-10-12: merge-gate success, freeze 전. 병합 완료."
  ]
 }
