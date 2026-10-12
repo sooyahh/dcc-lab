@@ -26,6 +26,6 @@
   "max_attempts": 3,
   "worker": "colab-a",
   "claimed_at": "2026-10-12T09:15:00+00:00",
-  "interruptions": 0,
+  "interruptions": 1,
   "started_at": "2026-10-12T09:15:02+00:00"
 }
