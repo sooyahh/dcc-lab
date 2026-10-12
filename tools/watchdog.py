@@ -68,14 +68,16 @@ def main() -> None:
 
     # 1) a running job whose worker is down must be resumed by that worker's notebook (legacy names -> colab-a),
     #    on the GPU the job asks for (a job moved to L4 restarts its worker on L4)
+    #    with max_workers=1 (Colab allows one GPU session) every job belongs to colab-a, which adopts them all
     need: dict[str, str] = {}
+    active = WORKERS[:max_workers]
     for job in running.values():
         w = job.get("worker")
-        w = w if w in WORKERS else WORKERS[0]
-        if w not in live and w not in need:
+        w = w if w in active else WORKERS[0]
+        if w not in live and not (max_workers <= 1 and live) and w not in need:   # a live runtime of either name holds the only session
             need[w] = want(job)
     # 2) queued jobs that idle live workers cannot take (busy, or GPU too small) -> start more workers, up to max_workers
-    busy = {job.get("worker") for job in running.values()}
+    busy = {(job.get("worker") if job.get("worker") in active else WORKERS[0]) for job in running.values()}
     idle_live = [w for w in live if w not in busy]
     leftover = []
     # claim order (file name = priority prefix + id), not biggest-GPU-first: a new worker starts on the GPU of the
@@ -86,10 +88,10 @@ def main() -> None:
             idle_live.remove(fit)
         else:
             leftover.append(want(job))
-    for w in WORKERS[:max_workers]:
+    for w in active:
         if not leftover:
             break
-        if w not in live and w not in need and w not in busy:
+        if w not in live and not (max_workers <= 1 and live) and w not in need and w not in busy:
             need[w] = leftover.pop(0)
     print(f"queued={len(queued)} running={len(running)} live={sorted(live)} need={need}")
     if not need:

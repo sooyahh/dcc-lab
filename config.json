@@ -5,7 +5,7 @@
   "default_budget_hours": 6,
   "max_attempts": 3,
   "colab_cu_floor": 15,
-  "max_workers": 2,
+  "max_workers": 1,
   "gpu_cu_per_hour": {
     "none": 0,
     "T4": 2.0,

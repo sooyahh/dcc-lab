@@ -136,8 +136,9 @@ _last_sync = 0.0
 
 def status(state: str, exp_id: str | None = None, force_git: bool = False, **extra) -> None:
     global _last_git_status
-    hb = {"at": now(), "worker": WORKER, "state": state, "exp_id": exp_id, "gpu": gpu(), **extra}
+    hb = {"at": now(), "worker": WORKER, "state": state, "exp_id": exp_id, "gpu": gpu(), **resources(exp_id), **extra}
     (DRIVE_LAB / "status").mkdir(parents=True, exist_ok=True)
+    log_resources(hb)
     for fname in (f"heartbeat_{WORKER}.json", "heartbeat.json"):      # heartbeat.json = last writer (legacy readers)
         (DRIVE_LAB / "status" / fname).write_text(json.dumps(hb, ensure_ascii=False), encoding="utf-8")
     global _last_sync
@@ -184,6 +185,46 @@ def status(state: str, exp_id: str | None = None, force_git: bool = False, **ext
             time.sleep(2 + attempt * 3)
     except Exception as exc:                                 # status is best-effort
         log(f"status push 실패: {redact(str(exc))}")
+
+
+_last_res_log = 0.0
+
+
+def resources(exp_id: str | None) -> dict:
+    """RAM / disk / newest checkpoint age, to tell OOM, Drive stalls and disconnects apart after a silent death."""
+    info: dict = {}
+    try:
+        import psutil  # type: ignore
+        vm = psutil.virtual_memory()
+        info.update(ram_used_gb=round((vm.total - vm.available) / 2**30, 1), ram_total_gb=round(vm.total / 2**30, 1))
+    except Exception:
+        pass
+    try:
+        du = shutil.disk_usage("/content")
+        info["disk_free_gb"] = round(du.free / 2**30, 1)
+    except Exception:
+        pass
+    if exp_id:
+        try:
+            ck = max(((p.stat().st_mtime, p) for p in (RUN_ROOT / exp_id).rglob("ckpt_last.pt")), default=None)
+            if ck:
+                info["last_ckpt_age_min"] = round((time.time() - ck[0]) / 60, 1)
+        except Exception:
+            pass
+    return info
+
+
+def log_resources(hb: dict) -> None:
+    """Append a line to Drive status/resources_<worker>.jsonl every 5 min (survives runtime death)."""
+    global _last_res_log
+    if time.time() - _last_res_log < 300:
+        return
+    _last_res_log = time.time()
+    try:
+        with open(DRIVE_LAB / "status" / f"resources_{WORKER}.jsonl", "a", encoding="utf-8") as f:
+            f.write(json.dumps(hb, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
 
 
 _gpu = None
@@ -253,13 +294,25 @@ def find_data_root() -> Path | None:
 
 
 # ------------------------------------------------------------------ jobs
+def max_workers() -> int:
+    try:
+        return int(json.loads((LAB / "config.json").read_text(encoding="utf-8")).get("max_workers", 1))
+    except Exception:
+        return 1
+
+
 def claim_next() -> dict | None:
     sync()
+    single = max_workers() <= 1 and WORKER == KNOWN_WORKERS[0]   # only one GPU session fits: colab-a owns every job
     for p in sorted((LAB / "running").glob("*.json")):
         w = json.loads(p.read_text(encoding="utf-8")).get("worker")
-        # ours; or a legacy hostname-named worker's job, adopted by colab-a
-        if w == WORKER or (w not in KNOWN_WORKERS and WORKER == "colab-a"):
-            return {"_name": p.name, **json.loads(p.read_text(encoding="utf-8"))}
+        # ours; or a legacy hostname-named worker's job, adopted by colab-a; or any job when single-worker
+        if w == WORKER or (w not in KNOWN_WORKERS and WORKER == "colab-a") or single:
+            job = {"_name": p.name, **json.loads(p.read_text(encoding="utf-8"))}
+            if w != WORKER:
+                job["worker"] = WORKER
+                update_running(p.name, worker=WORKER)
+            return job
     def runnable(p: Path) -> bool:                           # a job runs only on a GPU at least as big as it asks
         return gpu_ok(json.loads(p.read_text(encoding="utf-8"))["spec"].get("gpu", "T4"))
 
