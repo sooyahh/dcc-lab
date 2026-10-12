@@ -1,0 +1,392 @@
+{
+  "spec": {
+    "exp_id": "M2-SSL-004",
+    "mission": 2,
+    "title": "WavLM-large 미세조정, M2-SSL-003과 같은 레시피·같은 분할 (Training 전체, 3초 창 + 슬라이딩 추론)",
+    "hypothesis": "M2-SSL-003(WavLM-base-plus, 약 95M)의 레시피를 그대로 두고 백본만 WavLM-large(약 316M, 24층)로 키우면 표현력이 커져 holdout 발화 정확도가 base보다 오르고, 특히 짧은 발화와 겹친 발화에서 이득이 클 것이다. 같은 분할의 H 확률을 저장해 base·large·CNN 앙상블 구성을 정하는 재료로 쓴다",
+    "change_vs_baseline": "M2-SSL-003 스크립트(scripts/lab/m2-ssl-003.py, commit 7a07613 이후)를 복사해 scripts/lab/m2-ssl-004.py로 만들고 다음만 바꾼다. (1) 백본: microsoft/wavlm-large, revision c1423ed94bb01d80a3f5ce5bc39f6026a0f4828c, 로컬 경로 $DCC_RUN_ROOT/models/wavlm-large(없으면 고정 revision snapshot_download, 이후 local_files_only), layerdrop=0.0. 층 가중합은 hidden_states 실제 개수(25개 예상)로, 풀링 입력은 hidden_size×2(2048) → Linear 512 → ReLU → Dropout 0.1 → Linear 256 → L2 정규화 → Linear 1. hidden_size·층 수는 하드코딩하지 말고 config에서 읽는다. (2) epoch 수는 --epochs 인자(기본값 10)로 받고, warmup 5% + cosine 스케줄 총 step도 이 값으로 계산한다. 제출 직전 M2-SSL-003의 실측 epoch 시간으로 최종 값을 정해 command에 적는다(H 결과를 보고 정하지 않음). (3) 분할: $DCC_RUN_ROOT/lab/M2-SSL-003/split.json을 그대로 읽어 같은 train/D/H를 쓰고 sha256이 SSL-003과 같은지 확인해 기록한다. 파일이 없으면 실패(새로 만들지 않음). (4) 나머지(3초 창, 반복 패딩, 창 단위 정규화, BCE + 0.5×라벨 기반 SupCon, 다른 통화·반대 라벨 겹침 증강 15%, AdamW 백본 3e-5/헤드 3e-4, weight_decay 1e-2, 첫 1 epoch 트랜스포머 동결, 앞단 CNN 영구 동결, grad clip 5.0, AMP, 배치 32, 통화당 4발화 샘플링, 1.5초 간격 최대 8창 logit 평균 추론, WAV 읽기는 dcc_data.audio, audio_preflight)는 SSL-003과 동일. 배치 32가 메모리에 안 들어가면 gradient accumulation으로 유효 배치 32를 유지하고 기록한다",
+    "baseline": {
+      "exp_id": "M2-SSL-003",
+      "metric": "같은 H 1,500통화 전 발화 accuracy (WavLM-base-plus, 같은 레시피·같은 분할). SSL-003 결과가 나오면 그 값을 기준으로 쓴다",
+      "value": null
+    },
+    "branch": "sooyah/lab-m2-ssl-004",
+    "commit": "cb0980a09d039169db03e78226f29ca450db5498",
+    "command": "PYTHONPATH=src python scripts/lab/m2-ssl-004.py --output \"$LAB_OUT\" --epochs 15",
+    "uses_official_val": false,
+    "success_criteria": "주 지표 = H 1,500통화 전 발화 accuracy(슬라이딩 창 추론, threshold 0.5), 결과 보기 전 고정(epoch 선택은 D만). 채택(최종 앙상블 멤버로 진행) 조건: (1) H accuracy ≥ 0.918 (2) 학습 붕괴 없음. 비교·진단(판정 참고): $DCC_RUN_ROOT/lab/M2-SSL-003/에 H_probs.npy·H_rows.txt가 있으면 행을 맞춰 base, large, CNN(SSL-003이 저장한 CNN 열) 각각과 가중치 1:1 고정 확률 평균 조합(base+large, large+CNN, base+large+CNN)의 H accuracy, large vs base paired McNemar 2×2와 p값, call_id 기준 5개 묶음(seed 42)별 accuracy를 기록. 없으면 건너뛰고 사유 기록. metrics.json 항목은 SSL-003과 같게(클래스별 recall, 혼동행렬, 길이 구간 <0.5/0.5~1/1~3/>3초, 겹침 여부별, epoch별 D accuracy·loss·소요 분, best epoch, 층 가중치, ECE·Brier, GPU 처리량, CPU 2스레드 batch 1 300발화 → 공식 Val 111,947발화 환산 분, 통화·발화 수, split sha256, revision, 실제 epoch 수·유효 배치)",
+    "gpu": "A100",
+    "budget_hours": 12,
+    "priority": 1,
+    "notes": "M2-SSL-003과 같은 규정·실행 계약을 따른다: Training(서울) zip만 사용, Validation 미사용, 모델 입력은 대상 발화 구간 파형뿐(통화 단위 정규화·이웃 기반 트리밍·발화 순서 금지), 라벨은 제공된 JSON 그대로(label_source=provided_json). 재개: ckpt_last.pt를 LAB_WORK에 저장 후 LAB_OUT으로 .tmp 복사→크기 확인→os.replace(재시도 2·4·8·16·32초), 약 15분마다 step 단위 저장. large는 옵티마이저 상태 포함 ckpt_last가 수 GB이므로 재개에 필요한 것만 담고, best.ckpt는 모델 가중치 fp16 + 추론 규칙·revision·hidden_size·층 수. 확률 저장은 SSL-003과 같은 H_rows.txt 행 순서로 H_probs.npy(열 = wavlm_large) 저장. 데이터 준비 코드는 SSL-003과 동일하게 재사용(LAB_WORK에 zip 해제). 공식 Val 평가·앙상블은 별도 실험(M2-OFFVAL-ENS). 새 패키지 없음. 큐 순서: M2-SSL-003 다음(priority 1). 제출 전 SSL-003의 epoch당 시간을 보고 --epochs와 budget_hours를 확정한다 2026-10-12 23:30 KST 사용자 승인: --epochs 15 (SSL-003 실측 epoch 11분 기준, large 약 35분/epoch 예상)."
+  },
+  "commit": "cb0980a09d039169db03e78226f29ca450db5498",
+  "submitted_at": "2026-10-12T18:35:30+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-a",
+  "claimed_at": "2026-10-12T14:46:49+00:00",
+  "interruptions": 1,
+  "started_at": "2026-10-12T14:46:51+00:00",
+  "status": "done",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "finished_at": "2026-10-12T21:12:55+00:00",
+  "elapsed_min": 44.6,
+  "metrics": {
+    "exp_id": "M2-SSL-004",
+    "primary_metric": {
+      "name": "accuracy",
+      "value": 0.9314565752461322,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "accuracy": 0.9314565752461322,
+      "recall": {
+        "대원": 0.8969880346582313,
+        "신고자": 0.9631927736271158
+      },
+      "confusion_matrix": [
+        [
+          19566,
+          2247
+        ],
+        [
+          872,
+          22819
+        ]
+      ],
+      "duration_accuracy": {
+        "<0.5s": {
+          "rows": 3606,
+          "accuracy": 0.93261231281198
+        },
+        "0.5~1s": {
+          "rows": 10938,
+          "accuracy": 0.8965075882245384
+        },
+        "1~3s": {
+          "rows": 22073,
+          "accuracy": 0.9286005527114575
+        },
+        ">3s": {
+          "rows": 8887,
+          "accuracy": 0.9810959828963655
+        }
+      },
+      "overlap_accuracy": {
+        "overlap": {
+          "rows": 20302,
+          "accuracy": 0.9218796177716481
+        },
+        "no_overlap": {
+          "rows": 25202,
+          "accuracy": 0.9391714943258471
+        }
+      },
+      "ece_15": 0.007187566193542479,
+      "brier": 0.045020848634495576,
+      "epoch_history": [
+        {
+          "epoch": 1,
+          "d_accuracy": 0.8581574472341702,
+          "d_loss": 0.4011964123503842,
+          "train_loss": 2.2308701658784673,
+          "minutes": 14.766765110016665,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 2,
+          "d_accuracy": 0.9005701710513154,
+          "d_loss": 0.21898305202751525,
+          "train_loss": 1.7958307228552715,
+          "minutes": 18.49476422918333,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 3,
+          "d_accuracy": 0.91407422226668,
+          "d_loss": 0.1926944614951669,
+          "train_loss": 1.6888820264223363,
+          "minutes": 18.726245511183333,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 4,
+          "d_accuracy": 0.9194758427528259,
+          "d_loss": 0.17518922066423212,
+          "train_loss": 1.669431967092364,
+          "minutes": 18.54924204141671,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 5,
+          "d_accuracy": 0.9209762928878663,
+          "d_loss": 0.1681123117646002,
+          "train_loss": 1.6527209209413565,
+          "minutes": 18.601714992266654,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 6,
+          "d_accuracy": 0.9260778233470041,
+          "d_loss": 0.15288335724054838,
+          "train_loss": 1.6439275584774518,
+          "minutes": 18.636319949333362,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 7,
+          "d_accuracy": 0.9185755726718016,
+          "d_loss": 0.17752373415078856,
+          "train_loss": 1.631168937522374,
+          "minutes": 18.661891412566668,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 8,
+          "d_accuracy": 0.9222766830049015,
+          "d_loss": 0.16784655033460402,
+          "train_loss": 1.6243834966130917,
+          "minutes": 18.62894392186669,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 9,
+          "d_accuracy": 0.9149744923477043,
+          "d_loss": 0.18854227797876025,
+          "train_loss": 1.62278213147367,
+          "minutes": 19.210352493916677,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 10,
+          "d_accuracy": 0.9242772831849555,
+          "d_loss": 0.16113179466069358,
+          "train_loss": 1.6157101029135315,
+          "minutes": 19.743000675666675,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 11,
+          "d_accuracy": 0.9286786035810743,
+          "d_loss": 0.14873576460132276,
+          "train_loss": 1.605664961704154,
+          "minutes": 19.81698879405,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 12,
+          "d_accuracy": 0.9255776733019906,
+          "d_loss": 0.1557953575347683,
+          "train_loss": 1.61009585326977,
+          "minutes": 19.81666213426664,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 13,
+          "d_accuracy": 0.9268780634190257,
+          "d_loss": 0.15303837570226123,
+          "train_loss": 1.60632203328922,
+          "minutes": 19.311578671449993,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 14,
+          "d_accuracy": 0.9270781234370311,
+          "d_loss": 0.15205067218383442,
+          "train_loss": 1.6041177210468478,
+          "minutes": 19.502766945466707,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        },
+        {
+          "epoch": 15,
+          "d_accuracy": 0.9264779433830149,
+          "d_loss": 0.1521921610525645,
+          "train_loss": 1.6069442221823702,
+          "minutes": 20.081521614183295,
+          "micro_batch_size": 32,
+          "effective_batch_size": 32
+        }
+      ],
+      "best_epoch": 11,
+      "best_d_accuracy": 0.9286786035810743,
+      "d_majority_accuracy": 0.5187556266880065,
+      "training_collapse": false,
+      "layer_weights": [
+        0.043166548013687134,
+        0.04404480382800102,
+        0.043910592794418335,
+        0.04702300950884819,
+        0.0491955429315567,
+        0.049448415637016296,
+        0.0493880920112133,
+        0.04950881376862526,
+        0.048836544156074524,
+        0.04816751927137375,
+        0.04814988374710083,
+        0.04654330387711525,
+        0.043287910521030426,
+        0.039346788078546524,
+        0.03353411704301834,
+        0.03140448033809662,
+        0.030267827212810516,
+        0.03027152270078659,
+        0.03084973804652691,
+        0.0316314771771431,
+        0.03031589835882187,
+        0.03267144039273262,
+        0.031840674579143524,
+        0.034797679632902145,
+        0.03239741176366806
+      ],
+      "inference_timing": {
+        "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+        "h_rows_sha256": "0025cd1d6ba2ef4d42c13e3ded34fc98ba09b85c99bbf4763e4b7423fe7dd9eb",
+        "seconds": 1707.9993874729998,
+        "device": "cuda",
+        "gpu_utterances_per_second": 26.641695736977734,
+        "cpu_rows": 300,
+        "cpu_seconds": 333.3234883279997,
+        "cpu_official_val_estimated_minutes": 2073.031363769699
+      },
+      "cnn": {
+        "skipped_reason": null,
+        "cnn_split_suspect": false,
+        "accuracies": {
+          "large": 0.9314565752461322,
+          "base": 0.9259625527426161,
+          "base+large": 0.9320938818565401,
+          "CNN": 0.9199630801687764,
+          "large+CNN": 0.9332146624472574,
+          "base+large+CNN": 0.933434423347398
+        },
+        "mcnemar_large_vs_base": {
+          "table": [
+            [
+              41586,
+              799
+            ],
+            [
+              549,
+              2570
+            ]
+          ],
+          "axes": "large/base correct/incorrect",
+          "p_value": 1.0386093989458883e-11,
+          "method": "exact_two_sided"
+        },
+        "call_groups": [
+          {
+            "calls": 300,
+            "rows": 9412,
+            "accuracy": {
+              "large": 0.9270080747981301,
+              "base": 0.9210582235444114,
+              "base+large": 0.9284955376115597,
+              "CNN": 0.9176583085422865,
+              "large+CNN": 0.9294517637059073,
+              "base+large+CNN": 0.930407989800255
+            }
+          },
+          {
+            "calls": 300,
+            "rows": 8877,
+            "accuracy": {
+              "large": 0.9406330967669257,
+              "base": 0.9336487552100935,
+              "base+large": 0.9404077954263828,
+              "CNN": 0.9299312830911344,
+              "large+CNN": 0.9419849048101836,
+              "base+large+CNN": 0.9422102061507266
+            }
+          },
+          {
+            "calls": 300,
+            "rows": 8917,
+            "accuracy": {
+              "large": 0.9299091622743075,
+              "base": 0.92306829651228,
+              "base+large": 0.9312549063586408,
+              "CNN": 0.9147695413255579,
+              "large+CNN": 0.9311427610182796,
+              "base+large+CNN": 0.9319277784008074
+            }
+          },
+          {
+            "calls": 300,
+            "rows": 8891,
+            "accuracy": {
+              "large": 0.9270048363513665,
+              "base": 0.9211562253964684,
+              "base+large": 0.9262175233382072,
+              "CNN": 0.9155325610167585,
+              "large+CNN": 0.9286919356652795,
+              "base+large+CNN": 0.9270048363513665
+            }
+          },
+          {
+            "calls": 300,
+            "rows": 9407,
+            "accuracy": {
+              "large": 0.9329222919102795,
+              "base": 0.9309025194004464,
+              "base+large": 0.9341979377059636,
+              "CNN": 0.921972998830658,
+              "large+CNN": 0.9349420644201126,
+              "base+large+CNN": 0.9356861911342618
+            }
+          }
+        ]
+      },
+      "counts": {
+        "train": {
+          "calls": 26700,
+          "rows": 813187
+        },
+        "D": {
+          "calls": 1000,
+          "rows": 9997
+        },
+        "H": {
+          "calls": 1500,
+          "rows": 45504
+        }
+      },
+      "d_all_rows": 30667,
+      "sampled_train_rows_per_epoch": 106800
+    },
+    "seed": 42,
+    "train_rows": 813187,
+    "eval_rows": 45504,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "notes": "Training 서울 only; provided speaker labels; H used only for final reporting; no official Validation read",
+    "label_source": "provided_json",
+    "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+    "cnn_split_reproduced": true,
+    "cnn_split_suspect": false,
+    "revision": "c1423ed94bb01d80a3f5ce5bc39f6026a0f4828c",
+    "actual_epochs": 15,
+    "requested_epochs": 15,
+    "effective_batch_size": 32,
+    "micro_batch_size": 32,
+    "gradient_accumulation_steps": 1,
+    "split_file_sha256": "df0a4020a8e2d0926699bcc07969e5acef1cf9ebdd80c44981f658006a5594e8",
+    "baseline_split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+    "epoch_budget_note": "SSL-003 epoch timing unavailable: recorded first-batch failure; specification default 10"
+  }
+}

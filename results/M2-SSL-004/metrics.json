@@ -1,0 +1,357 @@
+{
+  "exp_id": "M2-SSL-004",
+  "primary_metric": {
+    "name": "accuracy",
+    "value": 0.9314565752461322,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "accuracy": 0.9314565752461322,
+    "recall": {
+      "대원": 0.8969880346582313,
+      "신고자": 0.9631927736271158
+    },
+    "confusion_matrix": [
+      [
+        19566,
+        2247
+      ],
+      [
+        872,
+        22819
+      ]
+    ],
+    "duration_accuracy": {
+      "<0.5s": {
+        "rows": 3606,
+        "accuracy": 0.93261231281198
+      },
+      "0.5~1s": {
+        "rows": 10938,
+        "accuracy": 0.8965075882245384
+      },
+      "1~3s": {
+        "rows": 22073,
+        "accuracy": 0.9286005527114575
+      },
+      ">3s": {
+        "rows": 8887,
+        "accuracy": 0.9810959828963655
+      }
+    },
+    "overlap_accuracy": {
+      "overlap": {
+        "rows": 20302,
+        "accuracy": 0.9218796177716481
+      },
+      "no_overlap": {
+        "rows": 25202,
+        "accuracy": 0.9391714943258471
+      }
+    },
+    "ece_15": 0.007187566193542479,
+    "brier": 0.045020848634495576,
+    "epoch_history": [
+      {
+        "epoch": 1,
+        "d_accuracy": 0.8581574472341702,
+        "d_loss": 0.4011964123503842,
+        "train_loss": 2.2308701658784673,
+        "minutes": 14.766765110016665,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 2,
+        "d_accuracy": 0.9005701710513154,
+        "d_loss": 0.21898305202751525,
+        "train_loss": 1.7958307228552715,
+        "minutes": 18.49476422918333,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 3,
+        "d_accuracy": 0.91407422226668,
+        "d_loss": 0.1926944614951669,
+        "train_loss": 1.6888820264223363,
+        "minutes": 18.726245511183333,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 4,
+        "d_accuracy": 0.9194758427528259,
+        "d_loss": 0.17518922066423212,
+        "train_loss": 1.669431967092364,
+        "minutes": 18.54924204141671,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 5,
+        "d_accuracy": 0.9209762928878663,
+        "d_loss": 0.1681123117646002,
+        "train_loss": 1.6527209209413565,
+        "minutes": 18.601714992266654,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 6,
+        "d_accuracy": 0.9260778233470041,
+        "d_loss": 0.15288335724054838,
+        "train_loss": 1.6439275584774518,
+        "minutes": 18.636319949333362,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 7,
+        "d_accuracy": 0.9185755726718016,
+        "d_loss": 0.17752373415078856,
+        "train_loss": 1.631168937522374,
+        "minutes": 18.661891412566668,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 8,
+        "d_accuracy": 0.9222766830049015,
+        "d_loss": 0.16784655033460402,
+        "train_loss": 1.6243834966130917,
+        "minutes": 18.62894392186669,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 9,
+        "d_accuracy": 0.9149744923477043,
+        "d_loss": 0.18854227797876025,
+        "train_loss": 1.62278213147367,
+        "minutes": 19.210352493916677,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 10,
+        "d_accuracy": 0.9242772831849555,
+        "d_loss": 0.16113179466069358,
+        "train_loss": 1.6157101029135315,
+        "minutes": 19.743000675666675,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 11,
+        "d_accuracy": 0.9286786035810743,
+        "d_loss": 0.14873576460132276,
+        "train_loss": 1.605664961704154,
+        "minutes": 19.81698879405,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 12,
+        "d_accuracy": 0.9255776733019906,
+        "d_loss": 0.1557953575347683,
+        "train_loss": 1.61009585326977,
+        "minutes": 19.81666213426664,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 13,
+        "d_accuracy": 0.9268780634190257,
+        "d_loss": 0.15303837570226123,
+        "train_loss": 1.60632203328922,
+        "minutes": 19.311578671449993,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 14,
+        "d_accuracy": 0.9270781234370311,
+        "d_loss": 0.15205067218383442,
+        "train_loss": 1.6041177210468478,
+        "minutes": 19.502766945466707,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      },
+      {
+        "epoch": 15,
+        "d_accuracy": 0.9264779433830149,
+        "d_loss": 0.1521921610525645,
+        "train_loss": 1.6069442221823702,
+        "minutes": 20.081521614183295,
+        "micro_batch_size": 32,
+        "effective_batch_size": 32
+      }
+    ],
+    "best_epoch": 11,
+    "best_d_accuracy": 0.9286786035810743,
+    "d_majority_accuracy": 0.5187556266880065,
+    "training_collapse": false,
+    "layer_weights": [
+      0.043166548013687134,
+      0.04404480382800102,
+      0.043910592794418335,
+      0.04702300950884819,
+      0.0491955429315567,
+      0.049448415637016296,
+      0.0493880920112133,
+      0.04950881376862526,
+      0.048836544156074524,
+      0.04816751927137375,
+      0.04814988374710083,
+      0.04654330387711525,
+      0.043287910521030426,
+      0.039346788078546524,
+      0.03353411704301834,
+      0.03140448033809662,
+      0.030267827212810516,
+      0.03027152270078659,
+      0.03084973804652691,
+      0.0316314771771431,
+      0.03031589835882187,
+      0.03267144039273262,
+      0.031840674579143524,
+      0.034797679632902145,
+      0.03239741176366806
+    ],
+    "inference_timing": {
+      "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+      "h_rows_sha256": "0025cd1d6ba2ef4d42c13e3ded34fc98ba09b85c99bbf4763e4b7423fe7dd9eb",
+      "seconds": 1707.9993874729998,
+      "device": "cuda",
+      "gpu_utterances_per_second": 26.641695736977734,
+      "cpu_rows": 300,
+      "cpu_seconds": 333.3234883279997,
+      "cpu_official_val_estimated_minutes": 2073.031363769699
+    },
+    "cnn": {
+      "skipped_reason": null,
+      "cnn_split_suspect": false,
+      "accuracies": {
+        "large": 0.9314565752461322,
+        "base": 0.9259625527426161,
+        "base+large": 0.9320938818565401,
+        "CNN": 0.9199630801687764,
+        "large+CNN": 0.9332146624472574,
+        "base+large+CNN": 0.933434423347398
+      },
+      "mcnemar_large_vs_base": {
+        "table": [
+          [
+            41586,
+            799
+          ],
+          [
+            549,
+            2570
+          ]
+        ],
+        "axes": "large/base correct/incorrect",
+        "p_value": 1.0386093989458883e-11,
+        "method": "exact_two_sided"
+      },
+      "call_groups": [
+        {
+          "calls": 300,
+          "rows": 9412,
+          "accuracy": {
+            "large": 0.9270080747981301,
+            "base": 0.9210582235444114,
+            "base+large": 0.9284955376115597,
+            "CNN": 0.9176583085422865,
+            "large+CNN": 0.9294517637059073,
+            "base+large+CNN": 0.930407989800255
+          }
+        },
+        {
+          "calls": 300,
+          "rows": 8877,
+          "accuracy": {
+            "large": 0.9406330967669257,
+            "base": 0.9336487552100935,
+            "base+large": 0.9404077954263828,
+            "CNN": 0.9299312830911344,
+            "large+CNN": 0.9419849048101836,
+            "base+large+CNN": 0.9422102061507266
+          }
+        },
+        {
+          "calls": 300,
+          "rows": 8917,
+          "accuracy": {
+            "large": 0.9299091622743075,
+            "base": 0.92306829651228,
+            "base+large": 0.9312549063586408,
+            "CNN": 0.9147695413255579,
+            "large+CNN": 0.9311427610182796,
+            "base+large+CNN": 0.9319277784008074
+          }
+        },
+        {
+          "calls": 300,
+          "rows": 8891,
+          "accuracy": {
+            "large": 0.9270048363513665,
+            "base": 0.9211562253964684,
+            "base+large": 0.9262175233382072,
+            "CNN": 0.9155325610167585,
+            "large+CNN": 0.9286919356652795,
+            "base+large+CNN": 0.9270048363513665
+          }
+        },
+        {
+          "calls": 300,
+          "rows": 9407,
+          "accuracy": {
+            "large": 0.9329222919102795,
+            "base": 0.9309025194004464,
+            "base+large": 0.9341979377059636,
+            "CNN": 0.921972998830658,
+            "large+CNN": 0.9349420644201126,
+            "base+large+CNN": 0.9356861911342618
+          }
+        }
+      ]
+    },
+    "counts": {
+      "train": {
+        "calls": 26700,
+        "rows": 813187
+      },
+      "D": {
+        "calls": 1000,
+        "rows": 9997
+      },
+      "H": {
+        "calls": 1500,
+        "rows": 45504
+      }
+    },
+    "d_all_rows": 30667,
+    "sampled_train_rows_per_epoch": 106800
+  },
+  "seed": 42,
+  "train_rows": 813187,
+  "eval_rows": 45504,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "notes": "Training 서울 only; provided speaker labels; H used only for final reporting; no official Validation read",
+  "label_source": "provided_json",
+  "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+  "cnn_split_reproduced": true,
+  "cnn_split_suspect": false,
+  "revision": "c1423ed94bb01d80a3f5ce5bc39f6026a0f4828c",
+  "actual_epochs": 15,
+  "requested_epochs": 15,
+  "effective_batch_size": 32,
+  "micro_batch_size": 32,
+  "gradient_accumulation_steps": 1,
+  "split_file_sha256": "df0a4020a8e2d0926699bcc07969e5acef1cf9ebdd80c44981f658006a5594e8",
+  "baseline_split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+  "epoch_budget_note": "SSL-003 epoch timing unavailable: recorded first-batch failure; specification default 10"
+}

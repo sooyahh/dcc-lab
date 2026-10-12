@@ -1,0 +1,36 @@
+
+===== attempt 1 2026-10-12T14:47:01+00:00 colab-a commit=cb0980a09d039169db03e78226f29ca450db5498 =====
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 5 files:  20%|██        | 1/5 [00:00<00:00,  4.62it/s]
+Fetching 5 files:  40%|████      | 2/5 [00:00<00:00,  5.52it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:08<00:00,  1.93s/it]
+Fetching 5 files: 100%|██████████| 5/5 [00:08<00:00,  1.65s/it]
+
+Loading weights:   0%|          | 0/488 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 488/488 [00:00<00:00, 17499.43it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+{"epoch": 1, "d_accuracy": 0.8581574472341702, "d_loss": 0.4011964123503842, "train_loss": 2.2308701658784673, "minutes": 14.766765110016665, "micro_batch_size": 32, "effective_batch_size": 32}
+15 epoch estimate: 3.69 hours
+{"epoch": 2, "d_accuracy": 0.9005701710513154, "d_loss": 0.21898305202751525, "train_loss": 1.7958307228552715, "minutes": 18.49476422918333, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 3, "d_accuracy": 0.91407422226668, "d_loss": 0.1926944614951669, "train_loss": 1.6888820264223363, "minutes": 18.726245511183333, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 4, "d_accuracy": 0.9194758427528259, "d_loss": 0.17518922066423212, "train_loss": 1.669431967092364, "minutes": 18.54924204141671, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 5, "d_accuracy": 0.9209762928878663, "d_loss": 0.1681123117646002, "train_loss": 1.6527209209413565, "minutes": 18.601714992266654, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 6, "d_accuracy": 0.9260778233470041, "d_loss": 0.15288335724054838, "train_loss": 1.6439275584774518, "minutes": 18.636319949333362, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 7, "d_accuracy": 0.9185755726718016, "d_loss": 0.17752373415078856, "train_loss": 1.631168937522374, "minutes": 18.661891412566668, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 8, "d_accuracy": 0.9222766830049015, "d_loss": 0.16784655033460402, "train_loss": 1.6243834966130917, "minutes": 18.62894392186669, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 9, "d_accuracy": 0.9149744923477043, "d_loss": 0.18854227797876025, "train_loss": 1.62278213147367, "minutes": 19.210352493916677, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 10, "d_accuracy": 0.9242772831849555, "d_loss": 0.16113179466069358, "train_loss": 1.6157101029135315, "minutes": 19.743000675666675, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 11, "d_accuracy": 0.9286786035810743, "d_loss": 0.14873576460132276, "train_loss": 1.605664961704154, "minutes": 19.81698879405, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 12, "d_accuracy": 0.9255776733019906, "d_loss": 0.1557953575347683, "train_loss": 1.61009585326977, "minutes": 19.81666213426664, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 13, "d_accuracy": 0.9268780634190257, "d_loss": 0.15303837570226123, "train_loss": 1.60632203328922, "minutes": 19.311578671449993, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 14, "d_accuracy": 0.9270781234370311, "d_loss": 0.15205067218383442, "train_loss": 1.6041177210468478, "minutes": 19.502766945466707, "micro_batch_size": 32, "effective_batch_size": 32}
+{"epoch": 15, "d_accuracy": 0.9264779433830149, "d_loss": 0.1521921610525645, "train_loss": 1.6069442221823702, "minutes": 20.081521614183295, "micro_batch_size": 32, "effective_batch_size": 32}
+
+===== attempt 1 2026-10-12T20:28:19+00:00 colab-a commit=cb0980a09d039169db03e78226f29ca450db5498 =====
+
+Loading weights:   0%|          | 0/488 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 488/488 [00:00<00:00, 18119.07it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+{"name": "accuracy", "value": 0.9314565752461322, "split": "internal_holdout"}
