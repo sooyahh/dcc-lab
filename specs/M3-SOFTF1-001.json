@@ -10,7 +10,7 @@
     "value": 0.6441
   },
   "branch": "sooyah/lab-m3-softf1-001",
-  "commit": "",
+  "commit": "94a985df03d4bb8ed37144e671abbf12863da2c8",
   "command": "python scripts/lab/m3-softf1-001.py --out \"$LAB_OUT\"",
   "uses_official_val": false,
   "success_criteria": "결과 보기 전 고정. pilot이므로 제출 모델 채택이 아니라 3-seed 확장 여부만 정한다. (1) B16−A16 또는 B64−A64 중 하나 이상이 holdout Macro F1 +0.005 이상 (2) 그 쌍에서 ECE(증상별 15구간 평균)·Brier가 대조군보다 나빠지지 않거나(악화 ≤ 10%), 악화되면 악화폭을 판정 요약에 명시. threshold는 sigmoid >= 0.5 고정, 후처리 없음(빈 예측 그대로 0), Validation 미사용. metrics.json에 팔별 Macro/Micro F1, 증상별 F1, 빈 예측 수, ECE·Brier·증상별 평균 예측 확률 − 양성 비율, 팔별 step당 시간과 최대 GPU 메모리, 시작 체크포인트 holdout Macro F1(0.6441 재현 확인, ±0.001 밖이면 재현 실패로 판정 보류) 기록. 학습 붕괴(어느 팔이든 빈 예측 > 50% 또는 Macro F1 < 0.3) 시 실패로 기록. 단일 seed pilot이라 seed 편차(약 ±0.002~0.004) 이내 차이는 결론으로 쓰지 않는다",
