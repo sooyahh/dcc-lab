@@ -177,7 +177,8 @@
   "032d9f91acdbe48b280fc2c47c60e79683db4d4b",
   "0df14b64e31aace7a62335ece83c3cd3f00c5313",
   "9340ec698f6e3bcb1bee387b51ebc0edf0068309",
-  "52ee761bc79c9876babced80daf55782ca529c14"
+  "52ee761bc79c9876babced80daf55782ca529c14",
+  "7a076137eb0a75073ef032f53198843f1addddc4"
  ],
  "merged_prs": [
   67,
@@ -333,6 +334,7 @@
   "Merge PR #176 (log M1-FUSE-001), #173 (code, lab-adopted) 2026-10-12: merge-gate success, freeze 전. 병합 완료.",
   "Merge PR #182 (log M3-STRUCT-001) 2026-10-12: merge-gate success, 로그 PR이라 freeze 무관. 병합 완료.",
   "Merge PR #193 (log M3-SOFTF1-001) 2026-10-12: merge-gate success, behind 0, 로그 PR이라 freeze 무관. 병합 완료.",
-  "Judge M2-SSL-003 2026-10-12: 보류 (학습 첫 배치 torchaudio.info AttributeError, 코드 결함; 재시도 소진 아님). 팀 로그 PR #194, 코드 PR #191 52ee761 재검토 FAIL(MAJOR)·lab-fix + 수정 지시, 이슈 #46 유지. No new proposal: open proposals 1 (#46) 실험 계속"
+  "Judge M2-SSL-003 2026-10-12: 보류 (학습 첫 배치 torchaudio.info AttributeError, 코드 결함; 재시도 소진 아님). 팀 로그 PR #194, 코드 PR #191 52ee761 재검토 FAIL(MAJOR)·lab-fix + 수정 지시, 이슈 #46 유지. No new proposal: open proposals 1 (#46) 실험 계속",
+  "Review PR #191 (M2-SSL-003) 2026-10-12: 7a07613 PASS (WAV 읽기 교체·audio_preflight). 다른 실행이 이미 review·큐 등록(colab-a claimed)해 중복 제출 안 함"
  ]
 }
