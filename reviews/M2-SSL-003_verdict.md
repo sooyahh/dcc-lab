@@ -1,5 +1,6 @@
-VERDICT: 보류
-- failed/00_M2-SSL-003.json (colab-a, A100, 11.5분): 학습 첫 배치에서 `AttributeError: module 'torchaudio' has no attribute 'info'` (`scripts/lab/m2-ssl-003.py:181`). metrics.json 없음.
-- 실험 결과가 아니라 코드/환경 결함이라 가설 판정 불가. WavLM 다운로드·로드는 정상(Fetching 5 files, Loading weights 248/248).
-- 명세 변경 불필요(재시도 횟수 attempts 1/3, 재시도 1회 소진 아님). 이전 검토(9340ec6)가 놓친 결함이라 52ee761 재검토를 FAIL로 기록(`reviews/M2-SSL-003_52ee761.md`).
-- 조치: PR #191에 lab-fix + 수정 지시(`dcc_data.audio.read_wav_info/read_wav_frames`로 구간 읽기, load_segment 스모크 검사). 수정 후 재검토 PASS 시 재제출.
+VERDICT: 채택
+- done/00_M2-SSL-003.json (colab-a, A100, 194분, commit 7a07613, 중단 2회 후 재개): H 1,500통화 45,504발화 accuracy **0.9260** — 사전 기준 0.918 이상 충족, 학습 붕괴 없음(D 0.9245 > 다수 클래스 0.5188, best epoch 12).
+- 비교: CNN 3-seed 단일 0.9135~0.9161, CNN 평균 0.9200, WavLM 단독 0.9260, WavLM+CNN 확률 평균(1:1) **0.9286**. CNN 분할 재현 정상(cnn_split_suspect=false). WavLM vs CNN 평균 McNemar p=2.3e-10, 5개 묶음 모두 WavLM > CNN 평균(+0.4~+1.1%p)이라 seed 편차보다 큼.
+- 보정: ECE(15구간) 0.0182, Brier 0.0511. 길이별 <0.5초 0.913 / 0.5~1초 0.889 / 1~3초 0.925 / >3초 0.980, 겹침 0.913 vs 비겹침 0.936. 대원 recall 0.877 < 신고자 0.971(대원 쪽 약함).
+- 주의: CPU(2 thread, batch 1) 추론이 공식 Val 111,947발화 환산 약 876분이라 제출 환경이 CPU면 실용 불가, GPU면 약 49분(38발화/초). 최종 앙상블 편입 전 제출 환경 추론 시간 확인 필요.
+- 조치: 최종 앙상블 첫 멤버로 채택. 코드 PR #191에 `lab-adopted`. 공식 Val 평가·앙상블은 별도 실험(M2-OFFVAL-ENS)에서 한다.
