@@ -45,3 +45,38 @@ Original Traceback (most recent call last):
            ^^^^^^^^^^^^^^^
 AttributeError: module 'torchaudio' has no attribute 'info'
 
+
+===== attempt 1 2026-10-12T09:15:13+00:00 colab-a commit=7a076137eb0a75073ef032f53198843f1addddc4 =====
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 17436.13it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+
+===== attempt 1 2026-10-12T09:41:19+00:00 colab-a commit=7a076137eb0a75073ef032f53198843f1addddc4 =====
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 27810.27it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+{"epoch": 1, "d_accuracy": 0.8649594878463539, "train_loss": 2.1538570943039455, "minutes": 22.5013730676}
+15 epoch estimate: 5.63 hours; epoch count remains 15
+
+===== attempt 1 2026-10-12T11:32:33+00:00 colab-a commit=7a076137eb0a75073ef032f53198843f1addddc4 =====
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 15891.88it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+{"epoch": 2, "d_accuracy": 0.9042712813844154, "train_loss": 1.8043613392047668, "minutes": 27.682684470883327}
+{"epoch": 3, "d_accuracy": 0.9113734120236071, "train_loss": 1.7113293036807342, "minutes": 11.145522122666668}
+{"epoch": 4, "d_accuracy": 0.9114734420326098, "train_loss": 1.6862756600897857, "minutes": 11.290282323466666}
+{"epoch": 5, "d_accuracy": 0.9183755126537961, "train_loss": 1.6683545308166676, "minutes": 11.388607709950005}
+{"epoch": 6, "d_accuracy": 0.91777533259978, "train_loss": 1.657093757618679, "minutes": 11.309560788116672}
+{"epoch": 7, "d_accuracy": 0.9172751825547665, "train_loss": 1.6435549204537039, "minutes": 11.466025415000006}
+{"epoch": 8, "d_accuracy": 0.9226768030409123, "train_loss": 1.6350601446316038, "minutes": 11.525557574100002}
+{"epoch": 9, "d_accuracy": 0.9215764729418826, "train_loss": 1.6317199344313547, "minutes": 11.54991150303334}
+{"epoch": 10, "d_accuracy": 0.9216765029508852, "train_loss": 1.6248076396399223, "minutes": 11.447997288633344}
+{"epoch": 11, "d_accuracy": 0.9234770431129339, "train_loss": 1.612354113010878, "minutes": 11.382281544983334}
+{"epoch": 12, "d_accuracy": 0.9244773432029609, "train_loss": 1.6163472527600407, "minutes": 11.446706727066658}
+{"epoch": 13, "d_accuracy": 0.9242772831849555, "train_loss": 1.6109971528464042, "minutes": 11.230943619299978}
+{"epoch": 14, "d_accuracy": 0.9238771631489446, "train_loss": 1.6081336830260602, "minutes": 11.284430869266664}
+{"epoch": 15, "d_accuracy": 0.9243773131939582, "train_loss": 1.6113205006595854, "minutes": 11.323340816933342}
+{"name": "accuracy", "value": 0.9259625527426161, "split": "internal_holdout"}
