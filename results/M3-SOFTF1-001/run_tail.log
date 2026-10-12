@@ -1,0 +1,280 @@
+
+===== attempt 1 2026-10-12T02:59:55+00:00 colab-a commit=94a985df03d4bb8ed37144e671abbf12863da2c8 =====
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:   4%|▍         | 17/389 [00:00<00:21, 17.10it/s]
+Loading weights:   6%|▋         | 25/389 [00:01<00:15, 23.80it/s]
+Loading weights:   8%|▊         | 30/389 [00:02<00:29, 12.01it/s]
+Loading weights:   8%|▊         | 33/389 [00:03<00:58,  6.12it/s]
+Loading weights:  10%|▉         | 38/389 [00:04<00:47,  7.35it/s]
+Loading weights:  10%|█         | 40/389 [00:05<01:08,  5.07it/s]
+Loading weights:  12%|█▏        | 48/389 [00:05<00:39,  8.56it/s]
+Loading weights:  14%|█▍        | 56/389 [00:05<00:25, 12.99it/s]
+Loading weights:  15%|█▌        | 60/389 [00:05<00:23, 14.14it/s]
+Loading weights:  16%|█▋        | 64/389 [00:05<00:19, 16.26it/s]
+Loading weights:  22%|██▏       | 85/389 [00:05<00:08, 36.97it/s]
+Loading weights:  25%|██▍       | 97/389 [00:06<00:06, 48.16it/s]
+Loading weights:  27%|██▋       | 106/389 [00:06<00:06, 46.42it/s]
+Loading weights:  29%|██▉       | 113/389 [00:06<00:05, 46.70it/s]
+Loading weights:  31%|███▏      | 122/389 [00:06<00:07, 36.34it/s]
+Loading weights:  35%|███▌      | 138/389 [00:07<00:10, 22.84it/s]
+Loading weights:  37%|███▋      | 142/389 [00:08<00:13, 17.77it/s]
+Loading weights:  39%|███▊      | 150/389 [00:08<00:11, 20.28it/s]
+Loading weights:  45%|████▌     | 176/389 [00:09<00:09, 22.77it/s]
+Loading weights:  46%|████▌     | 179/389 [00:09<00:09, 23.13it/s]
+Loading weights:  48%|████▊     | 186/389 [00:09<00:08, 24.43it/s]
+Loading weights:  49%|████▉     | 192/389 [00:10<00:07, 27.17it/s]
+Loading weights:  51%|█████     | 199/389 [00:10<00:06, 30.69it/s]
+Loading weights:  52%|█████▏    | 203/389 [00:10<00:06, 30.99it/s]
+Loading weights:  53%|█████▎    | 208/389 [00:10<00:05, 30.44it/s]
+Loading weights:  55%|█████▌    | 215/389 [00:10<00:05, 32.92it/s]
+Loading weights:  57%|█████▋    | 223/389 [00:10<00:04, 40.13it/s]
+Loading weights:  59%|█████▉    | 231/389 [00:11<00:04, 35.36it/s]
+Loading weights:  61%|██████    | 236/389 [00:11<00:06, 23.49it/s]
+Loading weights:  64%|██████▍   | 248/389 [00:11<00:03, 35.45it/s]
+Loading weights:  65%|██████▌   | 254/389 [00:11<00:03, 35.30it/s]
+Loading weights:  67%|██████▋   | 259/389 [00:12<00:03, 34.93it/s]
+Loading weights:  68%|██████▊   | 264/389 [00:13<00:10, 12.50it/s]
+Loading weights:  69%|██████▉   | 270/389 [00:13<00:07, 16.03it/s]
+Loading weights:  70%|███████   | 274/389 [00:13<00:06, 18.15it/s]
+Loading weights:  73%|███████▎  | 284/389 [00:13<00:04, 26.24it/s]
+Loading weights:  74%|███████▍  | 289/389 [00:13<00:04, 24.13it/s]
+Loading weights:  77%|███████▋  | 300/389 [00:14<00:02, 33.70it/s]
+Loading weights:  78%|███████▊  | 305/389 [00:14<00:02, 35.72it/s]
+Loading weights:  80%|████████  | 312/389 [00:14<00:01, 40.32it/s]
+Loading weights:  82%|████████▏ | 319/389 [00:14<00:01, 46.13it/s]
+Loading weights: 100%|██████████| 389/389 [00:14<00:00, 26.98it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  59%|█████▉    | 229/389 [00:00<00:00, 2272.18it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2903.19it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  75%|███████▍  | 291/389 [00:00<00:00, 2906.58it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2915.39it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+A16: rows=1600/23408 steps=100
+A16: rows=3200/23408 steps=200
+A16: rows=4800/23408 steps=300
+A16: rows=6400/23408 steps=400
+A16: rows=8000/23408 steps=500
+A16: rows=9600/23408 steps=600
+A16: rows=11200/23408 steps=700
+A16: rows=12800/23408 steps=800
+A16: rows=14400/23408 steps=900
+A16: rows=16000/23408 steps=1000
+A16: rows=17600/23408 steps=1100
+A16: rows=19200/23408 steps=1200
+A16: rows=20800/23408 steps=1300
+A16: rows=22400/23408 steps=1400
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  68%|██████▊   | 263/389 [00:00<00:00, 2573.65it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2690.10it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.weight       | MISSING    | 
+pooler.dense.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+B16: rows=1600/23408 steps=100
+B16: rows=3200/23408 steps=200
+B16: rows=4800/23408 steps=300
+B16: rows=6400/23408 steps=400
+B16: rows=8000/23408 steps=500
+B16: rows=9600/23408 steps=600
+B16: rows=11200/23408 steps=700
+B16: rows=12800/23408 steps=800
+B16: rows=14400/23408 steps=900
+B16: rows=16000/23408 steps=1000
+B16: rows=17600/23408 steps=1100
+B16: rows=19200/23408 steps=1200
+B16: rows=20800/23408 steps=1300
+B16: rows=22400/23408 steps=1400
+
+===== attempt 1 2026-10-12T07:42:52+00:00 colab-a commit=94a985df03d4bb8ed37144e671abbf12863da2c8 =====
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:   2%|▏         | 8/389 [00:01<00:50,  7.57it/s]
+Loading weights:   3%|▎         | 13/389 [00:02<01:02,  6.06it/s]
+Loading weights:   6%|▌         | 22/389 [00:03<00:50,  7.27it/s]
+Loading weights:   6%|▌         | 24/389 [00:04<01:23,  4.39it/s]
+Loading weights:   7%|▋         | 27/389 [00:05<01:33,  3.88it/s]
+Loading weights:   8%|▊         | 32/389 [00:06<01:10,  5.08it/s]
+Loading weights:   9%|▊         | 34/389 [00:07<01:27,  4.07it/s]
+Loading weights:  10%|█         | 40/389 [00:08<01:14,  4.66it/s]
+Loading weights:  12%|█▏        | 47/389 [00:08<00:45,  7.45it/s]
+Loading weights:  13%|█▎        | 52/389 [00:08<00:37,  8.93it/s]
+Loading weights:  15%|█▌        | 60/389 [00:08<00:26, 12.27it/s]
+Loading weights:  17%|█▋        | 66/389 [00:09<00:23, 14.04it/s]
+Loading weights:  21%|██        | 80/389 [00:09<00:13, 23.59it/s]
+Loading weights:  22%|██▏       | 84/389 [00:09<00:13, 23.30it/s]
+Loading weights:  24%|██▎       | 92/389 [00:09<00:11, 24.97it/s]
+Loading weights:  25%|██▍       | 96/389 [00:10<00:13, 21.23it/s]
+Loading weights:  28%|██▊       | 108/389 [00:10<00:13, 21.25it/s]
+Loading weights:  30%|███       | 118/389 [00:10<00:11, 24.36it/s]
+Loading weights:  33%|███▎      | 127/389 [00:11<00:11, 23.44it/s]
+Loading weights:  33%|███▎      | 130/389 [00:12<00:21, 11.80it/s]
+Loading weights:  34%|███▍      | 132/389 [00:12<00:21, 12.15it/s]
+Loading weights:  39%|███▉      | 153/389 [00:12<00:08, 28.64it/s]
+Loading weights:  41%|████      | 160/389 [00:12<00:07, 32.55it/s]
+Loading weights:  44%|████▎     | 170/389 [00:13<00:12, 17.64it/s]
+Loading weights:  45%|████▍     | 175/389 [00:14<00:11, 18.17it/s]
+Loading weights:  47%|████▋     | 183/389 [00:14<00:08, 23.35it/s]
+Loading weights:  48%|████▊     | 188/389 [00:14<00:09, 21.82it/s]
+Loading weights:  49%|████▉     | 192/389 [00:14<00:09, 20.31it/s]
+Loading weights:  52%|█████▏    | 202/389 [00:15<00:07, 24.87it/s]
+Loading weights:  53%|█████▎    | 207/389 [00:15<00:08, 21.77it/s]
+Loading weights:  56%|█████▋    | 219/389 [00:15<00:06, 26.68it/s]
+Loading weights:  57%|█████▋    | 223/389 [00:16<00:07, 22.01it/s]
+Loading weights:  59%|█████▊    | 228/389 [00:16<00:07, 21.95it/s]
+Loading weights:  60%|██████    | 234/389 [00:16<00:06, 24.69it/s]
+Loading weights:  62%|██████▏   | 243/389 [00:16<00:04, 33.95it/s]
+Loading weights:  65%|██████▌   | 253/389 [00:16<00:03, 37.64it/s]
+Loading weights:  66%|██████▋   | 258/389 [00:18<00:09, 13.77it/s]
+Loading weights:  67%|██████▋   | 262/389 [00:18<00:08, 14.43it/s]
+Loading weights:  69%|██████▉   | 269/389 [00:18<00:06, 18.93it/s]
+Loading weights:  71%|███████   | 277/389 [00:18<00:04, 24.62it/s]
+Loading weights:  73%|███████▎  | 283/389 [00:18<00:04, 23.56it/s]
+Loading weights:  74%|███████▍  | 287/389 [00:18<00:04, 23.35it/s]
+Loading weights:  75%|███████▌  | 293/389 [00:19<00:03, 26.25it/s]
+Loading weights:  76%|███████▋  | 297/389 [00:19<00:04, 21.86it/s]
+Loading weights:  81%|████████  | 314/389 [00:19<00:01, 43.28it/s]
+Loading weights:  83%|████████▎ | 321/389 [00:19<00:01, 39.25it/s]
+Loading weights:  85%|████████▍ | 330/389 [00:21<00:04, 14.64it/s]
+Loading weights:  90%|████████▉ | 349/389 [00:21<00:01, 24.01it/s]
+Loading weights:  91%|█████████ | 354/389 [00:22<00:01, 18.22it/s]
+Loading weights:  92%|█████████▏| 358/389 [00:22<00:01, 18.26it/s]
+Loading weights:  96%|█████████▌| 373/389 [00:22<00:00, 28.93it/s]
+Loading weights:  98%|█████████▊| 381/389 [00:22<00:00, 29.44it/s]
+Loading weights: 100%|██████████| 389/389 [00:22<00:00, 17.10it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  56%|█████▌    | 216/389 [00:00<00:00, 2085.61it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2298.84it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+B16: rows=16000/23408 steps=1000
+B16: rows=17600/23408 steps=1100
+B16: rows=19200/23408 steps=1200
+B16: rows=20800/23408 steps=1300
+B16: rows=22400/23408 steps=1400
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  56%|█████▋    | 219/389 [00:00<00:00, 2187.78it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2438.50it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+A64: rows=6400/23408 steps=100
+A64: rows=12800/23408 steps=200
+A64: rows=19200/23408 steps=300
+
+Loading weights:   0%|          | 0/389 [00:00<?, ?it/s]
+Loading weights:  63%|██████▎   | 247/389 [00:00<00:00, 2442.29it/s]
+Loading weights: 100%|██████████| 389/389 [00:00<00:00, 2522.24it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /content/drive/MyDrive/dcc_runs/models/roberta-large
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+B64: rows=6400/23408 steps=100
+B64: rows=12800/23408 steps=200
+B64: rows=19200/23408 steps=300
