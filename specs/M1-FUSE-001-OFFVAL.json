@@ -10,7 +10,7 @@
     "value": 0.9813186813186813
   },
   "branch": "sooyah/lab-m1-fuse-001-offval",
-  "commit": "",
+  "commit": "032d9f91acdbe48b280fc2c47c60e79683db4d4b",
   "command": "python scripts/lab/m1-fuse-001-offval.py --out \"$LAB_OUT\"",
   "uses_official_val": true,
   "success_criteria": "공식 Validation 3,640건 모두 평가. 정확도가 0.98434 이상(3,640건 중 3,583건 이상 정답 = M1-XVEC-002-OFFVAL의 3,572건 대비 +11통화, +0.3%p)이면 M1 제출 후보를 FUSE로 교체, 미달이면 M1-XVEC-002 (c) 유지(사전 고정, 사후 완화 금지). M1-XVEC-002-OFFVAL의 출력 CSV가 LAB_OUT 또는 $DCC_RUN_ROOT/lab/M1-XVEC-002-OFFVAL에서 읽히면 같은 3,640건으로 paired McNemar 정확검정 2×2·p값을 기록(판정 보조). metrics.json에 accuracy, 성별 recall·혼동행렬, 신고자 구간 길이별(≤20초, 20~40초, 40초 초과) 정확도, 통화당 창 수 분포, x-vector·ECAPA 추출 시간(통화당 초), 진단용(판정에 쓰지 않음): (c) 단독·(h) 단독 정확도와 (c)=XVEC-002-OFFVAL 재현 여부(예측 불일치 수), ckpt·모델 revision·입력 SHA256, 3640건, fitting_performed=false 기록. 출력 CSV는 F/M 값과 3,640행 확인",
