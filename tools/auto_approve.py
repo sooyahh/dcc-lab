@@ -33,6 +33,16 @@ def colab_cu() -> dict:
     return json.loads(raw) if raw else {}
 
 
+def was_run(exp: str) -> bool:
+    """Used ID = a job file or results dir exists. specs/<EXP>.json alone does not count:
+    the proposer may create it (lab.py new) in the same run, before approval."""
+    if not exp:
+        return False
+    if (LAB / "results" / exp).exists():
+        return True
+    return any(next((LAB / d).glob(f"*_{exp}.json"), None) for d in ("queue", "running", "done", "failed"))
+
+
 def problems(issue: dict, cu: dict) -> list[str]:
     m = re.search(r"```json\s*(\{.*?\})\s*```", issue["body"], re.S)
     if not m:
@@ -45,7 +55,7 @@ def problems(issue: dict, cu: dict) -> list[str]:
     exp = str(spec.get("exp_id", ""))
     if issue["title"].split()[:1] != [exp]:
         out.append("이슈 제목 첫 단어와 exp_id 불일치")
-    if (LAB / "specs" / f"{exp}.json").exists():
+    if was_run(exp):
         out.append(f"{exp}는 이미 실행된 ID (재제안 금지)")
     if spec.get("uses_official_val"):
         out.append("공식 Validation 사용 실험 (예산 관리상 사람 승인)")
