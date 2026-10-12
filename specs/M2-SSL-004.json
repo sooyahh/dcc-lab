@@ -11,11 +11,11 @@
   },
   "branch": "sooyah/lab-m2-ssl-004",
   "commit": "cb0980a09d039169db03e78226f29ca450db5498",
-  "command": "PYTHONPATH=src python scripts/lab/m2-ssl-004.py --output \"$LAB_OUT\" --epochs 10",
+  "command": "PYTHONPATH=src python scripts/lab/m2-ssl-004.py --output \"$LAB_OUT\" --epochs 15",
   "uses_official_val": false,
   "success_criteria": "주 지표 = H 1,500통화 전 발화 accuracy(슬라이딩 창 추론, threshold 0.5), 결과 보기 전 고정(epoch 선택은 D만). 채택(최종 앙상블 멤버로 진행) 조건: (1) H accuracy ≥ 0.918 (2) 학습 붕괴 없음. 비교·진단(판정 참고): $DCC_RUN_ROOT/lab/M2-SSL-003/에 H_probs.npy·H_rows.txt가 있으면 행을 맞춰 base, large, CNN(SSL-003이 저장한 CNN 열) 각각과 가중치 1:1 고정 확률 평균 조합(base+large, large+CNN, base+large+CNN)의 H accuracy, large vs base paired McNemar 2×2와 p값, call_id 기준 5개 묶음(seed 42)별 accuracy를 기록. 없으면 건너뛰고 사유 기록. metrics.json 항목은 SSL-003과 같게(클래스별 recall, 혼동행렬, 길이 구간 <0.5/0.5~1/1~3/>3초, 겹침 여부별, epoch별 D accuracy·loss·소요 분, best epoch, 층 가중치, ECE·Brier, GPU 처리량, CPU 2스레드 batch 1 300발화 → 공식 Val 111,947발화 환산 분, 통화·발화 수, split sha256, revision, 실제 epoch 수·유효 배치)",
   "gpu": "A100",
   "budget_hours": 12,
   "priority": 1,
-  "notes": "M2-SSL-003과 같은 규정·실행 계약을 따른다: Training(서울) zip만 사용, Validation 미사용, 모델 입력은 대상 발화 구간 파형뿐(통화 단위 정규화·이웃 기반 트리밍·발화 순서 금지), 라벨은 제공된 JSON 그대로(label_source=provided_json). 재개: ckpt_last.pt를 LAB_WORK에 저장 후 LAB_OUT으로 .tmp 복사→크기 확인→os.replace(재시도 2·4·8·16·32초), 약 15분마다 step 단위 저장. large는 옵티마이저 상태 포함 ckpt_last가 수 GB이므로 재개에 필요한 것만 담고, best.ckpt는 모델 가중치 fp16 + 추론 규칙·revision·hidden_size·층 수. 확률 저장은 SSL-003과 같은 H_rows.txt 행 순서로 H_probs.npy(열 = wavlm_large) 저장. 데이터 준비 코드는 SSL-003과 동일하게 재사용(LAB_WORK에 zip 해제). 공식 Val 평가·앙상블은 별도 실험(M2-OFFVAL-ENS). 새 패키지 없음. 큐 순서: M2-SSL-003 다음(priority 1). 제출 전 SSL-003의 epoch당 시간을 보고 --epochs와 budget_hours를 확정한다"
+  "notes": "M2-SSL-003과 같은 규정·실행 계약을 따른다: Training(서울) zip만 사용, Validation 미사용, 모델 입력은 대상 발화 구간 파형뿐(통화 단위 정규화·이웃 기반 트리밍·발화 순서 금지), 라벨은 제공된 JSON 그대로(label_source=provided_json). 재개: ckpt_last.pt를 LAB_WORK에 저장 후 LAB_OUT으로 .tmp 복사→크기 확인→os.replace(재시도 2·4·8·16·32초), 약 15분마다 step 단위 저장. large는 옵티마이저 상태 포함 ckpt_last가 수 GB이므로 재개에 필요한 것만 담고, best.ckpt는 모델 가중치 fp16 + 추론 규칙·revision·hidden_size·층 수. 확률 저장은 SSL-003과 같은 H_rows.txt 행 순서로 H_probs.npy(열 = wavlm_large) 저장. 데이터 준비 코드는 SSL-003과 동일하게 재사용(LAB_WORK에 zip 해제). 공식 Val 평가·앙상블은 별도 실험(M2-OFFVAL-ENS). 새 패키지 없음. 큐 순서: M2-SSL-003 다음(priority 1). 제출 전 SSL-003의 epoch당 시간을 보고 --epochs와 budget_hours를 확정한다 2026-10-12 23:30 KST 사용자 승인: --epochs 15 (SSL-003 실측 epoch 11분 기준, large 약 35분/epoch 예상)."
 }
