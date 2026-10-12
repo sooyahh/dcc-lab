@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M1-FUSE-001-OFFVAL",
+    "mission": 1,
+    "title": "고정 M1-FUSE-001 (x-vector LR + ECAPA LR 확률 평균) 공식 Validation 평가",
+    "hypothesis": "M1-FUSE-001은 Training 29,200통화 5-fold OOF에서 (k) 98.38%로 (c) 97.97%보다 +0.41%p(5/5 fold, McNemar p=1.7e-15)였다. 같은 고정 모델이 공식 Validation 3,640건에서도 M1-XVEC-002 (c)(0.98132)보다 높은지 한 번만 확인해 M1 제출 후보 교체 여부를 정한다",
+    "change_vs_baseline": "새 학습·모델 선택·창 수·가중치·임계값 튜닝 없음. $DCC_RUN_ROOT/lab/M1-FUSE-001/best.ckpt(joblib: Training 29,200통화 전체로 학습한 (c)·(h) 파이프라인, 결합 가중치 0.5/0.5, 창 규칙, x-vector/ECAPA revision)를 불러 공식 Validation 3,640건을 평가만 한다. 통화마다 신고자 구간으로 52D 음향 특징과 다중 창 x-vector((c) 입력, M1-XVEC-002-OFFVAL과 같은 방식·같은 microsoft/wavlm-base-plus-sv 고정 revision)와 다중 창 ECAPA((h) 입력, M1-ECAPA-002 추출 방식·같은 speechbrain spkrec-ecapa-voxceleb 고정 revision)를 만들고, 신고자 성별 확률 P_c·P_h를 0.5·P_c+0.5·P_h로 결합해 >= 0.5로 판정한다. $DCC_RUN_ROOT/lab/M1-XVEC-002-OFFVAL/ 의 x-vector 특징 캐시가 읽히고 identity(같은 3,640건·같은 revision·같은 창 규칙)가 일치하면 재사용하고, 아니면 다시 추출한다(결과는 같아야 함, 어느 쪽을 썼는지 기록)",
+    "baseline": {
+      "exp_id": "M1-XVEC-002-OFFVAL",
+      "metric": "accuracy (공식 Validation 3,640건, M1-XVEC-002 (c) 현재 제출 후보 후보)",
+      "value": 0.9813186813186813
+    },
+    "branch": "sooyah/lab-m1-fuse-001-offval",
+    "commit": "032d9f91acdbe48b280fc2c47c60e79683db4d4b",
+    "command": "python scripts/lab/m1-fuse-001-offval.py --out \"$LAB_OUT\"",
+    "uses_official_val": true,
+    "success_criteria": "공식 Validation 3,640건 모두 평가. 정확도가 0.98434 이상(3,640건 중 3,583건 이상 정답 = M1-XVEC-002-OFFVAL의 3,572건 대비 +11통화, +0.3%p)이면 M1 제출 후보를 FUSE로 교체, 미달이면 M1-XVEC-002 (c) 유지(사전 고정, 사후 완화 금지). M1-XVEC-002-OFFVAL의 출력 CSV가 LAB_OUT 또는 $DCC_RUN_ROOT/lab/M1-XVEC-002-OFFVAL에서 읽히면 같은 3,640건으로 paired McNemar 정확검정 2×2·p값을 기록(판정 보조). metrics.json에 accuracy, 성별 recall·혼동행렬, 신고자 구간 길이별(≤20초, 20~40초, 40초 초과) 정확도, 통화당 창 수 분포, x-vector·ECAPA 추출 시간(통화당 초), 진단용(판정에 쓰지 않음): (c) 단독·(h) 단독 정확도와 (c)=XVEC-002-OFFVAL 재현 여부(예측 불일치 수), ckpt·모델 revision·입력 SHA256, 3640건, fitting_performed=false 기록. 출력 CSV는 F/M 값과 3,640행 확인",
+    "gpu": "T4",
+    "budget_hours": 2,
+    "priority": 1,
+    "notes": "공식 Val 사용 실험이라 자동 승인 대상 아님(사람 승인). 공식 Val 예산 M1 6회 중 3번째(M1-XVEC-001-OFFVAL, M1-XVEC-002-OFFVAL 사용). scripts/lab/m1-xvec-002-offval.py(x-vector 경로·입력 규칙·Validation ZIP 처리·청크 캐시·재개)와 scripts/lab/m1-ecapa-002.py(ECAPA 추출, speechbrain 1.0.3의 torchaudio.list_audio_backends 호환 함수 포함)와 scripts/lab/m1-fuse-001.py(결합 규칙·best.ckpt 구조)를 재사용한다. 입력은 음성+startAt/endAt/Speaker, gender는 최종 채점에만 사용. Validation 원본 ZIP(Validation/VS_서울_구급.zip, VL_서울_구급.zip)은 LAB_WORK에만 복사, 외부 업로드 없음. 특징을 LAB_OUT에 2,000통화 청크 이하 단위 .npz로 저장해 재개 가능(identity 일치 시 건너뜀). sklearn은 M1-XVEC-002·FUSE 학습 때와 같은 버전을 LAB_WORK 전용 경로에 설치. speechbrain==1.0.3은 requirements.txt에 이미 있으면 추가하지 않음. best.ckpt가 없거나 구조가 다르면 main() 시작 직후 바로 실패. 출력 CSV(call_id, 예측 F/M, 확률)를 LAB_OUT에 저장. 예상 소요: T4 약 40~70분(XVEC-002-OFFVAL 실측 약 34분 + ECAPA 추출), 예산 2시간"
+  },
+  "commit": "032d9f91acdbe48b280fc2c47c60e79683db4d4b",
+  "submitted_at": "2026-10-12T14:00:17+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
