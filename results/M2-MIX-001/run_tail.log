@@ -12,3 +12,87 @@ Traceback (most recent call last):
   File "/content/lab_code/0f2e70e6f5bf/scripts/lab/m2-mix-001.py", line 132, in make_split
     raise ValueError(f'invalid {k} split')
 ValueError: invalid H split
+
+===== attempt 1 2026-10-11T19:16:37+00:00 colab-b commit=d9b902021717628c7601f60bf5caf20926d0d41b =====
+A1 epoch=1 D=0.86018
+A1 epoch=2 D=0.85599
+A1 epoch=3 D=0.86136
+A1 epoch=4 D=0.81612
+A1 epoch=5 D=0.77109
+A1 epoch=6 D=0.88737
+A1 epoch=7 D=0.87974
+A1 epoch=8 D=0.86652
+A1 epoch=9 D=0.89038
+A1 epoch=10 D=0.88329
+A1 epoch=11 D=0.88995
+A1 epoch=12 D=0.88479
+A1 epoch=13 D=0.89511
+A1 epoch=14 D=0.89790
+A1 epoch=15 D=0.89457
+A1 epoch=16 D=0.89640
+A1 epoch=17 D=0.89715
+A1 epoch=18 D=0.89629
+A1 epoch=19 D=0.89457
+B1 epoch=1 D=0.83536
+B1 epoch=2 D=0.82633
+B1 epoch=3 D=0.86319
+B1 epoch=4 D=0.87007
+B1 epoch=5 D=0.80172
+B1 epoch=6 D=0.78947
+
+===== attempt 1 2026-10-11T23:43:46+00:00 colab-b commit=d9b902021717628c7601f60bf5caf20926d0d41b =====
+B1 epoch=7 D=0.85352
+B1 epoch=8 D=0.88619
+B1 epoch=9 D=0.82912
+B1 epoch=10 D=0.88092
+B1 epoch=11 D=0.82880
+B1 epoch=12 D=0.89361
+B1 epoch=13 D=0.89092
+B1 epoch=14 D=0.89511
+B1 epoch=15 D=0.89651
+B1 epoch=16 D=0.89565
+B1 epoch=17 D=0.89146
+B1 epoch=18 D=0.89285
+B1 epoch=19 D=0.89017
+B1 epoch=20 D=0.89275
+A2 epoch=1 D=0.71327
+A2 epoch=2 D=0.86717
+A2 epoch=3 D=0.84073
+A2 epoch=4 D=0.82289
+A2 epoch=5 D=0.88307
+A2 epoch=6 D=0.87534
+A2 epoch=7 D=0.83385
+A2 epoch=8 D=0.87437
+A2 epoch=9 D=0.83321
+A2 epoch=10 D=0.88920
+A2 epoch=11 D=0.88941
+A2 epoch=12 D=0.89253
+A2 epoch=13 D=0.89533
+A2 epoch=14 D=0.88974
+A2 epoch=15 D=0.89608
+A2 epoch=16 D=0.88469
+A2 epoch=17 D=0.89747
+A2 epoch=18 D=0.89447
+A2 epoch=19 D=0.89962
+A2 epoch=20 D=0.89447
+A2 epoch=21 D=0.89823
+A2 epoch=22 D=0.89629
+A2 epoch=23 D=0.89672
+A2 epoch=24 D=0.88006
+B2 epoch=1 D=0.85631
+B2 epoch=2 D=0.82816
+B2 epoch=3 D=0.71553
+B2 epoch=4 D=0.84557
+B2 epoch=5 D=0.88071
+B2 epoch=6 D=0.82010
+B2 epoch=7 D=0.88619
+B2 epoch=8 D=0.88931
+B2 epoch=9 D=0.81677
+B2 epoch=10 D=0.87716
+B2 epoch=11 D=0.85406
+B2 epoch=12 D=0.89468
+B2 epoch=13 D=0.89113
+B2 epoch=14 D=0.89221
+B2 epoch=15 D=0.89318
+B2 epoch=16 D=0.88641
+B2 epoch=17 D=0.88984
