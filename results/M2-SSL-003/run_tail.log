@@ -1,0 +1,47 @@
+
+===== attempt 1 2026-10-12T08:58:19+00:00 colab-a commit=52ee761bc79c9876babced80daf55782ca529c14 =====
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 5 files:  20%|██        | 1/5 [00:00<00:01,  2.82it/s]
+Fetching 5 files:  60%|██████    | 3/5 [00:01<00:00,  2.76it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:10<00:00,  2.60s/it]
+Fetching 5 files: 100%|██████████| 5/5 [00:10<00:00,  2.10s/it]
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 17993.21it/s]
+Traceback (most recent call last):
+  File "/content/lab_code/52ee761bc79c/scripts/lab/m2-ssl-003.py", line 703, in <module>
+    main()
+    ~~~~^^
+  File "/content/lab_code/52ee761bc79c/scripts/lab/m2-ssl-003.py", line 642, in main
+    train(model, train_rows, d_rows, out, work, device, split['sha256'])
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/lab_code/52ee761bc79c/scripts/lab/m2-ssl-003.py", line 394, in train
+    for batch_step, (waveform, labels) in enumerate(loader, start=step):
+                                          ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py", line 741, in __next__
+    data = self._next_data()
+  File "/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py", line 1548, in _next_data
+    return self._process_data(data, worker_id)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py", line 1586, in _process_data
+    data.reraise()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/torch/_utils.py", line 785, in reraise
+    raise exception
+AttributeError: Caught AttributeError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/dist-packages/torch/utils/data/_utils/worker.py", line 358, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/usr/local/lib/python3.13/dist-packages/torch/utils/data/_utils/fetch.py", line 54, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "/content/lab_code/52ee761bc79c/scripts/lab/m2-ssl-003.py", line 272, in __getitem__
+    x = fit_length(load_segment(row), rng)
+                   ~~~~~~~~~~~~^^^^^
+  File "/content/lab_code/52ee761bc79c/scripts/lab/m2-ssl-003.py", line 181, in load_segment
+    info = torchaudio.info(row['wav'])
+           ^^^^^^^^^^^^^^^
+AttributeError: module 'torchaudio' has no attribute 'info'
+
