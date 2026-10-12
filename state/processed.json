@@ -69,7 +69,8 @@
   "done/01_M1-FUSE-001-OFFVAL.json@2026-10-12T07:26:43+00:00",
   "done/03_M3-SOFTF1-001.json@2026-10-12T08:42:50+00:00",
   "failed/00_M2-SSL-003.json@2026-10-12T09:09:47+00:00",
-  "done/00_M2-SSL-003.json@2026-10-12T14:46:43+00:00"
+  "done/00_M2-SSL-003.json@2026-10-12T14:46:43+00:00",
+  "done/01_M2-SSL-004.json@2026-10-12T21:12:55+00:00"
  ],
  "implemented_issues": [
   1,
@@ -338,6 +339,7 @@
   "Merge PR #182 (log M3-STRUCT-001) 2026-10-12: merge-gate success, 로그 PR이라 freeze 무관. 병합 완료.",
   "Merge PR #193 (log M3-SOFTF1-001) 2026-10-12: merge-gate success, behind 0, 로그 PR이라 freeze 무관. 병합 완료.",
   "Judge M2-SSL-003 2026-10-12: 보류 (학습 첫 배치 torchaudio.info AttributeError, 코드 결함; 재시도 소진 아님). 팀 로그 PR #194, 코드 PR #191 52ee761 재검토 FAIL(MAJOR)·lab-fix + 수정 지시, 이슈 #46 유지. No new proposal: open proposals 1 (#46) 실험 계속",
-  "Review PR #191 (M2-SSL-003) 2026-10-12: 7a07613 PASS (WAV 읽기 교체·audio_preflight). 다른 실행이 이미 review·큐 등록(colab-a claimed)해 중복 제출 안 함"
+  "Review PR #191 (M2-SSL-003) 2026-10-12: 7a07613 PASS (WAV 읽기 교체·audio_preflight). 다른 실행이 이미 review·큐 등록(colab-a claimed)해 중복 제출 안 함",
+  "Judge M2-SSL-004 2026-10-12: 채택 (H 0.9315, base 대비 +0.55%p). 팀 로그 PR #208, 코드 PR #195 이미 병합, 이슈 #47 닫음. No new proposal: M2-CALLENS-001 실행 중, M2-SSL-005 큐 대기, M2-OFFVAL-ENS는 SSL-005 결과 후"
  ]
 }
