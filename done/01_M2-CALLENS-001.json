@@ -27,5 +27,64 @@
   "worker": "colab-a",
   "claimed_at": "2026-10-12T21:13:00+00:00",
   "interruptions": 1,
-  "started_at": "2026-10-12T21:13:02+00:00"
+  "started_at": "2026-10-12T21:13:02+00:00",
+  "status": "done",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "finished_at": "2026-10-13T04:05:59+00:00",
+  "elapsed_min": 167.5,
+  "metrics": {
+    "ckpt": "checkpoints/",
+    "eval_rows": 45823,
+    "exp_id": "M2-CALLENS-001",
+    "metrics": {
+      "acc_a": 0.9028653732841586,
+      "acc_b": 0.9028871963860943,
+      "acc_gain_b_minus_a": 2.1823101935658507e-05,
+      "batch_size": 1,
+      "decision": "mean P(class=1) >= 0.5",
+      "gate_mcnemar_alpha": 0.05,
+      "gate_min_accuracy_gain": 0.003,
+      "gate_pass": false,
+      "groups": {
+        "a": {
+          "accuracy": 0.9028653732841586,
+          "checkpoints": [
+            "/content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/arm_a_torch1.pt",
+            "/content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/arm_a_torch2.pt"
+          ],
+          "n_members": 2,
+          "recall_0": 0.8826416981046316,
+          "recall_1": 0.9215431114096213
+        },
+        "b": {
+          "accuracy": 0.9028871963860943,
+          "checkpoints": [
+            "/content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b0_torch1.pt",
+            "/content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt"
+          ],
+          "n_members": 2,
+          "recall_0": 0.8569610472251261,
+          "recall_1": 0.9453026614054235
+        }
+      },
+      "holdout_calls": 1500,
+      "mcnemar": {
+        "n_a_only": 801,
+        "n_b_only": 802,
+        "p_value": 1.0
+      },
+      "min_frames": 300,
+      "n_utterances": 45823,
+      "pad_value_db": -80.0
+    },
+    "notes": "Pass iff accuracy gain >= 0.003 and exact McNemar p < 0.05. Official Validation was not opened.",
+    "official_val": null,
+    "primary_metric": {
+      "name": "accuracy_gain_b_minus_a",
+      "split": "internal_holdout",
+      "value": 2.1823101935658507e-05
+    },
+    "seed": 42,
+    "train_rows": null
+  }
 }

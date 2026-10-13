@@ -1,0 +1,200 @@
+6 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 14 epochs already trained, standing best val_acc=0.8963 (epoch 13)
+epoch  15  train_loss=0.1983  val_acc=0.8915  lr=5.00e-04  time=197s
+
+Best epoch so far: 13/15  val_acc=0.8963  (this run: 196.9s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8429 신고자(1)=0.9456
+Confusion matrix: [[15202, 2833], [1059, 18422]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 15 epochs already trained, standing best val_acc=0.8963 (epoch 13)
+epoch  16  train_loss=0.1960  val_acc=0.8950  lr=2.50e-04  time=196s
+
+Best epoch so far: 13/16  val_acc=0.8963  (this run: 195.6s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8429 신고자(1)=0.9456
+Confusion matrix: [[15202, 2833], [1059, 18422]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 16 epochs already trained, standing best val_acc=0.8963 (epoch 13)
+epoch  17  train_loss=0.1830  val_acc=0.8918  lr=2.50e-04  time=200s
+
+Best epoch so far: 13/17  val_acc=0.8963  (this run: 199.9s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8429 신고자(1)=0.9456
+Confusion matrix: [[15202, 2833], [1059, 18422]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 17 epochs already trained, standing best val_acc=0.8963 (epoch 13)
+epoch  18  train_loss=0.1797  val_acc=0.8990  lr=2.50e-04  time=198s
+
+Best epoch so far: 18/18  val_acc=0.8990  (this run: 198.1s)
+Recall 대원(0)=0.8566 신고자(1)=0.9383
+Confusion matrix: [[15449, 2586], [1202, 18279]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 18 epochs already trained, standing best val_acc=0.8990 (epoch 18)
+epoch  19  train_loss=0.1774  val_acc=0.8944  lr=2.50e-04  time=198s
+
+Best epoch so far: 18/19  val_acc=0.8990  (this run: 197.7s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8566 신고자(1)=0.9383
+Confusion matrix: [[15449, 2586], [1202, 18279]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 19 epochs already trained, standing best val_acc=0.8990 (epoch 18)
+epoch  20  train_loss=0.1743  val_acc=0.8914  lr=2.50e-04  time=200s
+
+Best epoch so far: 18/20  val_acc=0.8990  (this run: 200.0s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8566 신고자(1)=0.9383
+Confusion matrix: [[15449, 2586], [1202, 18279]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 20 epochs already trained, standing best val_acc=0.8990 (epoch 18)
+epoch  21  train_loss=0.1726  val_acc=0.8991  lr=1.25e-04  time=200s
+
+Best epoch so far: 21/21  val_acc=0.8991  (this run: 200.2s)
+Recall 대원(0)=0.8345 신고자(1)=0.9589
+Confusion matrix: [[15050, 2985], [800, 18681]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 21 epochs already trained, standing best val_acc=0.8991 (epoch 21)
+epoch  22  train_loss=0.1635  val_acc=0.8980  lr=1.25e-04  time=198s
+
+Best epoch so far: 21/22  val_acc=0.8991  (this run: 198.1s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8345 신고자(1)=0.9589
+Confusion matrix: [[15050, 2985], [800, 18681]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 22 epochs already trained, standing best val_acc=0.8991 (epoch 21)
+epoch  23  train_loss=0.1622  val_acc=0.8972  lr=1.25e-04  time=200s
+
+Best epoch so far: 21/23  val_acc=0.8991  (this run: 200.0s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8345 신고자(1)=0.9589
+Confusion matrix: [[15050, 2985], [800, 18681]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 23 epochs already trained, standing best val_acc=0.8991 (epoch 21)
+epoch  24  train_loss=0.1605  val_acc=0.8949  lr=6.25e-05  time=198s
+
+Best epoch so far: 21/24  val_acc=0.8991  (this run: 198.4s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8345 신고자(1)=0.9589
+Confusion matrix: [[15050, 2985], [800, 18681]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 24 epochs already trained, standing best val_acc=0.8991 (epoch 21)
+epoch  25  train_loss=0.1555  val_acc=0.8981  lr=6.25e-05  time=203s
+
+Best epoch so far: 21/25  val_acc=0.8991  (this run: 202.6s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8345 신고자(1)=0.9589
+Confusion matrix: [[15050, 2985], [800, 18681]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/train_mission2_cnn.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --model large --device cuda --amp --pad-to-multiple 8 --cudnn-benchmark --num-workers 2 --epochs 1 --early-stop-patience 5 --seed 42 --torch-seed 1 --train-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_train.txt --val-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/b1_val.txt --model-output /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --resume
+torch_seed=1 (model init + train shuffle order); split seed=42
+index provenance: {'split': 'Training', 'n_mels': 40, 'hop_length': 160, 'n_fft': 512, 'sample_rate': 8000, 'label_source': 'verified_against_provided_json'}
+explicit call-id split: train_calls=4800 val_calls=1200 (make_group_split skipped)
+train=146808 val=37516 train_calls=4800 val_calls=1200
+Resumed from /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt: 25 epochs already trained, standing best val_acc=0.8991 (epoch 21)
+epoch  26  train_loss=0.1546  val_acc=0.8972  lr=6.25e-05  time=200s
+EARLY STOPPED after epoch 26: best val_acc is still epoch 21
+
+Best epoch so far: 21/26  val_acc=0.8991  (this run: 200.5s)
+(this run did not beat the standing best -- checkpoint's best/resume state both updated, recall/confusion matrix below are the standing best's)
+Recall 대원(0)=0.8345 신고자(1)=0.9589
+Confusion matrix: [[15050, 2985], [800, 18681]]
+Model saved: /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt
++ /usr/bin/python3 scripts/score_mission2_call_ensemble.py --index /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrogram_index_packed.parquet --packed-spectrograms /content/drive/MyDrive/dcc_runs/m2_l2_spec/m2_spectrograms_packed.npy --holdout-call-ids /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/gate/holdout.txt --group a=/content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/arm_a_torch1.pt,/content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/arm_a_torch2.pt --group b=/content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b0_torch1.pt,/content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/checkpoints/b1_torch1.pt --device cuda --metrics /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/score_metrics.json --save-probs /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/probs
+inferred 1000/45823
+inferred 2000/45823
+inferred 3000/45823
+inferred 4000/45823
+inferred 5000/45823
+inferred 6000/45823
+inferred 7000/45823
+inferred 8000/45823
+inferred 9000/45823
+inferred 10000/45823
+inferred 11000/45823
+inferred 12000/45823
+inferred 13000/45823
+inferred 14000/45823
+inferred 15000/45823
+inferred 16000/45823
+inferred 17000/45823
+inferred 18000/45823
+inferred 19000/45823
+inferred 20000/45823
+inferred 21000/45823
+inferred 22000/45823
+inferred 23000/45823
+inferred 24000/45823
+inferred 25000/45823
+inferred 26000/45823
+inferred 27000/45823
+inferred 28000/45823
+inferred 29000/45823
+inferred 30000/45823
+inferred 31000/45823
+inferred 32000/45823
+inferred 33000/45823
+inferred 34000/45823
+inferred 35000/45823
+inferred 36000/45823
+inferred 37000/45823
+inferred 38000/45823
+inferred 39000/45823
+inferred 40000/45823
+inferred 41000/45823
+inferred 42000/45823
+inferred 43000/45823
+inferred 44000/45823
+inferred 45000/45823
+inferred 45823/45823
+wrote /content/drive/MyDrive/dcc_runs/lab/M2-CALLENS-001/score_metrics.json
+acc_a=0.9029 acc_b=0.9029 gain=0.0000 mcnemar_p=1 gate_pass=False
