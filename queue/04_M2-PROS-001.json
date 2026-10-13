@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M2-PROS-001",
+    "mission": 2,
+    "title": "스펙트럼 포락을 뺀 F0·에너지·비주기성 CNN을 앙상블 멤버로 추가",
+    "hypothesis": "WavLM-base, WavLM-large, CNN은 같은 스펙트럼을 봐서 오류가 겹친다. 대상 발화의 F0, 로그 에너지, 비주기성만 보는 작은 CNN을 동등 가중 네 번째 멤버로 넣으면 base+large+CNN 평균보다 H accuracy가 0.2%p 이상 높다.",
+    "change_vs_baseline": "새 모델만 학습한다. 프레임 25ms, hop 10ms, 최대 3초, 채널 3개. 통화당 4발화, 6에폭, Adam 1e-3, BCE, best는 D accuracy. 추론 확률을 기존 base·large·CNN과 1/4씩 평균한다. 가중치는 결과 보고 전에 1/4로 고정한다.",
+    "baseline": {
+      "exp_id": "M2-SSL-004",
+      "metric": "같은 H에서 base+large+CNN 동등 가중 accuracy",
+      "value": 0.933434423347398
+    },
+    "branch": "sooyah/lab-m2-residual",
+    "commit": "d2de48fc053f019b7991dbd0661fcf462a66ddd2",
+    "command": "PYTHONPATH=src python scripts/lab/m2-pros-001.py --output \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "SSL-003/004 H 확률이 있으면 주 지표는 4멤버 평균 accuracy. 채택 조건: 4멤버 − 3멤버 ≥ 0.002, 양측 정확 McNemar p < 0.05, 4멤버만 맞힌 수가 3멤버만 맞힌 수보다 큼. 확률 파일이 없으면 채택하지 않고 사유를 기록한다. 공식 Validation은 열지 않는다.",
+    "gpu": "T4",
+    "budget_hours": 6,
+    "priority": 4,
+    "notes": "특징은 대상 발화 파형만 사용한다. 제공 라벨, threshold 0.5. 분할은 lab/M2-SSL-003/split.json. 3멤버 기준값 0.933434423347398은 M2-ENS-CAND-001의 base+large+CNN이다."
+  },
+  "commit": "d2de48fc053f019b7991dbd0661fcf462a66ddd2",
+  "submitted_at": "2026-10-13T16:45:35+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
