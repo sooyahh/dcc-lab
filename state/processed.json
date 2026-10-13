@@ -183,7 +183,9 @@
   "9340ec698f6e3bcb1bee387b51ebc0edf0068309",
   "52ee761bc79c9876babced80daf55782ca529c14",
   "7a076137eb0a75073ef032f53198843f1addddc4",
-  "cb0980a09d039169db03e78226f29ca450db5498"
+  "cb0980a09d039169db03e78226f29ca450db5498",
+  "d2de48fc053f019b7991dbd0661fcf462a66ddd2",
+  "3d5c272849488486b036138c95a98646c3565120"
  ],
  "merged_prs": [
   67,
@@ -344,6 +346,7 @@
   "Judge M2-SSL-003 2026-10-12: 보류 (학습 첫 배치 torchaudio.info AttributeError, 코드 결함; 재시도 소진 아님). 팀 로그 PR #194, 코드 PR #191 52ee761 재검토 FAIL(MAJOR)·lab-fix + 수정 지시, 이슈 #46 유지. No new proposal: open proposals 1 (#46) 실험 계속",
   "Review PR #191 (M2-SSL-003) 2026-10-12: 7a07613 PASS (WAV 읽기 교체·audio_preflight). 다른 실행이 이미 review·큐 등록(colab-a claimed)해 중복 제출 안 함",
   "Judge M2-SSL-004 2026-10-12: 채택 (H 0.9315, base 대비 +0.55%p). 팀 로그 PR #208, 코드 PR #195 이미 병합, 이슈 #47 닫음. No new proposal: M2-CALLENS-001 실행 중, M2-SSL-005 큐 대기, M2-OFFVAL-ENS는 SSL-005 결과 후",
-  "Judge M2-CALLENS-001 2026-10-13: 기각 (A 0.9029 vs B 0.9029, +0.002%p, McNemar p=1.0). 팀 로그 PR #212. 코드 PR·proposal 이슈 없음. No new proposal: M2-SSL-005 큐 대기, M2-OFFVAL-ENS는 그 결과 후, freeze 임박"
+  "Judge M2-CALLENS-001 2026-10-13: 기각 (A 0.9029 vs B 0.9029, +0.002%p, McNemar p=1.0). 팀 로그 PR #212. 코드 PR·proposal 이슈 없음. No new proposal: M2-SSL-005 큐 대기, M2-OFFVAL-ENS는 그 결과 후, freeze 임박",
+  "Review PR #219 (M2-EDGE/SHORT/REFURB/PROS) d2de48f 및 PR #218 (M2-SSL-006/007/008) 3d5c272 2026-10-13: 기존 reviews/ 모두 PASS, specs branch/commit 일치·큐 등록 완료라 중복 제출 안 함. PR #219 merge-gate failure(파일·보안 규칙 검사, main 61 뒤처짐)는 병합 단계에서 처리."
  ]
 }
