@@ -265,6 +265,21 @@ class DriveCopyTests(unittest.TestCase):
             drive_io._run("import time; time.sleep(30)", 0.3)
         self.assertLess(time.monotonic() - t0, 5)
 
+    def test_wedged_helper_fails_fast(self) -> None:
+        class _Stuck:
+            def poll(self) -> None:
+                return None
+
+        saved = drive_io._wedged
+        drive_io._wedged = _Stuck()  # type: ignore[assignment]
+        try:
+            t0 = time.monotonic()
+            with self.assertRaises(TimeoutError):
+                drive_io._run("print(1)", 5)
+            self.assertLess(time.monotonic() - t0, 1)
+        finally:
+            drive_io._wedged = saved
+
 
 class TorchHookTests(unittest.TestCase):
     def test_torch_module_safe_open_is_redirected(self) -> None:

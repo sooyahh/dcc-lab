@@ -14,6 +14,7 @@ import select
 import shutil
 import subprocess
 import sys
+import threading
 import time
 from pathlib import Path
 
@@ -167,16 +168,50 @@ def _chunk_timeout() -> float:
     return float(os.environ.get("LAB_DRIVE_CHUNK_TIMEOUT", "60"))
 
 
+_helper_lock = threading.Lock()
+_wedged: subprocess.Popen[bytes] | None = None
+
+
+def _close_pipes(proc: subprocess.Popen[bytes]) -> None:
+    for stream in (proc.stdin, proc.stdout, proc.stderr):
+        if stream is not None and not stream.closed:
+            try:
+                stream.close()
+            except OSError:
+                pass
+
+
 def _run(code: str, timeout: float, input_bytes: bytes | None = None,
          args: list[str] | None = None) -> subprocess.CompletedProcess[bytes]:
-    """python -S so the child does not import sitecustomize (no patched shutil)."""
-    try:
-        return subprocess.run(
+    """python -S so the child does not import sitecustomize (no patched shutil).
+
+    Do not use subprocess.run. After a timeout it SIGKILLs and then wait()s with
+    no deadline. A helper blocked in a Drive FUSE syscall (D-state) ignores
+    SIGKILL, so that wait never returns and the heartbeat thread stops for good.
+    The webhook then restarts a runtime that is still training.
+    """
+    global _wedged
+    with _helper_lock:
+        if _wedged is not None:
+            if _wedged.poll() is None:
+                raise TimeoutError("previous drive helper still wedged")
+            _wedged = None
+        proc = subprocess.Popen(
             [sys.executable, "-S", "-c", code, *(args or [])],
-            input=input_bytes, capture_output=True, timeout=timeout, check=False,
+            stdin=subprocess.PIPE if input_bytes is not None else subprocess.DEVNULL,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         )
-    except subprocess.TimeoutExpired as exc:
-        raise TimeoutError(str(exc)) from exc
+        try:
+            try:
+                out, err = proc.communicate(input_bytes, timeout=timeout)
+            except subprocess.TimeoutExpired as exc:
+                _kill(proc)
+                if proc.poll() is None:
+                    _wedged = proc
+                raise TimeoutError("drive helper timeout") from exc
+            return subprocess.CompletedProcess(proc.args, proc.returncode, out, err)
+        finally:
+            _close_pipes(proc)
 
 
 class _LineReader:
@@ -232,9 +267,7 @@ def _kill(proc: subprocess.Popen[bytes]) -> None:
             proc.wait(timeout=1)
         except subprocess.TimeoutExpired:
             pass
-    for stream in (proc.stdin, proc.stdout):
-        if stream is not None and not stream.closed:
-            stream.close()
+    _close_pipes(proc)
 
 
 def _unlink(path: str) -> None:
@@ -270,7 +303,7 @@ def copy_onto_drive(src: str | os.PathLike[str], dst: str | os.PathLike[str], *,
                 msg = json.loads(reader.readline(chunk_timeout))
                 if "progress" in msg:
                     start = int(msg["progress"])
-                    step = start // (256 << 20)
+                    step = start // (1 << 30)
                     if step != logged:
                         logged = step
                         _log(f"청크 복사 {start / 2**20:.0f}/{total / 2**20:.0f} MiB {Path(dst_s).name}")
