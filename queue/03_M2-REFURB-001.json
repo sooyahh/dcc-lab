@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "exp_id": "M2-REFURB-001",
+    "mission": 2,
+    "title": "WavLM-large를 확신 있는 예측에만 부드러운 정답으로 한 에폭 더 학습",
+    "hypothesis": "제공 라벨 중 일부 통화는 뒤집혀 있으나 텍스트로 고칠 수 없다. max(p, 1-p)가 0.95 이상일 때만 BCE 정답을 0.9*제공라벨+0.1*p로 두면 H accuracy가 SSL-004보다 0.2%p 이상 오르고, 겹침 구간 accuracy는 내려가지 않는다.",
+    "change_vs_baseline": "초기 가중치와 샘플러는 M2-SSL-004와 같다. 손실만 바꾼다. SupCon은 제공 라벨을 유지한다. JSON 라벨 파일은 수정하지 않는다. 학습률은 백본 1e-5, 헤드 1e-4. 에폭 1. 트랜스포머는 학습한다.",
+    "baseline": {
+      "exp_id": "M2-SSL-004",
+      "metric": "같은 H 1,500통화 accuracy",
+      "value": 0.9314565752461322
+    },
+    "branch": "sooyah/lab-m2-residual",
+    "commit": "d2de48fc053f019b7991dbd0661fcf462a66ddd2",
+    "command": "PYTHONPATH=src python scripts/lab/m2-refurb-001.py --output \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "채택 조건은 모두 충족: (1) H accuracy − SSL-004 저장 확률 accuracy ≥ 0.002 (2) 양측 정확 McNemar p < 0.05 이고 이 모델만 맞힌 수가 더 큼 (3) 겹침 발화 accuracy ≥ SSL-004를 같은 행에서 다시 요약한 겹침 accuracy. 겹침이 내려가면 채택하지 않는다. 공식 Validation은 열지 않는다.",
+    "gpu": "A100",
+    "budget_hours": 6,
+    "priority": 3,
+    "notes": "텍스트·라벨 교정 없음. 부드러운 정답은 그 발화에 대한 모델 확률뿐이다. threshold 0.5. ckpt_last.pt로 재개."
+  },
+  "commit": "d2de48fc053f019b7991dbd0661fcf462a66ddd2",
+  "submitted_at": "2026-10-13T16:45:29+09:00",
+  "attempts": 0,
+  "max_attempts": 3
+}
