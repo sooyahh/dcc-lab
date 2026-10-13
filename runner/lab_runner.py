@@ -351,6 +351,34 @@ def update_running(name: str, **fields) -> None:
     commit_push(f"update {name}", mutate)
 
 
+def describe_ckpt(exp_id: str, root: Path | None = None) -> str:
+    """One line for run.log: whether a resume file is already on Drive."""
+    root = RUN_ROOT if root is None else root
+    try:
+        ckpts = list((root / exp_id).rglob("ckpt_last.pt"))
+    except OSError as exc:
+        return f"ckpt_last.pt 확인 실패: {exc}"
+    if not ckpts:
+        return "ckpt_last.pt 없음 (스크립트가 처음부터 학습)"
+    ck = max(ckpts, key=lambda p: p.stat().st_mtime)
+    age = (time.time() - ck.stat().st_mtime) / 60
+    return (f"ckpt_last.pt 있음: {ck} size={ck.stat().st_size / 2**30:.2f}GB age={age:.1f}min "
+            "(같은 명령이 이 파일을 읽으면 이어서 학습. attempt는 끊김이 나도 1로 남고 interruptions만 증가)")
+
+
+def build_child_env(repo: Path, exp_id: str, out: Path, work: Path, data_root: str | None,
+                    base: dict[str, str]) -> dict[str, str]:
+    """Env for the experiment process. Runner dir is on PYTHONPATH so sitecustomize runs."""
+    env = {k: v for k, v in base.items() if k not in ("DCC_LAB_TOKEN", "DCC_TEAM_TOKEN")}
+    if data_root and "DCC_DATA_ROOT" not in env:
+        env["DCC_DATA_ROOT"] = data_root
+    runner_dir = str(Path(__file__).resolve().parent)
+    env.update(LAB_EXP_ID=exp_id, LAB_OUT=str(out), LAB_WORK=str(work), DCC_RUN_ROOT=str(RUN_ROOT.parent),
+               PYTHONUNBUFFERED="1", HF_HUB_DISABLE_XET="1",
+               PYTHONPATH=os.pathsep.join(p for p in (runner_dir, str(repo / "src"), env.get("PYTHONPATH", "")) if p))
+    return env
+
+
 def prepare_code(job: dict) -> Path:
     commit = job["commit"]
     dst = CODE_CACHE / commit[:12]
@@ -423,50 +451,80 @@ def run_job(job: dict) -> None:
         finish(job, "failed", reason=f"code: {redact(str(exc))}")
         return
 
-    env = {k: v for k, v in os.environ.items() if k not in ("DCC_LAB_TOKEN", "DCC_TEAM_TOKEN")}
     data_root = find_data_root()
-    if data_root and "DCC_DATA_ROOT" not in env:
-        env["DCC_DATA_ROOT"] = str(data_root)                # older team commits don't search Drive shortcuts
-    env.update(LAB_EXP_ID=exp_id, LAB_OUT=str(out), LAB_WORK=str(work), DCC_RUN_ROOT=str(RUN_ROOT.parent),
-               PYTHONUNBUFFERED="1",
-               PYTHONPATH=os.pathsep.join([str(repo / "src"), os.environ.get("PYTHONPATH", "")]))
+    env = build_child_env(repo, exp_id, out, work, str(data_root) if data_root else None, dict(os.environ))
     cmd = (spec["command"].replace("$LAB_OUT", str(out)).replace("$LAB_WORK", str(work))
            .replace("$LAB_HOME", str(LAB)))                  # $LAB_HOME = this repo (shared helper scripts)
     budget_s = float(spec.get("budget_hours", 6)) * 3600
     log(f"{exp_id} 시작 (attempt {attempts}) commit={job['commit'][:7]}\n  $ {cmd}")
     status("running", exp_id, force_git=True, attempt=attempts)
 
-    t0, over = time.time(), False
-    with open(out / "run.log", "a", encoding="utf-8") as lf:
-        lf.write(f"\n===== attempt {attempts} {now()} {WORKER} commit={job['commit']} =====\n")
-        proc = subprocess.Popen(cmd, shell=True, cwd=repo, env=env, stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT, text=True, bufsize=1, start_new_session=True)
-        state = {"over": False}
+    t0 = time.time()
+    rc, over = 1, False
+    # tqdm refreshes with \r. Reading those as lines is fine, but flushing each one to Drive
+    # (the same FUSE the child is mmap-reading) wedges the runtime. Keep the log local and
+    # append it to Drive from another thread.
+    local_log = work / "_runner_run.log"
+    drive_log = out / "run.log"
+    from safetensors_local import append_log_mirror
+    stop_mirror = threading.Event()
 
-        def watch() -> None:
-            # heartbeat + budget on a timer: a job may print nothing (or only \r progress bars) for a long time
-            while proc.poll() is None:
+    def mirror_loop() -> None:
+        off = 0
+        while True:
+            try:
+                off = append_log_mirror(local_log, drive_log, off)
+            except Exception as exc:
+                log(f"run.log 미러 실패: {redact(str(exc))}")
+            if stop_mirror.wait(15):
                 try:
-                    status("running", exp_id, attempt=attempts)
-                except Exception as exc:                     # never let the heartbeat kill the job
-                    log(f"heartbeat 실패: {redact(str(exc))}")
-                if time.time() - t0 > budget_s:
-                    state["over"] = True
-                    os.killpg(proc.pid, 9)                   # shell=True: kill the whole process group
-                    return
-                time.sleep(60)
+                    append_log_mirror(local_log, drive_log, off)
+                except Exception as exc:
+                    log(f"run.log 마지막 미러 실패: {redact(str(exc))}")
+                return
 
-        watcher = threading.Thread(target=watch, daemon=True)
-        watcher.start()
-        for line in proc.stdout:
-            lf.write(line)
+    mirror = threading.Thread(target=mirror_loop, daemon=True)
+    mirror_started = False
+    try:
+        with open(local_log, "a", encoding="utf-8", newline="\n") as lf:
+            lf.write(f"\n===== attempt {attempts} {now()} {WORKER} commit={job['commit']} =====\n")
+            lf.write(describe_ckpt(exp_id) + "\n")
             lf.flush()
-            sys.stdout.write(line)
-        rc = proc.wait()
-        watcher.join(timeout=5)
-        over = state["over"]
-        if over:
-            lf.write("\n[runner] budget_hours 초과로 중단\n")
+            mirror.start()
+            mirror_started = True
+            proc = subprocess.Popen(cmd, shell=True, cwd=repo, env=env, stdout=subprocess.PIPE,
+                                    stderr=subprocess.STDOUT, text=True, bufsize=1, start_new_session=True)
+            state = {"over": False}
+
+            def watch() -> None:
+                # heartbeat + budget on a timer: a job may print nothing (or only \r progress bars) for a long time
+                while proc.poll() is None:
+                    try:
+                        status("running", exp_id, attempt=attempts)
+                    except Exception as exc:                     # never let the heartbeat kill the job
+                        log(f"heartbeat 실패: {redact(str(exc))}")
+                    if time.time() - t0 > budget_s:
+                        state["over"] = True
+                        os.killpg(proc.pid, 9)                   # shell=True: kill the whole process group
+                        return
+                    time.sleep(60)
+
+            watcher = threading.Thread(target=watch, daemon=True)
+            watcher.start()
+            for line in proc.stdout:
+                lf.write(line)
+                lf.flush()
+                sys.stdout.write(line)
+            rc = proc.wait()
+            watcher.join(timeout=5)
+            over = state["over"]
+            if over:
+                lf.write("\n[runner] budget_hours 초과로 중단\n")
+                lf.flush()
+    finally:
+        stop_mirror.set()
+        if mirror_started:
+            mirror.join(timeout=20)
     elapsed = round((time.time() - t0) / 60, 1)
     metrics_p = out / "metrics.json"
     if rc == 0 and metrics_p.exists():
@@ -475,7 +533,8 @@ def run_job(job: dict) -> None:
         finish(job, "failed", reason="budget_hours 초과", elapsed_min=elapsed)
     else:
         reason = f"exit {rc}" + ("" if metrics_p.exists() else ", metrics.json 없음")
-        tail = (out / "run.log").read_text(encoding="utf-8", errors="replace")[-3000:]
+        tail_src = local_log if local_log.exists() else drive_log
+        tail = tail_src.read_text(encoding="utf-8", errors="replace")[-3000:]
         oom = bool(re.search(r"CUDA out of memory|OutOfMemoryError", tail))
         finish(job, "failed", reason=reason + (" (OOM)" if oom else ""), elapsed_min=elapsed, log_tail=tail)
 
