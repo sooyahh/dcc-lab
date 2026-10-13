@@ -24,9 +24,9 @@
   "submitted_at": "2026-10-13T00:59:56+09:00",
   "attempts": 1,
   "max_attempts": 3,
-  "worker": "colab-a",
+  "worker": "colab-b",
   "claimed_at": "2026-10-13T04:06:05+00:00",
   "interruptions": 12,
-  "max_interruptions": 16,
+  "max_interruptions": 24,
   "started_at": "2026-10-13T04:06:06+00:00"
 }

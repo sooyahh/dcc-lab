@@ -41,11 +41,13 @@ try:
             sys.stdout.flush()
             raise SystemExit(0)
         begin, mode = have, "ab"
+    limit = req.get("limit")
+    stop = total if not limit else min(total, begin + int(limit))
     with open(src, "rb") as r, open(dst, mode) as w:
         r.seek(begin)
         done = begin
-        while done < total:
-            buf = r.read(min(chunk, total - done))
+        while done < stop:
+            buf = r.read(min(chunk, stop - done))
             if not buf:
                 break
             w.write(buf)
@@ -270,6 +272,47 @@ def _kill(proc: subprocess.Popen[bytes]) -> None:
     _close_pipes(proc)
 
 
+def _cache_min() -> int:
+    return int(os.environ.get("LAB_DRIVE_CACHE_MIN", str(512 << 20)))
+
+
+def _span_bytes() -> int:
+    """Close the Drive fd after this many bytes so one stuck read does not cover the whole zip."""
+    return int(os.environ.get("LAB_DRIVE_SPAN_BYTES", str(1 << 30)))
+
+
+def cache_path(src: str, total: int) -> Path | None:
+    """Shared local copy of a large Drive file, reused by later jobs on this VM.
+
+    /content is wiped when the runtime dies, so this only skips a second copy
+    in the same VM (and a retry that finds the bytes still on disk).
+    """
+    if not on_drive(src) or total < _cache_min():
+        return None
+    root = os.environ.get("LAB_WORK", "").strip()
+    if not root:
+        return None
+    name = Path(src).name
+    if name.endswith(".tmp"):
+        name = name[:-4]
+    return Path(root).parent / "_drive_cache" / f"{name}.{total}"
+
+
+def remember_cache(src: str, dst: str, total: int) -> None:
+    path = cache_path(src, total)
+    if path is None or os.path.abspath(dst) == os.path.abspath(path):
+        return
+    try:
+        if path.exists() and path.stat().st_size == total:
+            return
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists():
+            path.unlink()
+        os.link(dst, path)
+    except OSError:
+        pass
+
+
 def _unlink(path: str) -> None:
     try:
         _run(_UNLINK_SRC, 15, args=[path])
@@ -277,28 +320,64 @@ def _unlink(path: str) -> None:
         pass
 
 
+def _partial_start(dst: str, total: int) -> int:
+    """Bytes already on disk. A full file is returned as `total` so the copy is skipped."""
+    if not os.path.exists(dst):
+        return 0
+    have = os.path.getsize(dst)
+    if have == total:
+        return total
+    if have <= 0 or have > total:
+        return 0
+    return have
+
+
 def copy_onto_drive(src: str | os.PathLike[str], dst: str | os.PathLike[str], *,
                     chunk: int | None = None, chunk_timeout: float | None = None,
                     attempts: int = 3) -> None:
     """Copy src to dst in chunks. Raise OSError so the experiment's own retry runs.
 
-    A timed-out chunk is killed from here (the wait is interruptible). The last
-    acked offset is resumed; a partial file is removed only after every attempt fails.
+    A timed-out chunk is killed from here (the wait is interruptible). Bytes already
+    written stay on disk, so the script's 2/4/8/16/32s retry continues instead of
+    starting the 32GB zip over. A file read from Drive is closed and reopened every
+    1 GiB. A finished copy is hardlinked into LAB_WORK's sibling `_drive_cache` so
+    the next job on this VM does not read it from Drive again.
     """
-    src_s, dst_s = str(src), str(dst)
-    total = os.path.getsize(src_s)
+    origin, dst_s = str(src), str(dst)
+    total = os.path.getsize(origin)
+    cached = cache_path(origin, total)
+    src_s = origin
+    if cached is not None and cached.exists() and cached.stat().st_size == total and os.path.abspath(cached) != os.path.abspath(dst_s):
+        _log(f"로컬 캐시 사용 {cached.name}")
+        src_s = str(cached)
     chunk = _chunk_bytes() if chunk is None else chunk
     chunk_timeout = _chunk_timeout() if chunk_timeout is None else chunk_timeout
-    start = 0
+    start = _partial_start(dst_s, total)
+    if start == total:
+        _log(f"이미 받음 {Path(dst_s).name} ({total / 2**20:.0f} MiB)")
+        remember_cache(origin, dst_s, total)
+        return
     last_err = "timeout"
-    logged = -1
+    logged = start // (1 << 30)
+    limit = _span_bytes() if on_drive(src_s) else 0
     chunk_s = f"{chunk / 2**20:.0f} MiB" if chunk >= 1 << 20 else f"{chunk} B"
-    _log(f"청크 복사 시작 {Path(dst_s).name} ({total / 2**20:.0f} MiB, {chunk_s} chunks)")
-    for _ in range(max(1, attempts)):
+    _log(f"청크 복사 시작 {Path(dst_s).name} ({start / 2**20:.0f}/{total / 2**20:.0f} MiB, {chunk_s} chunks)")
+    fails = 0
+    while fails < max(1, attempts):
+        on_disk = _partial_start(dst_s, total)
+        if on_disk >= total:
+            _log(f"이미 받음 {Path(dst_s).name} ({total / 2**20:.0f} MiB)")
+            remember_cache(origin, dst_s, total)
+            return
+        if start > on_disk:
+            start = on_disk
         proc = _popen(_COPY_WORKER_SRC)
         reader = _LineReader(proc)
         try:
-            _send(proc, {"src": src_s, "dst": dst_s, "start": start, "chunk": chunk})
+            payload = {"src": src_s, "dst": dst_s, "start": start, "chunk": chunk}
+            if limit:
+                payload["limit"] = limit
+            _send(proc, payload)
             while True:
                 msg = json.loads(reader.readline(chunk_timeout))
                 if "progress" in msg:
@@ -309,24 +388,38 @@ def copy_onto_drive(src: str | os.PathLike[str], dst: str | os.PathLike[str], *,
                         _log(f"청크 복사 {start / 2**20:.0f}/{total / 2**20:.0f} MiB {Path(dst_s).name}")
                     continue
                 if msg.get("ok"):
-                    if int(msg.get("size", -1)) != total:
-                        last_err = f"size {msg.get('size')} != {total}"
-                        start = 0
-                        break
-                    _log(f"청크 복사 완료 {Path(dst_s).name} ({total / 2**20:.0f} MiB)")
-                    return
+                    acked = int(msg.get("size", on_disk))
+                    written = _partial_start(dst_s, total)
+                    finished = acked >= total and (written >= total or not on_drive(dst_s))
+                    if finished and written < total:
+                        start = written
+                        last_err = f"size {written} after ack {acked}"
+                        fails += 1
+                    elif finished:
+                        _log(f"청크 복사 완료 {Path(dst_s).name} ({total / 2**20:.0f} MiB)")
+                        remember_cache(origin, dst_s, total)
+                        return
+                    elif written > on_disk:
+                        start = written
+                        fails = 0
+                    else:
+                        last_err = "copy made no progress"
+                        fails += 1
+                    break
                 last_err = str(msg.get("err", "copy failed"))
-                start = 0
+                fails += 1
                 break
         except TimeoutError:
             last_err = f"chunk timeout at {start}/{total}"
+            fails += 1
         except (OSError, json.JSONDecodeError) as exc:
             last_err = str(exc)
-            start = 0
+            fails += 1
         finally:
             _kill(proc)
-    _unlink(dst_s)
-    raise OSError(f"Drive 복사 실패 {Path(src_s).name} -> {Path(dst_s).name} ({last_err})")
+    if _partial_start(dst_s, total) <= 0:
+        _unlink(dst_s)
+    raise OSError(f"Drive 복사 실패 {Path(origin).name} -> {Path(dst_s).name} ({last_err})")
 
 
 def replace_on_drive(src: str | os.PathLike[str], dst: str | os.PathLike[str], *,

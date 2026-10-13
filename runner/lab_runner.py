@@ -11,8 +11,8 @@ Code:   team repo checked out at job["commit"] (read-only token).
 Outputs (ckpt etc.): Drive MyDrive/dcc_runs/lab/<EXP>/  -> survives runtime death, enables resume.
 
 Experiment contract: see docs/implementer.md. Success = exit 0 AND $LAB_OUT/metrics.json.
-Multiple workers: each Colab notebook sets LAB_WORKER (colab-a / colab-b). A job left in running/ with our
-worker name is ours and is resumed first; other workers' jobs are left alone.
+Multiple workers: each Colab notebook sets LAB_WORKER (colab-a / colab-b). A job left in running/ is
+resumed before the queue. With max_workers 1, whichever known notebook is up adopts it.
 """
 from __future__ import annotations
 
@@ -309,13 +309,26 @@ def max_workers() -> int:
         return 1
 
 
+def adopts_running(worker: str, owner: str | None, n_workers: int) -> bool:
+    """Whether this notebook should continue a job left in running/.
+
+    max_workers is 1, so only one GPU session exists. That session must pick up a job
+    whose runtime was deleted (colab-b resumes colab-a's M2-SSL-005). It must not be
+    limited to colab-a, or the job sits in running/ while the live worker drains the queue.
+    """
+    if owner == worker:
+        return True
+    if n_workers <= 1 and worker in KNOWN_WORKERS:
+        return True
+    return owner not in KNOWN_WORKERS and worker == KNOWN_WORKERS[0]
+
+
 def claim_next() -> dict | None:
     sync()
-    single = max_workers() <= 1 and WORKER == KNOWN_WORKERS[0]   # only one GPU session fits: colab-a owns every job
+    n_workers = max_workers()
     for p in sorted((LAB / "running").glob("*.json")):
         w = json.loads(p.read_text(encoding="utf-8")).get("worker")
-        # ours; or a legacy hostname-named worker's job, adopted by colab-a; or any job when single-worker
-        if w == WORKER or (w not in KNOWN_WORKERS and WORKER == "colab-a") or single:
+        if adopts_running(WORKER, w, n_workers):
             job = {"_name": p.name, **json.loads(p.read_text(encoding="utf-8"))}
             if w != WORKER:
                 job["worker"] = WORKER

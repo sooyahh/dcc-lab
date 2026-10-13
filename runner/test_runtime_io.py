@@ -281,6 +281,138 @@ class DriveCopyTests(unittest.TestCase):
             drive_io._wedged = saved
 
 
+def _restore_env(saved: dict[str, str | None]) -> None:
+    for key, val in saved.items():
+        if val is None:
+            os.environ.pop(key, None)
+        else:
+            os.environ[key] = val
+
+
+class DriveResumeTests(unittest.TestCase):
+    def test_partial_resume_keeps_prefix(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            payload = bytes(i % 251 for i in range(80_000))
+            src = root / "zip.bin"
+            src.write_bytes(payload)
+            dst = root / "zip.bin.tmp"
+            dst.write_bytes(payload[:30_000])
+            drive_io.copy_onto_drive(src, dst, chunk=8_000, chunk_timeout=10, attempts=2)
+            self.assertEqual(dst.read_bytes(), payload)
+
+    def test_complete_dest_does_not_recopy(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            payload = bytes(i % 251 for i in range(4_000))
+            src = root / "zip.bin"
+            src.write_bytes(payload)
+            dst = root / "zip.bin.tmp"
+            dst.write_bytes(payload)
+            calls: list[int] = []
+            real = drive_io._popen
+
+            def wrapped(code: str):
+                calls.append(1)
+                return real(code)
+
+            drive_io._popen = wrapped
+            try:
+                drive_io.copy_onto_drive(src, dst, chunk=1_000, chunk_timeout=10, attempts=1)
+            finally:
+                drive_io._popen = real
+            self.assertEqual(calls, [])
+            self.assertEqual(dst.read_bytes(), payload)
+
+    def test_timeout_keeps_partial(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "zip.bin"
+            src.write_bytes(b"x" * 1000)
+            dst = root / "zip.bin.tmp"
+            dst.write_bytes(b"hello-partial")
+            saved = drive_io._COPY_WORKER_SRC
+            drive_io._COPY_WORKER_SRC = "import time\ntime.sleep(60)\n"
+            try:
+                with self.assertRaises(OSError):
+                    drive_io.copy_onto_drive(src, dst, chunk_timeout=0.4, attempts=1)
+                self.assertEqual(dst.read_bytes(), b"hello-partial")
+            finally:
+                drive_io._COPY_WORKER_SRC = saved
+
+    def test_drive_read_reopens_each_span(self) -> None:
+        keys = ("LAB_DRIVE_MARK", "LAB_DRIVE_SPAN_BYTES", "LAB_WORK", "LAB_DRIVE_CACHE_MIN")
+        saved = {key: os.environ.get(key) for key in keys}
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                mark = root / "drv"
+                mark.mkdir()
+                os.environ["LAB_DRIVE_MARK"] = str(mark)
+                os.environ["LAB_DRIVE_SPAN_BYTES"] = "20000"
+                os.environ.pop("LAB_WORK", None)
+                payload = bytes(i % 251 for i in range(50_000))
+                src = mark / "TS.zip"
+                src.write_bytes(payload)
+                dst = root / "TS.zip.tmp"
+                calls: list[int] = []
+                real = drive_io._popen
+
+                def wrapped(code: str):
+                    calls.append(1)
+                    return real(code)
+
+                drive_io._popen = wrapped
+                try:
+                    drive_io.copy_onto_drive(src, dst, chunk=8_000, chunk_timeout=10, attempts=2)
+                finally:
+                    drive_io._popen = real
+                self.assertGreaterEqual(len(calls), 3)
+                self.assertEqual(dst.read_bytes(), payload)
+        finally:
+            _restore_env(saved)
+
+    def test_cache_hit_ignores_later_source_bytes(self) -> None:
+        keys = ("LAB_DRIVE_MARK", "LAB_WORK", "LAB_DRIVE_CACHE_MIN", "LAB_DRIVE_SPAN_BYTES")
+        saved = {key: os.environ.get(key) for key in keys}
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                mark = root / "drv"
+                mark.mkdir()
+                work = root / "lab_work" / "M2-SSL-005"
+                work.mkdir(parents=True)
+                os.environ["LAB_DRIVE_MARK"] = str(mark)
+                os.environ["LAB_WORK"] = str(work)
+                os.environ["LAB_DRIVE_CACHE_MIN"] = "10"
+                os.environ["LAB_DRIVE_SPAN_BYTES"] = "1000000"
+                payload = bytes(i % 251 for i in range(50_000))
+                src = mark / "TS.zip"
+                src.write_bytes(payload)
+                dst = work / "TS.zip.tmp"
+                drive_io.copy_onto_drive(src, dst, chunk=8_000, chunk_timeout=10, attempts=2)
+                cache = root / "lab_work" / "_drive_cache" / f"TS.zip.{len(payload)}"
+                self.assertTrue(cache.is_file())
+                self.assertEqual(cache.stat().st_ino, dst.stat().st_ino)
+                src.write_bytes(bytes((i + 3) % 251 for i in range(len(payload))))
+                dst2 = work / "again.tmp"
+                drive_io.copy_onto_drive(src, dst2, chunk=8_000, chunk_timeout=10, attempts=2)
+                self.assertEqual(dst2.read_bytes(), payload)
+        finally:
+            _restore_env(saved)
+
+
+class ClaimTests(unittest.TestCase):
+    def test_single_slot_adopts_the_other_notebook(self) -> None:
+        self.assertTrue(lab_runner.adopts_running("colab-b", "colab-a", 1))
+        self.assertTrue(lab_runner.adopts_running("colab-a", "colab-b", 1))
+        self.assertTrue(lab_runner.adopts_running("colab-b", "colab-b", 1))
+        self.assertFalse(lab_runner.adopts_running("colab-b", "colab-a", 2))
+        self.assertTrue(lab_runner.adopts_running("colab-b", "colab-b", 2))
+        self.assertTrue(lab_runner.adopts_running("colab-a", None, 2))
+        self.assertFalse(lab_runner.adopts_running("colab-b", None, 2))
+
+
 class TorchHookTests(unittest.TestCase):
     def test_torch_module_safe_open_is_redirected(self) -> None:
         mod = types.ModuleType("safetensors.torch")
