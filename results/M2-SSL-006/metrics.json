@@ -1,0 +1,59 @@
+{
+  "exp_id": "M2-SSL-006",
+  "seed": 42,
+  "train_rows": 813187,
+  "eval_rows": 45504,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "label_source": "provided_json",
+  "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+  "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+  "variant": "asp",
+  "parent": "M2-SSL-003",
+  "primary_metric": {
+    "name": "accuracy",
+    "value": null,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "step0_d": {
+      "accuracy": 0.9243773131939582,
+      "dur_0_5_1": 0.8924050632911392,
+      "overlap": 0.9104477611940298,
+      "no_overlap": 0.9357298474945533,
+      "rows": {
+        "all": 9997,
+        "dur_0_5_1": 2370,
+        "overlap": 4489
+      },
+      "parent": {
+        "best_epoch": 12,
+        "d_accuracy": 0.9244773432029609
+      },
+      "asp_identity_max_abs_logit_diff": 0.0
+    },
+    "epoch_history": [
+      {
+        "epoch": 1,
+        "sample_epoch": 15,
+        "d_accuracy": 0.9181754526357907,
+        "d_slices": {
+          "accuracy": 0.9181754526357907,
+          "dur_0_5_1": 0.8839662447257384,
+          "overlap": 0.9055468924036534,
+          "no_overlap": 0.9284676833696441,
+          "rows": {
+            "all": 9997,
+            "dur_0_5_1": 2370,
+            "overlap": 4489
+          }
+        },
+        "train_loss": 1.616380319131001,
+        "minutes": 9.57054496146667,
+        "stopped_early": "asp: D accuracy 0.9182 < step0 0.9244 - 0.002"
+      }
+    ],
+    "stopped_early": "asp: D accuracy 0.9182 < step0 0.9244 - 0.002"
+  },
+  "notes": "stopped after first epoch by pre-fixed rule: asp: D accuracy 0.9182 < step0 0.9244 - 0.002; H not evaluated"
+}
