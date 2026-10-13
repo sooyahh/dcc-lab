@@ -1,0 +1,21 @@
+{
+  "exp_id": "M2-EDGE-001",
+  "mission": 2,
+  "title": "동결된 WavLM-large로 발화 경계 네 시점을 보고 확률을 평균",
+  "hypothesis": "겹친 짧은 발화의 오류는 구간 앞뒤에 붙은 다른 목소리 때문이다. 같은 발화에서 전체, 앞 120ms 제거, 뒤 120ms 제거, 가운데 400ms를 각각 추론해 확률을 평균하면 0.5~1초 정확도가 오르고 전체 H 정확도도 재계산한 전체 구간보다 0.2%p 이상 높다.",
+  "change_vs_baseline": "M2-SSL-004 best.ckpt는 고정한다. 학습은 없다. 대상 발화를 16kHz로 바꾼 뒤 네 시점을 기존 3초 창 규칙으로 추론하고, 네 sigmoid 확률의 산술평균을 threshold 0.5로 판정한다. 길이가 짧아 잘라낼 수 없으면 그 시점은 전체 구간으로 둔다.",
+  "baseline": {
+    "exp_id": "M2-SSL-004",
+    "metric": "같은 H 1,500통화에서 같은 가중치로 다시 계산한 전체 구간 accuracy",
+    "value": 0.9314565752461322
+  },
+  "branch": "sooyah/lab-m2-residual",
+  "commit": "d2de48fc053f019b7991dbd0661fcf462a66ddd2",
+  "command": "PYTHONPATH=src python scripts/lab/m2-edge-001.py --output \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "채택 조건은 모두 충족: (1) edge 평균 accuracy − 같은 실행의 전체 구간 accuracy ≥ 0.002 (2) 양측 정확 McNemar p < 0.05 이고 edge만 맞힌 수가 전체 구간만 맞힌 수보다 큼 (3) 0.5~1초 edge accuracy ≥ 전체 구간 (4) 3초 초과 edge accuracy ≥ 전체 구간 − 0.002. 저장된 SSL-004 확률과의 절대차는 재현 진단이며 채택 조건이 아니다. 공식 Validation은 열지 않는다.",
+  "gpu": "A100",
+  "budget_hours": 4,
+  "priority": 1,
+  "notes": "입력은 대상 발화 파형뿐이다. 제공 라벨, threshold 0.5. 256행마다 edge_progress.npz를 남겨 재개한다. 부모 체크포인트는 lab/M2-SSL-004/best.ckpt."
+}

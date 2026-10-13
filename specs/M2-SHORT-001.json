@@ -1,0 +1,21 @@
+{
+  "exp_id": "M2-SHORT-001",
+  "mission": 2,
+  "title": "WavLM-large를 1.2초 미만 발화 위주로 한 에폭 더 학습",
+  "hypothesis": "긴 발화는 이미 정확해서 기울기를 거의 만들지 않는다. SSL-004 체크포인트에서 한 에폭만 더 돌리되 스텝의 70%를 1.2초 미만 발화에서 뽑으면 0.5~1초 정확도가 오르고 H 전체도 SSL-004보다 0.2%p 이상 높다.",
+  "change_vs_baseline": "초기 가중치는 M2-SSL-004 best.ckpt. 에폭 1, 스텝 수는 통화당 4개로 SSL-004와 같다. 길이는 샘플링에만 쓰고 모델 입력은 파형 창뿐이다. 트랜스포머는 이 에폭에서 학습한다(처음부터 학습할 때의 첫 에폭 동결과는 다르다). 앞단 CNN 동결, 겹침 증강 15%, BCE+0.5 SupCon, 배치 32는 유지. 학습률은 백본 1e-5, 헤드 1e-4.",
+  "baseline": {
+    "exp_id": "M2-SSL-004",
+    "metric": "같은 H 1,500통화 accuracy",
+    "value": 0.9314565752461322
+  },
+  "branch": "sooyah/lab-m2-residual",
+  "commit": "d2de48fc053f019b7991dbd0661fcf462a66ddd2",
+  "command": "PYTHONPATH=src python scripts/lab/m2-short-001.py --output \"$LAB_OUT\"",
+  "uses_official_val": false,
+  "success_criteria": "채택 조건은 모두 충족: (1) H accuracy − SSL-004 저장 확률 accuracy ≥ 0.002 (2) 양측 정확 McNemar p < 0.05 이고 이 모델만 맞힌 수가 SSL-004만 맞힌 수보다 큼 (3) 0.5~1초 accuracy ≥ SSL-004의 같은 구간. D accuracy로 best를 고르고 H는 최종 보고에만 쓴다. 공식 Validation은 열지 않는다.",
+  "gpu": "A100",
+  "budget_hours": 6,
+  "priority": 2,
+  "notes": "분할은 lab/M2-SSL-003/split.json. 제공 라벨, threshold 0.5. num_workers=0. ckpt_last.pt로 재개."
+}
