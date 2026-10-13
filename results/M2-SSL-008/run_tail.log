@@ -1,0 +1,196 @@
+
+===== attempt 1 2026-10-13T18:23:37+00:00 colab-b commit=3d5c272849488486b036138c95a98646c3565120 =====
+ckpt_last.pt 없음 (스크립트가 처음부터 학습)
+[runner] Drive 대용량 복사 훅 설치 (청크 복사, fsync 없음)
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 14566.41it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+[runner] 청크 복사 시작 TS_서울_구급.zip.tmp (32169 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 1024/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 2048/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 3072/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 4096/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 5120/32169 MiB TS_서울_구급.zip.tmp
+
+===== attempt 1 2026-10-13T18:50:56+00:00 colab-b commit=3d5c272849488486b036138c95a98646c3565120 =====
+ckpt_last.pt 없음 (스크립트가 처음부터 학습)
+[runner] Drive 대용량 복사 훅 설치 (청크 복사, fsync 없음)
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 14369.02it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+[runner] 청크 복사 시작 TS_서울_구급.zip.tmp (32169 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 1024/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 2048/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 3072/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 4096/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 5120/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 6144/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 7168/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 8192/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 9216/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 10240/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 11264/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 12288/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 13312/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 14336/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 15360/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 16384/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 17408/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 18432/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 19456/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 20480/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 21504/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 22528/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 23552/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 24576/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 25600/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 26624/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 27648/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 28672/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 29696/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 30720/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 31744/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 완료 TS_서울_구급.zip.tmp (32169 MiB)
+{"step0": {"accuracy": 0.9243773131939582, "dur_0_5_1": 0.8924050632911392, "overlap": 0.9104477611940298, "no_overlap": 0.9357298474945533, "rows": {"all": 9997, "dur_0_5_1": 2370, "overlap": 4489}, "parent": {"best_epoch": 12, "d_accuracy": 0.9244773432029609}, "asp_identity_max_abs_logit_diff": null}}
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+{"epoch": 1, "sample_epoch": 15, "d_accuracy": 0.9174752425727718, "d_slices": {"accuracy": 0.9174752425727718, "dur_0_5_1": 0.880590717299578, "overlap": 0.9042102918244598, "no_overlap": 0.9282861292665214, "rows": {"all": 9997, "dur_0_5_1": 2370, "overlap": 4489}}, "train_loss": 1.616309269180012, "minutes": 9.200594459866666, "stopped_early": null}
+[runner] 청크 복사 시작 best.ckpt.tmp (182 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/182 MiB best.ckpt.tmp
+[runner] 청크 복사 완료 best.ckpt.tmp (182 MiB)
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+
+===== attempt 1 2026-10-13T19:49:19+00:00 colab-b commit=3d5c272849488486b036138c95a98646c3565120 =====
+ckpt_last.pt 있음: /content/drive/MyDrive/dcc_runs/lab/M2-SSL-008/ckpt_last.pt size=1.03GB age=30.3min (같은 명령이 이 파일을 읽으면 이어서 학습. attempt는 끊김이 나도 1로 남고 interruptions만 증가)
+[runner] Drive 대용량 복사 훅 설치 (청크 복사, fsync 없음)
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 18618.66it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+[runner] 청크 복사 시작 TS_서울_구급.zip.tmp (32169 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 1024/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 2048/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 3072/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 4096/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 5120/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 6144/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 7168/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 8192/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 9216/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 10240/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 11264/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 12288/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 13312/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 14336/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 15360/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 16384/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 17408/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 18432/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 19456/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 20480/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 21504/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 22528/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 23552/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 24576/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 25600/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 26624/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 27648/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 28672/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 29696/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 30720/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 31744/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 완료 TS_서울_구급.zip.tmp (32169 MiB)
+{"step0": {"accuracy": 0.9243773131939582, "dur_0_5_1": 0.8924050632911392, "overlap": 0.9104477611940298, "no_overlap": 0.9357298474945533, "rows": {"all": 9997, "dur_0_5_1": 2370, "overlap": 4489}, "parent": {"best_epoch": 12, "d_accuracy": 0.9244773432029609}, "asp_identity_max_abs_logit_diff": null}}
+[runner] 청크 복사 시작 resume.pt (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB resume.pt
+[runner] 청크 복사 1024/1059 MiB resume.pt
+[runner] 청크 복사 완료 resume.pt (1059 MiB)
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+{"epoch": 2, "sample_epoch": 16, "d_accuracy": 0.9215764729418826, "d_slices": {"accuracy": 0.9215764729418826, "dur_0_5_1": 0.8843881856540085, "overlap": 0.9082200935620406, "no_overlap": 0.9324618736383442, "rows": {"all": 9997, "dur_0_5_1": 2370, "overlap": 4489}}, "train_loss": 1.607157055590483, "minutes": 9.224706227333334}
+[runner] 청크 복사 시작 best.ckpt.tmp (182 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/182 MiB best.ckpt.tmp
+[runner] 청크 복사 완료 best.ckpt.tmp (182 MiB)
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+{"epoch": 3, "sample_epoch": 17, "d_accuracy": 0.9229768930679204, "d_slices": {"accuracy": 0.9229768930679204, "dur_0_5_1": 0.8869198312236287, "overlap": 0.9082200935620406, "no_overlap": 0.9350036310820624, "rows": {"all": 9997, "dur_0_5_1": 2370, "overlap": 4489}}, "train_loss": 1.6030049336358403, "minutes": 9.305234668050002}
+[runner] 청크 복사 시작 best.ckpt.tmp (182 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/182 MiB best.ckpt.tmp
+[runner] 청크 복사 완료 best.ckpt.tmp (182 MiB)
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+
+===== attempt 1 2026-10-13T20:43:26+00:00 colab-b commit=3d5c272849488486b036138c95a98646c3565120 =====
+ckpt_last.pt 있음: /content/drive/MyDrive/dcc_runs/lab/M2-SSL-008/ckpt_last.pt size=1.03GB age=31.4min (같은 명령이 이 파일을 읽으면 이어서 학습. attempt는 끊김이 나도 1로 남고 interruptions만 증가)
+[runner] Drive 대용량 복사 훅 설치 (청크 복사, fsync 없음)
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 15979.28it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+[runner] 청크 복사 시작 TS_서울_구급.zip.tmp (32169 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 1024/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 2048/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 3072/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 4096/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 5120/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 6144/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 7168/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 8192/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 9216/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 10240/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 11264/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 12288/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 13312/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 14336/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 15360/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 16384/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 17408/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 18432/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 19456/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 20480/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 21504/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 22528/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 23552/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 24576/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 25600/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 26624/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 27648/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 28672/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 29696/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 30720/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 31744/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 완료 TS_서울_구급.zip.tmp (32169 MiB)
+{"step0": {"accuracy": 0.9243773131939582, "dur_0_5_1": 0.8924050632911392, "overlap": 0.9104477611940298, "no_overlap": 0.9357298474945533, "rows": {"all": 9997, "dur_0_5_1": 2370, "overlap": 4489}, "parent": {"best_epoch": 12, "d_accuracy": 0.9244773432029609}, "asp_identity_max_abs_logit_diff": null}}
+{"name": "accuracy", "value": 0.925610935302391, "split": "internal_holdout"}
+{"ensemble_any_pass": false}

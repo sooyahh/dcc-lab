@@ -1,0 +1,245 @@
+{
+  "exp_id": "M2-SSL-008",
+  "seed": 42,
+  "train_rows": 813187,
+  "eval_rows": 45504,
+  "official_val": null,
+  "ckpt": "best.ckpt",
+  "label_source": "provided_json",
+  "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+  "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+  "variant": "control",
+  "parent": "M2-SSL-003",
+  "primary_metric": {
+    "name": "accuracy",
+    "value": 0.925610935302391,
+    "split": "internal_holdout"
+  },
+  "metrics": {
+    "accuracy": 0.925610935302391,
+    "recall": {
+      "대원": 0.8717278687021501,
+      "신고자": 0.9752226583934828
+    },
+    "confusion_matrix": [
+      [
+        19015,
+        2798
+      ],
+      [
+        587,
+        23104
+      ]
+    ],
+    "duration_accuracy": {
+      "<0.5s": {
+        "rows": 3606,
+        "accuracy": 0.9101497504159733
+      },
+      "0.5~1s": {
+        "rows": 10938,
+        "accuracy": 0.8891936368623149
+      },
+      "1~3s": {
+        "rows": 22073,
+        "accuracy": 0.9243419562361256
+      },
+      ">3s": {
+        "rows": 8887,
+        "accuracy": 0.9798582198717227
+      }
+    },
+    "overlap_accuracy": {
+      "overlap": {
+        "rows": 20302,
+        "accuracy": 0.9139493645946212
+      },
+      "no_overlap": {
+        "rows": 25202,
+        "accuracy": 0.9350051583207682
+      }
+    },
+    "ece_15": 0.021360560708164188,
+    "brier": 0.05220011240673723,
+    "ensemble": {
+      "skipped_reason": null,
+      "reference_accuracy": 0.933434423347398,
+      "comparisons": {
+        "cand+large+cnn": {
+          "accuracy": 0.933082805907173,
+          "reference": "base+large+cnn",
+          "delta": -0.00035161744022504937,
+          "candidate_only": 59,
+          "reference_only": 75,
+          "p_value": 0.1948566595070752,
+          "groups_ahead": 2,
+          "passes": false
+        },
+        "base+cand+large+cnn": {
+          "accuracy": 0.9318741209563994,
+          "reference": "base+large+cnn",
+          "delta": -0.0015603023909985803,
+          "candidate_only": 79,
+          "reference_only": 150,
+          "p_value": 3.1424470247818526e-06,
+          "groups_ahead": 0,
+          "passes": false
+        },
+        "cand": {
+          "accuracy": 0.925610935302391,
+          "reference": "base+large+cnn",
+          "delta": -0.007823488045006988,
+          "candidate_only": 194,
+          "reference_only": 550,
+          "p_value": 2.8971899108948883e-40,
+          "groups_ahead": 0,
+          "passes": false
+        },
+        "base": {
+          "accuracy": 0.9259625527426161,
+          "reference": "base+large+cnn",
+          "delta": -0.007471870604781938,
+          "candidate_only": 156,
+          "reference_only": 496,
+          "p_value": 3.621479465286868e-42,
+          "groups_ahead": 0,
+          "passes": false
+        }
+      },
+      "cand_vs_base": {
+        "accuracy": 0.925610935302391,
+        "reference": "base",
+        "delta": -0.00035161744022504937,
+        "candidate_only": 200,
+        "reference_only": 216,
+        "p_value": 0.46211579869676467,
+        "groups_ahead": 1,
+        "passes": false
+      },
+      "w2v2_note": "M2-SSL-005 H probabilities not present at evaluation time",
+      "any_pass": false
+    },
+    "step0_d": {
+      "accuracy": 0.9243773131939582,
+      "dur_0_5_1": 0.8924050632911392,
+      "overlap": 0.9104477611940298,
+      "no_overlap": 0.9357298474945533,
+      "rows": {
+        "all": 9997,
+        "dur_0_5_1": 2370,
+        "overlap": 4489
+      },
+      "parent": {
+        "best_epoch": 12,
+        "d_accuracy": 0.9244773432029609
+      },
+      "asp_identity_max_abs_logit_diff": null
+    },
+    "epoch_history": [
+      {
+        "epoch": 1,
+        "sample_epoch": 15,
+        "d_accuracy": 0.9174752425727718,
+        "d_slices": {
+          "accuracy": 0.9174752425727718,
+          "dur_0_5_1": 0.880590717299578,
+          "overlap": 0.9042102918244598,
+          "no_overlap": 0.9282861292665214,
+          "rows": {
+            "all": 9997,
+            "dur_0_5_1": 2370,
+            "overlap": 4489
+          }
+        },
+        "train_loss": 1.616309269180012,
+        "minutes": 9.200594459866666,
+        "stopped_early": null
+      },
+      {
+        "epoch": 2,
+        "sample_epoch": 16,
+        "d_accuracy": 0.9215764729418826,
+        "d_slices": {
+          "accuracy": 0.9215764729418826,
+          "dur_0_5_1": 0.8843881856540085,
+          "overlap": 0.9082200935620406,
+          "no_overlap": 0.9324618736383442,
+          "rows": {
+            "all": 9997,
+            "dur_0_5_1": 2370,
+            "overlap": 4489
+          }
+        },
+        "train_loss": 1.607157055590483,
+        "minutes": 9.224706227333334
+      },
+      {
+        "epoch": 3,
+        "sample_epoch": 17,
+        "d_accuracy": 0.9229768930679204,
+        "d_slices": {
+          "accuracy": 0.9229768930679204,
+          "dur_0_5_1": 0.8869198312236287,
+          "overlap": 0.9082200935620406,
+          "no_overlap": 0.9350036310820624,
+          "rows": {
+            "all": 9997,
+            "dur_0_5_1": 2370,
+            "overlap": 4489
+          }
+        },
+        "train_loss": 1.6030049336358403,
+        "minutes": 9.305234668050002
+      }
+    ],
+    "best_epoch": 3,
+    "best_d_accuracy": 0.9229768930679204,
+    "d_majority_accuracy": 0.5187556266880065,
+    "training_collapse": false,
+    "layer_weights": [
+      0.08561953902244568,
+      0.08384571969509125,
+      0.08619105815887451,
+      0.08529095351696014,
+      0.09623526781797409,
+      0.09351383149623871,
+      0.09993456304073334,
+      0.0800110325217247,
+      0.06657890230417252,
+      0.06335191428661346,
+      0.05579877644777298,
+      0.052035581320524216,
+      0.051592834293842316
+    ],
+    "inference_timing": {
+      "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+      "seconds": 1095.156896583,
+      "device": "cuda",
+      "gpu_utterances_per_second": 41.55021088026481
+    },
+    "counts": {
+      "train": {
+        "calls": 26700,
+        "rows": 813187
+      },
+      "D": {
+        "calls": 1000,
+        "rows": 9997
+      },
+      "H": {
+        "calls": 1500,
+        "rows": 45504
+      }
+    },
+    "sampled_train_rows_per_epoch": 106800,
+    "hyperparameters": {
+      "epochs": 3,
+      "epoch_offset": 15,
+      "lr_backbone": 1e-05,
+      "lr_head": 0.0001,
+      "lr_pool": null,
+      "consist": null
+    }
+  },
+  "notes": "Training 서울 only; continued from M2-SSL-003 best.ckpt; provided speaker labels; H used only for final reporting; no official Validation read"
+}

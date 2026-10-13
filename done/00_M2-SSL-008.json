@@ -1,0 +1,280 @@
+{
+  "spec": {
+    "exp_id": "M2-SSL-008",
+    "mission": 2,
+    "title": "SSL-003 이어 학습 대조군: 레시피 그대로 3 epoch",
+    "hypothesis": "M2-SSL-006/007의 이득이 풀링·일관성 때문인지, 같은 조건으로 3 epoch 더 학습한 효과인지 분리한다. 대조군 자체가 앙상블 기준을 넘으면 \"추가 학습 효과\"로 기록한다.",
+    "change_vs_baseline": "scripts/lab/m2-ssl-006.py(한 스크립트, --exp-id로 변형 선택). 공통: $DCC_RUN_ROOT/lab/M2-SSL-003/best.ckpt에서 시작, SSL-003 split.json 그대로(sha 확인, 없으면 실패), 3 epoch 이어 학습(샘플링 epoch 번호 15~17로 새 발화 추출), 트랜스포머 동결 없음(앞단 CNN만 동결), AdamW 백본 1e-5/헤드 1e-4(/새 풀링 3e-4), weight_decay 1e-2, warmup 5% + cosine, BCE + 0.5×SupCon, 배치 32, grad clip 5, AMP. 시작 전 부모 모델의 D 평가(step0_d.json: 전체·0.5~1초·겹침·비겹침), epoch마다 같은 D 구간별 정확도 기록, best는 D 정확도. 추론 규칙(3초 창, 1.5초 간격 최대 8창 logit 평균, threshold 0.5)은 SSL-003과 동일. 변형 control: SSL-003 모델·증강(p=0.15)·손실 그대로, 위 공통 이어 학습 조건만 적용.",
+    "baseline": {
+      "exp_id": "M2-ENS-CAND-001",
+      "metric": "같은 H에서 재계산한 base(SSL-003)+large(SSL-004)+CNN 3-seed 1:1 확률 평균 accuracy",
+      "value": 0.933434423347398
+    },
+    "branch": "sooyah/lab-m2-ssl-006",
+    "commit": "3d5c272849488486b036138c95a98646c3565120",
+    "command": "PYTHONPATH=src python scripts/lab/m2-ssl-006.py --exp-id M2-SSL-008 --output \"$LAB_OUT\"",
+    "uses_official_val": false,
+    "success_criteria": "주 지표 = H 1,500통화 45,504발화 accuracy(결과 보기 전 고정). 채택 판정은 metrics.ensemble: 같은 H에서 1:1 확률 평균으로 (i) 후보+large+CNN(base 교체), (ii) base+후보+large+CNN(추가)를 기준 base+large+CNN(재계산, 약 0.93343)과 비교. 통과 = accuracy +0.002 이상, 양측 정확 McNemar p<0.05이고 후보만 맞힌 수가 더 많음, call_id 정렬 연속 5등분 중 4묶음 이상 우위 — 셋 모두. SSL-005 H 확률이 있으면 w2v2 포함 조합도 같은 규칙으로 기록. p가 0.01~0.05이면 보류(비교 6회 다중성). 공식 Validation 미사용. 효과 귀속: 006·007과 H 단독·0.5~1초·겹침 정확도 비교(판정 참고). 중단 규칙 없음.",
+    "gpu": "A100",
+    "budget_hours": 3,
+    "priority": 0,
+    "notes": "규정: Training(서울)만, 입력은 대상 발화 구간 파형뿐(창 단위 정규화), 제공 라벨 그대로, threshold 0.5, 공식 Val 미사용. 구현은 사령탑이 직접 작성(동결 2026-10-14 09:00 KST 전 시간 부족), CPU 종단 테스트(무작위 가중치·합성 WAV)로 세 변형의 학습·재개·best 저장·앙상블 판정 경로 확인. 큐 순서: 사용자 지시로 기존 대기열(EDGE/SHORT/REFURB/PROS)보다 먼저(priority 0), 실행 중인 SSL-005는 중단하지 않음. 순서 006 → 007 → 008."
+  },
+  "commit": "3d5c272849488486b036138c95a98646c3565120",
+  "submitted_at": "2026-10-13T17:02:14+09:00",
+  "attempts": 1,
+  "max_attempts": 3,
+  "worker": "colab-b",
+  "claimed_at": "2026-10-13T18:23:31+00:00",
+  "interruptions": 3,
+  "started_at": "2026-10-13T18:23:33+00:00",
+  "status": "done",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "finished_at": "2026-10-13T21:16:46+00:00",
+  "elapsed_min": 33.3,
+  "metrics": {
+    "exp_id": "M2-SSL-008",
+    "seed": 42,
+    "train_rows": 813187,
+    "eval_rows": 45504,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "label_source": "provided_json",
+    "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+    "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+    "variant": "control",
+    "parent": "M2-SSL-003",
+    "primary_metric": {
+      "name": "accuracy",
+      "value": 0.925610935302391,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "accuracy": 0.925610935302391,
+      "recall": {
+        "대원": 0.8717278687021501,
+        "신고자": 0.9752226583934828
+      },
+      "confusion_matrix": [
+        [
+          19015,
+          2798
+        ],
+        [
+          587,
+          23104
+        ]
+      ],
+      "duration_accuracy": {
+        "<0.5s": {
+          "rows": 3606,
+          "accuracy": 0.9101497504159733
+        },
+        "0.5~1s": {
+          "rows": 10938,
+          "accuracy": 0.8891936368623149
+        },
+        "1~3s": {
+          "rows": 22073,
+          "accuracy": 0.9243419562361256
+        },
+        ">3s": {
+          "rows": 8887,
+          "accuracy": 0.9798582198717227
+        }
+      },
+      "overlap_accuracy": {
+        "overlap": {
+          "rows": 20302,
+          "accuracy": 0.9139493645946212
+        },
+        "no_overlap": {
+          "rows": 25202,
+          "accuracy": 0.9350051583207682
+        }
+      },
+      "ece_15": 0.021360560708164188,
+      "brier": 0.05220011240673723,
+      "ensemble": {
+        "skipped_reason": null,
+        "reference_accuracy": 0.933434423347398,
+        "comparisons": {
+          "cand+large+cnn": {
+            "accuracy": 0.933082805907173,
+            "reference": "base+large+cnn",
+            "delta": -0.00035161744022504937,
+            "candidate_only": 59,
+            "reference_only": 75,
+            "p_value": 0.1948566595070752,
+            "groups_ahead": 2,
+            "passes": false
+          },
+          "base+cand+large+cnn": {
+            "accuracy": 0.9318741209563994,
+            "reference": "base+large+cnn",
+            "delta": -0.0015603023909985803,
+            "candidate_only": 79,
+            "reference_only": 150,
+            "p_value": 3.1424470247818526e-06,
+            "groups_ahead": 0,
+            "passes": false
+          },
+          "cand": {
+            "accuracy": 0.925610935302391,
+            "reference": "base+large+cnn",
+            "delta": -0.007823488045006988,
+            "candidate_only": 194,
+            "reference_only": 550,
+            "p_value": 2.8971899108948883e-40,
+            "groups_ahead": 0,
+            "passes": false
+          },
+          "base": {
+            "accuracy": 0.9259625527426161,
+            "reference": "base+large+cnn",
+            "delta": -0.007471870604781938,
+            "candidate_only": 156,
+            "reference_only": 496,
+            "p_value": 3.621479465286868e-42,
+            "groups_ahead": 0,
+            "passes": false
+          }
+        },
+        "cand_vs_base": {
+          "accuracy": 0.925610935302391,
+          "reference": "base",
+          "delta": -0.00035161744022504937,
+          "candidate_only": 200,
+          "reference_only": 216,
+          "p_value": 0.46211579869676467,
+          "groups_ahead": 1,
+          "passes": false
+        },
+        "w2v2_note": "M2-SSL-005 H probabilities not present at evaluation time",
+        "any_pass": false
+      },
+      "step0_d": {
+        "accuracy": 0.9243773131939582,
+        "dur_0_5_1": 0.8924050632911392,
+        "overlap": 0.9104477611940298,
+        "no_overlap": 0.9357298474945533,
+        "rows": {
+          "all": 9997,
+          "dur_0_5_1": 2370,
+          "overlap": 4489
+        },
+        "parent": {
+          "best_epoch": 12,
+          "d_accuracy": 0.9244773432029609
+        },
+        "asp_identity_max_abs_logit_diff": null
+      },
+      "epoch_history": [
+        {
+          "epoch": 1,
+          "sample_epoch": 15,
+          "d_accuracy": 0.9174752425727718,
+          "d_slices": {
+            "accuracy": 0.9174752425727718,
+            "dur_0_5_1": 0.880590717299578,
+            "overlap": 0.9042102918244598,
+            "no_overlap": 0.9282861292665214,
+            "rows": {
+              "all": 9997,
+              "dur_0_5_1": 2370,
+              "overlap": 4489
+            }
+          },
+          "train_loss": 1.616309269180012,
+          "minutes": 9.200594459866666,
+          "stopped_early": null
+        },
+        {
+          "epoch": 2,
+          "sample_epoch": 16,
+          "d_accuracy": 0.9215764729418826,
+          "d_slices": {
+            "accuracy": 0.9215764729418826,
+            "dur_0_5_1": 0.8843881856540085,
+            "overlap": 0.9082200935620406,
+            "no_overlap": 0.9324618736383442,
+            "rows": {
+              "all": 9997,
+              "dur_0_5_1": 2370,
+              "overlap": 4489
+            }
+          },
+          "train_loss": 1.607157055590483,
+          "minutes": 9.224706227333334
+        },
+        {
+          "epoch": 3,
+          "sample_epoch": 17,
+          "d_accuracy": 0.9229768930679204,
+          "d_slices": {
+            "accuracy": 0.9229768930679204,
+            "dur_0_5_1": 0.8869198312236287,
+            "overlap": 0.9082200935620406,
+            "no_overlap": 0.9350036310820624,
+            "rows": {
+              "all": 9997,
+              "dur_0_5_1": 2370,
+              "overlap": 4489
+            }
+          },
+          "train_loss": 1.6030049336358403,
+          "minutes": 9.305234668050002
+        }
+      ],
+      "best_epoch": 3,
+      "best_d_accuracy": 0.9229768930679204,
+      "d_majority_accuracy": 0.5187556266880065,
+      "training_collapse": false,
+      "layer_weights": [
+        0.08561953902244568,
+        0.08384571969509125,
+        0.08619105815887451,
+        0.08529095351696014,
+        0.09623526781797409,
+        0.09351383149623871,
+        0.09993456304073334,
+        0.0800110325217247,
+        0.06657890230417252,
+        0.06335191428661346,
+        0.05579877644777298,
+        0.052035581320524216,
+        0.051592834293842316
+      ],
+      "inference_timing": {
+        "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+        "seconds": 1095.156896583,
+        "device": "cuda",
+        "gpu_utterances_per_second": 41.55021088026481
+      },
+      "counts": {
+        "train": {
+          "calls": 26700,
+          "rows": 813187
+        },
+        "D": {
+          "calls": 1000,
+          "rows": 9997
+        },
+        "H": {
+          "calls": 1500,
+          "rows": 45504
+        }
+      },
+      "sampled_train_rows_per_epoch": 106800,
+      "hyperparameters": {
+        "epochs": 3,
+        "epoch_offset": 15,
+        "lr_backbone": 1e-05,
+        "lr_head": 0.0001,
+        "lr_pool": null,
+        "consist": null
+      }
+    },
+    "notes": "Training 서울 only; continued from M2-SSL-003 best.ckpt; provided speaker labels; H used only for final reporting; no official Validation read"
+  }
+}
