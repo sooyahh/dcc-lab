@@ -30,6 +30,8 @@ import time
 import unicodedata
 from pathlib import Path
 
+import drive_io
+
 LAB_REPO = "sooyahh/dcc-lab"
 TEAM_REPO = "eigensinn-dcc2026/prelim"
 LAB = Path(os.environ.get("LAB_CLONE", "/content/dcc-lab"))
@@ -41,6 +43,7 @@ RUN_ROOT = Path(os.environ.get("LAB_RUN_ROOT", "/content/drive/MyDrive/dcc_runs/
 WORKER = os.environ.get("LAB_WORKER", "colab-" + socket.gethostname()[:8])
 KNOWN_WORKERS = ("colab-a", "colab-b")
 GIT_STATUS_EVERY_S = 15 * 60
+DRIVE_FAIL_GIVE_UP_S = 180                # after this, stop refreshing the git heartbeat so a dead FUSE can be restarted
 MAX_INTERRUPTIONS = 10                    # runtime-disconnect resumes allowed per job (separate from max_attempts)
 DATA_DIR = "대학부 데이터"
 
@@ -132,25 +135,52 @@ def commit_push(message: str, mutate) -> None:
 # ------------------------------------------------------------------ status
 _last_git_status = 0.0
 _last_sync = 0.0
+_last_res_log = 0.0
+_drive_fail_since: float | None = None
 
 
 def status(state: str, exp_id: str | None = None, force_git: bool = False, **extra) -> None:
-    global _last_git_status
+    global _last_git_status, _last_sync, _last_res_log, _drive_fail_since
     hb = {"at": now(), "worker": WORKER, "state": state, "exp_id": exp_id, "gpu": gpu(), **resources(exp_id), **extra}
-    (DRIVE_LAB / "status").mkdir(parents=True, exist_ok=True)
-    log_resources(hb)
-    for fname in (f"heartbeat_{WORKER}.json", "heartbeat.json"):      # heartbeat.json = last writer (legacy readers)
-        (DRIVE_LAB / "status" / fname).write_text(json.dumps(hb, ensure_ascii=False), encoding="utf-8")
-    global _last_sync
+    if exp_id:
+        age = drive_io.ckpt_age_min(RUN_ROOT / exp_id)
+        if age is not None:
+            hb["last_ckpt_age_min"] = round(age, 1)
+    # Drive writes go through a subprocess. A multi-GB checkpoint copy can wedge FUSE;
+    # an in-process write_text then blocks this thread forever and the heartbeat stops.
+    drive_files = {
+        f"heartbeat_{WORKER}.json": json.dumps(hb, ensure_ascii=False),
+        "heartbeat.json": json.dumps(hb, ensure_ascii=False),   # last writer (legacy readers)
+    }
+    try:
+        pending = len(list((LAB / "queue").glob("*.json"))) + len(list((LAB / "running").glob("*.json")))
+        drive_files["queue_pending.json"] = json.dumps(
+            {"at": hb["at"], "count": pending, "gpu": wanted_gpu()}, ensure_ascii=False)
+    except Exception:
+        pass
+    res_name = res_line = None
+    if time.time() - _last_res_log >= 300:
+        res_name = f"resources_{WORKER}.jsonl"
+        res_line = json.dumps(hb, ensure_ascii=False) + "\n"
+    if drive_io.publish_status(DRIVE_LAB / "status", drive_files, res_name, res_line):
+        _drive_fail_since = None
+        if res_line is not None:
+            _last_res_log = time.time()
+    else:
+        err = getattr(drive_io.publish_status, "last_error", "")
+        log(f"Drive heartbeat 쓰기 실패: {err}")
+        if _drive_fail_since is None:
+            _drive_fail_since = time.time()
+        if time.time() - _drive_fail_since >= DRIVE_FAIL_GIVE_UP_S:
+            # A fresh git heartbeat would look healthy and stop the webhook from remounting Drive.
+            log("Drive 쓰기가 3분 넘게 실패하여 git heartbeat는 갱신하지 않음")
+            return
     if time.time() - _last_sync > 300:                    # a busy worker never claims, so refresh the queue view here
         _last_sync = time.time()
         try:
             sync()
         except Exception as exc:
             log(f"큐 갱신 실패: {redact(str(exc))}")
-    pending = len(list((LAB / "queue").glob("*.json"))) + len(list((LAB / "running").glob("*.json")))
-    (DRIVE_LAB / "status" / "queue_pending.json").write_text(
-        json.dumps({"at": hb["at"], "count": pending, "gpu": wanted_gpu()}), encoding="utf-8")
     if not force_git and time.time() - _last_git_status < GIT_STATUS_EVERY_S:
         return
     hb_text = json.dumps(hb, ensure_ascii=False, indent=2)
@@ -167,8 +197,9 @@ def status(state: str, exp_id: str | None = None, force_git: bool = False, **ext
                         files[n] = git(LAB, "show", f"{parent}:{n}")
             files[f"heartbeat_{WORKER}.json"] = hb_text
             files["heartbeat.json"] = hb_text
-            if cu.exists():
-                files["colab_cu.json"] = cu.read_text(encoding="utf-8")
+            cu_text = drive_io.read_text(cu)
+            if cu_text is not None:
+                files["colab_cu.json"] = cu_text
             entries = []
             for name, text in files.items():
                 sha = subprocess.run(["git", "-C", str(LAB), "hash-object", "-w", "--stdin"], input=text.encode(),
@@ -187,11 +218,8 @@ def status(state: str, exp_id: str | None = None, force_git: bool = False, **ext
         log(f"status push 실패: {redact(str(exc))}")
 
 
-_last_res_log = 0.0
-
-
 def resources(exp_id: str | None) -> dict:
-    """RAM / disk / newest checkpoint age, to tell OOM, Drive stalls and disconnects apart after a silent death."""
+    """RAM / local disk. Checkpoint age is a Drive stat, probed from status() so this never touches Drive."""
     info: dict = {}
     try:
         import psutil  # type: ignore
@@ -204,27 +232,7 @@ def resources(exp_id: str | None) -> dict:
         info["disk_free_gb"] = round(du.free / 2**30, 1)
     except Exception:
         pass
-    if exp_id:
-        try:
-            ck = max(((p.stat().st_mtime, p) for p in (RUN_ROOT / exp_id).rglob("ckpt_last.pt")), default=None)
-            if ck:
-                info["last_ckpt_age_min"] = round((time.time() - ck[0]) / 60, 1)
-        except Exception:
-            pass
     return info
-
-
-def log_resources(hb: dict) -> None:
-    """Append a line to Drive status/resources_<worker>.jsonl every 5 min (survives runtime death)."""
-    global _last_res_log
-    if time.time() - _last_res_log < 300:
-        return
-    _last_res_log = time.time()
-    try:
-        with open(DRIVE_LAB / "status" / f"resources_{WORKER}.jsonl", "a", encoding="utf-8") as f:
-            f.write(json.dumps(hb, ensure_ascii=False) + "\n")
-    except Exception:
-        pass
 
 
 _gpu = None
@@ -366,6 +374,45 @@ def describe_ckpt(exp_id: str, root: Path | None = None) -> str:
             "(같은 명령이 이 파일을 읽으면 이어서 학습. attempt는 끊김이 나도 1로 남고 interruptions만 증가)")
 
 
+_PY_ASSIGN = re.compile(r"""(^|[\s;&|])PYTHONPATH=("[^"]*"|'[^']*'|\S+)""")
+
+
+def inject_runner_on_pythonpath(cmd: str, runner_dir: str) -> str:
+    """Keep the runner dir on PYTHONPATH when the job command assigns it.
+
+    `PYTHONPATH=src python ...` replaces the inherited value, so sitecustomize
+    (Drive copy hook, safetensors redirect) would never load.
+    """
+    def repl(m: re.Match[str]) -> str:
+        raw = m.group(2)
+        if len(raw) >= 2 and raw[0] in "\"'" and raw[-1] == raw[0]:
+            val = raw[1:-1]
+            q = raw[0]
+            merged = runner_dir if not val else runner_dir + os.pathsep + val
+            return f"{m.group(1)}PYTHONPATH={q}{merged}{q}"
+        merged = runner_dir if not raw else runner_dir + os.pathsep + raw
+        return f"{m.group(1)}PYTHONPATH={merged}"
+    return _PY_ASSIGN.sub(repl, cmd, count=1)
+
+
+def describe_ckpt_bounded(exp_id: str, timeout: float = 30) -> str:
+    """describe_ckpt on a daemon thread. A stuck Drive stat must not block job start."""
+    box: dict[str, str] = {}
+
+    def run() -> None:
+        try:
+            box["line"] = describe_ckpt(exp_id)
+        except Exception as exc:
+            box["line"] = f"ckpt_last.pt 확인 실패: {exc}"
+
+    t = threading.Thread(target=run, daemon=True)
+    t.start()
+    t.join(timeout)
+    if t.is_alive():
+        return "ckpt_last.pt 확인 시간 초과 (Drive 응답 없음)"
+    return box.get("line", "ckpt_last.pt 확인 실패")
+
+
 def build_child_env(repo: Path, exp_id: str, out: Path, work: Path, data_root: str | None,
                     base: dict[str, str]) -> dict[str, str]:
     """Env for the experiment process. Runner dir is on PYTHONPATH so sitecustomize runs."""
@@ -455,6 +502,7 @@ def run_job(job: dict) -> None:
     env = build_child_env(repo, exp_id, out, work, str(data_root) if data_root else None, dict(os.environ))
     cmd = (spec["command"].replace("$LAB_OUT", str(out)).replace("$LAB_WORK", str(work))
            .replace("$LAB_HOME", str(LAB)))                  # $LAB_HOME = this repo (shared helper scripts)
+    cmd = inject_runner_on_pythonpath(cmd, str(Path(__file__).resolve().parent))
     budget_s = float(spec.get("budget_hours", 6)) * 3600
     log(f"{exp_id} 시작 (attempt {attempts}) commit={job['commit'][:7]}\n  $ {cmd}")
     status("running", exp_id, force_git=True, attempt=attempts)
@@ -487,8 +535,12 @@ def run_job(job: dict) -> None:
     mirror_started = False
     try:
         with open(local_log, "a", encoding="utf-8", newline="\n") as lf:
-            lf.write(f"\n===== attempt {attempts} {now()} {WORKER} commit={job['commit']} =====\n")
-            lf.write(describe_ckpt(exp_id) + "\n")
+            banner = f"===== attempt {attempts} {now()} {WORKER} commit={job['commit']} ====="
+            note = describe_ckpt_bounded(exp_id)
+            # The cell shows runner stdout. The banner used to be written only into the log file.
+            log(banner)
+            log(note)
+            lf.write(f"\n{banner}\n{note}\n")
             lf.flush()
             mirror.start()
             mirror_started = True
