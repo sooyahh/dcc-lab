@@ -27,5 +27,70 @@
   "worker": "colab-b",
   "claimed_at": "2026-10-13T17:27:08+00:00",
   "interruptions": 1,
-  "started_at": "2026-10-13T17:27:09+00:00"
+  "started_at": "2026-10-13T17:27:09+00:00",
+  "status": "done",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "finished_at": "2026-10-13T18:23:18+00:00",
+  "elapsed_min": 23.9,
+  "metrics": {
+    "exp_id": "M2-SSL-007",
+    "seed": 42,
+    "train_rows": 813187,
+    "eval_rows": 45504,
+    "official_val": null,
+    "ckpt": "best.ckpt",
+    "label_source": "provided_json",
+    "split_sha256": "73b8aea7b94fd95f0bf71546a03afdfc568d519bc82b8d33fc328c6c6e2dfa77",
+    "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+    "variant": "consist",
+    "parent": "M2-SSL-003",
+    "primary_metric": {
+      "name": "accuracy",
+      "value": null,
+      "split": "internal_holdout"
+    },
+    "metrics": {
+      "step0_d": {
+        "accuracy": 0.9243773131939582,
+        "dur_0_5_1": 0.8924050632911392,
+        "overlap": 0.9104477611940298,
+        "no_overlap": 0.9357298474945533,
+        "rows": {
+          "all": 9997,
+          "dur_0_5_1": 2370,
+          "overlap": 4489
+        },
+        "parent": {
+          "best_epoch": 12,
+          "d_accuracy": 0.9244773432029609
+        },
+        "asp_identity_max_abs_logit_diff": null
+      },
+      "epoch_history": [
+        {
+          "epoch": 1,
+          "sample_epoch": 15,
+          "d_accuracy": 0.9143743122936882,
+          "d_slices": {
+            "accuracy": 0.9143743122936882,
+            "dur_0_5_1": 0.8763713080168777,
+            "overlap": 0.9044330585876588,
+            "no_overlap": 0.9224763979665941,
+            "rows": {
+              "all": 9997,
+              "dur_0_5_1": 2370,
+              "overlap": 4489
+            }
+          },
+          "train_loss": 1.7011469954765692,
+          "minutes": 10.821616323466666,
+          "kd_loss": 0.1915124099593701,
+          "mixed_fraction": 0.5005524344569289,
+          "stopped_early": "consist: D overlap 0.9044 < step0 0.9104 + 0.005"
+        }
+      ],
+      "stopped_early": "consist: D overlap 0.9044 < step0 0.9104 + 0.005"
+    },
+    "notes": "stopped after first epoch by pre-fixed rule: consist: D overlap 0.9044 < step0 0.9104 + 0.005; H not evaluated"
+  }
 }

@@ -1,0 +1,93 @@
+
+===== attempt 1 2026-10-13T17:27:13+00:00 colab-b commit=3d5c272849488486b036138c95a98646c3565120 =====
+ckpt_last.pt 없음 (스크립트가 처음부터 학습)
+[runner] Drive 대용량 복사 훅 설치 (청크 복사, fsync 없음)
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 14786.73it/s]
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 14305.58it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+[runner] 청크 복사 시작 TS_서울_구급.zip.tmp (32169 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 1024/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 2048/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 3072/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 4096/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 5120/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 6144/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 7168/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 8192/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 9216/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 10240/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 11264/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 12288/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 13312/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 14336/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 15360/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 16384/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 17408/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 18432/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 19456/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 20480/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 21504/32169 MiB TS_서울_구급.zip.tmp
+
+===== attempt 1 2026-10-13T17:59:23+00:00 colab-b commit=3d5c272849488486b036138c95a98646c3565120 =====
+ckpt_last.pt 없음 (스크립트가 처음부터 학습)
+[runner] Drive 대용량 복사 훅 설치 (청크 복사, fsync 없음)
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 17933.96it/s]
+
+Loading weights:   0%|          | 0/248 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 248/248 [00:00<00:00, 14105.77it/s]
+audio preflight OK: PCM segment, stereo mono, clipping, resampling
+[runner] 청크 복사 시작 TS_서울_구급.zip.tmp (32169 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 1024/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 2048/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 3072/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 4096/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 5120/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 6144/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 7168/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 8192/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 9216/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 10240/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 11264/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 12288/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 13312/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 14336/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 15360/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 16384/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 17408/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 18432/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 19456/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 20480/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 21504/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 22528/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 23552/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 24576/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 25600/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 26624/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 27648/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 28672/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 29696/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 30720/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 31744/32169 MiB TS_서울_구급.zip.tmp
+[runner] 청크 복사 완료 TS_서울_구급.zip.tmp (32169 MiB)
+{"step0": {"accuracy": 0.9243773131939582, "dur_0_5_1": 0.8924050632911392, "overlap": 0.9104477611940298, "no_overlap": 0.9357298474945533, "rows": {"all": 9997, "dur_0_5_1": 2370, "overlap": 4489}, "parent": {"best_epoch": 12, "d_accuracy": 0.9244773432029609}, "asp_identity_max_abs_logit_diff": null}}
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+{"epoch": 1, "sample_epoch": 15, "d_accuracy": 0.9143743122936882, "d_slices": {"accuracy": 0.9143743122936882, "dur_0_5_1": 0.8763713080168777, "overlap": 0.9044330585876588, "no_overlap": 0.9224763979665941, "rows": {"all": 9997, "dur_0_5_1": 2370, "overlap": 4489}}, "train_loss": 1.7011469954765692, "minutes": 10.821616323466666, "kd_loss": 0.1915124099593701, "mixed_fraction": 0.5005524344569289, "stopped_early": "consist: D overlap 0.9044 < step0 0.9104 + 0.005"}
+[runner] 청크 복사 시작 best.ckpt.tmp (182 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/182 MiB best.ckpt.tmp
+[runner] 청크 복사 완료 best.ckpt.tmp (182 MiB)
+[runner] 청크 복사 시작 ckpt_last.pt.tmp (1059 MiB, 8 MiB chunks)
+[runner] 청크 복사 8/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 1024/1059 MiB ckpt_last.pt.tmp
+[runner] 청크 복사 완료 ckpt_last.pt.tmp (1059 MiB)
+stopped early: consist: D overlap 0.9044 < step0 0.9104 + 0.005
