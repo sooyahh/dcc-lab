@@ -63,6 +63,9 @@ AI는 실제로 끝나지 않은 작업도 "완료했다"고 보고할 수 있�
 
 ## 운영 메모 (원문)
 
+<details>
+<summary>펼쳐 보기</summary>
+
 데이터+AI 크리에이터 캠프 2026 예선 개인 실험 자동화. 실험 코드·결과는 팀 저장소 `eigensinn-dcc2026/prelim`(비공개)에 PR로 공유하고, 이 저장소에는 큐·상태·자동화 도구만 둔다.
 
 | 역할 | 담당 | 규칙 |
@@ -100,6 +103,8 @@ Claude 판정 → 팀 로그 PR(자동 병합) + 다음 proposal ◀── done/
 Secrets: `CLAUDE_CODE_OAUTH_TOKEN`, `TEAM_REPO_TOKEN`, `GROKBOT_WEBHOOK_URL`. 실행 기록은 `Commander log` 이슈.
 
 동시 실행: `config.json`의 `max_workers`(2026-10-12부터 1 — Colab GPU 세션 1개 제한, 이때 colab-a가 모든 작업을 이어받음)만큼 Colab 러너가 병렬로 돈다. 워커는 노트북별 고정 이름(colab-a/b)이고 각자 `running/`의 자기 작업만 재개한다. 워치독이 워커별 heartbeat를 보고 필요한 노트북만 grokbot에 기동 요청한다.
+
+</details>
 
 ## License
 
